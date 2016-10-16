@@ -1,2 +1,2 @@
 # AsyncConverter
-Plugin for resharper, for converting code for async.
+Plugin for resharper, for converting code to async.
