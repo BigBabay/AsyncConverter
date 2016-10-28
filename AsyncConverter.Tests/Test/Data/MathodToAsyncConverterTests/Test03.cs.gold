@@ -1,0 +1,13 @@
+﻿namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
+{
+    using System;
+    using System.Threading.Tasks;
+
+    public class Class
+    {
+        public async Task<int> {caret}Test()
+        {
+            var a = Method();
+        }
+    }
+}

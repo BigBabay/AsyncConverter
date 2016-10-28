@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using JetBrains.Application.Progress;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Daemon.CSharp.Errors;
-using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
-using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Feature.Services.QuickFixes;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp;
-using JetBrains.ReSharper.Psi.CSharp.Impl;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
-using JetBrains.ReSharper.Psi.Impl.Types;
 using JetBrains.ReSharper.Psi.Resolve;
 using JetBrains.ReSharper.Psi.Tree;
 using JetBrains.ReSharper.Psi.Util;
@@ -26,7 +19,6 @@ namespace AsyncConverter
     public class FixReturnValueToTask : QuickFixBase
     {
         private readonly IncorrectArgumentTypeError error;
-        private ICSharpTypeConversionRule cSharpTypeConversionRule;
 
         public FixReturnValueToTask(IncorrectArgumentTypeError error)
         {
@@ -36,15 +28,12 @@ namespace AsyncConverter
         protected override Action<ITextControl> ExecutePsiTransaction(ISolution solution, IProgressIndicator progress)
         {
             var expression = error.Argument as ICSharpArgument;
-            if (expression == null)
-                return null;
 
-            var file = expression.GetContainingFile() as ICSharpFile;
+            var file = expression?.GetContainingFile() as ICSharpFile;
             if (file == null)
                 return null;
 
             var psiModule = error.Reference.GetAccessContext().GetPsiModule();
-            cSharpTypeConversionRule = expression.GetTypeConversionRule();
             var factory = CSharpElementFactory.GetInstance(psiModule);
             var cSharpArgument = factory.CreateArgument(ParameterKind.VALUE, factory.CreateExpression("Task.FromResult($0)", expression));
             expression.ReplaceBy(cSharpArgument);
