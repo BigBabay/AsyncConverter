@@ -13,7 +13,7 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
             this.anotherService = anotherService;
         }
 
-        public Task<int> {caret}TestAsync()
+        public async Task<int> {caret}TestAsync()
         {
             var a = await service.MethodAsync(await anotherService.AnotherMethodAsync().ConfigureAwait(false)).ConfigureAwait(false);
             return 4;

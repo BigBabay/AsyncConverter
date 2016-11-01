@@ -10,64 +10,21 @@ namespace AsyncConverter.Tests
 
         protected override string RelativeTestDataPath => "MathodToAsyncConverterTests";
 
-        [Test]
-        public void ReplaceToGenericTask()
+        [TestCase("ReplaceToGenericTask.cs")]
+        [TestCase("AddingUsing.cs")]
+        [TestCase("ReplaceToTask.cs")]
+        [TestCase("ReplaceMethod.cs")]
+        [TestCase("ReplaceMethodWithParameter.cs")]
+        [TestCase("ReplaceMethodWithCorrectChosenName.cs")]
+        [TestCase("CorrectCompareParam.cs")]
+        [TestCase("CorrectCompareReturnType.cs")]
+        [TestCase("ReplaceMethodFromAnotherClass.cs")]
+        [TestCase("ReplaceMethodFromAnotherClassThroughProp.cs")]
+        [TestCase("ReplaceMethodAndMethodInParam.cs")]
+        [TestCase("ReplaceMethodInChain.cs")]
+        public void Test(string fileName)
         {
-            DoTestFiles("Test01.cs");
-        }
-
-        [Test]
-        public void AddingUsing()
-        {
-            DoTestFiles("Test02.cs");
-        }
-
-        [Test]
-        public void AddingUsingInNamespace()
-        {
-            DoTestFiles("Test03.cs");
-        }
-
-        [Test]
-        public void ReplaceToTask()
-        {
-            DoTestFiles("Test04.cs");
-        }
-
-        [Test]
-        public void ReplaceMethod()
-        {
-            DoTestFiles("Test05.cs");
-        }
-
-        [Test]
-        public void ReplaceMethodWithParameter()
-        {
-            DoTestFiles("Test06.cs");
-        }
-
-        [Test]
-        public void ReplaceMethodWithCorrectChosenName()
-        {
-            DoTestFiles("Test07.cs");
-        }
-
-        [Test]
-        public void CorrectCompareParam()
-        {
-            DoTestFiles("Test08.cs");
-        }
-
-        [Test]
-        public void CorrectCompareReturnType()
-        {
-            DoTestFiles("Test09.cs");
-        }
-
-        [Test]
-        public void ReplaceMethodFromAnotherClass()
-        {
-            DoTestFiles("Test10.cs");
+            DoTestFiles(fileName);
         }
     }
 }
