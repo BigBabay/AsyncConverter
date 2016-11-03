@@ -67,20 +67,34 @@ namespace AsyncConverter
 
             var factory = CSharpElementFactory.GetInstance(psiModule);
 
+
             var invocationExpressions = method.Body.Descendants<IInvocationExpression>();
             foreach (var invocationExpression in invocationExpressions)
             {
                 ReplaceToAsyncMethod(invocationExpression, factory);
             }
 
+            var newMethodName = $"{method.NameIdentifier.Name}Async";
+
+            var finder = Provider.PsiServices.Finder;
+            var usages = finder.FindReferences(method.DeclaredElement, SearchDomainFactory.Instance.CreateSearchDomain(psiModule), NullProgressIndicator.Instance);
+            foreach (var usage in usages)
+            {
+                var invocation = usage.GetTreeNode().Parent as IInvocationExpression;
+                var containingFunctionDeclarationIgnoringClosures = invocation?.InvokedExpression.GetContainingFunctionDeclarationIgnoringClosures();
+                if (containingFunctionDeclarationIgnoringClosures == null)
+                    continue;
+                ReplaceCallToAsync(invocation, factory, newMethodName, containingFunctionDeclarationIgnoringClosures.IsAsync);
+            }
+
             method.SetType(newReturnValue);
             method.SetAsync(true);
-            CSharpImplUtil.ReplaceIdentifier(method.NameIdentifier, $"{method.NameIdentifier.Name}Async");
+            CSharpImplUtil.ReplaceIdentifier(method.NameIdentifier, newMethodName);
 
             return null;
         }
 
-        private void ReplaceToAsyncMethod(IInvocationExpression invocationExpression, CSharpElementFactory factory)
+        private void ReplaceToAsyncMethod([NotNull]IInvocationExpression invocationExpression, [NotNull] CSharpElementFactory factory)
         {
             if (!invocationExpression.IsValid())
                 return;
@@ -103,7 +117,6 @@ namespace AsyncConverter
             var referenceExpression = invocationExpression.FirstChild as IReferenceExpression;
             if (referenceExpression == null)
                 return;
-            var referenceName = factory.CreateReferenceName(asyncMethod.ShortName);
 
             foreach (var child in referenceExpression.Children())
             {
@@ -114,18 +127,45 @@ namespace AsyncConverter
                 }
             }
 
-            var referenceExpressionLastChild = referenceExpression.LastChild as IIdentifier;
+            ReplaceCallToAsync(invocationExpression, factory, asyncMethod.ShortName, true);
+        }
+
+        private static void ReplaceCallToAsync(IInvocationExpression invocationExpression, CSharpElementFactory factory, string newMethodName, bool useAsync)
+        {
+            var returnType = invocationExpression.Type();
+            var referenceExpression = invocationExpression.FirstChild as IReferenceExpression;
+            var referenceExpressionLastChild = referenceExpression?.LastChild as ICSharpIdentifier;
             if (referenceExpressionLastChild == null)
                 return;
-            //don't understand why not work, think later
-            //referenceExpression.SetNameIdentifier(referenceName.NameIdentifier);
-            using (WriteLockCookie.Create(true))
-            {
 
-                ModificationUtil.ReplaceChild<IIdentifier>(referenceExpressionLastChild, referenceName.NameIdentifier);
+            //don't understand why not work, thinking about it later
+            //referenceExpression.SetNameIdentifier(referenceName.NameIdentifier);
+            CSharpImplUtil.ReplaceIdentifier(referenceExpressionLastChild, newMethodName);
+
+            if (useAsync)
+            {
+                var awaitExpression = factory.CreateExpression("await $0($1).ConfigureAwait(false)", referenceExpression, invocationExpression.ArgumentList);
+                invocationExpression.ReplaceBy(awaitExpression);
             }
-            var awaitExpression = factory.CreateExpression("await $0($1).ConfigureAwait(false)", referenceExpression,
-                invocationExpression.ArgumentList);
+            else
+            {
+                var awaitExpression = factory.CreateExpression(returnType.IsVoid() ? "$0($1).Wait()" : "$0($1).Result", referenceExpression, invocationExpression.ArgumentList);
+                invocationExpression.ReplaceBy(awaitExpression);
+            }
+        }
+
+        private static void ReplaceCallToAsyncWithResult(IInvocationExpression invocationExpression, CSharpElementFactory factory, string newMethodName)
+        {
+            var referenceExpression = invocationExpression.FirstChild as IReferenceExpression;
+            var referenceExpressionLastChild = referenceExpression?.LastChild as ICSharpIdentifier;
+            if (referenceExpressionLastChild == null)
+                return;
+
+            //don't understand why not work, thinking about it later
+            //referenceExpression.SetNameIdentifier(referenceName.NameIdentifier);
+            CSharpImplUtil.ReplaceIdentifier(referenceExpressionLastChild, newMethodName);
+
+            var awaitExpression = factory.CreateExpression("$0($1).Result", referenceExpression, invocationExpression.ArgumentList);
             invocationExpression.ReplaceBy(awaitExpression);
         }
 

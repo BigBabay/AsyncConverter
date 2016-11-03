@@ -22,6 +22,9 @@ namespace AsyncConverter.Tests
         [TestCase("ReplaceMethodFromAnotherClassThroughProp.cs")]
         [TestCase("ReplaceMethodAndMethodInParam.cs")]
         [TestCase("ReplaceMethodInChain.cs")]
+        [TestCase("ReplaceFromCaller.cs")]
+        [TestCase("ReplaceFromCallerWithResult.cs")]
+        [TestCase("ReplaceFromAsyncCaller.cs")]
         public void Test(string fileName)
         {
             DoTestFiles(fileName);

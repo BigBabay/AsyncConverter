@@ -270,7 +270,11 @@
     <Compile Include="MathodToAsyncConverterAvailabilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEnvironment.cs" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceFromCallerWithResult.cs" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceFromAsyncCaller.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceFromCaller.cs" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceFromAsyncCaller.cs.gold" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceFromCallerWithResult.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceMethodInChain.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceMethodAndMethodInParam.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceMethodFromAnotherClassThroughProp.cs" />

@@ -8,5 +8,9 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
         {
             return 5;
         }
+        public void Caller()
+        {
+            TestAsync().Wait();
+        }
     }
 }

@@ -4,13 +4,13 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 {
     public class Class
     {
-        public void {caret}Test()
+        public int {caret}Test()
         {
             return 5;
         }
-        public void Caller()
+        public async Task Caller()
         {
-            Test();
+            var a = Test();
         }
     }
 }
