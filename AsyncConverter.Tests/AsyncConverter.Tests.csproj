@@ -270,6 +270,9 @@
     <Compile Include="MathodToAsyncConverterAvailabilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEnvironment.cs" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\RenameInHierarchyInterface.cs" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\RenameInHierarchy.cs" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\RenameInHierarchyInterface.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceFromCallerWithResult.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceFromAsyncCaller.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceFromCaller.cs" />
@@ -301,6 +304,7 @@
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceMethod.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceMethodInChain.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceFromCaller.cs.gold" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\RenameInHierarchy.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceToTask.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\AddingUsing.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceToGenericTask.cs.gold" />
