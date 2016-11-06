@@ -18,7 +18,7 @@
   <PropertyGroup>
     <HostFullIdentifier>ReSharperPlatformVs14Test</HostFullIdentifier>
   </PropertyGroup>
-  -->  
+  -->
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -269,6 +269,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AsyncHelper.cs" />
     <Compile Include="MathodToAsyncConverter.cs" />
     <Compile Include="FixReturnValueToTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
