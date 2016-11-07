@@ -3,19 +3,20 @@
   <metadata>
     <id>AsyncConverter.AsyncConverter</id>
     <title>AsyncConverter</title>
-    <version>1.0.1</version>
+    <version>1.1.0</version>
     <authors>i.mamay</authors>
     <copyright>i.mamay</copyright>
     <owners>i.mamay</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>AsyncConverter for test</description>
     <summary>AsyncConverter for test</summary>
+    <projectUrl>https://github.com/BigBabay/AsyncConverter</projectUrl>
     <dependencies>
       <dependency id="Wave" version="4.0" />
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\Debug\AsyncConverter.dll" target="dotFiles\" />
-    <file src="bin\Debug\AsyncConverter.pdb" target="dotFiles\" />
+    <file src="bin\Release\AsyncConverter.dll" target="dotFiles\" />
+    <file src="bin\Release\AsyncConverter.pdb" target="dotFiles\" />
   </files>
 </package>

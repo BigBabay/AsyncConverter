@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using JetBrains.Application.Progress;
+using JetBrains.ReSharper.Feature.Services.Util;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
@@ -10,6 +12,7 @@ using JetBrains.ReSharper.Psi.Resolve;
 using JetBrains.ReSharper.Psi.Search;
 using JetBrains.ReSharper.Psi.Tree;
 using JetBrains.ReSharper.Psi.Util;
+using JetBrains.Util;
 
 namespace AsyncConverter
 {
@@ -89,7 +92,7 @@ namespace AsyncConverter
             ReplaceCallToAsync(invocationExpression, factory, true);
         }
 
-        public static void ReplaceMethodSignatureToAsync(IParametersOwner methodDeclaredElement, IPsiModule psiModule, IMethodDeclaration methodDeclaration, IFinder finder)
+        public static void ReplaceMethodSignatureToAsync(IParametersOwner methodDeclaredElement, IPsiModule psiModule, IMethodDeclaration methodDeclaration)
         {
             var returnType = methodDeclaredElement.ReturnType;
 
@@ -107,15 +110,6 @@ namespace AsyncConverter
             }
 
             var newName = $"{methodDeclaration.DeclaredName}Async";
-
-            foreach (var method in finder.FindImmediateBaseElements(methodDeclaration.DeclaredElement, NullProgressIndicator.Instance))
-            {
-                var baseMethodDeclarations = method.GetDeclarations();
-                foreach (var declaration in baseMethodDeclarations.OfType<IMethodDeclaration>())
-                {
-                    SetSignature(declaration, newReturnValue, newName);
-                }
-            }
 
             SetSignature(methodDeclaration, newReturnValue, newName);
 
@@ -162,6 +156,19 @@ namespace AsyncConverter
                     return false;
             }
             return true;
+        }
+
+        public static List<FindResultOverridableMember> FindImplementingMembers([NotNull] IOverridableMember overridableMember, [NotNull] IProgressIndicator pi)
+        {
+            var found = new List<FindResultOverridableMember>();
+            overridableMember.GetPsiServices().AsyncFinder.FindImplementingMembers(overridableMember, overridableMember.GetSearchDomain(), new FindResultConsumer(result =>
+            {
+                var overridableMember1 = result as FindResultOverridableMember;
+                if (overridableMember1 != null)
+                    found.Add(overridableMember1);
+                return FindExecution.Continue;
+            }), true, pi);
+            return found;
         }
     }
 }

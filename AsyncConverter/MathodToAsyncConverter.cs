@@ -8,6 +8,7 @@ using JetBrains.Metadata.Reader.Impl;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Feature.Services.ContextActions;
 using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
+using JetBrains.ReSharper.Feature.Services.Util;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.CSharp.Impl;
@@ -41,16 +42,51 @@ namespace AsyncConverter
         protected override Action<ITextControl> ExecutePsiTransaction(ISolution solution, IProgressIndicator progress)
         {
             var method = GetMethodFromCarretPosition();
-            if (method == null)
-                return null;
 
-            var finder = Provider.PsiServices.Finder;
-            var methodDeclaredElement = method.DeclaredElement;
+            var methodDeclaredElement = method?.DeclaredElement;
             if (methodDeclaredElement == null)
                 return null;
 
+            var finder = Provider.PsiServices.Finder;
+
             var psiModule = method.GetPsiModule();
             var factory = CSharpElementFactory.GetInstance(psiModule);
+
+            FindAndReplaceAllBaseMethods(finder, psiModule, factory, methodDeclaredElement);
+
+            foreach (var immediateBaseMethod in AsyncHelper.FindImplementingMembers(methodDeclaredElement, NullProgressIndicator.Instance))
+            {
+                var implementingMethod = immediateBaseMethod.OverridableMember as IMethod;
+                var implementingMethodDeclaration = implementingMethod?.GetSingleDeclaration<IMethodDeclaration>();
+                if (implementingMethodDeclaration == null)
+                    return null;
+                ReplaceMethodToAsync(finder, psiModule, factory, implementingMethodDeclaration);
+            }
+
+            ReplaceMethodToAsync(finder, psiModule, factory, method);
+
+            return null;
+        }
+
+        private void FindAndReplaceAllBaseMethods(IFinder finder, IPsiModule psiModule, CSharpElementFactory factory, IDeclaredElement methodDeclaredElement)
+        {
+            foreach (var immediateBaseMethod in finder.FindImmediateBaseElements(methodDeclaredElement, NullProgressIndicator.Instance))
+            {
+                var baseMethodDeclarations = immediateBaseMethod.GetDeclarations();
+                foreach (var declaration in baseMethodDeclarations.OfType<IMethodDeclaration>())
+                {
+                    FindAndReplaceAllBaseMethods(finder, psiModule, factory, immediateBaseMethod);
+                    ReplaceMethodToAsync(finder, psiModule, factory, declaration);
+                }
+            }
+
+        }
+
+        private void ReplaceMethodToAsync(IFinder finder, IPsiModule psiModule, CSharpElementFactory factory, IMethodDeclaration method)
+        {
+            var methodDeclaredElement = method.DeclaredElement;
+            if (methodDeclaredElement == null)
+                return;
 
             var usages = finder.FindReferences(methodDeclaredElement, SearchDomainFactory.Instance.CreateSearchDomain(psiModule), NullProgressIndicator.Instance);
             foreach (var usage in usages)
@@ -68,14 +104,10 @@ namespace AsyncConverter
                 AsyncHelper.ReplaceToAsyncMethod(invocationExpression, factory);
             }
 
-            AsyncHelper.ReplaceMethodSignatureToAsync(methodDeclaredElement, psiModule, method, finder);
-
-            return null;
+            AsyncHelper.ReplaceMethodSignatureToAsync(methodDeclaredElement, psiModule, method);
         }
 
-
-
-        public override string Text { get; } = "Return empty collection";
+        public override string Text { get; } = "Convert method to async and replace all inner call to async version if exist.";
         public override bool IsAvailable(IUserDataHolder cache)
         {
             var method = GetMethodFromCarretPosition();

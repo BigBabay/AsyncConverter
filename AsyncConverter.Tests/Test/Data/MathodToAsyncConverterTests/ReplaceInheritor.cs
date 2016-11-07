@@ -4,9 +4,9 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 {
     public class Class
     {
-        public virtual Task TestAsync()
+        public virtual void {caret}Test()
         {
-            var a = await MethodAsync().ConfigureAwait(false);
+            var a = Method();
         }
 
         public int Method()
@@ -22,9 +22,9 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 
     public class Class2 : Class
     {
-        public override Task {caret}TestAsync()
+        public override void Test()
         {
-            await MethodAsync().ConfigureAwait(false);
+            var a = Method();
         }
     }
 }

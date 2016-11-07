@@ -1,13 +1,12 @@
 ﻿using System.Threading.Tasks;
-using JetBrains.ReSharper.Psi.Impl.reflection2.elements.Compiled;
 
 namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 {
     public class Class
     {
-        public virtual void Test()
+        public virtual async Task {caret}TestAsync()
         {
-            var a = Method();
+            var a = await MethodAsync().ConfigureAwait(false);
         }
 
         public int Method()
@@ -23,9 +22,9 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 
     public class Class2 : Class
     {
-        public override void {caret}Test()
+        public override async Task TestAsync()
         {
-            var a = Method();
+            var a = await MethodAsync().ConfigureAwait(false);
         }
     }
 }

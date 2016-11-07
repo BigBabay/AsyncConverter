@@ -25,8 +25,10 @@ namespace AsyncConverter.Tests
         [TestCase("ReplaceFromCaller.cs")]
         [TestCase("ReplaceFromCallerWithResult.cs")]
         [TestCase("ReplaceFromAsyncCaller.cs")]
-        [TestCase("RenameInHierarchyInterface.cs")]
-        [TestCase("RenameInHierarchy.cs")]
+        [TestCase("RenameInInterface.cs")]
+        [TestCase("ReplaceInBase.cs")]
+        [TestCase("ReplaceInheritor.cs")]
+        [TestCase("ReplaceFromResult.cs")]
         public void Test(string fileName)
         {
             DoTestFiles(fileName);
