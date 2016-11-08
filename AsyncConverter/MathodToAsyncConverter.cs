@@ -1,29 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using JetBrains.Annotations;
 using JetBrains.Application.Progress;
-using JetBrains.Metadata.Reader.Impl;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Feature.Services.ContextActions;
 using JetBrains.ReSharper.Feature.Services.CSharp.Analyses.Bulbs;
-using JetBrains.ReSharper.Feature.Services.Util;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp;
-using JetBrains.ReSharper.Psi.CSharp.Impl;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
-using JetBrains.ReSharper.Psi.CSharp.Util;
-using JetBrains.ReSharper.Psi.ExtensionsAPI.Tree;
-using JetBrains.ReSharper.Psi.Impl.Types;
 using JetBrains.ReSharper.Psi.Modules;
-using JetBrains.ReSharper.Psi.Resolve;
 using JetBrains.ReSharper.Psi.Search;
 using JetBrains.ReSharper.Psi.Tree;
-using JetBrains.ReSharper.Psi.Util;
-using JetBrains.ReSharper.Psi.Xaml.Tree;
-using JetBrains.ReSharper.Resources.Shell;
-using JetBrains.ReSharper.SDK.Helper;
 using JetBrains.TextControl;
 using JetBrains.Util;
 
@@ -52,7 +39,7 @@ namespace AsyncConverter
             var psiModule = method.GetPsiModule();
             var factory = CSharpElementFactory.GetInstance(psiModule);
 
-            FindAndReplaceAllBaseMethods(finder, psiModule, factory, methodDeclaredElement);
+            FindAndReplaceBaseMethods(finder, psiModule, factory, methodDeclaredElement);
 
             foreach (var immediateBaseMethod in AsyncHelper.FindImplementingMembers(methodDeclaredElement, NullProgressIndicator.Instance))
             {
@@ -68,14 +55,14 @@ namespace AsyncConverter
             return null;
         }
 
-        private void FindAndReplaceAllBaseMethods(IFinder finder, IPsiModule psiModule, CSharpElementFactory factory, IDeclaredElement methodDeclaredElement)
+        private void FindAndReplaceBaseMethods(IFinder finder, IPsiModule psiModule, CSharpElementFactory factory, IDeclaredElement methodDeclaredElement)
         {
             foreach (var immediateBaseMethod in finder.FindImmediateBaseElements(methodDeclaredElement, NullProgressIndicator.Instance))
             {
                 var baseMethodDeclarations = immediateBaseMethod.GetDeclarations();
                 foreach (var declaration in baseMethodDeclarations.OfType<IMethodDeclaration>())
                 {
-                    FindAndReplaceAllBaseMethods(finder, psiModule, factory, immediateBaseMethod);
+                    FindAndReplaceBaseMethods(finder, psiModule, factory, immediateBaseMethod);
                     ReplaceMethodToAsync(finder, psiModule, factory, declaration);
                 }
             }

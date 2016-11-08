@@ -56,7 +56,7 @@ namespace AsyncConverter
             return null;
         }
 
-        public static void ReplaceToAsyncMethod([NotNull]IInvocationExpression invocationExpression, [NotNull] CSharpElementFactory factory)
+        public static void ReplaceToAsyncMethod([NotNull] IInvocationExpression invocationExpression, [NotNull] CSharpElementFactory factory)
         {
             if (!invocationExpression.IsValid())
                 return;
@@ -72,24 +72,37 @@ namespace AsyncConverter
             var invocationMethod = referenceCurrentResolveResult.DeclaredElement as IMethod;
             if (invocationMethod == null)
                 return;
-            var asyncMethod = FindEquivalentAsyncMethod(invocationMethod);
-            if (asyncMethod == null)
-                return;
-
-            var referenceExpression = invocationExpression.FirstChild as IReferenceExpression;
-            if (referenceExpression == null)
-                return;
-
-            foreach (var child in referenceExpression.Children())
+            if (invocationExpression.Type().IsGenericTask())
             {
-                var invocationChild = child as IInvocationExpression;
-                if (invocationChild != null)
+                var reference = invocationExpression.Parent as IReferenceExpression;
+                if (reference?.NameIdentifier.Name == "Result")
                 {
-                    ReplaceToAsyncMethod(invocationChild, factory);
+                    var call = factory.CreateExpression("await $0($1).ConfigureAwait(false)", invocationExpression.ConditionalQualifier,
+                        invocationExpression.ArgumentList);
+                    reference.ReplaceBy(call);
                 }
             }
+            else
+            {
+                var asyncMethod = FindEquivalentAsyncMethod(invocationMethod);
+                if (asyncMethod == null)
+                    return;
 
-            ReplaceCallToAsync(invocationExpression, factory, true);
+                var referenceExpression = invocationExpression.FirstChild as IReferenceExpression;
+                if (referenceExpression == null)
+                    return;
+
+                foreach (var child in referenceExpression.Children())
+                {
+                    var invocationChild = child as IInvocationExpression;
+                    if (invocationChild != null)
+                    {
+                        ReplaceToAsyncMethod(invocationChild, factory);
+                    }
+                }
+
+                ReplaceCallToAsync(invocationExpression, factory, true);
+            }
         }
 
         public static void ReplaceMethodSignatureToAsync(IParametersOwner methodDeclaredElement, IPsiModule psiModule, IMethodDeclaration methodDeclaration)
@@ -109,13 +122,12 @@ namespace AsyncConverter
                 newReturnValue = TypeFactory.CreateType(task, returnType);
             }
 
-            var newName = $"{methodDeclaration.DeclaredName}Async";
+            var name = GenerateAsyncMethodName(methodDeclaration.DeclaredName);
 
-            SetSignature(methodDeclaration, newReturnValue, newName);
-
+            SetSignature(methodDeclaration, newReturnValue, name);
         }
 
-        private static void SetSignature(IMethodDeclaration methodDeclaration, IDeclaredType newReturnValue, string newName)
+        private static void SetSignature(IMethodDeclaration methodDeclaration, IType newReturnValue, string newName)
         {
             methodDeclaration.SetType(newReturnValue);
             if (!methodDeclaration.IsAbstract)
@@ -130,7 +142,7 @@ namespace AsyncConverter
             if (referenceExpression == null)
                 return;
 
-            var newMethodName = $"{referenceExpression.NameIdentifier.Name}Async";
+            var newMethodName = GenerateAsyncMethodName(referenceExpression.NameIdentifier.Name);
 
             var newReferenceExpression = referenceExpression.QualifierExpression == null
                 ? factory.CreateReferenceExpression("$0", newMethodName)
@@ -141,6 +153,11 @@ namespace AsyncConverter
                 : returnType.IsVoid() ? "$0($1).Wait()" : "$0($1).Result";
             var awaitExpression = factory.CreateExpression(callFormat, newReferenceExpression, invocationExpression.ArgumentList);
             invocationExpression.ReplaceBy(awaitExpression);
+        }
+
+        private static string GenerateAsyncMethodName(string oldName)
+        {
+            return oldName.EndsWith("Async") ? oldName : $"{oldName}Async";
         }
 
         private static bool IsParameterEquals(IList<IParameter> methodParameters, IList<IParameter> originalParameters)
