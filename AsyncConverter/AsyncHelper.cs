@@ -81,6 +81,28 @@ namespace AsyncConverter
                         invocationExpression.ArgumentList);
                     reference.ReplaceBy(call);
                 }
+                if (reference?.NameIdentifier.Name == "AwaitResult")
+                {
+                    var call = factory.CreateExpression("await $0($1).ConfigureAwait(false)", invocationExpression.ConditionalQualifier,
+                        invocationExpression.ArgumentList);
+                    var pa = reference.Parent as IInvocationExpression;
+                    if(pa == null)
+                        return;
+                    pa.ReplaceBy(call);
+                }
+            }
+            if (invocationExpression.Type().IsTask())
+            {
+                var reference = invocationExpression.Parent as IReferenceExpression;
+                if (reference?.NameIdentifier.Name == "Wait")
+                {
+                    var call = factory.CreateExpression("await $0($1).ConfigureAwait(false)", invocationExpression.ConditionalQualifier,
+                        invocationExpression.ArgumentList);
+                    var pa = reference.Parent as IInvocationExpression;
+                    if (pa == null)
+                        return;
+                    pa.ReplaceBy(call);
+                }
             }
             else
             {
@@ -178,13 +200,14 @@ namespace AsyncConverter
         public static List<FindResultOverridableMember> FindImplementingMembers([NotNull] IOverridableMember overridableMember, [NotNull] IProgressIndicator pi)
         {
             var found = new List<FindResultOverridableMember>();
-            overridableMember.GetPsiServices().AsyncFinder.FindImplementingMembers(overridableMember, overridableMember.GetSearchDomain(), new FindResultConsumer(result =>
-            {
-                var overridableMember1 = result as FindResultOverridableMember;
-                if (overridableMember1 != null)
-                    found.Add(overridableMember1);
-                return FindExecution.Continue;
-            }), true, pi);
+            overridableMember.GetPsiServices()
+                .AsyncFinder.FindImplementingMembers(overridableMember, overridableMember.GetSearchDomain(), new FindResultConsumer(result =>
+                {
+                    var overridableMember1 = result as FindResultOverridableMember;
+                    if (overridableMember1 != null)
+                        found.Add(overridableMember1);
+                    return FindExecution.Continue;
+                }), true, pi);
             return found;
         }
     }
