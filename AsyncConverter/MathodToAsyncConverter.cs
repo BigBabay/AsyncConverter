@@ -86,7 +86,7 @@ namespace AsyncConverter
             var invocationExpressions = method.Body.Descendants<IInvocationExpression>();
             foreach (var invocationExpression in invocationExpressions)
             {
-                AsyncHelper.ReplaceToAsyncMethod(invocationExpression, factory);
+                AsyncHelper.TryReplaceInvocationToAsync(invocationExpression, factory);
             }
 
             AsyncHelper.ReplaceMethodSignatureToAsync(methodDeclaredElement, psiModule, method);

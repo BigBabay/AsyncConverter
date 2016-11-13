@@ -4,9 +4,7 @@ using JetBrains.Application.Progress;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
-using JetBrains.ReSharper.Psi.Impl.CodeStyle;
 using JetBrains.ReSharper.Psi.Modules;
-using JetBrains.ReSharper.Psi.Resolve;
 using JetBrains.ReSharper.Psi.Search;
 using JetBrains.ReSharper.Psi.Tree;
 using JetBrains.ReSharper.Psi.Util;
@@ -34,20 +32,13 @@ namespace AsyncConverter
                 if (originalMethod.ShortName + "Async" != candidateMethod.ShortName)
                     continue;
 
-                var returnType = candidateMethod.Type() as IDeclaredType;
+                var returnType = candidateMethod.Type();
                 if (returnType.IsTask() && !originalReturnType.IsVoid())
                     continue;
 
-                if (returnType.IsGenericTask())
-                {
-                    var substitution = returnType.GetSubstitution();
-                    if (substitution.IsEmpty())
-                        continue;
+                if(!returnType.IsGenericTaskOf(originalReturnType))
+                    continue;
 
-                    var innerCandidateReturnMethod = substitution.Apply(substitution.Domain[0]);
-                    if (!innerCandidateReturnMethod.Equals(originalReturnType))
-                        continue;
-                }
                 if(!IsParameterEquals(candidateMethod.Parameters, originalMethod.Parameters))
                     continue;
 
@@ -56,7 +47,7 @@ namespace AsyncConverter
             return null;
         }
 
-        public static void ReplaceToAsyncMethod([NotNull] IInvocationExpression invocationExpression, [NotNull] CSharpElementFactory factory)
+        public static void TryReplaceInvocationToAsync([NotNull] IInvocationExpression invocationExpression, [NotNull] CSharpElementFactory factory)
         {
             if (!invocationExpression.IsValid())
                 return;
@@ -64,7 +55,7 @@ namespace AsyncConverter
             {
                 var argumentInvocationExpression = argument.Expression as IInvocationExpression;
                 if (argumentInvocationExpression != null)
-                    ReplaceToAsyncMethod(argumentInvocationExpression, factory);
+                    TryReplaceInvocationToAsync(argumentInvocationExpression, factory);
             }
 
             if (invocationExpression.Type().IsGenericTask() || invocationExpression.Type().IsTask())
@@ -99,7 +90,7 @@ namespace AsyncConverter
                     var invocationChild = child as IInvocationExpression;
                     if (invocationChild != null)
                     {
-                        ReplaceToAsyncMethod(invocationChild, factory);
+                        TryReplaceInvocationToAsync(invocationChild, factory);
                     }
                 }
 
@@ -119,7 +110,7 @@ namespace AsyncConverter
                         var invocationChild = child as IInvocationExpression;
                         if (invocationChild != null)
                         {
-                            ReplaceToAsyncMethod(invocationChild, factory);
+                            TryReplaceInvocationToAsync(invocationChild, factory);
                         }
                     }
                     if (TryConvertParameterFuncToAsync(invocationExpression, factory))
@@ -145,7 +136,7 @@ namespace AsyncConverter
                 if (innerInvocationExpression == null)
                     return false;
                 functionExpression.SetAsync(true);
-                ReplaceToAsyncMethod(innerInvocationExpression, factory);
+                TryReplaceInvocationToAsync(innerInvocationExpression, factory);
             }
             return true;
         }
@@ -169,19 +160,9 @@ namespace AsyncConverter
                     continue;
 
                 var returnType = candidateMethod.Type() as IDeclaredType;
-                if (returnType.IsTask() && !originalReturnType.IsVoid())
+                if((originalReturnType.IsVoid() && !returnType.IsTask())
+                    ||(!originalReturnType.IsVoid() && !returnType.IsGenericTaskOf(originalReturnType)))
                     continue;
-
-                if (returnType.IsGenericTask())
-                {
-                    var substitution = returnType.GetSubstitution();
-                    if (substitution.IsEmpty())
-                        continue;
-
-                    var innerCandidateReturnMethod = substitution.Apply(substitution.Domain[0]);
-                    if (!innerCandidateReturnMethod.Equals(originalReturnType))
-                        continue;
-                }
 
                 if (!IsParameterEqualsOrAsyncFunc(originalMethod.Parameters, candidateMethod.Parameters))
                     continue;
@@ -287,21 +268,39 @@ namespace AsyncConverter
 
         private static bool IsAsyncDelegate(IParameter originalParameter, IParameter parameter)
         {
-            if (!originalParameter.Type.IsAction())
-                return false;
-            if (parameter.Type.IsDelegate())
-                return false;
+            if (originalParameter.Type.IsAction() && parameter.Type.IsFunc())
+            {
+                var parameterDeclaredType = parameter.Type as IDeclaredType;
+                var substitution = parameterDeclaredType?.GetSubstitution();
+                if (substitution?.Domain.Count != 1)
+                    return false;
 
-            var parameterDeclaredType = parameter.Type as IDeclaredType;
-            var substitution = parameterDeclaredType?.GetSubstitution();
-            if (substitution?.Domain.Count != 1)
-                return false;
+                var valuableType = substitution.Apply(substitution.Domain[0]);
+                return valuableType.IsTask();
+            }
+            if (originalParameter.Type.IsFunc() && parameter.Type.IsFunc())
+            {
+                var parameterDeclaredType = parameter.Type as IDeclaredType;
+                var originalParameterDeclaredType = originalParameter.Type as IDeclaredType;
+                var substitution = parameterDeclaredType?.GetSubstitution();
+                var originalSubstitution = originalParameterDeclaredType?.GetSubstitution();
+                if (substitution == null || substitution.Domain.Count != originalSubstitution?.Domain.Count)
+                    return false;
 
-            var returnGenericParameterType = substitution.Apply(substitution.Domain[0]);
-            if (!returnGenericParameterType.IsTask())
-                return false;
+                var i = 0;
+                for (; i < substitution.Domain.Count - 1; i++)
+                {
+                    var genericType = substitution.Apply(substitution.Domain[i]);
+                    var originalGenericType = originalSubstitution.Apply(originalSubstitution.Domain[i]);
+                    if (!genericType.Equals(originalGenericType))
+                        return false;
+                }
+                var returnType = substitution.Apply(substitution.Domain[i]);
+                var originalReturnType = originalSubstitution.Apply(originalSubstitution.Domain[i]);
+                return returnType.IsGenericTaskOf(originalReturnType);
+            }
 
-            return true;
+            return false;
         }
 
         private static bool IsParameterEquals(IList<IParameter> originalParameters, IList<IParameter> methodParameters)
