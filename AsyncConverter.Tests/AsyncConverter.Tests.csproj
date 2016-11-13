@@ -270,10 +270,14 @@
     <Compile Include="MathodToAsyncConverterAvailabilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEnvironment.cs" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceVoidMethod.cs" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceInnerAction.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceFromWait.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceFromCallerWithWait.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceFromCallerWithWait.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceFromWait.cs.gold" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceInnerAction.cs.gold" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceVoidMethod.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceNameWithAsync.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceFromResult.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceInBase.cs" />

@@ -32,6 +32,8 @@ namespace AsyncConverter.Tests
         [TestCase("ReplaceNameWithAsync.cs")]
         [TestCase("ReplaceFromResult.cs")]
         [TestCase("ReplaceFromWait.cs")]
+        [TestCase("ReplaceInnerAction.cs")]
+        [TestCase("ReplaceVoidMethod.cs")]
         public void Test(string fileName)
         {
             DoTestFiles(fileName);

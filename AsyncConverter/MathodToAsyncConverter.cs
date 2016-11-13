@@ -66,7 +66,6 @@ namespace AsyncConverter
                     ReplaceMethodToAsync(finder, psiModule, factory, declaration);
                 }
             }
-
         }
 
         private void ReplaceMethodToAsync(IFinder finder, IPsiModule psiModule, CSharpElementFactory factory, IMethodDeclaration method)
@@ -84,7 +83,6 @@ namespace AsyncConverter
                     continue;
                 AsyncHelper.ReplaceCallToAsync(invocation, factory, containingFunctionDeclarationIgnoringClosures.IsAsync);
             }
-
             var invocationExpressions = method.Body.Descendants<IInvocationExpression>();
             foreach (var invocationExpression in invocationExpressions)
             {
