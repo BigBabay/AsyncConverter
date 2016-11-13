@@ -278,7 +278,8 @@ namespace AsyncConverter
             {
                 var parameter = methodParameters[i];
                 var originalParameter = originalParameters[i];
-                if (!IsAsyncDelegate(originalParameter, parameter))
+                if (!parameter.Type.Equals(originalParameter.Type)
+                    && !IsAsyncDelegate(originalParameter, parameter))
                     return false;
             }
             return true;
