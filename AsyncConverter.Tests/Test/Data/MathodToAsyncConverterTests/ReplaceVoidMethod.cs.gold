@@ -1,0 +1,21 @@
+﻿using System.Threading.Tasks;
+
+namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
+{
+    public class Class
+    {
+        public async Task {caret}TestAsync()
+        {
+            await MethodAsync().ConfigureAwait(false);
+        }
+
+        public void Method()
+        {
+        }
+
+        public Task MethodAsync()
+        {
+            return Task.CompletedTask;
+        }
+    }
+}

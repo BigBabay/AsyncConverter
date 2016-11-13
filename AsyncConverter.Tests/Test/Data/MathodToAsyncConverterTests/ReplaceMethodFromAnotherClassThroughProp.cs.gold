@@ -1,0 +1,31 @@
+﻿using System.Threading.Tasks;
+
+namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
+{
+    public class Class
+    {
+        private readonly IService service;
+
+        public Class(IService service)
+        {
+            this.service = service;
+        }
+
+        public async Task<int> {caret}TestAsync()
+        {
+            var a = await service.innerService.MethodAsync("lalala").ConfigureAwait(false);
+            return 4;
+        }
+    }
+
+    public interface IService
+    {
+        IInnerService innerService {get;}
+    }
+
+    public interface IInnerService
+    {
+        string Method(string s);
+        Task<string> MethodAsync(string s);
+    }
+}
