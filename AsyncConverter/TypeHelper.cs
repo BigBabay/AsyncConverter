@@ -59,12 +59,12 @@ namespace AsyncConverter
                 if(typeParameter1.HasDefaultConstructor != typeParameter2.HasDefaultConstructor
                     || typeParameter1.TypeConstraints.Count != typeParameter2.TypeConstraints.Count)
                     return false;
-                if (typeParameter1.TypeConstraints.Any(t => !t.IsEquals(t)))
+                if (typeParameter1.TypeConstraints.Where((t, i) => !t.IsEquals(typeParameter2.TypeConstraints[i])).Any())
                 {
                     return false;
                 }
             }
-            return Equals(typeElement1, typeElement2) && EqualSubstitutions(typeElement1, scalarType1.GetSubstitution(), typeElement2, otherScalarType.GetSubstitution());
+            return EqualSubstitutions(typeElement1, scalarType1.GetSubstitution(), typeElement2, otherScalarType.GetSubstitution());
         }
 
         /// <summary>
