@@ -270,6 +270,13 @@
     <Compile Include="MathodToAsyncConverterAvailabilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEnvironment.cs" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\IncorrectGenericParameter.cs" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\IncorrectGenericParameter.cs.gold" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\GenericResult.cs" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\GenericParameter.cs" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\GenericParameter.cs.gold" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceLambdaWithWait.cs" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceLambdaWithWait.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceVoidMethod.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceInnerAction.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceInnerFunc.cs" />
@@ -279,6 +286,7 @@
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceFromWait.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceInnerAction.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceInnerFunc.cs.gold" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\GenericResult.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceVoidMethod.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceNameWithAsync.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceFromResult.cs" />

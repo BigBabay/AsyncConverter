@@ -238,6 +238,8 @@ namespace AsyncConverter
                 ? factory.CreateReferenceExpression("$0", newMethodName)
                 : factory.CreateReferenceExpression("$0.$1", referenceExpression.QualifierExpression, newMethodName);
 
+            newReferenceExpression.SetTypeArgumentList(referenceExpression.TypeArgumentList);
+
             var callFormat = useAsync
                 ? "await $0($1).ConfigureAwait(false)"
                 : returnType.IsVoid() ? "$0($1).Wait()" : "$0($1).Result";
@@ -312,7 +314,8 @@ namespace AsyncConverter
             {
                 var parameter = methodParameters[i];
                 var originalParameter = originalParameters[i];
-                if (!parameter.Type.Equals(originalParameter.Type))
+
+                if (!parameter.Type.IsEquals(originalParameter.Type))
                     return false;
             }
             return true;
