@@ -82,20 +82,18 @@ namespace AsyncConverter
                 if (!TryConvertInnerReferenceToAsync(invocationExpression, factory))
                     return false;
                 ReplaceCallToAsync(invocationExpression, factory, useAsync: true);
-            }
-            else
-            {
-                var asyncMethodWithFunc = FindEquivalentAsyncMethodWithAsyncFunc(invocationMethod);
-                if (asyncMethodWithFunc == null)
-                    return false;
-                if (!TryConvertInnerReferenceToAsync(invocationExpression, factory))
-                    return false;
-
-                if (TryConvertParameterFuncToAsync(invocationExpression, factory))
-                    ReplaceCallToAsync(invocationExpression, factory, useAsync: true);
                 return true;
             }
-            return false;
+
+            var asyncMethodWithFunc = FindEquivalentAsyncMethodWithAsyncFunc(invocationMethod);
+            if (asyncMethodWithFunc == null)
+                return false;
+            if (!TryConvertInnerReferenceToAsync(invocationExpression, factory))
+                return false;
+
+            if (TryConvertParameterFuncToAsync(invocationExpression, factory))
+                ReplaceCallToAsync(invocationExpression, factory, useAsync: true);
+            return true;
         }
 
         private static bool TryConvertInnerReferenceToAsync(IInvocationExpression invocationExpression, CSharpElementFactory factory)
@@ -125,16 +123,18 @@ namespace AsyncConverter
                 //    ReplaceToAsyncMethod(innerInvocationExpression, factory);
                 //}
 
-                var innerInvocationExpression = functionExpression.BodyExpression as IInvocationExpression;
-                if (innerInvocationExpression == null)
-                    return false;
                 functionExpression.SetAsync(true);
-                if (!TryReplaceInvocationToAsync(innerInvocationExpression, factory))
+                var innerInvocationExpressions = functionExpression.Descendants<IInvocationExpression>();
+                foreach (var innerInvocationExpression in innerInvocationExpressions)
                 {
-                    invocationExpression.PsiModule.GetPsiServices().Transactions.RollbackTransaction();
-                    return false;
+                    if (!TryReplaceInvocationToAsync(innerInvocationExpression, factory))
+                    {
+                        invocationExpression.PsiModule.GetPsiServices().Transactions.RollbackTransaction();
+                        return false;
+                    }
                 }
             }
+            invocationExpression.PsiModule.GetPsiServices().Transactions.CommitTransaction();
             return true;
         }
 

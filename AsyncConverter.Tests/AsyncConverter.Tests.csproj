@@ -270,6 +270,7 @@
     <Compile Include="MathodToAsyncConverterAvailabilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEnvironment.cs" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\ResultInLambda.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\IncorrectAction.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\GenericParameterInClass.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\GenericParameterInClass.cs.gold" />
@@ -279,6 +280,7 @@
     <None Include="Test\Data\MathodToAsyncConverterTests\GenericParameter.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\GenericParameter.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\IncorrectAction.cs.gold" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\ResultInLambda.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceLambdaWithWait.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceLambdaWithWait.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceVoidMethod.cs" />
