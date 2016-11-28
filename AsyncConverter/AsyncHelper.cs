@@ -47,10 +47,10 @@ namespace AsyncConverter
             return null;
         }
 
-        public static void TryReplaceInvocationToAsync([NotNull] IInvocationExpression invocationExpression, [NotNull] CSharpElementFactory factory)
+        public static bool TryReplaceInvocationToAsync([NotNull] IInvocationExpression invocationExpression, [NotNull] CSharpElementFactory factory)
         {
             if (!invocationExpression.IsValid())
-                return;
+                return false;
             foreach (var argument in invocationExpression.Arguments)
             {
                 var argumentInvocationExpression = argument.Expression as IInvocationExpression;
@@ -60,70 +60,61 @@ namespace AsyncConverter
 
             if (invocationExpression.Type().IsGenericTask() || invocationExpression.Type().IsTask())
             {
-                ConvertCallWithWaitToAwaitCall(invocationExpression, factory);
+                return ConvertCallWithWaitToAwaitCall(invocationExpression, factory);
             }
-            else
-            {
-                TryConvertSyncCallToAsyncCall(invocationExpression, factory);
-            }
+
+            return TryConvertSyncCallToAsyncCall(invocationExpression, factory);
         }
 
-        private static void TryConvertSyncCallToAsyncCall(IInvocationExpression invocationExpression, CSharpElementFactory factory)
+        private static bool TryConvertSyncCallToAsyncCall(IInvocationExpression invocationExpression, CSharpElementFactory factory)
         {
             var referenceCurrentResolveResult = invocationExpression.Reference?.Resolve();
             if (referenceCurrentResolveResult?.IsValid() != true)
-                return;
+                return false;
 
             var invocationMethod = referenceCurrentResolveResult.DeclaredElement as IMethod;
             if (invocationMethod == null)
-                return;
+                return false;
 
             var asyncMethod = FindEquivalentAsyncMethod(invocationMethod);
             if (asyncMethod != null)
             {
-                var referenceExpression = invocationExpression.FirstChild as IReferenceExpression;
-                if (referenceExpression == null)
-                    return;
-
-                foreach (var child in referenceExpression.Children())
-                {
-                    var invocationChild = child as IInvocationExpression;
-                    if (invocationChild != null)
-                    {
-                        TryReplaceInvocationToAsync(invocationChild, factory);
-                    }
-                }
-
+                if (!TryConvertInnerReferenceToAsync(invocationExpression, factory))
+                    return false;
                 ReplaceCallToAsync(invocationExpression, factory, useAsync: true);
+                return true;
             }
-            else
-            {
-                var asyncMethodWithFunc = FindEquivalentAsyncMethodWithAsyncFunc(invocationMethod);
-                if (asyncMethodWithFunc != null)
-                {
-                    var referenceExpression = invocationExpression.FirstChild as IReferenceExpression;
-                    if (referenceExpression == null)
-                        return;
 
-                    foreach (var child in referenceExpression.Children())
-                    {
-                        var invocationChild = child as IInvocationExpression;
-                        if (invocationChild != null)
-                        {
-                            TryReplaceInvocationToAsync(invocationChild, factory);
-                        }
-                    }
-                    if (TryConvertParameterFuncToAsync(invocationExpression, factory))
-                    {
-                        ReplaceCallToAsync(invocationExpression, factory, useAsync: true);
-                    }
-                }
+            var asyncMethodWithFunc = FindEquivalentAsyncMethodWithAsyncFunc(invocationMethod);
+            if (asyncMethodWithFunc == null)
+                return false;
+            if (!TryConvertInnerReferenceToAsync(invocationExpression, factory))
+                return false;
+
+            if (TryConvertParameterFuncToAsync(invocationExpression, factory))
+                ReplaceCallToAsync(invocationExpression, factory, useAsync: true);
+            return true;
+        }
+
+        private static bool TryConvertInnerReferenceToAsync(IInvocationExpression invocationExpression, CSharpElementFactory factory)
+        {
+            var referenceExpression = invocationExpression.FirstChild as IReferenceExpression;
+            if (referenceExpression == null)
+                return false;
+
+            foreach (var child in referenceExpression.Children())
+            {
+                var invocationChild = child as IInvocationExpression;
+                if (invocationChild != null)
+                    TryReplaceInvocationToAsync(invocationChild, factory);
             }
+            return true;
         }
 
         private static bool TryConvertParameterFuncToAsync(IInvocationExpression invocationExpression, CSharpElementFactory factory)
         {
             var lambdaExpressions = invocationExpression.Arguments.SelectNotNull(x => x.Value as ILambdaExpression);
+            invocationExpression.PsiModule.GetPsiServices().Transactions.StartTransaction("convertAsyncParameter");
             foreach (var functionExpression in lambdaExpressions)
             {
                 //var invocationExpressions = functionExpression.BodyBlock.Descendants<IInvocationExpression>();
@@ -132,12 +123,18 @@ namespace AsyncConverter
                 //    ReplaceToAsyncMethod(innerInvocationExpression, factory);
                 //}
 
-                var innerInvocationExpression = functionExpression.BodyExpression as IInvocationExpression;
-                if (innerInvocationExpression == null)
-                    return false;
                 functionExpression.SetAsync(true);
-                TryReplaceInvocationToAsync(innerInvocationExpression, factory);
+                var innerInvocationExpressions = functionExpression.Descendants<IInvocationExpression>();
+                foreach (var innerInvocationExpression in innerInvocationExpressions)
+                {
+                    if (!TryReplaceInvocationToAsync(innerInvocationExpression, factory))
+                    {
+                        invocationExpression.PsiModule.GetPsiServices().Transactions.RollbackTransaction();
+                        return false;
+                    }
+                }
             }
+            invocationExpression.PsiModule.GetPsiServices().Transactions.CommitTransaction();
             return true;
         }
 
@@ -172,19 +169,20 @@ namespace AsyncConverter
             return null;
         }
 
-        private static void ConvertCallWithWaitToAwaitCall([NotNull] IInvocationExpression invocationExpression, [NotNull] CSharpElementFactory factory)
+        private static bool ConvertCallWithWaitToAwaitCall([NotNull] IInvocationExpression invocationExpression, [NotNull] CSharpElementFactory factory)
         {
             var reference = invocationExpression.Parent as IReferenceExpression;
 
-            //TODO: AwaitResult our custom method extension, it must be moded to settings
+            //TODO: AwaitResult our custom method extension, it must be moved to settings
             if (reference?.NameIdentifier.Name == "AwaitResult" || reference?.NameIdentifier.Name == "Wait")
             {
                 var call = factory.CreateExpression("await $0($1).ConfigureAwait(false)", invocationExpression.ConditionalQualifier,
                     invocationExpression.ArgumentList);
                 var parentInvocation = reference.Parent as IInvocationExpression;
                 if (parentInvocation == null)
-                    return;
+                    return false;
                 parentInvocation.ReplaceBy(call);
+                return true;
             }
 
             if (reference?.NameIdentifier.Name == "Result")
@@ -192,7 +190,9 @@ namespace AsyncConverter
                 var call = factory.CreateExpression("await $0($1).ConfigureAwait(false)", invocationExpression.ConditionalQualifier,
                     invocationExpression.ArgumentList);
                 reference.ReplaceBy(call);
+                return true;
             }
+            return false;
         }
 
         public static void ReplaceMethodSignatureToAsync(IParametersOwner methodDeclaredElement, IPsiModule psiModule, IMethodDeclaration methodDeclaration)
@@ -237,6 +237,8 @@ namespace AsyncConverter
             var newReferenceExpression = referenceExpression.QualifierExpression == null
                 ? factory.CreateReferenceExpression("$0", newMethodName)
                 : factory.CreateReferenceExpression("$0.$1", referenceExpression.QualifierExpression, newMethodName);
+
+            newReferenceExpression.SetTypeArgumentList(referenceExpression.TypeArgumentList);
 
             var callFormat = useAsync
                 ? "await $0($1).ConfigureAwait(false)"
@@ -312,7 +314,8 @@ namespace AsyncConverter
             {
                 var parameter = methodParameters[i];
                 var originalParameter = originalParameters[i];
-                if (!parameter.Type.Equals(originalParameter.Type))
+
+                if (!parameter.Type.IsEquals(originalParameter.Type))
                     return false;
             }
             return true;

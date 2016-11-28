@@ -1,4 +1,6 @@
-﻿using JetBrains.ReSharper.FeaturesTestFramework.Intentions;
+﻿using System.IO;
+using System.Linq;
+using JetBrains.ReSharper.FeaturesTestFramework.Intentions;
 using NUnit.Framework;
 
 namespace AsyncConverter.Tests
@@ -10,34 +12,18 @@ namespace AsyncConverter.Tests
 
         protected override string RelativeTestDataPath => "MathodToAsyncConverterTests";
 
-        [TestCase("ReplaceToGenericTask.cs")]
-        [TestCase("AddingUsing.cs")]
-        [TestCase("ReplaceToTask.cs")]
-        [TestCase("ReplaceMethod.cs")]
-        [TestCase("ReplaceMethodWithParameter.cs")]
-        [TestCase("ReplaceMethodWithCorrectChosenName.cs")]
-        [TestCase("CorrectCompareParam.cs")]
-        [TestCase("CorrectCompareReturnType.cs")]
-        [TestCase("ReplaceMethodFromAnotherClass.cs")]
-        [TestCase("ReplaceMethodFromAnotherClassThroughProp.cs")]
-        [TestCase("ReplaceMethodAndMethodInParam.cs")]
-        [TestCase("ReplaceMethodInChain.cs")]
-        [TestCase("ReplaceFromCaller.cs")]
-        [TestCase("ReplaceFromCallerWithResult.cs")]
-        [TestCase("ReplaceFromCallerWithWait.cs")]
-        [TestCase("ReplaceFromAsyncCaller.cs")]
-        [TestCase("RenameInInterface.cs")]
-        [TestCase("ReplaceInBase.cs")]
-        [TestCase("ReplaceInheritor.cs")]
-        [TestCase("ReplaceNameWithAsync.cs")]
-        [TestCase("ReplaceFromResult.cs")]
-        [TestCase("ReplaceFromWait.cs")]
-        [TestCase("ReplaceInnerAction.cs")]
-        [TestCase("ReplaceInnerFunc.cs")]
-        [TestCase("ReplaceVoidMethod.cs")]
+        [TestCaseSource(nameof(FileNames))]
         public void Test(string fileName)
         {
             DoTestFiles(fileName);
+        }
+
+        private TestCaseData[] FileNames()
+        {
+            return Directory
+                .GetFiles(@"..\..\Test\Data\" + RelativeTestDataPath, "*.cs")
+                .Select(x => new TestCaseData(Path.GetFileName(x)))
+                .ToArray();
         }
     }
 }
