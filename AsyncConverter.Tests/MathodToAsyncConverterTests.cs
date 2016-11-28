@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Linq;
+using AsyncConverter.QuickFixes;
 using JetBrains.ReSharper.FeaturesTestFramework.Intentions;
 using NUnit.Framework;
 

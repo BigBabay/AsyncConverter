@@ -1,4 +1,5 @@
-﻿using JetBrains.ReSharper.FeaturesTestFramework.Intentions;
+﻿using AsyncConverter.QuickFixes;
+using JetBrains.ReSharper.FeaturesTestFramework.Intentions;
 using NUnit.Framework;
 
 namespace AsyncConverter.Tests

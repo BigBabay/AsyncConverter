@@ -8,7 +8,7 @@ using JetBrains.ReSharper.Psi.Util;
 using IType = JetBrains.ReSharper.Psi.IType;
 using ITypeParameter = JetBrains.ReSharper.Psi.ITypeParameter;
 
-namespace AsyncConverter
+namespace AsyncConverter.Helpers
 {
     public static class TypeHelper
     {

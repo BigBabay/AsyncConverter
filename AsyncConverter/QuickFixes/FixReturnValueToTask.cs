@@ -13,7 +13,7 @@ using JetBrains.ReSharper.Psi.Util;
 using JetBrains.TextControl;
 using JetBrains.Util;
 
-namespace AsyncConverter
+namespace AsyncConverter.QuickFixes
 {
     [QuickFix]
     public class FixReturnValueToTask : QuickFixBase
