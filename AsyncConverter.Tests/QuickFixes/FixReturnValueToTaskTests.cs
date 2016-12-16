@@ -2,10 +2,10 @@
 using JetBrains.ReSharper.TestFramework;
 using NUnit.Framework;
 
-namespace AsyncConverter.Tests
+namespace AsyncConverter.Tests.QuickFixes
 {
     [TestFixture]
-    public class FixReturnValueToTaskTests : CSharpQuickFixTestBase<FixReturnValueToTask>
+    public class FixReturnValueToTaskTests : CSharpQuickFixTestBase<ReturnValueToTask>
     {
         protected override string RelativeTestDataPath => @"FixReturnValueToTaskTests";
 

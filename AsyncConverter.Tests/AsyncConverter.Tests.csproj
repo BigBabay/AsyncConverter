@@ -369,9 +369,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FixReturnValueToTaskTests.cs" />
-    <Compile Include="MathodToAsyncConverterTests.cs" />
-    <Compile Include="MathodToAsyncConverterAvailabilityTests.cs" />
+    <Compile Include="QuickFixes\FixReturnValueToTaskTests.cs" />
+    <Compile Include="ContextActions\MathodToAsyncConverterTests.cs" />
+    <Compile Include="ContextActions\MathodToAsyncConverterAvailabilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEnvironment.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\EnumerableToArrayMethod.cs" />
@@ -382,6 +382,21 @@
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceTree.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceTreeWithMultipleRoot.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceTree.cs.gold" />
+    <Compile Include="Analyzers\NullReturnFromMethodAnalyzerTests.cs" />
+    <None Include="Test\Data\NullReturnAnalyzerTests\ReturnNullFromBigLambda.cs" />
+    <None Include="Test\Data\NullReturnAnalyzerTests\ReturnNullFromGenericAsync.cs" />
+    <None Include="Test\Data\NullReturnAnalyzerTests\ReturnNullFromGenericAsync.cs.gold" />
+    <None Include="Test\Data\NullReturnAnalyzerTests\ReturnNullFromLambda.cs" />
+    <None Include="Test\Data\NullReturnAnalyzerTests\ReturnNullFromBigLambda.cs.gold" />
+    <None Include="Test\Data\NullReturnAnalyzerTests\ReturnNullFromLambda.cs.gold" />
+    <None Include="Test\Data\NullReturnAnalyzerTests\ReturnNullAsGenericTask.cs" />
+    <None Include="Test\Data\NullReturnAnalyzerTests\ReturnNullAsGenericTask.cs.gold" />
+    <None Include="Test\Data\NullReturnAnalyzerTests\ReturnNullAsNotTask.cs" />
+    <None Include="Test\Data\NullReturnAnalyzerTests\ReturnNotNull.cs" />
+    <None Include="Test\Data\NullReturnAnalyzerTests\ReturnNotNull.cs.gold" />
+    <None Include="Test\Data\NullReturnAnalyzerTests\ReturnNullAsNotTask.cs.gold" />
+    <None Include="Test\Data\NullReturnAnalyzerTests\ReturnNull.cs.gold" />
+    <None Include="Test\Data\NullReturnAnalyzerTests\ReturnNull.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ResultInLambda.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\IncorrectAction.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\GenericParameterInClass.cs" />

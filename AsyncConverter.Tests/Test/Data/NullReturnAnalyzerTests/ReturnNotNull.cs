@@ -1,0 +1,12 @@
+﻿using System.Threading.Tasks;
+
+namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
+{
+    public class Class
+    {
+        public Task Test()
+        {
+            return Task.Delay(0);
+        }
+    }
+}

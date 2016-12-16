@@ -1,8 +1,8 @@
-﻿using AsyncConverter.QuickFixes;
+﻿using AsyncConverter.ContextActions;
 using JetBrains.ReSharper.FeaturesTestFramework.Intentions;
 using NUnit.Framework;
 
-namespace AsyncConverter.Tests
+namespace AsyncConverter.Tests.ContextActions
 {
     [TestFixture]
     public class MathodToAsyncConverterAvailabilityTests : CSharpContextActionAvailabilityTestBase<MathodToAsyncConverter>

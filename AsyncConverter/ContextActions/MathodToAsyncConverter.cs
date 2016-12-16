@@ -15,7 +15,7 @@ using JetBrains.ReSharper.Psi.Tree;
 using JetBrains.TextControl;
 using JetBrains.Util;
 
-namespace AsyncConverter.QuickFixes
+namespace AsyncConverter.ContextActions
 {
     [ContextAction(Group = "C#", Name = "ConvertToAsync", Description = "Convert method to async and replace all inner call to async version if exist.")]
     public class MathodToAsyncConverter : ContextActionBase
