@@ -48,9 +48,8 @@ namespace AsyncConverter.QuickFixes
         public override bool IsAvailable(IUserDataHolder cache)
         {
             var parameterType = error.ParameterType;
-            var parameterTypeClass = parameterType.GetClassType();
 
-            if (parameterTypeClass == null || parameterTypeClass.GetClrName().FullName != "System.Threading.Tasks.Task`1")
+            if (!parameterType.IsGenericTask())
                 return false;
 
             var scalarType = parameterType.GetScalarType();

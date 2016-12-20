@@ -369,7 +369,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="QuickFixes\FixReturnValueToTaskTests.cs" />
+    <Compile Include="QuickFixes\ReturnNullToTaskTests.cs" />
+    <Compile Include="QuickFixes\ReturnValueToTaskTests.cs" />
     <Compile Include="ContextActions\MathodToAsyncConverterTests.cs" />
     <Compile Include="ContextActions\MathodToAsyncConverterAvailabilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -383,6 +384,9 @@
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceTreeWithMultipleRoot.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceTree.cs.gold" />
     <Compile Include="Analyzers\NullReturnFromMethodAnalyzerTests.cs" />
+    <None Include="Test\Data\ReturnNullToTaskAvailabilityTests\Test01.cs" />
+    <None Include="Test\Data\ReturnNullToTaskAvailabilityTests\Test01.cs.gold" />
+    <None Include="Test\Data\ReturnNullToTaskTests\Test01.cs.gold" />
     <None Include="Test\Data\NullReturnAnalyzerTests\ReturnNullFromBigLambda.cs" />
     <None Include="Test\Data\NullReturnAnalyzerTests\ReturnNullFromGenericAsync.cs" />
     <None Include="Test\Data\NullReturnAnalyzerTests\ReturnNullFromGenericAsync.cs.gold" />
@@ -446,8 +450,9 @@
     <None Include="Test\Data\MathodToAsyncConverterTests\AddingUsing.cs" />
     <None Include="Test\Data\MathodToAsyncConverterAvailabilityTests\Test01.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceToGenericTask.cs" />
-    <None Include="Test\Data\FixReturnValueToTaskTests\Test01.cs.gold" />
-    <None Include="Test\Data\FixReturnValueToTaskTests\Test01.cs" />
+    <None Include="Test\Data\ReturnNullToTaskTests\Test01.cs" />
+    <None Include="Test\Data\ReturnValueToTaskTests\Test01.cs.gold" />
+    <None Include="Test\Data\ReturnValueToTaskTests\Test01.cs" />
     <None Include="Test\Data\MathodToAsyncConverterAvailabilityTests\Test01.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceMethodAndMethodInParam.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceMethodFromAnotherClassThroughProp.cs.gold" />

@@ -1,6 +1,7 @@
 ﻿using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi;
+using JetBrains.ReSharper.Psi.CSharp.Parsing;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 
@@ -10,13 +11,13 @@ namespace AsyncConverter.Highlightings
     [ConfigurableSeverityHighlighting("NullReturnFromAsyncMethod", "CSHARP")]
     public class NullReturnAsTaskHighlighting : IHighlighting
     {
-        private readonly ICSharpLiteralExpression cSharpLiteralExpression;
-        private readonly IType returnType;
+        public ICSharpLiteralExpression CSharpLiteralExpression { get; }
+        public IType ReturnType { get; }
 
         public NullReturnAsTaskHighlighting(ICSharpLiteralExpression cSharpLiteralExpression, IType returnType)
         {
-            this.cSharpLiteralExpression = cSharpLiteralExpression;
-            this.returnType = returnType;
+            CSharpLiteralExpression = cSharpLiteralExpression;
+            ReturnType = returnType;
         }
 
         public string ToolTip => "Null return as Task";
@@ -24,12 +25,21 @@ namespace AsyncConverter.Highlightings
 
         public bool IsValid()
         {
+            if (!CSharpLiteralExpression.IsValid() || !ReturnType.IsValid())
+                return false;
+
+            if (CSharpLiteralExpression.Literal.GetTokenType() != CSharpTokenType.NULL_KEYWORD)
+                return false;
+
+            if (!ReturnType.IsTask() && !ReturnType.IsGenericTask())
+                return false;
+
             return true;
         }
 
         public DocumentRange CalculateRange()
         {
-            return cSharpLiteralExpression.GetDocumentRange();
+            return CSharpLiteralExpression.GetDocumentRange();
         }
     }
 }

@@ -5,9 +5,10 @@ using NUnit.Framework;
 namespace AsyncConverter.Tests.QuickFixes
 {
     [TestFixture]
-    public class FixReturnValueToTaskTests : CSharpQuickFixTestBase<ReturnValueToTask>
+    public class ReturnValueToTaskTests : CSharpQuickFixTestBase<ReturnValueToTask>
     {
-        protected override string RelativeTestDataPath => @"FixReturnValueToTaskTests";
+
+        protected override string RelativeTestDataPath => @"ReturnValueToTaskTests";
 
         [Test]
         [TestNetFramework46]
