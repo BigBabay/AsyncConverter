@@ -3,17 +3,17 @@
   <metadata>
     <id>AsyncConverter.AsyncConverter</id>
     <title>AsyncConverter</title>
-    <version>1.1.4.2</version>
+    <version>1.1.5.0</version>
     <authors>i.mamay</authors>
     <copyright>i.mamay</copyright>
     <owners>i.mamay</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Plugin for resharper 2016.2.2, for converting code to async.</description>
-    <summary>Plugin for resharper 2016.2.2, for converting code to async.</summary>
+    <description>Plugin for resharper 2016.3, for converting code to async.</description>
+    <summary>Plugin for resharper 2016.3, for converting code to async.</summary>
     <projectUrl>https://github.com/BigBabay/AsyncConverter</projectUrl>
     <tags>async</tags>
     <dependencies>
-      <dependency id="Wave" version="4.0" />
+      <dependency id="Wave" version="7.0" />
     </dependencies>
   </metadata>
   <files>
