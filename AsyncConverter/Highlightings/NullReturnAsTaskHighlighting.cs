@@ -5,7 +5,7 @@ using JetBrains.ReSharper.Psi.CSharp.Parsing;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 
-[assembly: RegisterConfigurableSeverity("NullReturnFromAsyncMethod", null, "CodeInfo", "Some title", "Other title", Severity.WARNING, false)]
+[assembly: RegisterConfigurableSeverity("NullReturnFromAsyncMethod", null, "CodeInfo", "Some title", "Other title", Severity.WARNING)]
 namespace AsyncConverter.Highlightings
 {
     [ConfigurableSeverityHighlighting("NullReturnFromAsyncMethod", "CSHARP")]
