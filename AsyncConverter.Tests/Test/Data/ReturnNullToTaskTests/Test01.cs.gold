@@ -1,12 +1,13 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections;
+using System.Threading.Tasks;
 
 namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 {
     public class Class
     {
-        public Task {caret}MethodAsync()
+        public Task Test()
         {
-            return Task.CompletedTask;
+            return {caret}Task.CompletedTask;
         }
     }
 }

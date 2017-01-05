@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Linq;
-using AsyncConverter.QuickFixes;
 using JetBrains.ReSharper.FeaturesTestFramework.Intentions;
 using JetBrains.ReSharper.TestFramework;
 using NUnit.Framework;
@@ -8,10 +7,10 @@ using NUnit.Framework;
 namespace AsyncConverter.Tests.QuickFixes
 {
     [TestFixture]
-    [TestNetFramework46]
-    public class ReturnNullToTaskTests : CSharpQuickFixTestBase<ReturnNullToTask>
+    [TestNetFramework4]
+    public class ReturnNullToTaskAvailabilityTests : QuickFixAvailabilityTestBase
     {
-        protected override string RelativeTestDataPath => @"ReturnNullToTaskTests";
+        protected override string RelativeTestDataPath => @"ReturnNullToTaskAvailabilityTests";
 
         [TestCaseSource(nameof(FileNames))]
         public void Test(string fileName)

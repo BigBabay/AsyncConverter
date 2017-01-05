@@ -369,6 +369,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="QuickFixes\ReturnNullToTaskAvailabilityTests.cs" />
     <Compile Include="QuickFixes\ReturnNullToTaskTests.cs" />
     <Compile Include="QuickFixes\ReturnValueToTaskTests.cs" />
     <Compile Include="ContextActions\MathodToAsyncConverterTests.cs" />
