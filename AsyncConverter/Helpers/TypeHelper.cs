@@ -79,25 +79,6 @@ namespace AsyncConverter.Helpers
             return EqualSubstitutions(typeElement1, scalarType1.GetSubstitution(), typeElement2, otherScalarType.GetSubstitution());
         }
 
-        /// <summary>
-        /// Return value indicating the specific type occurs in this open declared type.
-        /// If this type contains value type (for example for List`T &amp; T it returns true)
-        /// </summary>
-        private static bool ContainsOpenType(IDeclaredType thisType, IDeclaredType value)
-        {
-            bool isAny = false;
-            value.Accept(new DelegatingTypeVisitor
-                         {
-                             ProcessDeclaredType = d =>
-                                                   {
-                                                       if (!d.IsOpenType || !Equals(d, thisType))
-                                                           return;
-                                                       isAny = true;
-                                                   }
-                         });
-            return isAny;
-        }
-
         private static bool IsEqualTypeGroup([NotNull] IType sourceType, [NotNull] IType targetType)
         {
             if (sourceType is IDeclaredType && targetType is IDeclaredType || sourceType is IArrayType && targetType is IArrayType)
@@ -105,20 +86,6 @@ namespace AsyncConverter.Helpers
             if (sourceType is IPointerType)
                 return targetType is IPointerType;
             return false;
-        }
-
-        private static bool EqualSubstitutions([NotNull] IMethod referenceOwner, [NotNull] ISubstitution referenceSubstitution, [NotNull] IMethod originOwner, [NotNull] ISubstitution originSubstitution)
-        {
-            ITypeElement containingType1 = referenceOwner.GetContainingType();
-            ITypeElement containingType2 = originOwner.GetContainingType();
-            if (containingType1 == null || containingType2 == null || (!EqualSubstitutions(containingType1, referenceSubstitution, containingType2, originSubstitution) || referenceOwner.TypeParameters.Count != originOwner.TypeParameters.Count))
-                return false;
-            for (int index = 0; index < referenceOwner.TypeParameters.Count; ++index)
-            {
-                if (!IsEquals(referenceSubstitution[referenceOwner.TypeParameters[index]], originSubstitution[originOwner.TypeParameters[index]]))
-                    return false;
-            }
-            return true;
         }
 
         private static bool EqualSubstitutions([NotNull] ITypeElement referenceOwner, [NotNull] ISubstitution referenceSubstitution, [NotNull] ITypeElement originOwner, [NotNull] ISubstitution originSubstitution)
