@@ -374,6 +374,8 @@
     <Compile Include="MathodToAsyncConverterAvailabilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEnvironment.cs" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceTree.cs" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceTree.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ResultInLambda.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\IncorrectAction.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\GenericParameterInClass.cs" />

@@ -1,0 +1,25 @@
+﻿using System.Threading.Tasks;
+
+namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
+{
+    public interface IClass
+    {
+        public Task<int> TestAsync();
+    }
+
+    public class Class1 : IClass
+    {
+        public async Task<int> {caret}TestAsync()
+        {
+            return 5;
+        }
+    }
+
+    public class Class2 : IClass
+    {
+        public async Task<int> TestAsync()
+        {
+            return 5;
+        }
+    }
+}
