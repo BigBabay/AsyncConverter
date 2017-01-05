@@ -1,52 +1,17 @@
 ﻿using System.Collections.Generic;
 using JetBrains.Annotations;
-using JetBrains.Application.Progress;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Modules;
-using JetBrains.ReSharper.Psi.Search;
 using JetBrains.ReSharper.Psi.Tree;
 using JetBrains.ReSharper.Psi.Util;
 using JetBrains.Util;
 
-namespace AsyncConverter
+namespace AsyncConverter.Helpers
 {
     public static class AsyncHelper
     {
-        [CanBeNull]
-        [Pure]
-        public static IMethod FindEquivalentAsyncMethod([NotNull] IParametersOwner originalMethod)
-        {
-            if (!originalMethod.IsValid())
-                return null;
-
-            var originalReturnType = originalMethod.Type();
-
-            var @class = originalMethod.GetContainingType();
-            if (@class == null)
-                return null;
-
-            foreach (var candidateMethod in @class.Methods)
-            {
-                if (originalMethod.ShortName + "Async" != candidateMethod.ShortName)
-                    continue;
-
-                var returnType = candidateMethod.Type();
-                if (returnType.IsTask() && !originalReturnType.IsVoid())
-                    continue;
-
-                if (!returnType.IsGenericTaskOf(originalReturnType))
-                    continue;
-
-                if (!IsParameterEquals(candidateMethod.Parameters, originalMethod.Parameters))
-                    continue;
-
-                return candidateMethod;
-            }
-            return null;
-        }
-
         public static bool TryReplaceInvocationToAsync([NotNull] IInvocationExpression invocationExpression, [NotNull] CSharpElementFactory factory)
         {
             if (!invocationExpression.IsValid())
@@ -305,6 +270,39 @@ namespace AsyncConverter
             return false;
         }
 
+        [CanBeNull]
+        [Pure]
+        public static IMethod FindEquivalentAsyncMethod([NotNull] IParametersOwner originalMethod)
+        {
+            if (!originalMethod.IsValid())
+                return null;
+
+            var originalReturnType = originalMethod.Type();
+
+            var @class = originalMethod.GetContainingType();
+            if (@class == null)
+                return null;
+
+            foreach (var candidateMethod in @class.Methods)
+            {
+                if (originalMethod.ShortName + "Async" != candidateMethod.ShortName)
+                    continue;
+
+                var returnType = candidateMethod.Type();
+                if (returnType.IsTask() && !originalReturnType.IsVoid())
+                    continue;
+
+                if (!returnType.IsGenericTaskOf(originalReturnType))
+                    continue;
+
+                if (!IsParameterEquals(candidateMethod.Parameters, originalMethod.Parameters))
+                    continue;
+
+                return candidateMethod;
+            }
+            return null;
+        }
+
         private static bool IsParameterEquals([ItemNotNull] IList<IParameter> originalParameters, [ItemNotNull] IList<IParameter> methodParameters)
         {
             if (methodParameters.Count != originalParameters.Count)
@@ -319,26 +317,6 @@ namespace AsyncConverter
                     return false;
             }
             return true;
-        }
-
-        [ItemNotNull]
-        public static IList<TOverridableMember> FindImplementingMembers<TOverridableMember>([NotNull] TOverridableMember overridableMember, [CanBeNull] IProgressIndicator pi = null)
-            where TOverridableMember : class, IOverridableMember
-        {
-            var found = new List<TOverridableMember>();
-            overridableMember
-                .GetPsiServices()
-                .Finder
-                .FindImplementingMembers(overridableMember, overridableMember.GetSearchDomain(),
-                    new FindResultConsumer(findResult =>
-                                           {
-                                               var resultOverridableMember = findResult as FindResultOverridableMember;
-                                               var result = resultOverridableMember?.OverridableMember as TOverridableMember;
-                                               if (result != null)
-                                                   found.Add(result);
-                                               return FindExecution.Continue;
-                                           }), true, pi ?? NullProgressIndicator.Instance);
-            return found;
         }
     }
 }

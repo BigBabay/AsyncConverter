@@ -373,7 +373,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AsyncHelper.cs" />
+    <Compile Include="Helpers\AsyncHelper.cs" />
+    <Compile Include="Helpers\FinderHelper.cs" />
     <Compile Include="MathodToAsyncConverter.cs" />
     <Compile Include="FixReturnValueToTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
