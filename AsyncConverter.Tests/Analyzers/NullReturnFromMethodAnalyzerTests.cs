@@ -1,11 +1,13 @@
 ﻿using System.IO;
 using System.Linq;
 using JetBrains.ReSharper.FeaturesTestFramework.Daemon;
+using JetBrains.ReSharper.TestFramework;
 using NUnit.Framework;
 
 namespace AsyncConverter.Tests.Analyzers
 {
     [TestFixture]
+    [TestNetFramework46]
     public class NullReturnAnalyzerTests : CSharpHighlightingTestBase
     {
         protected override string RelativeTestDataPath => "NullReturnAnalyzerTests";

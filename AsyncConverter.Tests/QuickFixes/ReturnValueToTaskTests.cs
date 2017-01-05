@@ -1,4 +1,7 @@
-﻿using JetBrains.ReSharper.FeaturesTestFramework.Intentions;
+﻿using System.IO;
+using System.Linq;
+using AsyncConverter.QuickFixes;
+using JetBrains.ReSharper.FeaturesTestFramework.Intentions;
 using JetBrains.ReSharper.TestFramework;
 using NUnit.Framework;
 
@@ -6,15 +9,22 @@ namespace AsyncConverter.Tests.QuickFixes
 {
     [TestFixture]
     [TestNetFramework4]
-    public class ReturnValueToTaskTests : CSharpQuickFixTestBase<ReturnValueToTask>
+    public class ReturnValueAsTaskTests : CSharpQuickFixTestBase<ReturnValueAsTask>
     {
+        protected override string RelativeTestDataPath => @"ReturnValueAsTaskTests";
 
-        protected override string RelativeTestDataPath => @"ReturnValueToTaskTests";
-
-        [Test]
-        public void Test01()
+        [TestCaseSource(nameof(FileNames))]
+        public void Test(string fileName)
         {
-            DoTestFiles("Test01.cs");
+            DoTestFiles(fileName);
+        }
+
+        private TestCaseData[] FileNames()
+        {
+            return Directory
+                .GetFiles(@"..\..\Test\Data\" + RelativeTestDataPath, "*.cs")
+                .Select(x => new TestCaseData(Path.GetFileName(x)))
+                .ToArray();
         }
     }
 }

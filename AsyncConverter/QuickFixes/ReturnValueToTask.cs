@@ -16,11 +16,11 @@ using JetBrains.Util;
 namespace AsyncConverter.QuickFixes
 {
     [QuickFix]
-    public class ReturnValueToTask : QuickFixBase
+    public class ReturnValueAsTask : QuickFixBase
     {
         private readonly IncorrectArgumentTypeError error;
 
-        public ReturnValueToTask(IncorrectArgumentTypeError error)
+        public ReturnValueAsTask(IncorrectArgumentTypeError error)
         {
             this.error = error;
         }

@@ -12,7 +12,7 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 
         public Task Test2()
         {
-            return Task.Delay(0);
+            return Task.CompletedTask;
         }
     }
 }

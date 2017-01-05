@@ -452,8 +452,8 @@
     <None Include="Test\Data\MathodToAsyncConverterAvailabilityTests\Test01.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceToGenericTask.cs" />
     <None Include="Test\Data\ReturnNullToTaskTests\Test01.cs" />
-    <None Include="Test\Data\ReturnValueToTaskTests\Test01.cs.gold" />
-    <None Include="Test\Data\ReturnValueToTaskTests\Test01.cs" />
+    <None Include="Test\Data\ReturnValueAsTaskTests\Test01.cs.gold" />
+    <None Include="Test\Data\ReturnValueAsTaskTests\Test01.cs" />
     <None Include="Test\Data\MathodToAsyncConverterAvailabilityTests\Test01.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceMethodAndMethodInParam.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceMethodFromAnotherClassThroughProp.cs.gold" />
