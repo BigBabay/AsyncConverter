@@ -40,14 +40,11 @@ namespace AsyncConverter
             var factory = CSharpElementFactory.GetInstance(psiModule);
 
             FindAndReplaceBaseMethods(finder, psiModule, factory, methodDeclaredElement);
-
-            foreach (var immediateBaseMethod in AsyncHelper.FindImplementingMembers(methodDeclaredElement, NullProgressIndicator.Instance))
+            foreach (var methodDeclaration in AsyncHelper
+                .FindImplementingMembers(methodDeclaredElement)
+                .SelectMany(x => x.GetDeclarations<IMethodDeclaration>()))
             {
-                var implementingMethod = immediateBaseMethod.OverridableMember as IMethod;
-                var implementingMethodDeclaration = implementingMethod?.GetSingleDeclaration<IMethodDeclaration>();
-                if (implementingMethodDeclaration == null)
-                    return null;
-                ReplaceMethodToAsync(finder, psiModule, factory, implementingMethodDeclaration);
+                ReplaceMethodToAsync(finder, psiModule, factory, methodDeclaration);
             }
 
             ReplaceMethodToAsync(finder, psiModule, factory, method);
