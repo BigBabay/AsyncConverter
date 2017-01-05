@@ -11,11 +11,11 @@ using JetBrains.Util;
 namespace AsyncConverter.QuickFixes
 {
     [QuickFix]
-    public class ReturnNullToTask : QuickFixBase
+    public class ReturnNullAsTask : QuickFixBase
     {
         private readonly NullReturnAsTaskHighlighting error;
 
-        public ReturnNullToTask(NullReturnAsTaskHighlighting error)
+        public ReturnNullAsTask(NullReturnAsTaskHighlighting error)
         {
             this.error = error;
         }

@@ -9,9 +9,9 @@ namespace AsyncConverter.Tests.QuickFixes
 {
     [TestFixture]
     [TestNetFramework46]
-    public class ReturnNullToTaskTests : CSharpQuickFixTestBase<ReturnNullToTask>
+    public class ReturnNullAsTaskTests : CSharpQuickFixTestBase<ReturnNullAsTask>
     {
-        protected override string RelativeTestDataPath => @"ReturnNullToTaskTests";
+        protected override string RelativeTestDataPath => @"ReturnNullAsTaskTests";
 
         [TestCaseSource(nameof(FileNames))]
         public void Test(string fileName)
