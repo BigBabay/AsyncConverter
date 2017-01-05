@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using AsyncConverter.Helpers;
 using JetBrains.Annotations;
 using JetBrains.Application.Progress;
 using JetBrains.ProjectModel;
@@ -39,37 +40,20 @@ namespace AsyncConverter
             var psiModule = method.GetPsiModule();
             var factory = CSharpElementFactory.GetInstance(psiModule);
 
-            FindAndReplaceBaseMethods(finder, psiModule, factory, methodDeclaredElement);
-
-            foreach (var immediateBaseMethod in AsyncHelper.FindImplementingMembers(methodDeclaredElement, NullProgressIndicator.Instance))
+            foreach (var methodDeclaration in methodDeclaredElement
+                .FindAllHierarchy()
+                .SelectMany(x => x.GetDeclarations<IMethodDeclaration>()))
             {
-                var implementingMethod = immediateBaseMethod.OverridableMember as IMethod;
-                var implementingMethodDeclaration = implementingMethod?.GetSingleDeclaration<IMethodDeclaration>();
-                if (implementingMethodDeclaration == null)
-                    return null;
-                ReplaceMethodToAsync(finder, psiModule, factory, implementingMethodDeclaration);
+                ReplaceMethodToAsync(finder, psiModule, factory, methodDeclaration);
             }
-
-            ReplaceMethodToAsync(finder, psiModule, factory, method);
-
             return null;
-        }
-
-        private void FindAndReplaceBaseMethods(IFinder finder, IPsiModule psiModule, CSharpElementFactory factory, IDeclaredElement methodDeclaredElement)
-        {
-            foreach (var immediateBaseMethod in finder.FindImmediateBaseElements(methodDeclaredElement, NullProgressIndicator.Instance))
-            {
-                var baseMethodDeclarations = immediateBaseMethod.GetDeclarations();
-                foreach (var declaration in baseMethodDeclarations.OfType<IMethodDeclaration>())
-                {
-                    FindAndReplaceBaseMethods(finder, psiModule, factory, immediateBaseMethod);
-                    ReplaceMethodToAsync(finder, psiModule, factory, declaration);
-                }
-            }
         }
 
         private void ReplaceMethodToAsync(IFinder finder, IPsiModule psiModule, CSharpElementFactory factory, IMethodDeclaration method)
         {
+            if(!method.IsValid())
+                return;
+
             var methodDeclaredElement = method.DeclaredElement;
             if (methodDeclaredElement == null)
                 return;
