@@ -5,9 +5,9 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 {
     public class Class
     {
-        public Task<int> Test()
+        public Task<object> Test()
         {
-            return Task.FromResult(default(int));
+            return {caret}null;
         }
     }
 }
