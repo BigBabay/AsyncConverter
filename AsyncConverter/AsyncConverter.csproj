@@ -419,7 +419,8 @@
   </Target>
   <Import Project="..\packages\JetBrains.Build.Platform.Tasks.ThemedIconsPacker.2.0.20151217.1\build\JetBrains.Build.Platform.Tasks.ThemedIconsPacker.Targets" Condition="Exists('..\packages\JetBrains.Build.Platform.Tasks.ThemedIconsPacker.2.0.20151217.1\build\JetBrains.Build.Platform.Tasks.ThemedIconsPacker.Targets')" />
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)packages\NuGet.CommandLine.3.4.3\tools\nuget.exe" pack "$(SolutionDir)$(ProjectName)\package.nuspec"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Framework.107.0.20161214.153643\build\JetBrains.Platform.Interop.dotMemoryUnit.Framework.Targets" Condition="Exists('..\packages\JetBrains.Platform.Interop.dotMemoryUnit.Framework.107.0.20161214.153643\build\JetBrains.Platform.Interop.dotMemoryUnit.Framework.Targets')" />
   <Import Project="..\packages\JetBrains.Platform.Core.Shell.107.0.20161214.153252\build\JetBrains.Platform.Core.Shell.Targets" Condition="Exists('..\packages\JetBrains.Platform.Core.Shell.107.0.20161214.153252\build\JetBrains.Platform.Core.Shell.Targets')" />
