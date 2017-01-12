@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 {
-    public static class EnumerableExtension
+    public static class Enumerable
     {
         public static T[] ToArray<T>(this IEnumerable<T> enumerable)
         {
@@ -12,19 +12,19 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
         }
     }
 
-    public static class QueryableExtension
+    public static class QueryableExtensions
     {
-        public static Task<T[]> ToArrayAsync<T>(this IQueryable<T> enumerable)
+        public static Task<T[]> ToArrayAsync<T>(this IQueryable<T> queryable)
         {
-            return Task.FromResult(enumerable.ToArray());
+            return Task.FromResult(queryable.ToArray());
         }
     }
 
     public class Class
     {
-        public T[] {caret}Test(IEnumerable<T> enumerable)
+        public T[] {caret}Test(IQueryable<T> queryable)
         {
-            return enumerable.ToArray();
+            return queryable.ToArray();
         }
     }
 }
