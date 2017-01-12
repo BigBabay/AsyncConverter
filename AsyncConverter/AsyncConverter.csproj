@@ -383,7 +383,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="package.nuspec">
+    <None Include="AsyncConverter.nuspec">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
