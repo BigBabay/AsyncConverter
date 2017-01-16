@@ -1,4 +1,5 @@
 ﻿using JetBrains.ReSharper.FeaturesTestFramework.Intentions;
+using JetBrains.ReSharper.TestFramework;
 using NUnit.Framework;
 
 namespace AsyncConverter.Tests
@@ -9,6 +10,7 @@ namespace AsyncConverter.Tests
         protected override string RelativeTestDataPath => @"FixReturnValueToTaskTests";
 
         [Test]
+        [TestNetFramework46]
         public void Test01()
         {
             DoTestFiles("Test01.cs");
