@@ -2,16 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
+namespace System.Data.Entity
 {
-    public static class Enumerable
-    {
-        public static T[] ToArray<T>(this IEnumerable<T> enumerable)
-        {
-            return enumerable.ToArray();
-        }
-    }
-
     public static class QueryableExtensions
     {
         public static Task<T[]> ToArrayAsync<T>(this IQueryable<T> queryable)
@@ -19,7 +11,10 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
             return Task.FromResult(queryable.ToArray());
         }
     }
+}
 
+namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
+{
     public class Class
     {
         public T[] {caret}Test(IQueryable<T> queryable)
