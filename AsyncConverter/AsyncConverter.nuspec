@@ -3,7 +3,7 @@
   <metadata>
     <id>AsyncConverter.AsyncConverter</id>
     <title>AsyncConverter</title>
-    <version>1.1.5.2</version>
+    <version>1.1.5.3</version>
     <authors>i.mamay</authors>
     <copyright>i.mamay</copyright>
     <owners>i.mamay</owners>
@@ -16,4 +16,8 @@
       <dependency id="Wave" version="7.0" />
     </dependencies>
   </metadata>
+  <files>
+    <file src="bin\$configuration$\AsyncConverter.dll" target="dotFiles\" />
+    <file src="bin\$configuration$\AsyncConverter.pdb" target="dotFiles\" />
+  </files>
 </package>
