@@ -40,7 +40,7 @@ namespace AsyncConverter.QuickFixes
 
                 var substitution = declaredReturnType.GetSubstitution();
                 var genericParameter = substitution.Apply(substitution.Domain[0]);
-                var wrappedNull = factory.CreateReferenceExpression(
+                var wrappedNull = factory.CreateExpression(
                     genericParameter.IsStructType() ? "$0.FromResult(default($1))" : "$0.FromResult<$1>(null)",
                     taskType,
                     genericParameter);
