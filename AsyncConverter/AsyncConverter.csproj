@@ -375,14 +375,14 @@
   <ItemGroup>
     <Compile Include="Analyzers\NullReturnFromLambdaAnalyzer.cs" />
     <Compile Include="Analyzers\NullReturnFromMethodAnalyzer.cs" />
+    <Compile Include="ContextActions\MathodToAsyncConverter.cs" />
     <Compile Include="Helpers\AsyncHelper.cs" />
     <Compile Include="Helpers\FinderHelper.cs" />
-    <Compile Include="Highlightings\NullReturnAsTaskHighlighting.cs" />
-    <Compile Include="ContextActions\MathodToAsyncConverter.cs" />
-    <Compile Include="QuickFixes\ReturnValueToTask.cs" />
-    <Compile Include="QuickFixes\ReturnNullToTask.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\TypeHelper.cs" />
+    <Compile Include="Highlightings\NullReturnAsTaskHighlighting.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuickFixes\ReturnNullToTask.cs" />
+    <Compile Include="QuickFixes\ReturnValueToTask.cs" />
     <Compile Include="ZoneMarker.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -398,7 +398,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Antlr2.Tools.2.7.6.4\build\Antlr2.Tools.targets" Condition="Exists('..\packages\Antlr2.Tools.2.7.6.4\build\Antlr2.Tools.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
