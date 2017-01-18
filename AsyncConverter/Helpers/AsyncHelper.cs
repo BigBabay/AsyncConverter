@@ -85,12 +85,6 @@ namespace AsyncConverter.Helpers
             invocationExpression.PsiModule.GetPsiServices().Transactions.StartTransaction("convertAsyncParameter");
             foreach (var functionExpression in lambdaExpressions)
             {
-                //var invocationExpressions = functionExpression.BodyBlock.Descendants<IInvocationExpression>();
-                //foreach (var innerInvocationExpression in invocationExpressions)
-                //{
-                //    ReplaceToAsyncMethod(innerInvocationExpression, factory);
-                //}
-
                 functionExpression.SetAsync(true);
                 var innerInvocationExpressions = functionExpression.Descendants<IInvocationExpression>();
                 foreach (var innerInvocationExpression in innerInvocationExpressions)

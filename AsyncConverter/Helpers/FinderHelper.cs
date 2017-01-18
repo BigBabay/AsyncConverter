@@ -42,17 +42,6 @@ namespace AsyncConverter.Helpers
 
         [NotNull]
         [ItemNotNull]
-        private static IEnumerable<IMethod> InnerFindBaseMethods([NotNull] IFinder finder, [NotNull] IMethod method, [NotNull] IProgressIndicator pi)
-        {
-            return finder
-                .FindImmediateBaseElements(method, pi)
-                .OfType<IMethod>()
-                .SelectMany(innerMethod => innerMethod.FindBaseMethods())
-                .Concat(new[] {method});
-        }
-
-        [NotNull]
-        [ItemNotNull]
         public static IEnumerable<IMethod> FindAllHierarchy([NotNull] this IMethod method, [CanBeNull] IProgressIndicator pi = null)
         {
             var finder = method
@@ -72,6 +61,17 @@ namespace AsyncConverter.Helpers
             return immediateBaseMethods.Any()
                 ? immediateBaseMethods.SelectMany(innerMethod => innerMethod.FindAllHierarchy())
                 : new [] { method }.Concat(method.FindImplementingMembers());
+        }
+
+        [NotNull]
+        [ItemNotNull]
+        private static IEnumerable<IMethod> InnerFindBaseMethods([NotNull] IFinder finder, [NotNull] IMethod method, [NotNull] IProgressIndicator pi)
+        {
+            return finder
+                .FindImmediateBaseElements(method, pi)
+                .OfType<IMethod>()
+                .SelectMany(innerMethod => innerMethod.FindBaseMethods())
+                .Concat(new[] {method});
         }
     }
 }
