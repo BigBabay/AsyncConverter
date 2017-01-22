@@ -5,6 +5,7 @@ using JetBrains.ReSharper.Psi.CSharp.Parsing;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 
+[assembly:RegisterConfigurableHighlightingsGroup("AsyncConverter", "Async converter plugin")]
 [assembly: RegisterConfigurableSeverity("NullReturnFromAsyncMethod", null, "Async converter plugin", "Null return from async method", "May cause null reference exception if return of method will be awaiting.", Severity.WARNING)]
 namespace AsyncConverter.Highlightings
 {
