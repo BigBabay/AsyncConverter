@@ -1,7 +1,12 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using JetBrains.Annotations;
+using JetBrains.ProjectModel.Model2.Assemblies.Interfaces;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.Resolve;
+using JetBrains.ReSharper.Psi.Util;
+using IType = JetBrains.ReSharper.Psi.IType;
+using ITypeParameter = JetBrains.ReSharper.Psi.ITypeParameter;
 
 namespace AsyncConverter
 {
@@ -36,6 +41,13 @@ namespace AsyncConverter
 
             var clrTypeName = declaredType.GetClrName();
             return clrTypeName.Equals(PredefinedType.FUNC_FQN) || clrTypeName.FullName.StartsWith(PredefinedType.FUNC_FQN + "`");
+        }
+
+        [Pure]
+        [ContractAnnotation("null => false")]
+        public static bool IsGenericIQueryable([CanBeNull]this IType type)
+        {
+            return TypesUtil.IsPredefinedTypeFromAssembly(type, PredefinedType.GENERIC_IQUERYABLE_FQN, assembly => assembly.IsMscorlib);
         }
 
         public static bool IsEquals([NotNull]this IType type, [NotNull] IType otherType)

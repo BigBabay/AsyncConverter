@@ -17,9 +17,9 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 {
     public class Class
     {
-        public T[] {caret}Test(IQueryable<T> queryable)
+        public T[] {caret}Test(IEnumerable<T> enumerable)
         {
-            return queryable.ToArray();
+            return enumerable.ToArray();
         }
     }
 }
