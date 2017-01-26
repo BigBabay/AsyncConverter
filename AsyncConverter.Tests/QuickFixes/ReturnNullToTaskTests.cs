@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace AsyncConverter.Tests.QuickFixes
 {
     [TestFixture]
-    [TestNetFramework46]
+    [TestNetFramework4]
     public class ReturnNullAsTaskTests : CSharpQuickFixTestBase<ReturnNullAsTask>
     {
         protected override string RelativeTestDataPath => @"ReturnNullAsTaskTests";
