@@ -385,6 +385,7 @@
     <None Include="app.config" />
     <None Include="AsyncConverter.nuspec">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

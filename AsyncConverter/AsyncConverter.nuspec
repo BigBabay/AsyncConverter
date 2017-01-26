@@ -16,8 +16,4 @@
       <dependency id="Wave" version="7.0" />
     </dependencies>
   </metadata>
-  <files>
-    <file src="bin\$configuration$\AsyncConverter.dll" target="dotFiles\" />
-    <file src="bin\$configuration$\AsyncConverter.pdb" target="dotFiles\" />
-  </files>
 </package>
