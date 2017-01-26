@@ -375,7 +375,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEnvironment.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\EnumerableToArrayMethod.cs" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\QueryableToArrayMethod.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\EnumerableToArrayMethod.cs.gold" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\QueryableToArrayMethod.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceTreeWithMultipleRoot.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceTree.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceTreeWithMultipleRoot.cs.gold" />

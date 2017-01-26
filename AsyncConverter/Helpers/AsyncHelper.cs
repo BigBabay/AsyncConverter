@@ -42,7 +42,9 @@ namespace AsyncConverter.Helpers
             if (invocationMethod == null)
                 return false;
 
-            var asyncMethod = FindEquivalentAsyncMethod(invocationMethod, psiModule);
+            var invokedObjectType = (invocationExpression.ConditionalQualifier as IReferenceExpression)?.QualifierExpression?.Type();
+
+            var asyncMethod = FindEquivalentAsyncMethod(invocationMethod, invokedObjectType, psiModule);
             if (asyncMethod != null)
             {
                 if (!TryConvertInnerReferenceToAsync(invocationExpression, factory, psiModule))
@@ -273,12 +275,12 @@ namespace AsyncConverter.Helpers
 
         [CanBeNull]
         [Pure]
-        public static IMethod FindEquivalentAsyncMethod([NotNull] IParametersOwner originalMethod, [NotNull] IPsiModule psiModule)
+        public static IMethod FindEquivalentAsyncMethod([NotNull] IParametersOwner originalMethod, [CanBeNull] IType invokedObjectType, [NotNull] IPsiModule psiModule)
         {
             if (!originalMethod.IsValid())
                 return null;
 
-            var @class = GetClassForMethodSearch(originalMethod, psiModule);
+            var @class = GetClassForMethodSearch(invokedObjectType, originalMethod, psiModule);
             if (@class == null)
                 return null;
 
@@ -305,7 +307,7 @@ namespace AsyncConverter.Helpers
 
         [CanBeNull]
         [Pure]
-        private static ITypeElement GetClassForMethodSearch([NotNull] IParametersOwner originalMethod, [NotNull] IPsiModule psiModule)
+        private static ITypeElement GetClassForMethodSearch(IType invokedObjectType, [NotNull] IParametersOwner originalMethod, [NotNull] IPsiModule psiModule)
         {
             var containingType = originalMethod.GetContainingType();
             if (containingType == null)
@@ -313,7 +315,7 @@ namespace AsyncConverter.Helpers
                 return null;
             }
 
-            if (!IsEnumerable(containingType))
+            if (!invokedObjectType.IsGenericIQueryable() || !IsEnumerable(containingType))
             {
                 return containingType;
             }
