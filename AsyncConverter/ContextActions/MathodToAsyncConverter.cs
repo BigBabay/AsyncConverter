@@ -58,7 +58,7 @@ namespace AsyncConverter.ContextActions
             if (methodDeclaredElement == null)
                 return;
 
-            var usages = finder.FindReferences(methodDeclaredElement, SearchDomainFactory.Instance.CreateSearchDomain(psiModule), NullProgressIndicator.Instance);
+            var usages = finder.FindAllReferences(methodDeclaredElement);
             foreach (var usage in usages)
             {
                 var invocation = usage.GetTreeNode().Parent as IInvocationExpression;
