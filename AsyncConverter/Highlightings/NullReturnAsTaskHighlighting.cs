@@ -1,17 +1,21 @@
-﻿using JetBrains.DocumentModel;
+﻿using AsyncConverter.Highlightings;
+using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi;
+using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.CSharp.Parsing;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 
-[assembly:RegisterConfigurableHighlightingsGroup("AsyncConverter", "Async converter plugin")]
-[assembly: RegisterConfigurableSeverity("NullReturnFromAsyncMethod", null, "AsyncConverter", "Null return from async method", "May cause null reference exception if return of method will be awaiting.", Severity.WARNING)]
+[assembly: RegisterConfigurableSeverity(NullReturnAsTaskHighlighting.SeverityId, null, AsyncConverterGroupSettings.Id, "Null return from async method", "May cause null reference exception if return of method will be awaiting.", Severity.WARNING)]
+
 namespace AsyncConverter.Highlightings
 {
-    [ConfigurableSeverityHighlighting("NullReturnFromAsyncMethod", "CSHARP")]
+    [ConfigurableSeverityHighlighting(SeverityId, CSharpLanguage.Name)]
     public class NullReturnAsTaskHighlighting : IHighlighting
     {
+        public const string SeverityId = "AsyncConverter.NullReturnAsTask";
+
         public ICSharpLiteralExpression CSharpLiteralExpression { get; }
         public IType ReturnType { get; }
 

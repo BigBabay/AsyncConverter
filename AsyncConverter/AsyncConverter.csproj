@@ -379,6 +379,7 @@
     <Compile Include="Helpers\AsyncHelper.cs" />
     <Compile Include="Helpers\FinderHelper.cs" />
     <Compile Include="Helpers\TypeHelper.cs" />
+    <Compile Include="Highlightings\AsyncConverterGroupSettings.cs" />
     <Compile Include="Highlightings\NullReturnAsTaskHighlighting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuickFixes\ReturnNullToTask.cs" />
