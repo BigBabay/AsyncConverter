@@ -15,7 +15,7 @@ using JetBrains.ReSharper.Psi.Tree;
 using JetBrains.TextControl;
 using JetBrains.Util;
 
-namespace AsyncConverter
+namespace AsyncConverter.ContextActions
 {
     [ContextAction(Group = "C#", Name = "ConvertToAsync", Description = "Convert method to async and replace all inner call to async version if exist.")]
     public class MathodToAsyncConverter : ContextActionBase
@@ -58,7 +58,7 @@ namespace AsyncConverter
             if (methodDeclaredElement == null)
                 return;
 
-            var usages = finder.FindReferences(methodDeclaredElement, SearchDomainFactory.Instance.CreateSearchDomain(psiModule), NullProgressIndicator.Instance);
+            var usages = finder.FindAllReferences(methodDeclaredElement);
             foreach (var usage in usages)
             {
                 var invocation = usage.GetTreeNode().Parent as IInvocationExpression;

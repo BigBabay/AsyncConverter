@@ -13,14 +13,14 @@ using JetBrains.ReSharper.Psi.Util;
 using JetBrains.TextControl;
 using JetBrains.Util;
 
-namespace AsyncConverter
+namespace AsyncConverter.QuickFixes
 {
     [QuickFix]
-    public class FixReturnValueToTask : QuickFixBase
+    public class ReturnValueAsTask : QuickFixBase
     {
         private readonly IncorrectArgumentTypeError error;
 
-        public FixReturnValueToTask(IncorrectArgumentTypeError error)
+        public ReturnValueAsTask(IncorrectArgumentTypeError error)
         {
             this.error = error;
         }
@@ -48,9 +48,8 @@ namespace AsyncConverter
         public override bool IsAvailable(IUserDataHolder cache)
         {
             var parameterType = error.ParameterType;
-            var parameterTypeClass = parameterType.GetClassType();
 
-            if (parameterTypeClass == null || parameterTypeClass.GetClrName().FullName != "System.Threading.Tasks.Task`1")
+            if (!parameterType.IsGenericTask())
                 return false;
 
             var scalarType = parameterType.GetScalarType();

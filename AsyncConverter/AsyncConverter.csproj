@@ -373,12 +373,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Analyzers\NullReturnFromLambdaAnalyzer.cs" />
+    <Compile Include="Analyzers\NullReturnFromMethodAnalyzer.cs" />
+    <Compile Include="ContextActions\MathodToAsyncConverter.cs" />
     <Compile Include="Helpers\AsyncHelper.cs" />
     <Compile Include="Helpers\FinderHelper.cs" />
-    <Compile Include="MathodToAsyncConverter.cs" />
-    <Compile Include="FixReturnValueToTask.cs" />
+    <Compile Include="Helpers\TypeHelper.cs" />
+    <Compile Include="Highlightings\AsyncConverterGroupSettings.cs" />
+    <Compile Include="Highlightings\NullReturnAsTaskHighlighting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TypeHelper.cs" />
+    <Compile Include="QuickFixes\ReturnNullToTask.cs" />
+    <Compile Include="QuickFixes\ReturnValueToTask.cs" />
     <Compile Include="ZoneMarker.cs" />
   </ItemGroup>
   <ItemGroup>

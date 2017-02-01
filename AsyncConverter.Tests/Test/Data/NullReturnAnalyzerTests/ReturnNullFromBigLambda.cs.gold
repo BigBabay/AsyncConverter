@@ -1,0 +1,25 @@
+﻿using System;
+using System.Threading.Tasks;
+
+namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
+{
+    public class Class
+    {
+        public void Test()
+        {
+            Test2(() =>
+                  {
+                      Test();
+                      return |null|(0);
+                  });
+        }
+
+        public void Test2(Func<Task> func)
+        {
+            func().Wait();
+        }
+    }
+}
+
+---------------------------------------------------------
+(0): ReSharper Warning: (T) 'Null return as Task' (E) 'May cause null reference if Task will be await.'

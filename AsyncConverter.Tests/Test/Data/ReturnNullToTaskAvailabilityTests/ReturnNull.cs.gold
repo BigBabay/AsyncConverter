@@ -1,0 +1,17 @@
+﻿using System.Threading.Tasks;
+
+namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
+{
+    public class Class
+    {
+        public Task Test()
+        {
+            return |null|(0);
+        }
+    }
+}
+
+------------------------------------------------
+0: Null return as Task
+QUICKFIXES:
+Wrap to Task

@@ -1,21 +1,21 @@
 ﻿using System.IO;
 using System.Linq;
-using JetBrains.ReSharper.FeaturesTestFramework.Intentions;
+using JetBrains.ReSharper.FeaturesTestFramework.Daemon;
+using JetBrains.ReSharper.TestFramework;
 using NUnit.Framework;
 
-namespace AsyncConverter.Tests
+namespace AsyncConverter.Tests.Analyzers
 {
     [TestFixture]
-    public class MathodToAsyncConverterTests : CSharpContextActionExecuteTestBase<MathodToAsyncConverter>
+    [TestNetFramework46]
+    public class NullReturnAnalyzerTests : CSharpHighlightingTestBase
     {
-        protected override string ExtraPath => "MathodToAsyncConverterTests";
-
-        protected override string RelativeTestDataPath => "MathodToAsyncConverterTests";
+        protected override string RelativeTestDataPath => "NullReturnAnalyzerTests";
 
         [TestCaseSource(nameof(FileNames))]
         public void Test(string fileName)
         {
-            DoTestFiles(fileName);
+            DoTestSolution(fileName);
         }
 
         private TestCaseData[] FileNames()

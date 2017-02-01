@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
+namespace AsyncConverter.Tests.Test.Data.ReturnValueAsTask
 {
     public class Class
     {
