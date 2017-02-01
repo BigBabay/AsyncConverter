@@ -4,9 +4,12 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 {
     public class Class
     {
-        public Task TestAsync()
+        public Task |Test|(0)()
         {
             return Task.CompletedTask;
         }
     }
 }
+
+---------------------------------------------------------
+(0): ReSharper Warning: (T) '' (E) 'Async method must ends on "Async"'

@@ -2,9 +2,8 @@
 {
     public class Class
     {
-        public object TestAsync()
+        public void Test()
         {
-            return null;
         }
     }
 }

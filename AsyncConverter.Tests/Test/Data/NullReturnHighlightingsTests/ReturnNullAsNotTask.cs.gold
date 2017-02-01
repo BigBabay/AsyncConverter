@@ -2,7 +2,7 @@
 {
     public class Class
     {
-        public object Test()
+        public object TestAsync()
         {
             return null;
         }

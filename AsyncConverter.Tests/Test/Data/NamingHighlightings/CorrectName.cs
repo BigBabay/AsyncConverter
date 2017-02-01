@@ -4,9 +4,9 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 {
     public class Class
     {
-        public Task TestAsync()
+        public async Task TestAsync()
         {
-            return Task.CompletedTask;
+            await Task.Delay(1000);
         }
     }
 }

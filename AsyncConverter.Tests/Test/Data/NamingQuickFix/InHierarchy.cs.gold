@@ -1,0 +1,25 @@
+﻿using System.Threading.Tasks;
+
+namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
+{
+    public interface IInterface
+    {
+        public Task TestAsync();
+    }
+
+    public class Class : IInterface
+    {
+        public virtual Task {caret}TestAsync()
+        {
+            return Task.CompletedTask;
+        }
+    }
+
+    public class Class2 : Class
+    {
+        public override Task TestAsync()
+        {
+            return Task.CompletedTask;
+        }
+    }
+}

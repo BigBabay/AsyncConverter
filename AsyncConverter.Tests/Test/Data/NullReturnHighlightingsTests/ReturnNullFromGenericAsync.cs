@@ -4,13 +4,13 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 {
     public class Class
     {
-        public async Task<object> Test()
+        public async Task<object> TestAsync()
         {
-            await Test2();
+            await Test2Async();
             return null;
         }
 
-        public Task Test2()
+        public Task Test2Async()
         {
             return Task.CompletedTask;
         }

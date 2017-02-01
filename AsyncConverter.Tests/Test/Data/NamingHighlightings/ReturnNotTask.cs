@@ -2,9 +2,9 @@
 {
     public class Class
     {
-        public object TestAsync()
+        public int Test()
         {
-            return null;
+            return 5;
         }
     }
 }
