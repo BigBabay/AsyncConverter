@@ -30,16 +30,7 @@ namespace AsyncConverter.Highlightings
 
         public bool IsValid()
         {
-            if (!CSharpLiteralExpression.IsValid() || !ReturnType.IsValid())
-                return false;
-
-            if (CSharpLiteralExpression.Literal.GetTokenType() != CSharpTokenType.NULL_KEYWORD)
-                return false;
-
-            if (!ReturnType.IsTask() && !ReturnType.IsGenericTask())
-                return false;
-
-            return true;
+            return CSharpLiteralExpression.IsValid() && ReturnType.IsValid();
         }
 
         public DocumentRange CalculateRange()
