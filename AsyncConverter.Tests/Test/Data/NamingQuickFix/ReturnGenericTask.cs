@@ -4,14 +4,9 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 {
     public class Class
     {
-        public Task TestAsync()
+        public Task<int> Te{caret}st()
         {
-            return |null|(0);
+            return Task.FromResult(5);
         }
     }
 }
-
-------------------------------------------------
-0: Null return as Task
-QUICKFIXES:
-Wrap to Task

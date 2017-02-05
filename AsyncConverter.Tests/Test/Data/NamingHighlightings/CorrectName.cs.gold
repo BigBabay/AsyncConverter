@@ -4,12 +4,11 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 {
     public class Class
     {
-        public Task<int> Test()
+        public async Task TestAsync()
         {
-            return |null|(0);
+            await Task.Delay(1000);
         }
     }
 }
 
 ---------------------------------------------------------
-(0): ReSharper Warning: (T) 'Null return as Task' (E) 'May cause null reference if Task will be await.'

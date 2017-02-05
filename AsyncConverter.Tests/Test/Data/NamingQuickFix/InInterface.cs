@@ -2,11 +2,8 @@
 
 namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 {
-    public class Class
+    public interface IInterface
     {
-        public Task TestAsync()
-        {
-            return null;
-        }
+        Task {caret}Test();
     }
 }

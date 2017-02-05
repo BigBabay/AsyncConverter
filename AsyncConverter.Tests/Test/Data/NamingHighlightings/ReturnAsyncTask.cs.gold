@@ -1,0 +1,15 @@
+﻿using System.Threading.Tasks;
+
+namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
+{
+    public class Class
+    {
+        public async Task |Test|(0)()
+        {
+            await Task.Delay(1000);
+        }
+    }
+}
+
+---------------------------------------------------------
+(0): ReSharper Warning: (T) '' (E) 'Async method must ends on "Async"'

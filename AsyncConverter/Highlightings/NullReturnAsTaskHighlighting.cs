@@ -3,7 +3,6 @@ using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp;
-using JetBrains.ReSharper.Psi.CSharp.Parsing;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 
@@ -30,16 +29,7 @@ namespace AsyncConverter.Highlightings
 
         public bool IsValid()
         {
-            if (!CSharpLiteralExpression.IsValid() || !ReturnType.IsValid())
-                return false;
-
-            if (CSharpLiteralExpression.Literal.GetTokenType() != CSharpTokenType.NULL_KEYWORD)
-                return false;
-
-            if (!ReturnType.IsTask() && !ReturnType.IsGenericTask())
-                return false;
-
-            return true;
+            return CSharpLiteralExpression.IsValid() && ReturnType.IsValid();
         }
 
         public DocumentRange CalculateRange()

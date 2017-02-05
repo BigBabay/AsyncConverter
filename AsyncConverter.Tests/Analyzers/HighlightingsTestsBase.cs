@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.Linq;
 using JetBrains.ReSharper.FeaturesTestFramework.Daemon;
 using JetBrains.ReSharper.TestFramework;
@@ -8,17 +8,15 @@ namespace AsyncConverter.Tests.Analyzers
 {
     [TestFixture]
     [TestNetFramework46]
-    public class NullReturnAnalyzerTests : CSharpHighlightingTestBase
+    public abstract class HighlightingsTestsBase : CSharpHighlightingTestBase
     {
-        protected override string RelativeTestDataPath => "NullReturnAnalyzerTests";
-
         [TestCaseSource(nameof(FileNames))]
         public void Test(string fileName)
         {
             DoTestSolution(fileName);
         }
 
-        private TestCaseData[] FileNames()
+        protected TestCaseData[] FileNames()
         {
             return Directory
                 .GetFiles(@"..\..\Test\Data\" + RelativeTestDataPath, "*.cs")

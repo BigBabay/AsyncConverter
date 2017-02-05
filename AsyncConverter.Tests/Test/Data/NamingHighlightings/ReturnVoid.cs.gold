@@ -2,9 +2,8 @@
 {
     public class Class
     {
-        public object Test()
+        public void Test()
         {
-            return null;
         }
     }
 }
