@@ -6,7 +6,7 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
     {
         public async Task TestAsync()
         {
-            await Task.Delay(1000).ConfigureAwait(false);
+            var tmp = (await {caret}Task.FromResult(new[] { 1 })).Select(x => x + 1);
         }
     }
 }

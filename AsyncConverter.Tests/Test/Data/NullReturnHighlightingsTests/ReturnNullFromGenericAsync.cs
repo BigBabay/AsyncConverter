@@ -6,7 +6,7 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
     {
         public async Task<object> TestAsync()
         {
-            await Test2Async();
+            await Test2Async().ConfigureAwait(false);
             return null;
         }
 
