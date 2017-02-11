@@ -370,8 +370,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Analyzers\HighlightingsTestsBase.cs" />
+    <Compile Include="Analyzers\ConfigureAwaitHighlightingTests.cs" />
     <Compile Include="Analyzers\NullReturnHighlightingsTests.cs" />
     <Compile Include="QuickFixes\AsyncMethodNamingQuickFixTests.cs" />
+    <Compile Include="QuickFixes\ConfigureAwaitQuickFixTests.cs" />
+    <Compile Include="QuickFixes\QuickFixBaseTests.cs" />
     <Compile Include="QuickFixes\ReturnNullToTaskAvailabilityTests.cs" />
     <Compile Include="QuickFixes\ReturnNullToTaskTests.cs" />
     <Compile Include="QuickFixes\ReturnValueToTaskTests.cs" />
@@ -379,6 +382,16 @@
     <Compile Include="ContextActions\MathodToAsyncConverterAvailabilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEnvironment.cs" />
+    <None Include="Test\Data\ConfigureAwaitQuickFixTests\Chain.cs" />
+    <None Include="Test\Data\ConfigureAwaitQuickFixTests\Chain.cs.gold" />
+    <None Include="Test\Data\ConfigureAwaitQuickFixTests\Simple.cs" />
+    <None Include="Test\Data\ConfigureAwaitHighlightingTests\WithTrue.cs" />
+    <None Include="Test\Data\ConfigureAwaitHighlightingTests\WithFalse.cs" />
+    <None Include="Test\Data\ConfigureAwaitHighlightingTests\WithTrue.cs.gold" />
+    <None Include="Test\Data\ConfigureAwaitHighlightingTests\Without.cs" />
+    <None Include="Test\Data\ConfigureAwaitHighlightingTests\WithFalse.cs.gold" />
+    <None Include="Test\Data\ConfigureAwaitHighlightingTests\Without.cs.gold" />
+    <None Include="Test\Data\ConfigureAwaitQuickFixTests\Simple.cs.gold" />
     <None Include="Test\Data\NamingQuickFix\InUsage.cs" />
     <None Include="Test\Data\NamingQuickFix\InHierarchy.cs" />
     <None Include="Test\Data\NamingQuickFix\ReturnTask.cs" />
