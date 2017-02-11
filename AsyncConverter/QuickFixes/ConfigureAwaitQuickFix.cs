@@ -28,7 +28,7 @@ namespace AsyncConverter.QuickFixes
             return new []
                    {
                        new ConfigureAwaitAction(configureAwaitHighlighting, false),
-                       new ConfigureAwaitAction(configureAwaitHighlighting, false),
+                       new ConfigureAwaitAction(configureAwaitHighlighting, true),
                    }.ToQuickFixIntentions();
         }
     }
