@@ -11,9 +11,10 @@ namespace AsyncConverter.Helpers
     public static class TypeHelper
     {
         [Pure]
-        public static bool IsGenericTaskOf([CanBeNull] this IType taskType, [CanBeNull] IType otherType)
+        [ContractAnnotation("taskType:null => false; substitutionType:null => false")]
+        public static bool IsGenericTaskOf([CanBeNull] this IType taskType, [CanBeNull] IType substitutionType)
         {
-            if (taskType == null || otherType == null)
+            if (taskType == null || substitutionType == null)
                 return false;
             if (!taskType.IsGenericTask())
                 return false;
@@ -26,7 +27,7 @@ namespace AsyncConverter.Helpers
             if (substitution.IsEmpty())
                 return false;
             var meaningType = substitution.Apply(substitution.Domain[0]);
-            return meaningType.IsEquals(otherType);
+            return meaningType.IsEquals(substitutionType);
         }
 
         [Pure]
@@ -46,6 +47,16 @@ namespace AsyncConverter.Helpers
         public static bool IsGenericIQueryable([CanBeNull]this IType type)
         {
             return TypesUtil.IsPredefinedTypeFromAssembly(type, PredefinedType.GENERIC_IQUERYABLE_FQN, assembly => assembly.IsMscorlib);
+        }
+
+        [Pure]
+        [ContractAnnotation("null => false")]
+        public static bool IsEnumerableClass([CanBeNull]this ITypeElement type)
+        {
+            if (type == null)
+                return false;
+            var typeName = type.GetClrName();
+            return typeName.Equals(PredefinedType.ENUMERABLE_CLASS);
         }
 
         public static bool IsEquals([NotNull]this IType type, [NotNull] IType otherType)
