@@ -1,0 +1,27 @@
+﻿using System.Threading.Tasks;
+
+namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
+{
+    public class Class
+    {
+        public async Task<int> {caret}TestAsync()
+        {
+            return 5;
+        }
+
+        public async Task Caller()
+        {
+            var a = await CallerWihtLambdaAsync(() => TestAsync()).ConfigureAwait(false);
+        }
+
+        public int CallerWihtLambda(Func<int> func)
+        {
+            return func();
+        }
+
+        public Task CallerWihtLambdaAsync(Func<Task<int>> func)
+        {
+            return func();
+        }
+    }
+}

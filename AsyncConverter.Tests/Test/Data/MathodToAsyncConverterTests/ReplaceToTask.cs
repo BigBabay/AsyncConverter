@@ -6,7 +6,6 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
     {
         public void {caret}Test()
         {
-            return 5;
         }
     }
 }

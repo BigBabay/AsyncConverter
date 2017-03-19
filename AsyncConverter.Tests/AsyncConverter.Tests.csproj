@@ -382,6 +382,8 @@
     <Compile Include="ContextActions\MathodToAsyncConverterAvailabilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEnvironment.cs" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\UsageFromLambdaWithBody.cs" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\UsageFromLambda.cs" />
     <None Include="Test\Data\ConfigureAwaitQuickFixTests\Chain.cs" />
     <None Include="Test\Data\ConfigureAwaitQuickFixTests\Chain.cs.gold" />
     <None Include="Test\Data\ConfigureAwaitQuickFixTests\Simple.cs" />
@@ -392,6 +394,8 @@
     <None Include="Test\Data\ConfigureAwaitHighlightingTests\WithFalse.cs.gold" />
     <None Include="Test\Data\ConfigureAwaitHighlightingTests\Without.cs.gold" />
     <None Include="Test\Data\ConfigureAwaitQuickFixTests\Simple.cs.gold" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\UsageFromLambdaWithBody.cs.gold" />
+    <None Include="Test\Data\MathodToAsyncConverterTests\UsageFromLambda.cs.gold" />
     <None Include="Test\Data\NamingQuickFix\InUsage.cs" />
     <None Include="Test\Data\NamingQuickFix\InHierarchy.cs" />
     <None Include="Test\Data\NamingQuickFix\ReturnTask.cs" />
@@ -468,8 +472,6 @@
     <None Include="Test\Data\MathodToAsyncConverterTests\GenericParameter.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\IncorrectAction.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ResultInLambda.cs.gold" />
-    <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceLambdaWithWait.cs" />
-    <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceLambdaWithWait.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceVoidMethod.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceInnerAction.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceInnerFunc.cs" />
