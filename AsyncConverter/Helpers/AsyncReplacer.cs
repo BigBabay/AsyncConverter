@@ -56,7 +56,7 @@ namespace AsyncConverter.Helpers
                 var invocation = usage.GetTreeNode().Parent as IInvocationExpression;
                 asyncInvocationReplacer.ReplaceInvocation(invocation, GenerateAsyncMethodName(method.DeclaredName), asyncChecker.CanUseAwait(invocation));
             }
-            var invocationExpressions = method.Body.Descendants<IInvocationExpression>();
+            var invocationExpressions = method.Body.Descendants<IInvocationExpression>().ToEnumerable().ToArray();
             foreach (var invocationExpression in invocationExpressions)
             {
                 TryReplaceInvocationToAsync(invocationExpression, factory, psiModule);
