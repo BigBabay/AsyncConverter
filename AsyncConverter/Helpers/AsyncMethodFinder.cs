@@ -1,4 +1,3 @@
-using AsyncConverter.AsyncHelpers;
 using AsyncConverter.AsyncHelpers.ClassSearchers;
 using AsyncConverter.AsyncHelpers.ParameterComparers;
 using JetBrains.ProjectModel;
@@ -19,14 +18,14 @@ namespace AsyncConverter.Helpers
             this.parameterComparer = parameterComparer;
         }
 
-        public IMethod FindEquivalentAsyncMethod(IParametersOwner originalMethod, IType invokedType)
+        public FindingReslt FindEquivalentAsyncMethod(IParametersOwner originalMethod, IType invokedType)
         {
             if (!originalMethod.IsValid())
-                return null;
+                return FindingReslt.CreateFail();
 
             var @class = classForSearchResolver.GetClassForSearch(originalMethod, invokedType);
             if (@class == null)
-                return null;
+                return FindingReslt.CreateFail();
 
             var originalReturnType = originalMethod.Type();
             foreach (var candidateMethod in @class.Methods)
@@ -35,20 +34,20 @@ namespace AsyncConverter.Helpers
                     continue;
 
                 var returnType = candidateMethod.Type();
-                if (returnType.IsTask() && !originalReturnType.IsVoid())
+                if (!returnType.IsTaskOf(originalReturnType))
                     continue;
 
-                if (!returnType.IsGenericTaskOf(originalReturnType))
+                var parameterCompareResult = parameterComparer.ComparerParameters(candidateMethod.Parameters, originalMethod.Parameters);
+                if (!parameterCompareResult.CanBeConvertedToAsync())
                     continue;
 
-                var parameterCompareAggregateResult = parameterComparer.ComparerParameters(candidateMethod.Parameters, originalMethod.Parameters).Result;
-                if(parameterCompareAggregateResult == ParameterCompareAggregateResult.NotEqual
-                    || parameterCompareAggregateResult == ParameterCompareAggregateResult.DifferentLength)
-                    continue;
-
-                return candidateMethod;
+                return new FindingReslt
+                       {
+                           Method = candidateMethod,
+                           ParameterCompareResult = parameterCompareResult,
+                       };
             }
-            return null;
+            return FindingReslt.CreateFail();
         }
     }
 }

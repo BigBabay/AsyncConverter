@@ -1,4 +1,5 @@
 using System.Linq;
+using AsyncConverter.AsyncHelpers.ParameterComparers;
 using JetBrains.Annotations;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Psi;
@@ -7,7 +8,6 @@ using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Modules;
 using JetBrains.ReSharper.Psi.Search;
 using JetBrains.ReSharper.Psi.Tree;
-using JetBrains.Util;
 
 namespace AsyncConverter.Helpers
 {
@@ -82,18 +82,18 @@ namespace AsyncConverter.Helpers
 
             var invokedType = (invocationExpression.ConditionalQualifier as IReferenceExpression)?.QualifierExpression?.Type();
 
-            var asyncMethod = asyncMethodFinder.FindEquivalentAsyncMethod(invocationMethod, invokedType);
-            if (asyncMethod != null)
+            var findingReslt = asyncMethodFinder.FindEquivalentAsyncMethod(invocationMethod, invokedType);
+            if (findingReslt.CanBeConvertedToAsync())
             {
                 if (!TryConvertInnerReferenceToAsync(invocationExpression, factory, psiModule))
                     return false;
 
-                if (TryConvertParameterFuncToAsync(invocationExpression, factory, psiModule))
-                    asyncInvocationReplacer.ReplaceInvocation(invocationExpression, GenerateAsyncMethodName(asyncMethod.ShortName), true);
+                if (TryConvertParameterFuncToAsync(invocationExpression, findingReslt.ParameterCompareResult, factory, psiModule))
+                    asyncInvocationReplacer.ReplaceInvocation(invocationExpression, GenerateAsyncMethodName(findingReslt.Method.ShortName), true);
 
                 return true;
             }
-            return true;
+            return false;
         }
 
         public bool TryReplaceInvocationToAsync([NotNull] IInvocationExpression invocationExpression, [NotNull] CSharpElementFactory factory, [NotNull] IPsiModule psiModule)
@@ -130,20 +130,30 @@ namespace AsyncConverter.Helpers
             return true;
         }
 
-        private bool TryConvertParameterFuncToAsync([NotNull] IInvocationExpression invocationExpression, [NotNull] CSharpElementFactory factory, [NotNull] IPsiModule psiModule)
+        private bool TryConvertParameterFuncToAsync([NotNull] IInvocationExpression invocationExpression, [NotNull] ParameterCompareResult parameterCompareResult, [NotNull] CSharpElementFactory factory, [NotNull] IPsiModule psiModule)
         {
-            var lambdaExpressions = invocationExpression.Arguments.SelectNotNull(x => x.Value as ILambdaExpression);
+            var arguments = invocationExpression.Arguments;
             invocationExpression.PsiModule.GetPsiServices().Transactions.StartTransaction("convertAsyncParameter");
-            foreach (var functionExpression in lambdaExpressions)
+            for (var i = 0; i < arguments.Count; i++)
             {
-                functionExpression.SetAsync(true);
-                var innerInvocationExpressions = functionExpression.Descendants<IInvocationExpression>();
-                foreach (var innerInvocationExpression in innerInvocationExpressions)
+                var compareResult = parameterCompareResult.ParameterResults[i];
+                if (compareResult.Action == ParameterCompareResultAction.NeedConvertToAsyncFunc)
                 {
-                    if (!TryReplaceInvocationToAsync(innerInvocationExpression, factory, psiModule))
+                    var lambdaExpression = arguments[i].Value as ILambdaExpression;
+                    if(lambdaExpression == null)
                     {
                         invocationExpression.PsiModule.GetPsiServices().Transactions.RollbackTransaction();
                         return false;
+                    }
+                    lambdaExpression.SetAsync(true);
+                    var innerInvocationExpressions = lambdaExpression.Descendants<IInvocationExpression>();
+                    foreach (var innerInvocationExpression in innerInvocationExpressions)
+                    {
+                        if (!TryReplaceInvocationToAsync(innerInvocationExpression, factory, psiModule))
+                        {
+                            invocationExpression.PsiModule.GetPsiServices().Transactions.RollbackTransaction();
+                            return false;
+                        }
                     }
                 }
             }

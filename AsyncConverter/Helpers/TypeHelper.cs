@@ -11,15 +11,24 @@ namespace AsyncConverter.Helpers
     public static class TypeHelper
     {
         [Pure]
-        [ContractAnnotation("taskType:null => false; substitutionType:null => false")]
-        public static bool IsGenericTaskOf([CanBeNull] this IType taskType, [CanBeNull] IType substitutionType)
+        [ContractAnnotation("type:null => false; otherType:null => false")]
+        public static bool IsTaskOf([CanBeNull] this IType type, [CanBeNull] IType otherType)
         {
-            if (taskType == null || substitutionType == null)
+            if (type.IsTask() && otherType.IsVoid())
+                return true;
+            return type.IsGenericTaskOf(otherType);
+        }
+
+        [Pure]
+        [ContractAnnotation("type:null => false; otherType:null => false")]
+        public static bool IsGenericTaskOf([CanBeNull] this IType type, [CanBeNull] IType otherType)
+        {
+            if (type == null || otherType == null)
                 return false;
-            if (!taskType.IsGenericTask())
+            if (!type.IsGenericTask())
                 return false;
 
-            var taskDeclaredType = taskType as IDeclaredType;
+            var taskDeclaredType = type as IDeclaredType;
             if (taskDeclaredType == null)
                 return false;
 
@@ -27,7 +36,7 @@ namespace AsyncConverter.Helpers
             if (substitution.IsEmpty())
                 return false;
             var meaningType = substitution.Apply(substitution.Domain[0]);
-            return meaningType.IsEquals(substitutionType);
+            return meaningType.IsEquals(otherType);
         }
 
         [Pure]

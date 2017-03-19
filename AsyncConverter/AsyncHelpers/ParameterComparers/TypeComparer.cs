@@ -9,9 +9,9 @@ namespace AsyncConverter.AsyncHelpers.ParameterComparers
     {
         public ParameterCompareResultAction Compare(IType originalParameterType, IType parameterType)
         {
-            if (originalParameterType.IsEquals(parameterType))
+            if (parameterType.IsEquals(originalParameterType))
                 return ParameterCompareResultAction.Equal;
-            if (originalParameterType.IsAsyncDelegate(parameterType))
+            if (parameterType.IsAsyncDelegate(originalParameterType))
                 return ParameterCompareResultAction.NeedConvertToAsyncFunc;
             return ParameterCompareResultAction.NotEqual;
         }

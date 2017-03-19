@@ -5,8 +5,8 @@ namespace AsyncConverter.Helpers
 {
     public interface IAsyncMethodFinder
     {
-        [CanBeNull]
+        [NotNull]
         [Pure]
-        IMethod FindEquivalentAsyncMethod([NotNull] IParametersOwner originalMethod, [CanBeNull] IType invokedType);
+        FindingReslt FindEquivalentAsyncMethod([NotNull] IParametersOwner originalMethod, [CanBeNull] IType invokedType);
     }
 }

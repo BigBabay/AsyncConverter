@@ -8,18 +8,16 @@ namespace AsyncConverter.AsyncHelpers.ParameterComparers
     public class ParameterComparer : IParameterComparer
     {
         private readonly ITypeComparer typeComparer;
-        private readonly IParameterCompareResolver parameterCompareResolver;
 
-        public ParameterComparer(ITypeComparer typeComparer, IParameterCompareResolver parameterCompareResolver)
+        public ParameterComparer(ITypeComparer typeComparer)
         {
             this.typeComparer = typeComparer;
-            this.parameterCompareResolver = parameterCompareResolver;
         }
 
         public ParameterCompareResult ComparerParameters(IList<IParameter> originalParameters, IList<IParameter> methodParameters)
         {
             if (methodParameters.Count != originalParameters.Count)
-                return new ParameterCompareResult {Result = ParameterCompareAggregateResult.DifferentLength};
+                return ParameterCompareResult.CreateFailDifferentLength();
 
             var parameterResults = new CompareResult[methodParameters.Count];
             for (var i = 0; i < methodParameters.Count; i++)
@@ -34,7 +32,7 @@ namespace AsyncConverter.AsyncHelpers.ParameterComparers
                                           Action = typeComparer.Compare(originalParameter.Type, parameter.Type),
                                       };
             }
-            return new ParameterCompareResult {Result = parameterCompareResolver.Resolve(parameterResults), ParameterResults = parameterResults};
+            return ParameterCompareResult.Create(parameterResults);
         }
     }
 }
