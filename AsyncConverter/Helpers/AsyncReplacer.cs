@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using JetBrains.ProjectModel;
@@ -8,7 +7,6 @@ using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Modules;
 using JetBrains.ReSharper.Psi.Search;
 using JetBrains.ReSharper.Psi.Tree;
-using JetBrains.ReSharper.Psi.Util;
 using JetBrains.Util;
 
 namespace AsyncConverter.Helpers
@@ -89,18 +87,12 @@ namespace AsyncConverter.Helpers
             {
                 if (!TryConvertInnerReferenceToAsync(invocationExpression, factory, psiModule))
                     return false;
-                asyncInvocationReplacer.ReplaceInvocation(invocationExpression, GenerateAsyncMethodName(asyncMethod.ShortName), true);
+
+                if (TryConvertParameterFuncToAsync(invocationExpression, factory, psiModule))
+                    asyncInvocationReplacer.ReplaceInvocation(invocationExpression, GenerateAsyncMethodName(asyncMethod.ShortName), true);
+
                 return true;
             }
-
-            var asyncMethodWithFunc = FindEquivalentAsyncMethodWithAsyncFunc(invocationMethod);
-            if (asyncMethodWithFunc == null)
-                return false;
-            if (!TryConvertInnerReferenceToAsync(invocationExpression, factory, psiModule))
-                return false;
-
-            if (TryConvertParameterFuncToAsync(invocationExpression, factory, psiModule))
-                asyncInvocationReplacer.ReplaceInvocation(invocationExpression, GenerateAsyncMethodName(asyncMethodWithFunc.ShortName), true);
             return true;
         }
 
@@ -122,8 +114,6 @@ namespace AsyncConverter.Helpers
 
             return TryConvertSyncCallToAsyncCall(invocationExpression, factory, psiModule);
         }
-
-
 
         private bool TryConvertInnerReferenceToAsync([NotNull] IInvocationExpression invocationExpression, [NotNull] CSharpElementFactory factory, [NotNull] IPsiModule psiModule)
         {
@@ -159,37 +149,6 @@ namespace AsyncConverter.Helpers
             }
             invocationExpression.PsiModule.GetPsiServices().Transactions.CommitTransaction();
             return true;
-        }
-
-        [Pure]
-        [CanBeNull]
-        private IMethod FindEquivalentAsyncMethodWithAsyncFunc([NotNull] IMethod originalMethod)
-        {
-            if (!originalMethod.IsValid())
-                return null;
-
-            var originalReturnType = originalMethod.Type();
-
-            var @class = originalMethod.GetContainingType();
-            if (@class == null)
-                return null;
-
-            foreach (var candidateMethod in @class.Methods)
-            {
-                if (originalMethod.ShortName + "Async" != candidateMethod.ShortName)
-                    continue;
-
-                var returnType = candidateMethod.Type() as IDeclaredType;
-                if (originalReturnType.IsVoid() && !returnType.IsTask()
-                    || !originalReturnType.IsVoid() && !returnType.IsGenericTaskOf(originalReturnType))
-                    continue;
-
-                if (!IsParameterEqualsOrAsyncFunc(originalMethod.Parameters, candidateMethod.Parameters))
-                    continue;
-
-                return candidateMethod;
-            }
-            return null;
         }
 
         private bool ConvertCallWithWaitToAwaitCall([NotNull] IInvocationExpression invocationExpression, [NotNull] CSharpElementFactory factory)
@@ -247,62 +206,5 @@ namespace AsyncConverter.Helpers
                 methodDeclaration.SetAsync(true);
             methodDeclaration.SetName(newName);
         }
-
-        private bool IsParameterEqualsOrAsyncFunc([NotNull, ItemNotNull] IList<IParameter> originalParameters, [NotNull, ItemNotNull] IList<IParameter> methodParameters)
-        {
-            if (methodParameters.Count != originalParameters.Count)
-                return false;
-
-            for (var i = 0; i < methodParameters.Count; i++)
-            {
-                var parameter = methodParameters[i];
-                var originalParameter = originalParameters[i];
-                if (!parameter.Type.Equals(originalParameter.Type)
-                    && !IsAsyncDelegate(originalParameter, parameter))
-                    return false;
-            }
-            return true;
-        }
-
-        private bool IsAsyncDelegate([NotNull] IParameter originalParameter, [NotNull] IParameter parameter)
-        {
-            if (originalParameter.Type.IsAction() && parameter.Type.IsFunc())
-            {
-                var parameterDeclaredType = parameter.Type as IDeclaredType;
-                var substitution = parameterDeclaredType?.GetSubstitution();
-                if (substitution?.Domain.Count != 1)
-                    return false;
-
-                var valuableType = substitution.Apply(substitution.Domain[0]);
-                return valuableType.IsTask();
-            }
-            if (originalParameter.Type.IsFunc() && parameter.Type.IsFunc())
-            {
-                var parameterDeclaredType = parameter.Type as IDeclaredType;
-                var originalParameterDeclaredType = originalParameter.Type as IDeclaredType;
-                var substitution = parameterDeclaredType?.GetSubstitution();
-                var originalSubstitution = originalParameterDeclaredType?.GetSubstitution();
-                if (substitution == null || substitution.Domain.Count != originalSubstitution?.Domain.Count)
-                    return false;
-
-                var i = 0;
-                for (; i < substitution.Domain.Count - 1; i++)
-                {
-                    var genericType = substitution.Apply(substitution.Domain[i]);
-                    var originalGenericType = originalSubstitution.Apply(originalSubstitution.Domain[i]);
-                    if (!genericType.Equals(originalGenericType))
-                        return false;
-                }
-                var returnType = substitution.Apply(substitution.Domain[i]);
-                var originalReturnType = originalSubstitution.Apply(originalSubstitution.Domain[i]);
-                return returnType.IsGenericTaskOf(originalReturnType);
-            }
-
-            return false;
-        }
-
-
-
-
     }
 }

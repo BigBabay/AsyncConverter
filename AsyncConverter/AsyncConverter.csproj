@@ -382,8 +382,11 @@
     <Compile Include="AsyncHelpers\ClassSearchers\EntityFrameworkCustomSearcher.cs" />
     <Compile Include="AsyncHelpers\ClassSearchers\IClassForSearchResolver.cs" />
     <Compile Include="AsyncHelpers\ClassSearchers\IClassSearcher.cs" />
-    <Compile Include="AsyncHelpers\IParameterComparer.cs" />
+    <Compile Include="AsyncHelpers\IParameterCompareResolver.cs" />
+    <Compile Include="AsyncHelpers\ITypeComparer.cs" />
     <Compile Include="AsyncHelpers\ParameterComparer.cs" />
+    <Compile Include="AsyncHelpers\ParameterCompareResolver.cs" />
+    <Compile Include="AsyncHelpers\TypeComparer.cs" />
     <Compile Include="ContextActions\MathodToAsyncConverter.cs" />
     <Compile Include="Helpers\AsyncChecker.cs" />
     <Compile Include="Helpers\AsyncInvocationReplacer.cs" />
@@ -392,6 +395,7 @@
     <Compile Include="Helpers\FinderHelper.cs" />
     <Compile Include="Helpers\IAsyncChecker.cs" />
     <Compile Include="Helpers\IAsyncInvocationReplacer.cs" />
+    <Compile Include="Helpers\IAsyncMethodCutomFinder.cs" />
     <Compile Include="Helpers\IAsyncMethodFinder.cs" />
     <Compile Include="Helpers\IAsyncReplacer.cs" />
     <Compile Include="Helpers\TypeHelper.cs" />
@@ -399,6 +403,11 @@
     <Compile Include="Highlightings\ConfigureAwaitHighlighting.cs" />
     <Compile Include="Highlightings\AsyncMethodNamingHighlighting.cs" />
     <Compile Include="Highlightings\NullReturnAsTaskHighlighting.cs" />
+    <Compile Include="ParameterComparers\CompareResult.cs" />
+    <Compile Include="ParameterComparers\IParameterComparer.cs" />
+    <Compile Include="ParameterComparers\ParameterCompareAggregateResult.cs" />
+    <Compile Include="ParameterComparers\ParameterCompareResult.cs" />
+    <Compile Include="ParameterComparers\ParameterCompareResultAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuickFixes\AsyncMethodNamingQuickFix.cs" />
     <Compile Include="QuickFixes\ConfigureAwaitAction.cs" />

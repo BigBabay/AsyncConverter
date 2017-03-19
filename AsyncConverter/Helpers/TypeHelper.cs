@@ -88,6 +88,42 @@ namespace AsyncConverter.Helpers
             return EqualSubstitutions(typeElement1, scalarType1.GetSubstitution(), typeElement2, otherScalarType.GetSubstitution());
         }
 
+        public static bool IsAsyncDelegate([NotNull] this IType type, [NotNull] IType otherType)
+        {
+            if (type.IsAction() && otherType.IsFunc())
+            {
+                var parameterDeclaredType = otherType as IDeclaredType;
+                var substitution = parameterDeclaredType?.GetSubstitution();
+                if (substitution?.Domain.Count != 1)
+                    return false;
+
+                var valuableType = substitution.Apply(substitution.Domain[0]);
+                return valuableType.IsTask();
+            }
+            if (type.IsFunc() && otherType.IsFunc())
+            {
+                var parameterDeclaredType = otherType as IDeclaredType;
+                var originalParameterDeclaredType = type as IDeclaredType;
+                var substitution = parameterDeclaredType?.GetSubstitution();
+                var originalSubstitution = originalParameterDeclaredType?.GetSubstitution();
+                if (substitution == null || substitution.Domain.Count != originalSubstitution?.Domain.Count)
+                    return false;
+
+                var i = 0;
+                for (; i < substitution.Domain.Count - 1; i++)
+                {
+                    var genericType = substitution.Apply(substitution.Domain[i]);
+                    var originalGenericType = originalSubstitution.Apply(originalSubstitution.Domain[i]);
+                    if (!genericType.Equals(originalGenericType))
+                        return false;
+                }
+                var returnType = substitution.Apply(substitution.Domain[i]);
+                var originalReturnType = originalSubstitution.Apply(originalSubstitution.Domain[i]);
+                return returnType.IsGenericTaskOf(originalReturnType);
+            }
+            return false;
+        }
+
         private static bool IsEqualTypeGroup([NotNull] IType sourceType, [NotNull] IType targetType)
         {
             if (sourceType is IDeclaredType && targetType is IDeclaredType || sourceType is IArrayType && targetType is IArrayType)

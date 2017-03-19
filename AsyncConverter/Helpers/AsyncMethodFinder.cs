@@ -1,5 +1,6 @@
 using AsyncConverter.AsyncHelpers;
 using AsyncConverter.AsyncHelpers.ClassSearchers;
+using AsyncConverter.ParameterComparers;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.Util;
@@ -9,13 +10,13 @@ namespace AsyncConverter.Helpers
     [SolutionComponent]
     public class AsyncMethodFinder : IAsyncMethodFinder
     {
-        private readonly IParameterComparer parameterComparer;
         private readonly IClassForSearchResolver classForSearchResolver;
+        private readonly IParameterComparer parameterComparer;
 
-        public AsyncMethodFinder(IParameterComparer parameterComparer, IClassForSearchResolver classForSearchResolver)
+        public AsyncMethodFinder(IClassForSearchResolver classForSearchResolver, IParameterComparer parameterComparer)
         {
-            this.parameterComparer = parameterComparer;
             this.classForSearchResolver = classForSearchResolver;
+            this.parameterComparer = parameterComparer;
         }
 
         public IMethod FindEquivalentAsyncMethod(IParametersOwner originalMethod, IType invokedType)
@@ -40,7 +41,9 @@ namespace AsyncConverter.Helpers
                 if (!returnType.IsGenericTaskOf(originalReturnType))
                     continue;
 
-                if (!parameterComparer.IsParametersEqual(candidateMethod.Parameters, originalMethod.Parameters))
+                var parameterCompareAggregateResult = parameterComparer.ComparerParameters(candidateMethod.Parameters, originalMethod.Parameters).Result;
+                if(parameterCompareAggregateResult == ParameterCompareAggregateResult.NotEqual
+                    || parameterCompareAggregateResult == ParameterCompareAggregateResult.DifferentLength)
                     continue;
 
                 return candidateMethod;
