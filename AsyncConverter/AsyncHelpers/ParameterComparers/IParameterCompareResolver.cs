@@ -1,6 +1,4 @@
-using AsyncConverter.AsyncHelpers.ParameterComparers;
-
-namespace AsyncConverter.AsyncHelpers
+namespace AsyncConverter.AsyncHelpers.ParameterComparers
 {
     public interface IParameterCompareResolver
     {

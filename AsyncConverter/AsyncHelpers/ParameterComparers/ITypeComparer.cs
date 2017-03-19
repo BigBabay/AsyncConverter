@@ -1,7 +1,6 @@
-using AsyncConverter.AsyncHelpers.ParameterComparers;
 using JetBrains.ReSharper.Psi;
 
-namespace AsyncConverter.AsyncHelpers
+namespace AsyncConverter.AsyncHelpers.ParameterComparers
 {
     public interface ITypeComparer
     {

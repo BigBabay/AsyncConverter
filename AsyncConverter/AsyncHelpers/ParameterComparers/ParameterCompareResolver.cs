@@ -1,9 +1,8 @@
 using System;
 using System.Linq;
-using AsyncConverter.AsyncHelpers.ParameterComparers;
 using JetBrains.ProjectModel;
 
-namespace AsyncConverter.AsyncHelpers
+namespace AsyncConverter.AsyncHelpers.ParameterComparers
 {
     [SolutionComponent]
     public class ParameterCompareResolver : IParameterCompareResolver

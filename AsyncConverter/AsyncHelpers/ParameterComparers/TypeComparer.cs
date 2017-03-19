@@ -1,9 +1,8 @@
-using AsyncConverter.AsyncHelpers.ParameterComparers;
 using AsyncConverter.Helpers;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Psi;
 
-namespace AsyncConverter.AsyncHelpers
+namespace AsyncConverter.AsyncHelpers.ParameterComparers
 {
     [SolutionComponent]
     public class TypeComparer : ITypeComparer

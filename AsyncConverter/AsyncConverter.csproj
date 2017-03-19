@@ -382,11 +382,11 @@
     <Compile Include="AsyncHelpers\ClassSearchers\EntityFrameworkCustomSearcher.cs" />
     <Compile Include="AsyncHelpers\ClassSearchers\IClassForSearchResolver.cs" />
     <Compile Include="AsyncHelpers\ClassSearchers\IClassSearcher.cs" />
-    <Compile Include="AsyncHelpers\IParameterCompareResolver.cs" />
-    <Compile Include="AsyncHelpers\ITypeComparer.cs" />
-    <Compile Include="AsyncHelpers\ParameterComparer.cs" />
-    <Compile Include="AsyncHelpers\ParameterCompareResolver.cs" />
-    <Compile Include="AsyncHelpers\TypeComparer.cs" />
+    <Compile Include="AsyncHelpers\ParameterComparers\IParameterCompareResolver.cs" />
+    <Compile Include="AsyncHelpers\ParameterComparers\ITypeComparer.cs" />
+    <Compile Include="AsyncHelpers\ParameterComparers\ParameterComparer.cs" />
+    <Compile Include="AsyncHelpers\ParameterComparers\ParameterCompareResolver.cs" />
+    <Compile Include="AsyncHelpers\ParameterComparers\TypeComparer.cs" />
     <Compile Include="ContextActions\MathodToAsyncConverter.cs" />
     <Compile Include="Helpers\AsyncChecker.cs" />
     <Compile Include="Helpers\AsyncInvocationReplacer.cs" />

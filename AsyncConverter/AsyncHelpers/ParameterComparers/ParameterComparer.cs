@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using AsyncConverter.AsyncHelpers.ParameterComparers;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Psi;
 
-namespace AsyncConverter.AsyncHelpers
+namespace AsyncConverter.AsyncHelpers.ParameterComparers
 {
     [SolutionComponent]
     public class ParameterComparer : IParameterComparer
