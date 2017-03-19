@@ -1,6 +1,6 @@
 using AsyncConverter.AsyncHelpers;
 using AsyncConverter.AsyncHelpers.ClassSearchers;
-using AsyncConverter.ParameterComparers;
+using AsyncConverter.AsyncHelpers.ParameterComparers;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.Util;

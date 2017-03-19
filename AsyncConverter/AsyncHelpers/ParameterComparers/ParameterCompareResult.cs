@@ -1,6 +1,6 @@
 using JetBrains.Annotations;
 
-namespace AsyncConverter.ParameterComparers
+namespace AsyncConverter.AsyncHelpers.ParameterComparers
 {
     public class ParameterCompareResult
     {

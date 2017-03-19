@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using AsyncConverter.ParameterComparers;
+using AsyncConverter.AsyncHelpers.ParameterComparers;
 using JetBrains.ProjectModel;
 
 namespace AsyncConverter.AsyncHelpers

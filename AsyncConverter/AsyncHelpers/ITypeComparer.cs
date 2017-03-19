@@ -1,4 +1,4 @@
-using AsyncConverter.ParameterComparers;
+using AsyncConverter.AsyncHelpers.ParameterComparers;
 using JetBrains.ReSharper.Psi;
 
 namespace AsyncConverter.AsyncHelpers

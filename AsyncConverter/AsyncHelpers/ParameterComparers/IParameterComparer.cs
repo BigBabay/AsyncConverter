@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using JetBrains.ReSharper.Psi;
 
-namespace AsyncConverter.ParameterComparers
+namespace AsyncConverter.AsyncHelpers.ParameterComparers
 {
     public interface IParameterComparer
     {

@@ -1,4 +1,4 @@
-using AsyncConverter.ParameterComparers;
+using AsyncConverter.AsyncHelpers.ParameterComparers;
 
 namespace AsyncConverter.AsyncHelpers
 {

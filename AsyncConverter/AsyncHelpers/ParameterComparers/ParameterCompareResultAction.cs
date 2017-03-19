@@ -1,4 +1,4 @@
-namespace AsyncConverter.ParameterComparers
+namespace AsyncConverter.AsyncHelpers.ParameterComparers
 {
     public enum ParameterCompareResultAction
     {

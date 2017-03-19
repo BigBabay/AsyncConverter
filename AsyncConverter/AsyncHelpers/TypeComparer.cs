@@ -1,5 +1,5 @@
+using AsyncConverter.AsyncHelpers.ParameterComparers;
 using AsyncConverter.Helpers;
-using AsyncConverter.ParameterComparers;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Psi;
 
