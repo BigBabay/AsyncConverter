@@ -11,14 +11,24 @@ namespace AsyncConverter.Helpers
     public static class TypeHelper
     {
         [Pure]
-        public static bool IsGenericTaskOf([CanBeNull] this IType taskType, [CanBeNull] IType otherType)
+        [ContractAnnotation("type:null => false; otherType:null => false")]
+        public static bool IsTaskOf([CanBeNull] this IType type, [CanBeNull] IType otherType)
         {
-            if (taskType == null || otherType == null)
+            if (type.IsTask() && otherType.IsVoid())
+                return true;
+            return type.IsGenericTaskOf(otherType);
+        }
+
+        [Pure]
+        [ContractAnnotation("type:null => false; otherType:null => false")]
+        public static bool IsGenericTaskOf([CanBeNull] this IType type, [CanBeNull] IType otherType)
+        {
+            if (type == null || otherType == null)
                 return false;
-            if (!taskType.IsGenericTask())
+            if (!type.IsGenericTask())
                 return false;
 
-            var taskDeclaredType = taskType as IDeclaredType;
+            var taskDeclaredType = type as IDeclaredType;
             if (taskDeclaredType == null)
                 return false;
 
@@ -48,6 +58,16 @@ namespace AsyncConverter.Helpers
             return TypesUtil.IsPredefinedTypeFromAssembly(type, PredefinedType.GENERIC_IQUERYABLE_FQN, assembly => assembly.IsMscorlib);
         }
 
+        [Pure]
+        [ContractAnnotation("null => false")]
+        public static bool IsEnumerableClass([CanBeNull]this ITypeElement type)
+        {
+            if (type == null)
+                return false;
+            var typeName = type.GetClrName();
+            return typeName.Equals(PredefinedType.ENUMERABLE_CLASS);
+        }
+
         public static bool IsEquals([NotNull]this IType type, [NotNull] IType otherType)
         {
             if (!type.IsOpenType && !otherType.IsOpenType)
@@ -75,6 +95,42 @@ namespace AsyncConverter.Helpers
                 }
             }
             return EqualSubstitutions(typeElement1, scalarType1.GetSubstitution(), typeElement2, otherScalarType.GetSubstitution());
+        }
+
+        public static bool IsAsyncDelegate([NotNull] this IType type, [NotNull] IType otherType)
+        {
+            if (type.IsAction() && otherType.IsFunc())
+            {
+                var parameterDeclaredType = otherType as IDeclaredType;
+                var substitution = parameterDeclaredType?.GetSubstitution();
+                if (substitution?.Domain.Count != 1)
+                    return false;
+
+                var valuableType = substitution.Apply(substitution.Domain[0]);
+                return valuableType.IsTask();
+            }
+            if (type.IsFunc() && otherType.IsFunc())
+            {
+                var parameterDeclaredType = otherType as IDeclaredType;
+                var originalParameterDeclaredType = type as IDeclaredType;
+                var substitution = parameterDeclaredType?.GetSubstitution();
+                var originalSubstitution = originalParameterDeclaredType?.GetSubstitution();
+                if (substitution == null || substitution.Domain.Count != originalSubstitution?.Domain.Count)
+                    return false;
+
+                var i = 0;
+                for (; i < substitution.Domain.Count - 1; i++)
+                {
+                    var genericType = substitution.Apply(substitution.Domain[i]);
+                    var originalGenericType = originalSubstitution.Apply(originalSubstitution.Domain[i]);
+                    if (!genericType.Equals(originalGenericType))
+                        return false;
+                }
+                var returnType = substitution.Apply(substitution.Domain[i]);
+                var originalReturnType = originalSubstitution.Apply(originalSubstitution.Domain[i]);
+                return returnType.IsGenericTaskOf(originalReturnType);
+            }
+            return false;
         }
 
         private static bool IsEqualTypeGroup([NotNull] IType sourceType, [NotNull] IType targetType)

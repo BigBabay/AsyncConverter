@@ -377,14 +377,35 @@
     <Compile Include="Analyzers\AsyncMethodNamingAnalyzer.cs" />
     <Compile Include="Analyzers\NullReturnFromLambdaAnalyzer.cs" />
     <Compile Include="Analyzers\NullReturnFromMethodAnalyzer.cs" />
+    <Compile Include="AsyncHelpers\ClassSearchers\ClassForSearchResolver.cs" />
+    <Compile Include="AsyncHelpers\ClassSearchers\DefaultSearcher.cs" />
+    <Compile Include="AsyncHelpers\ClassSearchers\EntityFrameworkCustomSearcher.cs" />
+    <Compile Include="AsyncHelpers\ClassSearchers\IClassForSearchResolver.cs" />
+    <Compile Include="AsyncHelpers\ClassSearchers\IClassSearcher.cs" />
+    <Compile Include="AsyncHelpers\ParameterComparers\ITypeComparer.cs" />
+    <Compile Include="AsyncHelpers\ParameterComparers\ParameterComparer.cs" />
+    <Compile Include="AsyncHelpers\ParameterComparers\TypeComparer.cs" />
     <Compile Include="ContextActions\MathodToAsyncConverter.cs" />
-    <Compile Include="Helpers\AsyncHelper.cs" />
+    <Compile Include="Helpers\AsyncChecker.cs" />
+    <Compile Include="Helpers\AsyncInvocationReplacer.cs" />
+    <Compile Include="Helpers\AsyncMethodFinder.cs" />
+    <Compile Include="Helpers\AsyncReplacer.cs" />
     <Compile Include="Helpers\FinderHelper.cs" />
+    <Compile Include="Helpers\FindingReslt.cs" />
+    <Compile Include="Helpers\IAsyncChecker.cs" />
+    <Compile Include="Helpers\IAsyncInvocationReplacer.cs" />
+    <Compile Include="Helpers\IAsyncMethodFinder.cs" />
+    <Compile Include="Helpers\IAsyncReplacer.cs" />
     <Compile Include="Helpers\TypeHelper.cs" />
     <Compile Include="Highlightings\AsyncConverterGroupSettings.cs" />
     <Compile Include="Highlightings\ConfigureAwaitHighlighting.cs" />
     <Compile Include="Highlightings\AsyncMethodNamingHighlighting.cs" />
     <Compile Include="Highlightings\NullReturnAsTaskHighlighting.cs" />
+    <Compile Include="AsyncHelpers\ParameterComparers\CompareResult.cs" />
+    <Compile Include="AsyncHelpers\ParameterComparers\IParameterComparer.cs" />
+    <Compile Include="AsyncHelpers\ParameterComparers\ParameterCompareAggregateResult.cs" />
+    <Compile Include="AsyncHelpers\ParameterComparers\ParameterCompareResult.cs" />
+    <Compile Include="AsyncHelpers\ParameterComparers\ParameterCompareResultAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuickFixes\AsyncMethodNamingQuickFix.cs" />
     <Compile Include="QuickFixes\ConfigureAwaitAction.cs" />
@@ -405,6 +426,9 @@
     <None Include="Content\mind.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ParameterComparers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Antlr2.Tools.2.7.6.4\build\Antlr2.Tools.targets" Condition="Exists('..\packages\Antlr2.Tools.2.7.6.4\build\Antlr2.Tools.targets')" />
