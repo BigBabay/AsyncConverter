@@ -373,6 +373,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Analyzers\CanBeUseAsyncMethodAnalyzer.cs" />
     <Compile Include="Analyzers\ConfigureAwaitAnalyzer.cs" />
     <Compile Include="Analyzers\AsyncMethodNamingAnalyzer.cs" />
     <Compile Include="Analyzers\NullReturnFromLambdaAnalyzer.cs" />
@@ -402,6 +403,7 @@
     <Compile Include="Helpers\IAsyncReplacer.cs" />
     <Compile Include="Helpers\TypeHelper.cs" />
     <Compile Include="Highlightings\AsyncConverterGroupSettings.cs" />
+    <Compile Include="Highlightings\CanBeUseAsyncMethodHighlighting.cs" />
     <Compile Include="Highlightings\ConfigureAwaitHighlighting.cs" />
     <Compile Include="Highlightings\AsyncMethodNamingHighlighting.cs" />
     <Compile Include="Highlightings\NullReturnAsTaskHighlighting.cs" />
