@@ -15,13 +15,11 @@ namespace AsyncConverter.Helpers
     public class AsyncReplacer : IAsyncReplacer
     {
         private readonly IAsyncInvocationReplacer asyncInvocationReplacer;
-        private readonly IAsyncChecker asyncChecker;
         private readonly IAsyncMethodFinder asyncMethodFinder;
 
-        public AsyncReplacer(IAsyncInvocationReplacer asyncInvocationReplacer, IAsyncChecker asyncChecker, IAsyncMethodFinder asyncMethodFinder)
+        public AsyncReplacer(IAsyncInvocationReplacer asyncInvocationReplacer, IAsyncMethodFinder asyncMethodFinder)
         {
             this.asyncInvocationReplacer = asyncInvocationReplacer;
-            this.asyncChecker = asyncChecker;
             this.asyncMethodFinder = asyncMethodFinder;
         }
 
@@ -54,7 +52,7 @@ namespace AsyncConverter.Helpers
             foreach (var usage in usages)
             {
                 var invocation = usage.GetTreeNode().Parent as IInvocationExpression;
-                asyncInvocationReplacer.ReplaceInvocation(invocation, GenerateAsyncMethodName(method.DeclaredName), asyncChecker.CanUseAwait(invocation));
+                asyncInvocationReplacer.ReplaceInvocation(invocation, GenerateAsyncMethodName(method.DeclaredName), invocation?.IsUnderAsyncDeclaration() ?? false);
             }
             var invocationExpressions = method.Body.Descendants<IInvocationExpression>().ToEnumerable().ToArray();
             foreach (var invocationExpression in invocationExpressions)
