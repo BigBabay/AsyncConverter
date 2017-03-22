@@ -414,6 +414,7 @@
     <Compile Include="AsyncHelpers\ParameterComparers\ParameterCompareResultAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuickFixes\AsyncMethodNamingQuickFix.cs" />
+    <Compile Include="QuickFixes\CanBeUseAsyncMethodQuickFix.cs" />
     <Compile Include="QuickFixes\ConfigureAwaitAction.cs" />
     <Compile Include="QuickFixes\ConfigureAwaitQuickFix.cs" />
     <Compile Include="QuickFixes\ReturnNullToTask.cs" />
