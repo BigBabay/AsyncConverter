@@ -135,10 +135,12 @@ namespace AsyncConverter.Helpers
 
         private static bool IsEqualTypeGroup([NotNull] IType sourceType, [NotNull] IType targetType)
         {
+            if (sourceType.IsOpenType != targetType.IsOpenType)
+                return false;
             if (sourceType is IDeclaredType && targetType is IDeclaredType || sourceType is IArrayType && targetType is IArrayType)
                 return true;
-            if (sourceType is IPointerType)
-                return targetType is IPointerType;
+            if (sourceType is IPointerType && targetType is IPointerType)
+                return true;
             return false;
         }
 
