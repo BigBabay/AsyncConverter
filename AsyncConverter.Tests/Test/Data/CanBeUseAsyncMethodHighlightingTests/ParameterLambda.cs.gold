@@ -1,0 +1,27 @@
+﻿using System;
+using System.Threading.Tasks;
+
+namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
+{
+    public class Class
+    {
+        public async Task TestAsync()
+        {
+            await Task.Delay(1000).ConfigureAwait(false);
+            |Method(() => Task.Delay(1000))|(0);
+        }
+
+        public void Method(Action action)
+        {
+            action();
+        }
+
+        public Task MethodAsync(Func<Task> func)
+        {
+            return func();
+        }
+    }
+}
+
+---------------------------------------------------------
+(0): ReSharper Warning: (T) '' (E) 'May be converted to nonblocking await call.'
