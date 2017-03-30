@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 
 namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 {
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Xunit;
     public class Class
     {
-        [TestMethod]
+        [Fact]
         public async Task Test()
         {
             await Task.Delay(1000).ConfigureAwait(false);
@@ -14,10 +14,9 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
     }
 }
 
-namespace Microsoft.VisualStudio.TestTools.UnitTesting
+namespace Xunit
 {
-    public class TestMethodAttribute : Attribute
+    public class FactAttribute : Attribute
     { }
 }
-
 ---------------------------------------------------------
