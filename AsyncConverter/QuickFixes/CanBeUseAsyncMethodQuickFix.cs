@@ -1,4 +1,5 @@
 using System;
+using AsyncConverter.Helpers;
 using AsyncConverter.Highlightings;
 using JetBrains.Application.Progress;
 using JetBrains.ProjectModel;
@@ -20,6 +21,9 @@ namespace AsyncConverter.QuickFixes
 
         protected override Action<ITextControl> ExecutePsiTransaction(ISolution solution, IProgressIndicator progress)
         {
+            var asyncReplacer = solution.GetComponent<IAsyncReplacer>();
+
+            asyncReplacer.TryReplaceInvocationToAsync(canBeUseAsyncMethodHighlighting.InvocationExpression);
             return null;
         }
 
