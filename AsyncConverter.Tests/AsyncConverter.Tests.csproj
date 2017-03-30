@@ -399,6 +399,14 @@
     <None Include="Test\Data\NamingHighlightings\XunitFactAttr.cs.gold" />
     <None Include="Test\Data\NamingHighlightings\XunitFactAttr.cs" />
     <None Include="Test\Data\NamingHighlightings\MsTestAttr.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodTests\TransformToAsync.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodTests\TransformToAsync.cs.gold" />
+    <None Include="Test\Data\CanBeUseAsyncMethodTests\ChainAwaitSecond.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodTests\ChainAwait.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodTests\ChainAwaitSecond.cs.gold" />
+    <None Include="Test\Data\CanBeUseAsyncMethodTests\ChainAwait.cs.gold" />
+    <None Include="Test\Data\CanBeUseAsyncMethodTests\Simple.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodTests\Chain.cs" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\Task.cs" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\Sync.cs" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ParameterDifferentGenericWithWhere.cs" />
@@ -423,6 +431,8 @@
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ParameterLambda.cs.gold" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\Sync.cs.gold" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\Void.cs.gold" />
+    <None Include="Test\Data\CanBeUseAsyncMethodTests\Chain.cs.gold" />
+    <None Include="Test\Data\CanBeUseAsyncMethodTests\Simple.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceMethodTwice.cs" />
     <None Include="Test\Data\ConfigureAwaitQuickFixTests\Chain.cs" />
     <None Include="Test\Data\ConfigureAwaitQuickFixTests\Chain.cs.gold" />

@@ -4,6 +4,6 @@ namespace AsyncConverter.Tests.QuickFixes
 {
     public class CanBeUseAsyncMethodQuickFixTests : QuickFixBaseTests<CanBeUseAsyncMethodQuickFix>
     {
-        protected override string RelativeTestDataPath => @"CanBeUseAsyncMethod";
+        protected override string RelativeTestDataPath => @"CanBeUseAsyncMethodTests";
     }
 }

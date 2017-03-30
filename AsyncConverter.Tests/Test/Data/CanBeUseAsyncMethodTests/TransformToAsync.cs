@@ -6,20 +6,18 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
     {
         public Task TestAsync()
         {
-            |Method()|(0);
+            {caret}Method();
             return Task.CompletedTask;
         }
 
-        public void Method()
+        public Class Method()
         {
+            return 5;
         }
 
-        public Task MethodAsync()
+        public Task<Class> MethodAsync()
         {
-            return Task.CompletedTask;
+            return Task.FromResult<Class>(null);
         }
     }
 }
-
----------------------------------------------------------
-(0): ReSharper Warning: (T) '' (E) 'May be converted to nonblocking await call.'
