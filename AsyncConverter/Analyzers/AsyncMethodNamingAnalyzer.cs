@@ -1,8 +1,10 @@
-﻿using AsyncConverter.Highlightings;
+﻿using AsyncConverter.AsyncHelpers.RenameCheckers;
+using AsyncConverter.Highlightings;
+using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Daemon.Stages.Dispatcher;
 using JetBrains.ReSharper.Feature.Services.Daemon;
-using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
+using JetBrains.ReSharper.Psi.Tree;
 
 namespace AsyncConverter.Analyzers
 {
@@ -11,10 +13,9 @@ namespace AsyncConverter.Analyzers
     {
         protected override void Run(IMethodDeclaration element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
-            if(!element.Type.IsTask() && !element.Type.IsGenericTask())
-                return;
+            var checker = element.GetSolution().GetComponent<IRenameChecker>();
 
-            if (element.DeclaredName.EndsWith("Async"))
+            if(!checker.NeedRename(element))
                 return;
 
             consumer.AddHighlighting(new AsyncMethodNamingHighlighting(element));
