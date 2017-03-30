@@ -1,4 +1,5 @@
-﻿using AsyncConverter.Helpers;
+﻿using AsyncConverter.AsyncHelpers.ParameterComparers;
+using AsyncConverter.Helpers;
 using AsyncConverter.Highlightings;
 using JetBrains.ReSharper.Daemon.Stages.Dispatcher;
 using JetBrains.ReSharper.Feature.Services.Daemon;
@@ -19,7 +20,7 @@ namespace AsyncConverter.Analyzers
 
         protected override void Run(IInvocationExpression invocationExpression, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
-            if (!invocationExpression.IsUnderAsyncDeclaration())
+            if (!invocationExpression.IsUnderAsync())
                 return;
 
             var referenceCurrentResolveResult = invocationExpression.Reference?.Resolve();
