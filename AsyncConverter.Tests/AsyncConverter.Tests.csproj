@@ -382,6 +382,15 @@
     <Compile Include="ContextActions\MathodToAsyncConverterAvailabilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEnvironment.cs" />
+    <None Include="Test\Data\NamingHighlightings\NUnitTestCaseAttr.cs" />
+    <None Include="Test\Data\NamingHighlightings\NUnitTestAttr.cs" />
+    <None Include="Test\Data\NamingHighlightings\NUnitTestCaseAttr.cs.gold" />
+    <None Include="Test\Data\NamingHighlightings\NUnitTestAttr.cs.gold" />
+    <None Include="Test\Data\NamingHighlightings\XunitTheoryAttr.cs" />
+    <None Include="Test\Data\NamingHighlightings\XunitTheoryAttr.cs.gold" />
+    <None Include="Test\Data\NamingHighlightings\XunitFactAttr.cs.gold" />
+    <None Include="Test\Data\NamingHighlightings\XunitFactAttr.cs" />
+    <None Include="Test\Data\NamingHighlightings\MsTestAttr.cs" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceMethodTwice.cs" />
     <None Include="Test\Data\ConfigureAwaitQuickFixTests\Chain.cs" />
     <None Include="Test\Data\ConfigureAwaitQuickFixTests\Chain.cs.gold" />
@@ -394,6 +403,7 @@
     <None Include="Test\Data\ConfigureAwaitHighlightingTests\Without.cs.gold" />
     <None Include="Test\Data\ConfigureAwaitQuickFixTests\Simple.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceMethodTwice.cs.gold" />
+    <None Include="Test\Data\NamingHighlightings\MsTestAttr.cs.gold" />
     <None Include="Test\Data\NamingQuickFix\InUsage.cs" />
     <None Include="Test\Data\NamingQuickFix\InHierarchy.cs" />
     <None Include="Test\Data\NamingQuickFix\ReturnTask.cs" />
