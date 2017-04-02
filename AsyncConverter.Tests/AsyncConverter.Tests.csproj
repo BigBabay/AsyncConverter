@@ -384,6 +384,8 @@
     <Compile Include="ContextActions\MathodToAsyncConverterAvailabilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEnvironment.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\GenericWithWhereOnMyClass.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\GenericWithWhereOnMyClass.cs.gold" />
     <None Include="Test\Data\NamingHighlightings\ApiControllerNotDorect.cs" />
     <None Include="Test\Data\NamingHighlightings\ApiControllerNotDorect.cs.gold" />
     <None Include="Test\Data\NamingHighlightings\Controller.cs" />
@@ -409,9 +411,9 @@
     <None Include="Test\Data\CanBeUseAsyncMethodTests\Chain.cs" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\Task.cs" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\Sync.cs" />
-    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ParameterDifferentGenericWithWhere.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\GenericWithWhereOnStruct.cs" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ParameterDifferentGeneric.cs" />
-    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ParameterDifferentGenericWithWhere.cs.gold" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\GenericWithWhereOnStruct.cs.gold" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ParameterGeneric.cs" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ParameterDifferentType.cs" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ParameterDifferentCount.cs" />
