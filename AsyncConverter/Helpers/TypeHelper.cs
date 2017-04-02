@@ -74,11 +74,13 @@ namespace AsyncConverter.Helpers
                 return Equals(type, otherType);
             if (!IsEqualTypeGroup(type, otherType))
                 return false;
-            var scalarType1 = type.GetScalarType();
+            var scalarType = type.GetScalarType();
             var otherScalarType = otherType.GetScalarType();
-            if (scalarType1 == null || otherScalarType == null)
+            if (scalarType == null || otherScalarType == null)
                 return false;
-            var typeElement1 = scalarType1.GetTypeElement();
+            if (scalarType.Classify != otherScalarType.Classify)
+                return false;
+            var typeElement1 = scalarType.GetTypeElement();
             var typeElement2 = otherScalarType.GetTypeElement();
             if (typeElement1 == null || typeElement2 == null)
                 return false;
@@ -94,7 +96,7 @@ namespace AsyncConverter.Helpers
                     return false;
                 }
             }
-            return EqualSubstitutions(typeElement1, scalarType1.GetSubstitution(), typeElement2, otherScalarType.GetSubstitution());
+            return EqualSubstitutions(typeElement1, scalarType.GetSubstitution(), typeElement2, otherScalarType.GetSubstitution());
         }
 
         public static bool IsAsyncDelegate([NotNull] this IType type, [NotNull] IType otherType)
