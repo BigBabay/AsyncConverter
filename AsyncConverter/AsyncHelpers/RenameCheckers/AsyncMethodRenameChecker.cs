@@ -17,7 +17,7 @@ namespace AsyncConverter.AsyncHelpers.RenameCheckers
 
         public bool NeedRename(IMethodDeclaration method)
         {
-            return concreateCheckers.All(x => x.NeedRename(method));
+            return !concreateCheckers.Any(x => x.SkipRename(method));
         }
     }
 }

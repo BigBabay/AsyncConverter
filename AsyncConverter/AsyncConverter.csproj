@@ -385,10 +385,11 @@
     <Compile Include="AsyncHelpers\ClassSearchers\IClassSearcher.cs" />
     <Compile Include="AsyncHelpers\RenameCheckers\DefaultAsyncMethodRenameChecker.cs" />
     <Compile Include="AsyncHelpers\RenameCheckers\IAsyncMethodRenameChecker.cs" />
-    <Compile Include="AsyncHelpers\RenameCheckers\IConcreateAsyncMethodRenameChecker.cs" />
+    <Compile Include="AsyncHelpers\RenameCheckers\IConcreateRenameChecker.cs" />
     <Compile Include="AsyncHelpers\ParameterComparers\ITypeComparer.cs" />
     <Compile Include="AsyncHelpers\ParameterComparers\ParameterComparer.cs" />
     <Compile Include="AsyncHelpers\ParameterComparers\TypeComparer.cs" />
+    <Compile Include="AsyncHelpers\RenameCheckers\MvcControllerRenameChecker.cs" />
     <Compile Include="AsyncHelpers\RenameCheckers\TestAsyncMethodRenameChecker.cs" />
     <Compile Include="ContextActions\MathodToAsyncConverter.cs" />
     <Compile Include="Helpers\AsyncChecker.cs" />

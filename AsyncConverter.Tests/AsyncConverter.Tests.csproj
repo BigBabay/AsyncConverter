@@ -382,6 +382,12 @@
     <Compile Include="ContextActions\MathodToAsyncConverterAvailabilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEnvironment.cs" />
+    <None Include="Test\Data\NamingHighlightings\ApiControllerNotDorect.cs" />
+    <None Include="Test\Data\NamingHighlightings\ApiControllerNotDorect.cs.gold" />
+    <None Include="Test\Data\NamingHighlightings\Controller.cs" />
+    <None Include="Test\Data\NamingHighlightings\ApiController.cs" />
+    <None Include="Test\Data\NamingHighlightings\Controller.cs.gold" />
+    <None Include="Test\Data\NamingHighlightings\ApiController.cs.gold" />
     <None Include="Test\Data\NamingHighlightings\NUnitTestCaseAttr.cs" />
     <None Include="Test\Data\NamingHighlightings\NUnitTestAttr.cs" />
     <None Include="Test\Data\NamingHighlightings\NUnitTestCaseAttr.cs.gold" />
