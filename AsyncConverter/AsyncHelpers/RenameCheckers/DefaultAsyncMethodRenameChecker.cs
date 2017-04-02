@@ -7,15 +7,15 @@ namespace AsyncConverter.AsyncHelpers.RenameCheckers
     [SolutionComponent]
     public class DefaultRenameChecker : IConcreateRenameChecker
     {
-        public bool NeedRename(IMethodDeclaration method)
+        public bool SkipRename(IMethodDeclaration method)
         {
             if (!method.Type.IsTask() && !method.Type.IsGenericTask())
-                return false;
+                return true;
 
             if (method.DeclaredName.EndsWith("Async"))
-                return false;
+                return true;
 
-            return true;
+            return false;
         }
     }
 }

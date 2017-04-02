@@ -385,7 +385,7 @@
     <Compile Include="AsyncHelpers\ClassSearchers\IClassSearcher.cs" />
     <Compile Include="AsyncHelpers\RenameCheckers\DefaultAsyncMethodRenameChecker.cs" />
     <Compile Include="AsyncHelpers\RenameCheckers\IAsyncMethodRenameChecker.cs" />
-    <Compile Include="AsyncHelpers\RenameCheckers\IConcreateAsyncMethodRenameChecker.cs" />
+    <Compile Include="AsyncHelpers\RenameCheckers\IConcreateRenameChecker.cs" />
     <Compile Include="AsyncHelpers\ParameterComparers\ITypeComparer.cs" />
     <Compile Include="AsyncHelpers\ParameterComparers\ParameterComparer.cs" />
     <Compile Include="AsyncHelpers\ParameterComparers\TypeComparer.cs" />

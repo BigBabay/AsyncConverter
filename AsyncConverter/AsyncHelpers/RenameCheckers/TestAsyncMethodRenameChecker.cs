@@ -10,7 +10,7 @@ namespace AsyncConverter.AsyncHelpers.RenameCheckers
     [SolutionComponent]
     public class TestRenameChecker : IConcreateRenameChecker
     {
-        private HashSet<ClrTypeName> testAttributesClass = new HashSet<ClrTypeName>
+        private readonly HashSet<ClrTypeName> testAttributesClass = new HashSet<ClrTypeName>
                                                            {
                                                                new ClrTypeName("Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute"),
                                                                new ClrTypeName("Xunit.FactAttribute"),
@@ -19,22 +19,18 @@ namespace AsyncConverter.AsyncHelpers.RenameCheckers
                                                                new ClrTypeName("NUnit.Framework.TestCaseAttribute"),
                                                            };
 
-        public bool NeedRename(IMethodDeclaration method)
+        public bool SkipRename(IMethodDeclaration method)
         {
             if (method.AttributeSectionList == null)
-                return true;
+                return false;
 
-            foreach (var attribute in method.AttributeSectionList.AttributesEnumerable)
-            {
-                var attributeClass = attribute.Name.Reference.Resolve().DeclaredElement as IClass;
-                if (attributeClass == null)
-                    continue;
-
-                var clrTypeName = attributeClass.GetClrName();
-                if (testAttributesClass.Contains(clrTypeName))
-                    return false;
-            }
-            return true;
+            return method
+                .AttributeSectionList
+                .AttributesEnumerable
+                .Select(attribute => attribute.Name.Reference.Resolve().DeclaredElement)
+                .OfType<IClass>()
+                .Select(attributeClass => attributeClass.GetClrName())
+                .Any(clrTypeName => testAttributesClass.Contains(clrTypeName));
         }
     }
 }
