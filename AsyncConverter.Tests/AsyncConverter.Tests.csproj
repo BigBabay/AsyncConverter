@@ -369,10 +369,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Analyzers\CanBeUseAsyncMethodHighlightingTests.cs" />
     <Compile Include="Analyzers\HighlightingsTestsBase.cs" />
     <Compile Include="Analyzers\ConfigureAwaitHighlightingTests.cs" />
     <Compile Include="Analyzers\NullReturnHighlightingsTests.cs" />
     <Compile Include="QuickFixes\AsyncMethodNamingQuickFixTests.cs" />
+    <Compile Include="QuickFixes\CanBeUseAsyncMethodQuickFixTests.cs" />
     <Compile Include="QuickFixes\ConfigureAwaitQuickFixTests.cs" />
     <Compile Include="QuickFixes\QuickFixBaseTests.cs" />
     <Compile Include="QuickFixes\ReturnNullToTaskAvailabilityTests.cs" />
@@ -382,6 +384,8 @@
     <Compile Include="ContextActions\MathodToAsyncConverterAvailabilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEnvironment.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\GenericWithWhereOnMyClass.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\GenericWithWhereOnMyClass.cs.gold" />
     <None Include="Test\Data\NamingHighlightings\ApiControllerNotDorect.cs" />
     <None Include="Test\Data\NamingHighlightings\ApiControllerNotDorect.cs.gold" />
     <None Include="Test\Data\NamingHighlightings\Controller.cs" />
@@ -397,6 +401,36 @@
     <None Include="Test\Data\NamingHighlightings\XunitFactAttr.cs.gold" />
     <None Include="Test\Data\NamingHighlightings\XunitFactAttr.cs" />
     <None Include="Test\Data\NamingHighlightings\MsTestAttr.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodTests\ChainAwaitSecond.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodTests\ChainAwait.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodTests\ChainAwaitSecond.cs.gold" />
+    <None Include="Test\Data\CanBeUseAsyncMethodTests\ChainAwait.cs.gold" />
+    <None Include="Test\Data\CanBeUseAsyncMethodTests\Simple.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodTests\Chain.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\Sync.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\GenericWithWhereOnStruct.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ParameterDifferentGeneric.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\GenericWithWhereOnStruct.cs.gold" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ParameterGeneric.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ParameterDifferentType.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ParameterDifferentCount.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ParameterDifferentGeneric.cs.gold" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ParameterGeneric.cs.gold" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ParameterDifferentType.cs.gold" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ParameterLambda.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\AnotherClass.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\Chein.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\AnotherClass.cs.gold" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\NotVoid.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\Chein.cs.gold" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ParameterDifferentCount.cs.gold" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\Void.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\NotVoid.cs.gold" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ParameterLambda.cs.gold" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\Sync.cs.gold" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\Void.cs.gold" />
+    <None Include="Test\Data\CanBeUseAsyncMethodTests\Chain.cs.gold" />
+    <None Include="Test\Data\CanBeUseAsyncMethodTests\Simple.cs.gold" />
     <None Include="Test\Data\MathodToAsyncConverterTests\ReplaceMethodTwice.cs" />
     <None Include="Test\Data\ConfigureAwaitQuickFixTests\Chain.cs" />
     <None Include="Test\Data\ConfigureAwaitQuickFixTests\Chain.cs.gold" />
