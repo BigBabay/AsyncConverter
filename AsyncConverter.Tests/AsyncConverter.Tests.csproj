@@ -389,6 +389,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Analyzers\AsyncAwaitMayBeElidedHighlightingTests.cs" />
     <Compile Include="Analyzers\CanBeUseAsyncMethodHighlightingTests.cs" />
     <Compile Include="Analyzers\HighlightingsTestsBase.cs" />
     <Compile Include="Analyzers\ConfigureAwaitHighlightingTests.cs" />
@@ -404,6 +405,8 @@
     <Compile Include="ContextActions\MathodToAsyncConverterAvailabilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEnvironment.cs" />
+    <None Include="Test\Data\AsyncAwaitMayBeElidedHighlighting\Simple.cs" />
+    <None Include="Test\Data\AsyncAwaitMayBeElidedHighlighting\Simple.cs.gold" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\GenericWithWhereOnMyClass.cs" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\GenericWithWhereOnMyClass.cs.gold" />
     <None Include="Test\Data\NamingHighlightings\ApiControllerNotDorect.cs" />
