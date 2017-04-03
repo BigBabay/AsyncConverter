@@ -392,6 +392,7 @@
     <Compile Include="Helpers\IAsyncReplacer.cs" />
     <Compile Include="Helpers\TypeHelper.cs" />
     <Compile Include="Highlightings\AsyncConverterGroupSettings.cs" />
+    <Compile Include="Highlightings\AsyncAwaitMayBeElidedHighlighting.cs" />
     <Compile Include="Highlightings\CanBeUseAsyncMethodHighlighting.cs" />
     <Compile Include="Highlightings\ConfigureAwaitHighlighting.cs" />
     <Compile Include="Highlightings\AsyncMethodNamingHighlighting.cs" />
