@@ -24,7 +24,7 @@ namespace AsyncConverter.QuickFixes
         protected override Action<ITextControl> ExecutePsiTransaction(ISolution solution, IProgressIndicator progress)
         {
             var psiModule = error.CSharpLiteralExpression.GetPsiModule();
-            var factory = CSharpElementFactory.GetInstance(psiModule);
+            var factory = CSharpElementFactory.GetInstance(error.CSharpLiteralExpression);
             var taskType = TypeFactory.CreateTypeByCLRName("System.Threading.Tasks.Task", psiModule);
 
             if (error.ReturnType.IsTask())
