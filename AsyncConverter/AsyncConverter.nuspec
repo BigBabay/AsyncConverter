@@ -8,8 +8,8 @@
     <copyright>i.mamay</copyright>
     <owners>i.mamay</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Plugin for resharper 2016.3, for converting code to async.</description>
-    <summary>Plugin for resharper 2016.3, for converting code to async.</summary>
+    <description>Plugin for resharper 2017.1, for converting code to async.</description>
+    <summary>Plugin for resharper 2017.1, for converting code to async.</summary>
     <projectUrl>https://github.com/BigBabay/AsyncConverter</projectUrl>
     <tags>async</tags>
     <dependencies>
