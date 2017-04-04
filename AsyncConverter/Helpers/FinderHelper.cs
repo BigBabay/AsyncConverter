@@ -26,7 +26,7 @@ namespace AsyncConverter.Helpers
                                                if (result != null)
                                                    found.Add(result);
                                                return FindExecution.Continue;
-                                           }), true, pi ?? NullProgressIndicator.Instance);
+                                           }), true, pi ?? NullProgressIndicator.Create());
             return found;
         }
 
@@ -37,7 +37,7 @@ namespace AsyncConverter.Helpers
             var finder = method
                 .GetPsiServices()
                 .Finder;
-            return InnerFindBaseMethods(finder, method, pi ?? NullProgressIndicator.Instance);
+            return InnerFindBaseMethods(finder, method, pi ?? NullProgressIndicator.Create());
         }
 
         [NotNull]
@@ -47,7 +47,7 @@ namespace AsyncConverter.Helpers
             var finder = method
                 .GetPsiServices()
                 .Finder;
-            return InnerFindAllHierarchy(finder, method, pi ?? NullProgressIndicator.Instance);
+            return InnerFindAllHierarchy(finder, method, pi ?? NullProgressIndicator.Create());
         }
 
         [NotNull]

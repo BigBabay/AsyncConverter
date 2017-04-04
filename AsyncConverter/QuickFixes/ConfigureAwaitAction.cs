@@ -21,8 +21,7 @@ namespace AsyncConverter.QuickFixes
         protected override Action<ITextControl> ExecutePsiTransaction(ISolution solution, IProgressIndicator progress)
         {
             var awaitExpression = configureAwaitHighlighting.AwaitExpression;
-            var psiModule = awaitExpression.GetPsiModule();
-            var factory = CSharpElementFactory.GetInstance(psiModule);
+            var factory = CSharpElementFactory.GetInstance(awaitExpression);
             var taskWithConfiguring = factory.CreateExpression($"$0.ConfigureAwait({GetConfigureAwaitValueText()})", awaitExpression.Task);
             awaitExpression.Task.ReplaceBy(taskWithConfiguring);
             return null;

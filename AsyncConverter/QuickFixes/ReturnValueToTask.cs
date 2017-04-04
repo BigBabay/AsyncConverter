@@ -33,8 +33,7 @@ namespace AsyncConverter.QuickFixes
             if (file == null)
                 return null;
 
-            var psiModule = error.Reference.GetAccessContext().GetPsiModule();
-            var factory = CSharpElementFactory.GetInstance(psiModule);
+            var factory = CSharpElementFactory.GetInstance(expression);
             var cSharpArgument = factory.CreateArgument(ParameterKind.VALUE, factory.CreateExpression("Task.FromResult($0)", expression));
             expression.ReplaceBy(cSharpArgument);
             var taskUsing = factory.CreateUsingDirective("System.Threading.Tasks");
