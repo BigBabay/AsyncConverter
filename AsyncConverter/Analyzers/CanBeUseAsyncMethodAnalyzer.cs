@@ -1,5 +1,4 @@
-﻿using AsyncConverter.AsyncHelpers.ParameterComparers;
-using AsyncConverter.Helpers;
+﻿using AsyncConverter.Helpers;
 using AsyncConverter.Highlightings;
 using JetBrains.ReSharper.Daemon.Stages.Dispatcher;
 using JetBrains.ReSharper.Feature.Services.Daemon;

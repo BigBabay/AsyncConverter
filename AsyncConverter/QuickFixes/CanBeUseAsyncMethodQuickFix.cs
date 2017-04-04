@@ -4,7 +4,6 @@ using AsyncConverter.Highlightings;
 using JetBrains.Application.Progress;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Feature.Services.QuickFixes;
-using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.TextControl;
 using JetBrains.Util;
 
@@ -24,7 +23,6 @@ namespace AsyncConverter.QuickFixes
         {
             var asyncReplacer = solution.GetComponent<IAsyncReplacer>();
 
-            var factory = CSharpElementFactory.GetInstance(canBeUseAsyncMethodHighlighting.InvocationExpression);
             asyncReplacer.TryReplaceInvocationToAsync(canBeUseAsyncMethodHighlighting.InvocationExpression);
             return null;
         }
