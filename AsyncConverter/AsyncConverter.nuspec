@@ -3,7 +3,7 @@
   <metadata>
     <id>AsyncConverter.AsyncConverter</id>
     <title>AsyncConverter</title>
-    <version>1.1.6.7</version>
+    <version>1.1.6.8</version>
     <authors>i.mamay</authors>
     <copyright>i.mamay</copyright>
     <owners>i.mamay</owners>
@@ -13,7 +13,7 @@
     <projectUrl>https://github.com/BigBabay/AsyncConverter</projectUrl>
     <tags>async</tags>
     <dependencies>
-      <dependency id="Wave" version="[7.0]" />
+      <dependency id="Wave" version="[8.0]" />
     </dependencies>
   </metadata>
 </package>
