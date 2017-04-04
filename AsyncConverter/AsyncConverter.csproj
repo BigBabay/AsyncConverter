@@ -361,6 +361,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Analyzers\AsyncAwaitMayBeElidedAnalyzer.cs" />
     <Compile Include="Analyzers\CanBeUseAsyncMethodAnalyzer.cs" />
     <Compile Include="Analyzers\ConfigureAwaitAnalyzer.cs" />
     <Compile Include="Analyzers\AsyncMethodNamingAnalyzer.cs" />
