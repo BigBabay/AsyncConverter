@@ -419,8 +419,8 @@
     <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\Simple.cs.gold" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\GenericWithWhereOnMyClass.cs" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\GenericWithWhereOnMyClass.cs.gold" />
-    <None Include="Test\Data\NamingHighlightings\ApiControllerNotDorect.cs" />
-    <None Include="Test\Data\NamingHighlightings\ApiControllerNotDorect.cs.gold" />
+    <None Include="Test\Data\NamingHighlightings\ApiControllerNotDirect.cs" />
+    <None Include="Test\Data\NamingHighlightings\ApiControllerNotDirect.cs.gold" />
     <None Include="Test\Data\NamingHighlightings\Controller.cs" />
     <None Include="Test\Data\NamingHighlightings\ApiController.cs" />
     <None Include="Test\Data\NamingHighlightings\Controller.cs.gold" />
