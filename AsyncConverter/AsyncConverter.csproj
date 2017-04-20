@@ -367,6 +367,8 @@
     <Compile Include="Analyzers\AsyncMethodNamingAnalyzer.cs" />
     <Compile Include="Analyzers\NullReturnFromLambdaAnalyzer.cs" />
     <Compile Include="Analyzers\NullReturnFromMethodAnalyzer.cs" />
+    <Compile Include="AsyncHelpers\AwaitElideChecker\AwaitElideChecker.cs" />
+    <Compile Include="AsyncHelpers\AwaitElideChecker\IAwaitElideChecker.cs" />
     <Compile Include="AsyncHelpers\RenameCheckers\AsyncMethodRenameChecker.cs" />
     <Compile Include="AsyncHelpers\ClassSearchers\ClassForSearchResolver.cs" />
     <Compile Include="AsyncHelpers\ClassSearchers\DefaultSearcher.cs" />
@@ -404,6 +406,7 @@
     <Compile Include="AsyncHelpers\ParameterComparers\ParameterCompareResult.cs" />
     <Compile Include="AsyncHelpers\ParameterComparers\ParameterCompareResultAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuickFixes\AsyncAwaitMayBeElidedQuickFix.cs" />
     <Compile Include="QuickFixes\AsyncMethodNamingQuickFix.cs" />
     <Compile Include="QuickFixes\CanBeUseAsyncMethodQuickFix.cs" />
     <Compile Include="QuickFixes\ConfigureAwaitAction.cs" />

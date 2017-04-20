@@ -1,30 +1,32 @@
-﻿using AsyncConverter.Highlightings;
+﻿using System.Linq;
+using AsyncConverter.AsyncHelpers.AwaitElideChecker;
+using AsyncConverter.Highlightings;
+using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Daemon.Stages.Dispatcher;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
-using JetBrains.ReSharper.Psi.CSharp.Util;
+using JetBrains.ReSharper.Psi.Tree;
 
 namespace AsyncConverter.Analyzers
 {
-    [ElementProblemAnalyzer(typeof(IAwaitExpression), HighlightingTypes = new[] {typeof(AsyncAwaitMayBeElidedHighlighting) })]
-    public class AsyncAwaitMayBeElidedAnalyzer : ElementProblemAnalyzer<IAwaitExpression>
+    [ElementProblemAnalyzer(typeof(IMethodDeclaration), HighlightingTypes = new[] {typeof(AsyncAwaitMayBeElidedHighlighting) })]
+    public class AsyncAwaitMayBeElidedAnalyzer : ElementProblemAnalyzer<IMethodDeclaration>
     {
-        protected override void Run(IAwaitExpression element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
+        protected override void Run(IMethodDeclaration element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
-            var expression = element.Parent as IExpressionStatement;
-            if(expression == null)
+            var awaitElideChecker = element.GetSolution().GetComponent<IAwaitElideChecker>();
+
+            var awaitExpressions = element.Descendants<IAwaitExpression>().ToEnumerable().ToArray();
+
+            //TODO: think about this, different settings
+            if(awaitExpressions.Length != 1)
                 return;
 
-            if (expression.GetNextStatement() != null)
+            var awaitExpression = awaitExpressions.First();
+            if(!awaitElideChecker.MayBeElided(awaitExpression))
                 return;
 
-            if(expression.GetContainingNode<IUsingStatement>() != null)
-                return;
-
-            if (expression.GetContainingNode<ITryStatement>() != null)
-                return;
-
-            consumer.AddHighlighting(new AsyncAwaitMayBeElidedHighlighting(element));
+            consumer.AddHighlighting(new AsyncAwaitMayBeElidedHighlighting(awaitExpression));
         }
     }
 }
