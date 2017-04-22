@@ -406,8 +406,12 @@
     <Compile Include="ContextActions\MathodToAsyncConverterAvailabilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEnvironment.cs" />
+    <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\LocalFunc.cs" />
+    <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\LambdaChein.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\Lambda.cs" />
+    <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\LambdaChein.cs.gold" />
     <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\Lambda.cs.gold" />
+    <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\LocalFunc.cs.gold" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\Lambda.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\ExpressionBody.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\Lambda.cs.gold" />

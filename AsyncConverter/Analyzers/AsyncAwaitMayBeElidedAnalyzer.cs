@@ -9,17 +9,18 @@ using JetBrains.ReSharper.Psi.Tree;
 
 namespace AsyncConverter.Analyzers
 {
-    [ElementProblemAnalyzer(typeof(IMethodDeclaration), HighlightingTypes = new[] {typeof(AsyncAwaitMayBeElidedHighlighting) })]
-    public class AsyncAwaitMayBeElidedAnalyzer : ElementProblemAnalyzer<IMethodDeclaration>
+    [ElementProblemAnalyzer(typeof(IParametersOwnerDeclaration), HighlightingTypes = new[] {typeof(AsyncAwaitMayBeElidedHighlighting) })]
+    public class AsyncAwaitMayBeElidedAnalyzer : ElementProblemAnalyzer<IParametersOwnerDeclaration>
     {
-        protected override void Run(IMethodDeclaration element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
+        protected override void Run(IParametersOwnerDeclaration element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
             var awaitElideChecker = element.GetSolution().GetComponent<IAwaitElideChecker>();
 
             var awaitExpressions = element.Descendants<IAwaitExpression>().ToEnumerable().ToArray();
 
             //TODO: think about this, different settings
-            if(awaitExpressions.Length != 1)
+            var expressionsInClosure = awaitExpressions.Where(x => x.GetContainingFunctionLikeDeclarationOrClosure() == element);
+            if(expressionsInClosure.Count() != 1)
                 return;
 
             var awaitExpression = awaitExpressions.First();

@@ -21,6 +21,10 @@ namespace AsyncConverter.AsyncHelpers.AwaitElideChecker
             if (arrowExpressionClause != null)
                 return true;
 
+            var lambdaExpression = element.Parent as ILambdaExpression;
+            if (lambdaExpression != null)
+                return true;
+
             return false;
 
         }
