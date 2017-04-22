@@ -56,6 +56,19 @@ namespace AsyncConverter.QuickFixes
                 else
                     methodDeclaration.ArrowClause?.SetExpression(expressionWithoutConfigureAwait);
             }
+
+            var lambdaExpression = declarationOrClosure as ILambdaExpression;
+            if (lambdaExpression != null)
+            {
+                lambdaExpression.SetAsync(false);
+                if (lambdaExpression.BodyBlock != null)
+                {
+                    var statement = factory.CreateStatement("return $0;", expressionWithoutConfigureAwait);
+                    awaitExpression.GetContainingStatement()?.ReplaceBy(statement);
+                }
+                else
+                    lambdaExpression.SetBodyExpression(expressionWithoutConfigureAwait);
+            }
             }
             return null;
         }
