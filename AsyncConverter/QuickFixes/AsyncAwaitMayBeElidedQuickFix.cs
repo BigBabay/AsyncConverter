@@ -53,7 +53,9 @@ namespace AsyncConverter.QuickFixes
                     var statement = factory.CreateStatement("return $0;", expressionWithoutConfigureAwait);
                     awaitExpression.GetContainingStatement()?.ReplaceBy(statement);
                 }
-                methodDeclaration.ArrowClause?.SetExpression(expressionWithoutConfigureAwait);
+                else
+                    methodDeclaration.ArrowClause?.SetExpression(expressionWithoutConfigureAwait);
+            }
             }
             return null;
         }
