@@ -414,8 +414,8 @@
     <None Include="Test\Data\AsyncAwaitMayBeElided\ExpressionBody.cs.gold" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\SimpleWithoutConfigureAwait.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\Simple.cs" />
-    <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\CheinInExpression.cs" />
-    <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\CheinInExpression.cs.gold" />
+    <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\ExpressionBodyChein.cs" />
+    <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\ExpressionBodyChein.cs.gold" />
     <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\ExpressionBody.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\TwoAwait.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\InScope.cs.gold" />
