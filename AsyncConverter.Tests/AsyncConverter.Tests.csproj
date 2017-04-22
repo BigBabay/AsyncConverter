@@ -409,9 +409,9 @@
     <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\Lambda.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\Lambda.cs.gold" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\Lambda.cs" />
-    <None Include="Test\Data\AsyncAwaitMayBeElided\ArrowBody.cs" />
+    <None Include="Test\Data\AsyncAwaitMayBeElided\ExpressionBody.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\Lambda.cs.gold" />
-    <None Include="Test\Data\AsyncAwaitMayBeElided\ArrowBody.cs.gold" />
+    <None Include="Test\Data\AsyncAwaitMayBeElided\ExpressionBody.cs.gold" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\SimpleWithoutConfigureAwait.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\Simple.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\CheinInExpression.cs" />
