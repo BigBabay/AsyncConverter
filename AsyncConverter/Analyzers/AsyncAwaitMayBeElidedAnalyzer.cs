@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using AsyncConverter.AsyncHelpers.AwaitElideChecker;
+using AsyncConverter.Helpers;
 using AsyncConverter.Highlightings;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Daemon.Stages.Dispatcher;
@@ -16,11 +17,10 @@ namespace AsyncConverter.Analyzers
         {
             var awaitElideChecker = element.GetSolution().GetComponent<IAwaitElideChecker>();
 
-            var awaitExpressions = element.Descendants<IAwaitExpression>().ToEnumerable().ToArray();
+            var awaitExpressions = element.DescendantsInScope<IAwaitExpression>().ToArray();
 
             //TODO: think about this, different settings
-            var expressionsInClosure = awaitExpressions.Where(x => x.GetContainingFunctionLikeDeclarationOrClosure() == element);
-            if(expressionsInClosure.Count() != 1)
+            if(awaitExpressions.Length != 1)
                 return;
 
             var awaitExpression = awaitExpressions.First();
