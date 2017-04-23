@@ -5,7 +5,7 @@ using JetBrains.ReSharper.Psi;
 namespace AsyncConverter.AsyncHelpers.ParameterComparers
 {
     [SolutionComponent]
-    public class ParameterComparer : IParameterComparer
+    internal class ParameterComparer : IParameterComparer
     {
         private readonly ITypeComparer typeComparer;
 

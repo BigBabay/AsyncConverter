@@ -6,7 +6,7 @@ using JetBrains.ReSharper.Psi.CSharp.Tree;
 namespace AsyncConverter.AsyncHelpers.RenameCheckers
 {
     [SolutionComponent]
-    public class RenameChecker : IRenameChecker
+    internal class RenameChecker : IRenameChecker
     {
         private readonly IConcreateRenameChecker[] concreateCheckers;
 
