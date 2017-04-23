@@ -1,11 +1,9 @@
 ﻿using System;
+using AsyncConverter.AsyncHelpers;
 using AsyncConverter.Highlightings;
 using JetBrains.Application.Progress;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Feature.Services.QuickFixes;
-using JetBrains.ReSharper.Psi;
-using JetBrains.ReSharper.Psi.CSharp;
-using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.TextControl;
 using JetBrains.Util;
 
@@ -23,64 +21,11 @@ namespace AsyncConverter.QuickFixes
 
         protected override Action<ITextControl> ExecutePsiTransaction(ISolution solution, IProgressIndicator progress)
         {
+            var awaitElider = solution.GetComponent<IAwaitElider>();
+
             var awaitExpression = asyncAwaitMayBeElidedHighlighting.AwaitExpression;
-            var factory = CSharpElementFactory.GetInstance(awaitExpression);
+            awaitElider.Elide(awaitExpression);
 
-            var expression = awaitExpression.Task;
-            var invocationExpression = expression as IInvocationExpression;
-
-            var declarationOrClosure = awaitExpression.GetContainingFunctionLikeDeclarationOrClosure();
-            //(declarationOrClosure as IAnonymousFunctionExpression)?.SetAsync(false);
-
-            ICSharpExpression expressionWithoutConfigureAwait;
-            if ((invocationExpression?.Reference?.Resolve().Result.DeclaredElement as IMethod)?.XMLDocId == "M:System.Threading.Tasks.Task.ConfigureAwait(System.Boolean)")
-            {
-                expressionWithoutConfigureAwait = (invocationExpression.FirstChild as IReferenceExpression)?.QualifierExpression;
-                if (expressionWithoutConfigureAwait == null)
-                    return null;
-            }
-            else
-            {
-                expressionWithoutConfigureAwait = expression;
-            }
-
-            var methodDeclaration = declarationOrClosure as IMethodDeclaration;
-            if (methodDeclaration != null)
-            {
-                methodDeclaration.SetAsync(false);
-                if (methodDeclaration.Body != null)
-                {
-                    var statement = factory.CreateStatement("return $0;", expressionWithoutConfigureAwait);
-                    awaitExpression.GetContainingStatement()?.ReplaceBy(statement);
-                }
-                else
-                    methodDeclaration.ArrowClause?.SetExpression(expressionWithoutConfigureAwait);
-            }
-
-            var lambdaExpression = declarationOrClosure as ILambdaExpression;
-            if (lambdaExpression != null)
-            {
-                lambdaExpression.SetAsync(false);
-                if (lambdaExpression.BodyBlock != null)
-                {
-                    var statement = factory.CreateStatement("return $0;", expressionWithoutConfigureAwait);
-                    awaitExpression.GetContainingStatement()?.ReplaceBy(statement);
-                }
-                else
-                    lambdaExpression.SetBodyExpression(expressionWithoutConfigureAwait);
-            }
-            var localFunctionDeclaration = declarationOrClosure as ILocalFunctionDeclaration;
-            if (localFunctionDeclaration != null)
-            {
-                localFunctionDeclaration.SetAsync(false);
-                if (localFunctionDeclaration.Body != null)
-                {
-                    var statement = factory.CreateStatement("return $0;", expressionWithoutConfigureAwait);
-                    awaitExpression.GetContainingStatement()?.ReplaceBy(statement);
-                }
-                else
-                    localFunctionDeclaration.ArrowClause?.SetExpression(expressionWithoutConfigureAwait);
-            }
             return null;
         }
 
