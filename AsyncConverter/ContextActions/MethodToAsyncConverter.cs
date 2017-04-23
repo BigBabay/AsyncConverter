@@ -13,12 +13,12 @@ using JetBrains.Util;
 namespace AsyncConverter.ContextActions
 {
     [ContextAction(Group = "C#", Name = "ConvertToAsync", Description = "Convert method to async and replace all inner call to async version if exist.")]
-    public class MathodToAsyncConverter : ContextActionBase
+    public class MethodToAsyncConverter : ContextActionBase
     {
         private IAsyncReplacer asyncReplacer;
         private ICSharpContextActionDataProvider Provider { get; }
 
-        public MathodToAsyncConverter(ICSharpContextActionDataProvider provider)
+        public MethodToAsyncConverter(ICSharpContextActionDataProvider provider)
         {
             Provider = provider;
         }
