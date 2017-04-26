@@ -10,7 +10,7 @@ namespace AsyncConverter.AsyncHelpers.AwaitElideChecker
     {
         public bool MayBeElided(IAwaitExpression element)
         {
-            var statement = element.Parent as IExpressionStatement;
+            var statement = element.Parent as ICSharpStatement;
             if (statement != null
                 && IsFinalStatement(statement)
                 && statement.GetContainingNode<IUsingStatement>() == null

@@ -406,6 +406,16 @@
     <Compile Include="ContextActions\MethodToAsyncConverterAvailabilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEnvironment.cs" />
+    <None Include="Test\Data\AsyncAwaitMayBeElided\ExpressionBodyGenericLocalFunc.cs" />
+    <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\ExpressionBodyGeneric.cs" />
+    <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\ExpressionBodyGeneric.cs.gold" />
+    <None Include="Test\Data\AsyncAwaitMayBeElided\ExpressionBodyGeneric.cs" />
+    <None Include="Test\Data\AsyncAwaitMayBeElided\ExpressionBodyGeneric.cs.gold" />
+    <None Include="Test\Data\AsyncAwaitMayBeElided\ExpressionBodyLocalFunc.cs - Copy.gold" />
+    <None Include="Test\Data\AsyncAwaitMayBeElided\SimpleGenericWithoutConfigureAwait.cs" />
+    <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\SimpleGeneric.cs" />
+    <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\SimpleGeneric.cs.gold" />
+    <None Include="Test\Data\AsyncAwaitMayBeElided\SimpleGeneric.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\LambdaWithBody.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\ExpressionBodyLocalFunc.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\LambdaWithBody.cs.gold" />
@@ -422,6 +432,7 @@
     <None Include="Test\Data\AsyncAwaitMayBeElided\ExpressionBody.cs.gold" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\ExpressionBodyLocalFunc.cs.gold" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\LocalFunc.cs.gold" />
+    <None Include="Test\Data\AsyncAwaitMayBeElided\SimpleGeneric.cs.gold" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\SimpleWithoutConfigureAwait.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\Simple.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\ExpressionBodyChein.cs" />
@@ -444,6 +455,7 @@
     <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\NotInEnd.cs.gold" />
     <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\Chein.cs.gold" />
     <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\Simple.cs.gold" />
+    <None Include="Test\Data\AsyncAwaitMayBeElided\SimpleGenericWithoutConfigureAwait.cs.gold" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\SimpleWithoutConfigureAwait.cs.gold" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\Simple.cs.gold" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\GenericWithWhereOnMyClass.cs" />

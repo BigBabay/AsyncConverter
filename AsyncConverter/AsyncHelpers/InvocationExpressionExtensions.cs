@@ -11,7 +11,9 @@ namespace AsyncConverter.AsyncHelpers
         public static ICSharpExpression RemoveConfigureAwait(this IInvocationExpression expression)
         {
             ICSharpExpression expressionWithoutConfigureAwait;
-            if ((expression?.Reference?.Resolve().Result.DeclaredElement as IMethod)?.XMLDocId == "M:System.Threading.Tasks.Task.ConfigureAwait(System.Boolean)")
+            var xmlDocId = (expression?.Reference?.Resolve().Result.DeclaredElement as IMethod)?.XMLDocId;
+            if (xmlDocId == "M:System.Threading.Tasks.Task.ConfigureAwait(System.Boolean)"
+                || xmlDocId == "M:System.Threading.Tasks.Task`1.ConfigureAwait(System.Boolean)")
             {
                 expressionWithoutConfigureAwait = (expression.FirstChild as IReferenceExpression)?.QualifierExpression;
                 if (expressionWithoutConfigureAwait == null)
