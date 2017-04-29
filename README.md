@@ -36,5 +36,5 @@ Suggest add method name Async suffix.
 ## Suggesting use async method if it exist
 If in async context call sync method, but exist async method with same signature and suffix Async, then suggest use async method.
 
-![Suggesting method name with Async suffix](ReadMe/ConfigureAwait.gif)
+![Suggesting method name with Async suffix](ReadMe/CanBeUseAsyncMethod.gif)
 
