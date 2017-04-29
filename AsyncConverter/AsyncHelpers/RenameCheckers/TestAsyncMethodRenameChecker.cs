@@ -8,7 +8,7 @@ using JetBrains.ReSharper.Psi.CSharp.Tree;
 namespace AsyncConverter.AsyncHelpers.RenameCheckers
 {
     [SolutionComponent]
-    public class TestRenameChecker : IConcreateRenameChecker
+    internal class TestRenameChecker : IConcreateRenameChecker
     {
         private readonly HashSet<ClrTypeName> testAttributesClass = new HashSet<ClrTypeName>
                                                            {

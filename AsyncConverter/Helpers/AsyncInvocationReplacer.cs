@@ -6,7 +6,7 @@ using JetBrains.ReSharper.Psi.CSharp.Tree;
 namespace AsyncConverter.Helpers
 {
     [SolutionComponent]
-    public class AsyncInvocationReplacer : IAsyncInvocationReplacer
+    internal class AsyncInvocationReplacer : IAsyncInvocationReplacer
     {
         public void ReplaceInvocation(IInvocationExpression invocation, string newMethodName, bool useAwait)
         {

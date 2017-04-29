@@ -6,9 +6,10 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
     {
         public async Task TestAsync()
         {
-            await Task.Delay(1000).ConfigureAwait(true);
+            |await Task.Delay(1000).ConfigureAwait(true)|(0);
         }
     }
 }
 
 ---------------------------------------------------------
+(0): ReSharper Warning: (T) 'Async in method declaration and await may be elided.' (E) 'Await may be elided.'

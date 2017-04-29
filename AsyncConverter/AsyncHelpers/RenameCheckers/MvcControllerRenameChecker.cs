@@ -10,7 +10,7 @@ using JetBrains.Util;
 namespace AsyncConverter.AsyncHelpers.RenameCheckers
 {
     [SolutionComponent]
-    public class MvcControllerRenameChecker : IConcreateRenameChecker
+    internal class MvcControllerRenameChecker : IConcreateRenameChecker
     {
         private readonly HashSet<ClrTypeName> controllerClasses = new HashSet<ClrTypeName>
                                                            {

@@ -7,11 +7,11 @@ using NUnit.Framework;
 namespace AsyncConverter.Tests.ContextActions
 {
     [TestFixture]
-    public class MathodToAsyncConverterTests : CSharpContextActionExecuteTestBase<MathodToAsyncConverter>
+    public class MethodToAsyncConverterTests : CSharpContextActionExecuteTestBase<MethodToAsyncConverter>
     {
-        protected override string ExtraPath => "MathodToAsyncConverterTests";
+        protected override string ExtraPath => "MethodToAsyncConverterTests";
 
-        protected override string RelativeTestDataPath => "MathodToAsyncConverterTests";
+        protected override string RelativeTestDataPath => "MethodToAsyncConverterTests";
 
         [TestCaseSource(nameof(FileNames))]
         public void Test(string fileName)

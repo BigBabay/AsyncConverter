@@ -1,0 +1,20 @@
+﻿using System.Threading.Tasks;
+
+namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
+{
+    public class Class
+    {
+        public async Task<int> TestAsync()
+        {
+            return |await MethodAsync().ConfigureAwait(false)|(0);
+        }
+
+        public Task<int> MethodAsync()
+        {
+            return Task.FromResult(5);
+        }
+    }
+}
+
+---------------------------------------------------------
+(0): ReSharper Warning: (T) 'Async in method declaration and await may be elided.' (E) 'Await may be elided.'

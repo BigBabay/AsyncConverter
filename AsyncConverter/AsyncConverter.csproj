@@ -361,11 +361,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Analyzers\AsyncAwaitMayBeElidedAnalyzer.cs" />
     <Compile Include="Analyzers\CanBeUseAsyncMethodAnalyzer.cs" />
     <Compile Include="Analyzers\ConfigureAwaitAnalyzer.cs" />
     <Compile Include="Analyzers\AsyncMethodNamingAnalyzer.cs" />
     <Compile Include="Analyzers\NullReturnFromLambdaAnalyzer.cs" />
     <Compile Include="Analyzers\NullReturnFromMethodAnalyzer.cs" />
+    <Compile Include="AsyncHelpers\AwaitElideChecker\AwaitElideChecker.cs" />
+    <Compile Include="AsyncHelpers\AwaitElideChecker\IAwaitElideChecker.cs" />
+    <Compile Include="AsyncHelpers\AwaitElider\AwaitElider.cs" />
+    <Compile Include="AsyncHelpers\AwaitElider\IAwaitElider.cs" />
+    <Compile Include="AsyncHelpers\AwaitElider\ICustomAwaitElider.cs" />
+    <Compile Include="AsyncHelpers\AwaitElider\LambdaAwaitElider.cs" />
+    <Compile Include="AsyncHelpers\AwaitElider\LocalFunctionAwaitElider.cs" />
+    <Compile Include="AsyncHelpers\AwaitElider\MethodAwaitElider.cs" />
+    <Compile Include="AsyncHelpers\InvocationExpressionExtensions.cs" />
     <Compile Include="AsyncHelpers\RenameCheckers\AsyncMethodRenameChecker.cs" />
     <Compile Include="AsyncHelpers\ClassSearchers\ClassForSearchResolver.cs" />
     <Compile Include="AsyncHelpers\ClassSearchers\DefaultSearcher.cs" />
@@ -381,7 +391,7 @@
     <Compile Include="AsyncHelpers\ParameterComparers\TypeComparer.cs" />
     <Compile Include="AsyncHelpers\RenameCheckers\MvcControllerRenameChecker.cs" />
     <Compile Include="AsyncHelpers\RenameCheckers\TestAsyncMethodRenameChecker.cs" />
-    <Compile Include="ContextActions\MathodToAsyncConverter.cs" />
+    <Compile Include="ContextActions\MethodToAsyncConverter.cs" />
     <Compile Include="Helpers\AsyncInvocationReplacer.cs" />
     <Compile Include="Helpers\AsyncMethodFinder.cs" />
     <Compile Include="Helpers\AsyncReplacer.cs" />
@@ -390,8 +400,10 @@
     <Compile Include="Helpers\IAsyncInvocationReplacer.cs" />
     <Compile Include="Helpers\IAsyncMethodFinder.cs" />
     <Compile Include="Helpers\IAsyncReplacer.cs" />
+    <Compile Include="Helpers\ParametersOwnerDeclarationExtensions.cs" />
     <Compile Include="Helpers\TypeHelper.cs" />
     <Compile Include="Highlightings\AsyncConverterGroupSettings.cs" />
+    <Compile Include="Highlightings\AsyncAwaitMayBeElidedHighlighting.cs" />
     <Compile Include="Highlightings\CanBeUseAsyncMethodHighlighting.cs" />
     <Compile Include="Highlightings\ConfigureAwaitHighlighting.cs" />
     <Compile Include="Highlightings\AsyncMethodNamingHighlighting.cs" />
@@ -402,6 +414,7 @@
     <Compile Include="AsyncHelpers\ParameterComparers\ParameterCompareResult.cs" />
     <Compile Include="AsyncHelpers\ParameterComparers\ParameterCompareResultAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuickFixes\AsyncAwaitMayBeElidedQuickFix.cs" />
     <Compile Include="QuickFixes\AsyncMethodNamingQuickFix.cs" />
     <Compile Include="QuickFixes\CanBeUseAsyncMethodQuickFix.cs" />
     <Compile Include="QuickFixes\ConfigureAwaitAction.cs" />
