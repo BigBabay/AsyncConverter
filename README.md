@@ -9,7 +9,7 @@ Plugin for ReSharper, for helping you working and converting your code to `async
 5. Analyze body and replace all calls to `.Result` with `await` call.
 6. Analyze using of this method. If method call is from `async` context, then replace it to `await`. If the method calls from sync context then replace calls to `.Result` or `.Wait()`
 
-
+![Replacing Value](ReadMe/MathodToAsyncConverter.gif)
 
 # Highlightings
 ## Replacing Value
