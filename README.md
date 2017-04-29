@@ -38,3 +38,9 @@ If in async context call sync method, but exist async method with same signature
 
 ![Suggesting method name with Async suffix](ReadMe/CanBeUseAsyncMethod.gif)
 
+## Async/await eliding
+If in method only one await in the end of method, then async/await  may be elided.
+
+![Suggesting method name with Async suffix](ReadMe/AsyncAwaitMayBeElided.gif)
+
+
