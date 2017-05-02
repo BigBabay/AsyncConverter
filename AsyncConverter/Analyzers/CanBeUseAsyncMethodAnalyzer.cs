@@ -19,7 +19,7 @@ namespace AsyncConverter.Analyzers
 
         protected override void Run(IInvocationExpression invocationExpression, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
-            if (!invocationExpression.IsUnderAsyncDeclaration())
+            if (!invocationExpression.IsUnderAsync())
                 return;
 
             var referenceCurrentResolveResult = invocationExpression.Reference?.Resolve();
