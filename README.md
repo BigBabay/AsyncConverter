@@ -1,45 +1,46 @@
 # AsyncConverter
-Plugin for ReSharper, for helping you working and converting your code to `async`.
+This is an implementation of a ReSharper Plugin that converts your synchronous code to it's asynchronous version and helps you to write your own asynchronous applications.
 
-# Convert Any Method to Async Implementation
-1. Replace return type to `Task` or `Task<T>`
-2. Rename method and overrides and base and interface from &lt;MethodName&gt; to &lt;MethodName&gt;Async
-3. Add using on `System.Threading.Tasks`
-4. Analyze body and replace all calls to another method to `async` version if it exists.
-5. Analyze body and replace all calls to `.Result` with `await` call.
-6. Analyze using of this method. If method call is from `async` context, then replace it to `await`. If the method calls from sync context then replace calls to `.Result` or `.Wait()`
+# Convert Any Method to It's Async Implementation
+AsyncConverter can:
+1. Replace a returning type with generic or non-generic `Task<T>` or `Task` 
+2. Rename a hierarchy of overridden methods from &lt;MethodName&gt; to &lt;MethodName&gt;Async
+3. Add the `System.Threading.Tasks` to a usings declaration
+4. Analyze a method body and replace the every synchronous call with it's `async` implementation if exists.
+5. Analyze a method body and replace the every `.Result` call with the `await` call.
+6. Analyze usage of a processed method. If the method is called from `async` context the AsyncConverter will replace it's call with the `await` expression, otherwise it will just call `.Result` or `.Wait()`
 
 ![Replacing Value](ReadMe/MathodToAsyncConverter.gif)
 
 # Highlightings
-## Replacing Value
-If expect type `Task<int>`, but real type is `int`, you may wrap it to `Task.FromResult()`
+## Value Replacement
+In case that an expected returning type is `Task<int>` but an actual returning type is `int`, AsyncConverter will notice you that you can wrap a returning value with `Task.FromResult()`.
 
 ![Replacing Value](ReadMe/ReplacingValue.gif)
 
-## Return `null` as `Task`
-If you return null from method with retuen type `Task` or `Task<T>`, then calling code may await it and get `NullReferenceException`.
+## Return `null` as `Task` 
+If expected returning type is `Task` or `Task<T>` but null is returned instead, AsyncConverter warn you that execution point can await expected 'Task' and get `NullReferenceException`
 
 ![Return Null As Task](ReadMe/ReturnNullAsTask.gif)
 
-## Suggesting method name with Async suffix
-Suggest add method name Async suffix.
-1. Do not suggest if contaning class is inherits from `Controller` or `ApiController`. 
-2. Do not suggest if method is test. Support NUnit, XUnit and MsUnit.
+## Async suffix in a method name
+AsyncConverter will suggest you to add the 'Async' suffix to an asynchronous method name in all cases except:
+1. Classes inherited from `Controller` or `ApiController`. 
+2. Methods of test classes. NUnit, XUnit and MsUnit are supported.
 
 ![Suggesting method name with Async suffix](ReadMe/Naming.gif)
 
-## Suggesting configure all await expression with ConfigureAwait
+## Suggesting to configure an every await expression with ConfigureAwait
 
 ![Suggesting ConfigureAwait](ReadMe/ConfigureAwait.gif)
 
-## Suggesting use async method if it exist
-If in async context call sync method, but exist async method with same signature and suffix Async, then suggest use async method.
+## Suggesting to use the async method if exists
+If a synchronous method is called in the async context and it's asynchronous implementation is exists (e.g method has same signature 'Async' suffix and 'Task' or 'Task<T>' as the returning type) AsyncConverter will suggest you to use this asynchronous implementation.
 
 ![Suggesting method name with Async suffix](ReadMe/CanBeUseAsyncMethod.gif)
 
-## Async/await eliding
-If in method only one await in the end of method, then async/await  may be elided.
+## Async/await ignoring
+An 'await' expression can be ignored if this 'await' expression is the single in a method and awaited value is returned from a method.
 
 ![Suggesting method name with Async suffix](ReadMe/AsyncAwaitMayBeElided.gif)
 
