@@ -5,7 +5,7 @@ using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 
-[assembly: RegisterConfigurableSeverity(ConfigureAwaitHighlighting.SeverityId, null, AsyncConverterGroupSettings.Id, "Await not configured", "If await not configured it may couse deadlock", Severity.WARNING)]
+[assembly: RegisterConfigurableSeverity(ConfigureAwaitHighlighting.SeverityId, null, AsyncConverterGroupSettings.Id, "Await not configured", "If await not configured it may cause deadlock", Severity.WARNING)]
 
 namespace AsyncConverter.Highlightings
 {
@@ -30,7 +30,7 @@ namespace AsyncConverter.Highlightings
             return AwaitExpression.GetDocumentRange();
         }
 
-        public string ToolTip => "If await not configured it may couse deadlock, if this code will be call synchronously";
+        public string ToolTip => "If await not configured it may cause deadlock, if this code will be call synchronously";
         public string ErrorStripeToolTip => "Await not configured";
     }
 }

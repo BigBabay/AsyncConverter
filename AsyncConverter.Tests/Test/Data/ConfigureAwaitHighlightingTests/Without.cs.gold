@@ -13,4 +13,4 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 
 ---------------------------------------------------------
 (0): ReSharper Warning: (T) 'Async in method declaration and await may be elided.' (E) 'Await may be elided.'
-(1): ReSharper Warning: (T) 'If await not configured it may couse deadlock, if this code will be call synchronously' (E) 'Await not configured'
+(1): ReSharper Warning: (T) 'If await not configured it may cause deadlock, if this code will be call synchronously' (E) 'Await not configured'
