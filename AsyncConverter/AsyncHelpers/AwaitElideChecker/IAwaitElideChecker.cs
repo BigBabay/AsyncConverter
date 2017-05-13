@@ -1,10 +1,10 @@
 ﻿using JetBrains.Annotations;
-using JetBrains.ReSharper.Psi.CSharp.Tree;
+using JetBrains.ReSharper.Psi.Tree;
 
 namespace AsyncConverter.AsyncHelpers.AwaitElideChecker
 {
     public interface IAwaitElideChecker
     {
-        bool MayBeElided([NotNull]IAwaitExpression element);
+        bool CanBeElided([NotNull] ITreeNode element);
     }
 }

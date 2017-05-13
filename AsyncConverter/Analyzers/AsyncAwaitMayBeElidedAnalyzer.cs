@@ -38,7 +38,7 @@ namespace AsyncConverter.Analyzers
             if (returnStatements.Any() && returnStatements.First() != awaitExpression.GetContainingStatement())
                 return;
 
-            if (!awaitElideChecker.MayBeElided(awaitExpression))
+            if(!awaitElideChecker.CanBeElided(awaitExpression))
                 return;
 
             consumer.AddHighlighting(new AsyncAwaitMayBeElidedHighlighting(awaitExpression));
