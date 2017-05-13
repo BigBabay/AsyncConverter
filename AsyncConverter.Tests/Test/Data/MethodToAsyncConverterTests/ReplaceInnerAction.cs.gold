@@ -5,9 +5,9 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 {
     public class Class
     {
-        public async Task {caret}TestAsync()
+        public Task {caret}TestAsync()
         {
-            await MethodAsync(async () => await InnerMethodAsync().ConfigureAwait(false)).ConfigureAwait(false);
+            return MethodAsync(() => InnerMethodAsync());
         }
 
         public void Method(Action func)
