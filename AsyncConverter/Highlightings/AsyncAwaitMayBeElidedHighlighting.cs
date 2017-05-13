@@ -5,7 +5,7 @@ using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 
-[assembly: RegisterConfigurableSeverity(AsyncAwaitMayBeElidedHighlighting.SeverityId, null, AsyncConverterGroupSettings.Id, "Async method must ends on \"Async\"", "Async method must ends on \"Async\"", Severity.WARNING)]
+[assembly: RegisterConfigurableSeverity(AsyncAwaitMayBeElidedHighlighting.SeverityId, null, AsyncConverterGroupSettings.Id, "Elide async/await", "Elide async/await if task may be returned", Severity.WARNING)]
 
 namespace AsyncConverter.Highlightings
 {
@@ -20,15 +20,9 @@ namespace AsyncConverter.Highlightings
             AwaitExpression = awaitExpression;
         }
 
-        public bool IsValid()
-        {
-            return AwaitExpression.IsValid();
-        }
+        public bool IsValid() => AwaitExpression.IsValid();
 
-        public DocumentRange CalculateRange()
-        {
-            return AwaitExpression.GetDocumentRange();
-        }
+        public DocumentRange CalculateRange() => AwaitExpression.GetDocumentRange();
 
         public string ToolTip => "Async in method declaration and await may be elided.";
         public string ErrorStripeToolTip => "Await may be elided.";
