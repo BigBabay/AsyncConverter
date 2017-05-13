@@ -1,6 +1,6 @@
 ﻿using JetBrains.ReSharper.Psi.CSharp.Tree;
 
-namespace AsyncConverter.AsyncHelpers
+namespace AsyncConverter.AsyncHelpers.AwaitElider
 {
     public interface IAwaitElider
     {
