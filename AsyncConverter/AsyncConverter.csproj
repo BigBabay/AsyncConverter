@@ -406,6 +406,8 @@
     <Compile Include="Helpers\FinderHelper.cs" />
     <Compile Include="Helpers\IAsyncInvocationReplacer.cs" />
     <Compile Include="Helpers\IAsyncReplacer.cs" />
+    <Compile Include="Helpers\IInvocationConverter.cs" />
+    <Compile Include="Helpers\InvocationConverter.cs" />
     <Compile Include="Helpers\ParametersOwnerDeclarationExtensions.cs" />
     <Compile Include="Helpers\TypeHelper.cs" />
     <Compile Include="Highlightings\AsyncConverterGroupSettings.cs" />

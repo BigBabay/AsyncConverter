@@ -21,9 +21,9 @@ namespace AsyncConverter.QuickFixes
 
         protected override Action<ITextControl> ExecutePsiTransaction(ISolution solution, IProgressIndicator progress)
         {
-            var asyncReplacer = solution.GetComponent<IAsyncReplacer>();
+            var invocationConverter = solution.GetComponent<IInvocationConverter>();
 
-            asyncReplacer.TryReplaceInvocationToAsync(canBeUseAsyncMethodHighlighting.InvocationExpression);
+            invocationConverter.TryReplaceInvocationToAsync(canBeUseAsyncMethodHighlighting.InvocationExpression);
             return null;
         }
 
