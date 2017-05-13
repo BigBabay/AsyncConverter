@@ -24,7 +24,7 @@ namespace AsyncConverter.Analyzers
                 return;
 
             var awaitExpression = awaitExpressions.First();
-            if(!awaitElideChecker.MayBeElided(awaitExpression))
+            if(!awaitElideChecker.CanBeElided(awaitExpression))
                 return;
 
             consumer.AddHighlighting(new AsyncAwaitMayBeElidedHighlighting(awaitExpression));

@@ -2,13 +2,14 @@
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.CSharp.Util;
+using JetBrains.ReSharper.Psi.Tree;
 
 namespace AsyncConverter.AsyncHelpers.AwaitElideChecker
 {
     [SolutionComponent]
     internal class AwaitElideChecker : IAwaitElideChecker
     {
-        public bool MayBeElided(IAwaitExpression element)
+        public bool CanBeElided(ITreeNode element)
         {
             var statement = element.Parent as ICSharpStatement;
             if (statement != null
