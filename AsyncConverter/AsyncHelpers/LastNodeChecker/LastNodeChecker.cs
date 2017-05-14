@@ -4,12 +4,12 @@ using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.CSharp.Util;
 using JetBrains.ReSharper.Psi.Tree;
 
-namespace AsyncConverter.AsyncHelpers.AwaitElideChecker
+namespace AsyncConverter.AsyncHelpers.LastNodeChecker
 {
     [SolutionComponent]
-    internal class AwaitElideChecker : IAwaitElideChecker
+    internal class LastNodeChecker : ILastNodeChecker
     {
-        public bool CanBeElided(ITreeNode element)
+        public bool IsLastNode(ITreeNode element)
         {
             var statement = element.Parent as ICSharpStatement;
             if (statement != null

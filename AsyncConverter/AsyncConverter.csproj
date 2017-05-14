@@ -367,8 +367,8 @@
     <Compile Include="Analyzers\AsyncMethodNamingAnalyzer.cs" />
     <Compile Include="Analyzers\NullReturnFromLambdaAnalyzer.cs" />
     <Compile Include="Analyzers\NullReturnFromMethodAnalyzer.cs" />
-    <Compile Include="AsyncHelpers\AwaitElideChecker\AwaitElideChecker.cs" />
-    <Compile Include="AsyncHelpers\AwaitElideChecker\IAwaitElideChecker.cs" />
+    <Compile Include="AsyncHelpers\LastNodeChecker\LastNodeChecker.cs" />
+    <Compile Include="AsyncHelpers\LastNodeChecker\ILastNodeChecker.cs" />
     <Compile Include="AsyncHelpers\AwaitElider\AwaitElider.cs" />
     <Compile Include="AsyncHelpers\AwaitElider\IAwaitElider.cs" />
     <Compile Include="AsyncHelpers\AwaitElider\ICustomAwaitElider.cs" />
