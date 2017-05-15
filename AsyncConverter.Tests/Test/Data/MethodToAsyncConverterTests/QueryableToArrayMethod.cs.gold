@@ -19,7 +19,8 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
     {
         public async Task<T[]> {caret}TestAsync(IQueryable<T> queryable)
         {
-            return await queryable.ToArrayAsync().ConfigureAwait(false);
+            var array = await queryable.ToArrayAsync().ConfigureAwait(false);
+            return array;
         }
     }
 }
