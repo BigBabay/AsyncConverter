@@ -2,29 +2,29 @@ using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 
-namespace AsyncConverter.AsyncHelpers.AwaitElider
+namespace AsyncConverter.AsyncHelpers.AwaitEliders
 {
     [SolutionComponent]
-    internal class LocalFunctionAwaitElider : ICustomAwaitElider
+    internal class MethodAwaitElider : ICustomAwaitElider
     {
-        public bool CanElide(ICSharpDeclaration declarationOrClosure) => declarationOrClosure is ILocalFunctionDeclaration;
+        public bool CanElide(ICSharpDeclaration declarationOrClosure) => declarationOrClosure is IMethodDeclaration;
 
         public void Elide(ICSharpDeclaration declarationOrClosure, ICSharpExpression awaitExpression)
         {
             var factory = CSharpElementFactory.GetInstance(awaitExpression);
 
-            var localFunctionDeclaration = declarationOrClosure as ILocalFunctionDeclaration;
-            if (localFunctionDeclaration == null)
+            var methodDeclaration = declarationOrClosure as IMethodDeclaration;
+            if (methodDeclaration == null)
                 return;
 
-            localFunctionDeclaration.SetAsync(false);
-            if (localFunctionDeclaration.Body != null)
+            methodDeclaration.SetAsync(false);
+            if (methodDeclaration.Body != null)
             {
                 var statement = factory.CreateStatement("return $0;", awaitExpression);
                 awaitExpression.GetContainingStatement()?.ReplaceBy(statement);
             }
             else
-                localFunctionDeclaration.ArrowClause?.SetExpression(awaitExpression);
+                methodDeclaration.ArrowClause?.SetExpression(awaitExpression);
         }
     }
 }

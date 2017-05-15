@@ -1,5 +1,5 @@
 ﻿using System;
-using AsyncConverter.AsyncHelpers.AwaitElider;
+using AsyncConverter.AsyncHelpers.AwaitEliders;
 using AsyncConverter.Highlightings;
 using JetBrains.Application.Progress;
 using JetBrains.ProjectModel;

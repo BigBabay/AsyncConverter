@@ -4,7 +4,7 @@ using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.CSharp.Util;
 using JetBrains.ReSharper.Psi.Tree;
 
-namespace AsyncConverter.AsyncHelpers.LastNodeChecker
+namespace AsyncConverter.AsyncHelpers.Checker
 {
     [SolutionComponent]
     internal class LastNodeChecker : ILastNodeChecker

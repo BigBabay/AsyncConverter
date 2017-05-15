@@ -1,7 +1,7 @@
 ﻿using JetBrains.Annotations;
 using JetBrains.ReSharper.Psi.Tree;
 
-namespace AsyncConverter.AsyncHelpers.LastNodeChecker
+namespace AsyncConverter.AsyncHelpers.Checker
 {
     public interface ILastNodeChecker
     {
