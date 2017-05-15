@@ -1,6 +1,8 @@
 using System.Linq;
 using AsyncConverter.AsyncHelpers.MethodFinders;
 using AsyncConverter.AsyncHelpers.ParameterComparers;
+using AsyncConverter.AsyncHelpers.AwaitElider;
+using AsyncConverter.AsyncHelpers.LastNodeChecker;
 using JetBrains.Annotations;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Psi;
@@ -15,11 +17,15 @@ namespace AsyncConverter.Helpers
     {
         private readonly IAsyncInvocationReplacer asyncInvocationReplacer;
         private readonly IInvocationConverter invocationConverter;
+        private readonly IAwaitElider awaitElider;
+        private readonly ILastNodeChecker lastNodeChecker;
 
-        public AsyncReplacer(IAsyncInvocationReplacer asyncInvocationReplacer, IInvocationConverter invocationConverter)
+        public AsyncReplacer(IAsyncInvocationReplacer asyncInvocationReplacer, IInvocationConverter invocationConverter, IAwaitElider awaitElider, ILastNodeChecker lastNodeChecker)
         {
             this.asyncInvocationReplacer = asyncInvocationReplacer;
             this.invocationConverter = invocationConverter;
+            this.awaitElider = awaitElider;
+            this.lastNodeChecker = lastNodeChecker;
         }
 
         public void ReplaceToAsync(IMethod method)
@@ -48,6 +54,8 @@ namespace AsyncConverter.Helpers
                 var invocation = usage.GetTreeNode().Parent as IInvocationExpression;
                 asyncInvocationReplacer.ReplaceInvocation(invocation, GenerateAsyncMethodName(method.DeclaredName), invocation?.IsUnderAsyncDeclaration() ?? false);
             }
+
+            //TODO: ugly hack. think
             while (true)
             {
                 var allInvocationReplaced = method
@@ -64,9 +72,9 @@ namespace AsyncConverter.Helpers
 
         private string GenerateAsyncMethodName([NotNull] string oldName) => oldName.EndsWith("Async") ? oldName : $"{oldName}Async";
 
-        private void ReplaceMethodSignatureToAsync([NotNull] IParametersOwner methodDeclaredElement, [NotNull] IMethodDeclaration methodDeclaration)
+        private void ReplaceMethodSignatureToAsync([NotNull] IParametersOwner parametersOwner, [NotNull] IMethodDeclaration methodDeclaration)
         {
-            var returnType = methodDeclaredElement.ReturnType;
+            var returnType = parametersOwner.ReturnType;
 
             var psiModule = methodDeclaration.GetPsiModule();
             IDeclaredType newReturnValue;
@@ -84,15 +92,19 @@ namespace AsyncConverter.Helpers
 
             var name = GenerateAsyncMethodName(methodDeclaration.DeclaredName);
 
-            var isAsync = methodDeclaration.DescendantsInScope<IAwaitExpression>().Any();
+            SetSignature(methodDeclaration, newReturnValue, name);
 
-            SetSignature(methodDeclaration, newReturnValue, name, isAsync);
+            //TODO: encapsulate this
+            var awaitExpressions = methodDeclaration.DescendantsInScope<IAwaitExpression>().ToArray();
+            if(awaitExpressions.Length == 1 && lastNodeChecker.IsLastNode(awaitExpressions.First()))
+                awaitElider.Elide(awaitExpressions.First());
         }
 
-        private static void SetSignature([NotNull] IMethodDeclaration methodDeclaration, [NotNull] IType newReturnValue, [NotNull] string newName, bool isAsync)
+        private static void SetSignature([NotNull] IMethodDeclaration methodDeclaration, [NotNull] IType newReturnValue, [NotNull] string newName)
         {
             methodDeclaration.SetType(newReturnValue);
-            methodDeclaration.SetAsync(isAsync);
+            if(!methodDeclaration.IsAbstract)
+                methodDeclaration.SetAsync(true);
             methodDeclaration.SetName(newName);
         }
     }
