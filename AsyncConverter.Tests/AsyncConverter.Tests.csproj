@@ -430,6 +430,7 @@
     <None Include="Test\Data\NamingHighlightings\CoreController.cs.gold" />
     <None Include="Test\Data\ReturnValueAsTaskTests\Return.cs" />
     <None Include="Test\Data\ReturnValueAsTaskTests\Return.cs.gold" />
+    <None Include="Test\Data\MethodToAsyncConverterTests\ReplaceVoidMethodWithElide.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\LocalFuncGeneric.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\LambdaGenericWithBody.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\LambdaGeneric.cs" />
@@ -493,6 +494,7 @@
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ObsoleteAll.cs.gold" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ObsoleteOriginal.cs.gold" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ObsoleteCandidate.cs.gold" />
+    <None Include="Test\Data\MethodToAsyncConverterTests\ReplaceVoidMethodWithElide.cs.gold" />
     <None Include="Test\Data\NamingHighlightings\ApiControllerNotDirect.cs" />
     <None Include="Test\Data\NamingHighlightings\ApiControllerNotDirect.cs.gold" />
     <None Include="Test\Data\NamingHighlightings\Controller.cs" />
@@ -591,7 +593,6 @@
     <None Include="Test\Data\MethodToAsyncConverterTests\QueryableToArrayMethod.cs" />
     <None Include="Test\Data\MethodToAsyncConverterTests\EnumerableToArrayMethod.cs.gold" />
     <None Include="Test\Data\MethodToAsyncConverterTests\QueryableToArrayMethod.cs.gold" />
-    <None Include="Test\Data\MethodToAsyncConverterTests\EnumerableToArrayMethod.cs.gold" />
     <None Include="Test\Data\ReturnNullAsTaskTests\ObjectFromMethod.cs" />
     <None Include="Test\Data\ReturnNullAsTaskTests\ObjectFromLambda.cs.gold" />
     <None Include="Test\Data\ReturnNullAsTaskTests\StructFromMethod.cs" />

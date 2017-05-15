@@ -7,7 +7,8 @@ namespace A
     {
         public async Task<string> {caret}TestAsync()
         {
-            return await MethodAsync("input").ConfigureAwait(false);
+            var a = await MethodAsync("input").ConfigureAwait(false);
+            return a;
         }
 
         private string Method<T>(T input)
