@@ -1,10 +1,10 @@
+using System;
 using AsyncConverter.AsyncHelpers.ParameterComparers;
 using JetBrains.Annotations;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
-using JetBrains.ReSharper.Psi.Tree;
 
 namespace AsyncConverter.Helpers
 {
@@ -24,7 +24,7 @@ namespace AsyncConverter.Helpers
         {
             if (invocationExpression.Type().IsGenericTask() || invocationExpression.Type().IsTask())
             {
-                return TryConvertCallWithWaitToAwaitCall(invocationExpression);
+                return TryConvertSyncToAwaitWaiting(invocationExpression);
             }
 
             return TryConvertSyncCallToAsyncCall(invocationExpression);
@@ -54,7 +54,7 @@ namespace AsyncConverter.Helpers
             return false;
         }
 
-        private bool TryConvertCallWithWaitToAwaitCall([NotNull] IInvocationExpression invocationExpression)
+        private bool TryConvertSyncToAwaitWaiting([NotNull] IInvocationExpression invocationExpression)
         {
             var reference = invocationExpression.Parent as IReferenceExpression;
 
@@ -86,29 +86,38 @@ namespace AsyncConverter.Helpers
         {
             var arguments = invocationExpression.Arguments;
             invocationExpression.PsiModule.GetPsiServices().Transactions.StartTransaction("convertAsyncParameter");
-            for (var i = 0; i < arguments.Count; i++)
+            try
             {
-                var compareResult = parameterCompareResult.ParameterResults[i];
-                if (compareResult.Action == ParameterCompareResultAction.NeedConvertToAsyncFunc)
+                for (var i = 0; i < arguments.Count; i++)
                 {
-                    var lambdaExpression = arguments[i].Value as ILambdaExpression;
-                    if(lambdaExpression == null)
+                    var compareResult = parameterCompareResult.ParameterResults[i];
+                    if (compareResult.Action == ParameterCompareResultAction.NeedConvertToAsyncFunc)
                     {
-                        invocationExpression.PsiModule.GetPsiServices().Transactions.RollbackTransaction();
-                        return false;
-                    }
-
-                    var innerInvocationExpressions = lambdaExpression.Descendants<IInvocationExpression>();
-                    foreach (var innerInvocationExpression in innerInvocationExpressions)
-                    {
-                        if (!TryReplaceInvocationToAsync(innerInvocationExpression))
+                        var lambdaExpression = arguments[i].Value as ILambdaExpression;
+                        if (lambdaExpression == null)
                         {
                             invocationExpression.PsiModule.GetPsiServices().Transactions.RollbackTransaction();
                             return false;
                         }
+                        lambdaExpression.SetAsync(true);
+                        var innerInvocationExpressions = lambdaExpression.DescendantsInScope<IInvocationExpression>();
+                        foreach (var innerInvocationExpression in innerInvocationExpressions)
+                        {
+                            if (!TryReplaceInvocationToAsync(innerInvocationExpression))
+                            {
+                                invocationExpression.PsiModule.GetPsiServices().Transactions.RollbackTransaction();
+                                return false;
+                            }
+                        }
                     }
                 }
             }
+            catch (Exception)
+            {
+                invocationExpression.PsiModule.GetPsiServices().Transactions.RollbackTransaction();
+                return false;
+            }
+
             invocationExpression.PsiModule.GetPsiServices().Transactions.CommitTransaction();
             return true;
         }
