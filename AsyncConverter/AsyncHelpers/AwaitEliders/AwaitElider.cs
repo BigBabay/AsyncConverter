@@ -3,7 +3,7 @@ using System.Linq;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 
-namespace AsyncConverter.AsyncHelpers.AwaitElider
+namespace AsyncConverter.AsyncHelpers.AwaitEliders
 {
     [SolutionComponent]
     internal class AwaitElider : IAwaitElider

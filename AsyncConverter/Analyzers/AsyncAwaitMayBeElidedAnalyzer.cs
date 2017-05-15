@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using AsyncConverter.AsyncHelpers.LastNodeChecker;
+using AsyncConverter.AsyncHelpers.Checker;
 using AsyncConverter.Helpers;
 using AsyncConverter.Highlightings;
 using JetBrains.ProjectModel;
