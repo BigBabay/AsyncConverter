@@ -1,7 +1,7 @@
 using AsyncConverter.AsyncHelpers.ParameterComparers;
 using JetBrains.ReSharper.Psi;
 
-namespace AsyncConverter.Helpers
+namespace AsyncConverter.AsyncHelpers.MethodFinders
 {
     public class FindingReslt
     {
