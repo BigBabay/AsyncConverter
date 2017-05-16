@@ -431,6 +431,9 @@
     <None Include="Test\Data\ReturnValueAsTaskTests\Return.cs" />
     <None Include="Test\Data\ReturnValueAsTaskTests\Return.cs.gold" />
     <None Include="Test\Data\MethodToAsyncConverterTests\EnumerableToArrayMethod.cs.gold" />
+    <None Include="Test\Data\MethodToAsyncConverterTests\ExpressionBody.cs" />
+    <None Include="Test\Data\MethodToAsyncConverterTests\EnumerableToArrayMethod.cs.gold" />
+    <None Include="Test\Data\MethodToAsyncConverterTests\ExpressionBody.cs.gold" />
     <None Include="Test\Data\MethodToAsyncConverterTests\ReplaceVoidMethodWithElide.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\LocalFuncGeneric.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\LambdaGenericWithBody.cs" />
