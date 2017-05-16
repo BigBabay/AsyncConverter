@@ -1,0 +1,29 @@
+﻿using System;
+using System.Threading.Tasks;
+
+namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
+{
+    public class Class
+    {
+        public async Task TestAsync()
+        {
+            await Task.Delay(1000).ConfigureAwait(false);
+            ||Method|(1)()|(0);
+        }
+
+        [Obsolete]
+        public void Method()
+        {
+        }
+
+        [Obsolete]
+        public Task MethodAsync()
+        {
+            return Task.CompletedTask;
+        }
+    }
+}
+
+---------------------------------------------------------
+(0): ReSharper Warning: (T) '' (E) 'May be converted to nonblocking await call.'
+(1): ReSharper Warning [CS0612]: Method 'AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests.Class.Method' is obsolete

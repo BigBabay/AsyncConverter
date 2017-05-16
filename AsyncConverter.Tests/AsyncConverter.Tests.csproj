@@ -406,6 +406,9 @@
     <Compile Include="ContextActions\MethodToAsyncConverterAvailabilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEnvironment.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ObsoleteAll.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ObsoleteOriginal.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ObsoleteCandidate.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\LocalFuncGeneric.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\LambdaGenericWithBody.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\LambdaGeneric.cs" />
@@ -466,6 +469,9 @@
     <None Include="Test\Data\AsyncAwaitMayBeElided\Simple.cs.gold" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\GenericWithWhereOnMyClass.cs" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\GenericWithWhereOnMyClass.cs.gold" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ObsoleteAll.cs.gold" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ObsoleteOriginal.cs.gold" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ObsoleteCandidate.cs.gold" />
     <None Include="Test\Data\NamingHighlightings\ApiControllerNotDirect.cs" />
     <None Include="Test\Data\NamingHighlightings\ApiControllerNotDirect.cs.gold" />
     <None Include="Test\Data\NamingHighlightings\Controller.cs" />
