@@ -1,6 +1,5 @@
 using System.Linq;
-using AsyncConverter.AsyncHelpers.AwaitElider;
-using AsyncConverter.AsyncHelpers.LastNodeChecker;
+using AsyncConverter.AsyncHelpers.AwaitEliders;
 using JetBrains.Annotations;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Psi;
@@ -16,14 +15,14 @@ namespace AsyncConverter.Helpers
         private readonly IAsyncInvocationReplacer asyncInvocationReplacer;
         private readonly IInvocationConverter invocationConverter;
         private readonly IAwaitElider awaitElider;
-        private readonly ILastNodeChecker lastNodeChecker;
+        private readonly IAwaitEliderChecker awaitEliderChecker;
 
-        public AsyncReplacer(IAsyncInvocationReplacer asyncInvocationReplacer, IInvocationConverter invocationConverter, IAwaitElider awaitElider, ILastNodeChecker lastNodeChecker)
+        public AsyncReplacer(IAsyncInvocationReplacer asyncInvocationReplacer, IInvocationConverter invocationConverter, IAwaitElider awaitElider, IAwaitEliderChecker awaitEliderChecker)
         {
             this.asyncInvocationReplacer = asyncInvocationReplacer;
             this.invocationConverter = invocationConverter;
             this.awaitElider = awaitElider;
-            this.lastNodeChecker = lastNodeChecker;
+            this.awaitEliderChecker = awaitEliderChecker;
         }
 
         public void ReplaceToAsync(IMethod method)
@@ -92,10 +91,8 @@ namespace AsyncConverter.Helpers
 
             SetSignature(methodDeclaration, newReturnValue, name);
 
-            //TODO: encapsulate this
-            var awaitExpressions = methodDeclaration.DescendantsInScope<IAwaitExpression>().ToArray();
-            if(awaitExpressions.Length == 1 && lastNodeChecker.IsLastNode(awaitExpressions.First()))
-                awaitElider.Elide(awaitExpressions.First());
+            if(awaitEliderChecker.CanElide(methodDeclaration))
+                awaitElider.Elide(methodDeclaration);
         }
 
         private static void SetSignature([NotNull] IMethodDeclaration methodDeclaration, [NotNull] IType newReturnValue, [NotNull] string newName)

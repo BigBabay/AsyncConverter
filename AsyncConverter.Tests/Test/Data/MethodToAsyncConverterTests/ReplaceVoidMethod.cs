@@ -7,7 +7,7 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
         public void {caret}Test()
         {
             Method();
-            Method();
+            var a = 6;
         }
 
         public void Method()

@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using AsyncConverter.AsyncHelpers.Checker;
-using AsyncConverter.Helpers;
+﻿using AsyncConverter.Helpers;
 using AsyncConverter.Highlightings;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Daemon.Stages.Dispatcher;
@@ -15,19 +13,15 @@ namespace AsyncConverter.Analyzers
     {
         protected override void Run(IParametersOwnerDeclaration element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
-            var awaitElideChecker = element.GetSolution().GetComponent<ILastNodeChecker>();
+            var awaitElideChecker = element.GetSolution().GetComponent<IAwaitEliderChecker>();
 
-            var awaitExpressions = element.DescendantsInScope<IAwaitExpression>().ToArray();
-
-            //TODO: think about this, different settings
-            if(awaitExpressions.Length != 1)
-                return;
-
-            var awaitExpression = awaitExpressions.First();
-            if(!awaitElideChecker.IsLastNode(awaitExpression))
-                return;
-
-            consumer.AddHighlighting(new AsyncAwaitMayBeElidedHighlighting(awaitExpression));
+            if (awaitElideChecker.CanElide(element))
+            {
+                foreach (var awaitExpression in element.DescendantsInScope<IAwaitExpression>())
+                {
+                    consumer.AddHighlighting(new AsyncAwaitMayBeElidedHighlighting(awaitExpression));
+                }
+            }
         }
     }
 }

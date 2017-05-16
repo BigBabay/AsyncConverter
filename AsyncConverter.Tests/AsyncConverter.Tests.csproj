@@ -406,6 +406,7 @@
     <Compile Include="ContextActions\MethodToAsyncConverterAvailabilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEnvironment.cs" />
+    <None Include="Test\Data\MethodToAsyncConverterTests\EnumerableToArrayMethod.cs.gold" />
     <None Include="Test\Data\MethodToAsyncConverterTests\ReplaceVoidMethodWithElide.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\LocalFuncGeneric.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\LambdaGenericWithBody.cs" />
@@ -560,7 +561,6 @@
     <None Include="Test\Data\ReturnNullAsTaskTests\ObjectFromLambda.cs" />
     <None Include="Test\Data\MethodToAsyncConverterTests\EnumerableToArrayMethod.cs" />
     <None Include="Test\Data\MethodToAsyncConverterTests\QueryableToArrayMethod.cs" />
-    <None Include="Test\Data\MethodToAsyncConverterTests\EnumerableToArrayMethod.cs.gold" />
     <None Include="Test\Data\MethodToAsyncConverterTests\QueryableToArrayMethod.cs.gold" />
     <None Include="Test\Data\ReturnNullAsTaskTests\ObjectFromMethod.cs" />
     <None Include="Test\Data\ReturnNullAsTaskTests\ObjectFromLambda.cs.gold" />

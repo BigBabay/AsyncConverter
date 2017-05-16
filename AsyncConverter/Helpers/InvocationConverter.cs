@@ -1,4 +1,5 @@
 using System;
+using AsyncConverter.AsyncHelpers.AwaitEliders;
 using AsyncConverter.AsyncHelpers.ParameterComparers;
 using JetBrains.Annotations;
 using JetBrains.ProjectModel;
@@ -12,12 +13,20 @@ namespace AsyncConverter.Helpers
     public class InvocationConverter : IInvocationConverter
     {
         private readonly IAsyncInvocationReplacer asyncInvocationReplacer;
+        private readonly IAwaitEliderChecker awaitEliderChecker;
+        private readonly IAwaitElider awaitElider;
         private readonly IAsyncMethodFinder asyncMethodFinder;
 
-        public InvocationConverter(IAsyncMethodFinder asyncMethodFinder, IAsyncInvocationReplacer asyncInvocationReplacer)
+        public InvocationConverter(
+            IAsyncMethodFinder asyncMethodFinder,
+            IAsyncInvocationReplacer asyncInvocationReplacer,
+            IAwaitEliderChecker awaitEliderChecker,
+            IAwaitElider awaitElider)
         {
             this.asyncMethodFinder = asyncMethodFinder;
             this.asyncInvocationReplacer = asyncInvocationReplacer;
+            this.awaitEliderChecker = awaitEliderChecker;
+            this.awaitElider = awaitElider;
         }
 
         public bool TryReplaceInvocationToAsync(IInvocationExpression invocationExpression)
@@ -109,6 +118,9 @@ namespace AsyncConverter.Helpers
                                 return false;
                             }
                         }
+
+                        if (awaitEliderChecker.CanElide(lambdaExpression))
+                            awaitElider.Elide(lambdaExpression);
                     }
                 }
             }

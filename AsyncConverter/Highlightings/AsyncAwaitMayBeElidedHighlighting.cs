@@ -20,15 +20,9 @@ namespace AsyncConverter.Highlightings
             AwaitExpression = awaitExpression;
         }
 
-        public bool IsValid()
-        {
-            return AwaitExpression.IsValid();
-        }
+        public bool IsValid() => AwaitExpression.IsValid();
 
-        public DocumentRange CalculateRange()
-        {
-            return AwaitExpression.GetDocumentRange();
-        }
+        public DocumentRange CalculateRange() => AwaitExpression.GetDocumentRange();
 
         public string ToolTip => "Async in method declaration and await may be elided.";
         public string ErrorStripeToolTip => "Await may be elided.";

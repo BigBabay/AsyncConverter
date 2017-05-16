@@ -395,6 +395,7 @@
     <Compile Include="Helpers\AsyncInvocationReplacer.cs" />
     <Compile Include="Helpers\AsyncMethodFinder.cs" />
     <Compile Include="Helpers\AsyncReplacer.cs" />
+    <Compile Include="Helpers\AwaitEliderChecker.cs" />
     <Compile Include="Helpers\FinderHelper.cs" />
     <Compile Include="Helpers\FindingReslt.cs" />
     <Compile Include="Helpers\IAsyncInvocationReplacer.cs" />
