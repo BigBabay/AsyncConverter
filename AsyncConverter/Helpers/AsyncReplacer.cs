@@ -58,9 +58,7 @@ namespace AsyncConverter.Helpers
             while (true)
             {
                 var allInvocationReplaced = method
-                    .Body
-                    .Descendants<IInvocationExpression>()
-                    .ToEnumerable()
+                    .DescendantsInScope<IInvocationExpression>()
                     .All(invocationExpression => !invocationConverter.TryReplaceInvocationToAsync(invocationExpression));
                 if(allInvocationReplaced)
                     break;
