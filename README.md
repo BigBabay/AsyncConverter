@@ -36,6 +36,7 @@ AsyncConverter will suggest you to add the 'Async' suffix to an asynchronous met
 
 ## Suggesting to use the async method if exists
 If a synchronous method is called in the async context and it's asynchronous implementation is exists (e.g method has same signature 'Async' suffix and 'Task' or 'Task<T>' as the returning type) AsyncConverter will suggest you to use this asynchronous implementation.
+Do not suggest to use obsolete async methods
 
 ![Suggesting method name with Async suffix](ReadMe/CanBeUseAsyncMethod.gif)
 
