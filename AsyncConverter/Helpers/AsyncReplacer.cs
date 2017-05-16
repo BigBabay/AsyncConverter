@@ -1,4 +1,5 @@
 using System.Linq;
+using AsyncConverter.AsyncHelpers.MethodFinders;
 using AsyncConverter.AsyncHelpers.ParameterComparers;
 using JetBrains.Annotations;
 using JetBrains.ProjectModel;
