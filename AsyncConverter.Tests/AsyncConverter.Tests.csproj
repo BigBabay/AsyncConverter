@@ -406,6 +406,10 @@
     <Compile Include="ContextActions\MethodToAsyncConverterAvailabilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEnvironment.cs" />
+    <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\ReturnTask.cs" />
+    <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\ReturnGenericTask.cs" />
+    <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\ReturnTask.cs.gold" />
+    <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\ReturnGenericTask.cs.gold" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ObsoleteAll.cs" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ObsoleteOriginal.cs" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ObsoleteCandidate.cs" />
