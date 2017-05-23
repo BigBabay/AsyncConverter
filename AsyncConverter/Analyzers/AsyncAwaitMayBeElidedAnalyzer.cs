@@ -5,6 +5,7 @@ using AsyncConverter.Highlightings;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Daemon.Stages.Dispatcher;
 using JetBrains.ReSharper.Feature.Services.Daemon;
+using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 
@@ -17,14 +18,27 @@ namespace AsyncConverter.Analyzers
         {
             var awaitElideChecker = element.GetSolution().GetComponent<IAwaitElideChecker>();
 
-            var awaitExpressions = element.DescendantsInScope<IAwaitExpression>().ToArray();
+            var returnStatements = element.DescendantsInScope<IReturnStatement>().ToArray();
+            var returnType = element.DeclaredParametersOwner?.ReturnType;
+            if (returnType == null)
+                return;
+            if (returnType.IsTask() && returnStatements.Any())
+                return;
 
+            var awaitExpressions = element.DescendantsInScope<IAwaitExpression>().ToArray();
             //TODO: think about this, different settings
             if(awaitExpressions.Length != 1)
                 return;
 
             var awaitExpression = awaitExpressions.First();
-            if(!awaitElideChecker.MayBeElided(awaitExpression))
+
+            if (returnStatements.Length > 1)
+                return;
+
+            if (returnStatements.Any() && returnStatements.First() != awaitExpression.GetContainingStatement())
+                return;
+
+            if (!awaitElideChecker.MayBeElided(awaitExpression))
                 return;
 
             consumer.AddHighlighting(new AsyncAwaitMayBeElidedHighlighting(awaitExpression));
