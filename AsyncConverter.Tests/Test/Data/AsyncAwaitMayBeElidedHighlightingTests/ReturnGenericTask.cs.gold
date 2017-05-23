@@ -1,0 +1,23 @@
+﻿using System.Threading.Tasks;
+
+namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
+{
+    public class Class
+    {
+        public async Task<int> TestAsync(bool a)
+        {
+            if(a)
+                return 5;
+
+            return |await FooAsync()|(0);
+        }
+
+        public Task<int> FooAsync()
+        {
+            return Task.FromResult(5);
+        }
+    }
+}
+
+---------------------------------------------------------
+(0): ReSharper Warning: (T) 'If await not configured it may cause deadlock, if this code will be call synchronously' (E) 'Await not configured'
