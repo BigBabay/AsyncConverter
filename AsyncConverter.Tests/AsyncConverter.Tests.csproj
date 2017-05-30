@@ -401,6 +401,7 @@
     <Compile Include="QuickFixes\QuickFixBaseTests.cs" />
     <Compile Include="QuickFixes\ReturnNullToTaskAvailabilityTests.cs" />
     <Compile Include="QuickFixes\ReturnNullToTaskTests.cs" />
+    <Compile Include="QuickFixes\ArgumentValueAsTaskTests.cs" />
     <Compile Include="QuickFixes\ReturnValueToTaskTests.cs" />
     <Compile Include="ContextActions\MathodToAsyncConverterTests.cs" />
     <Compile Include="ContextActions\MethodToAsyncConverterAvailabilityTests.cs" />
@@ -413,6 +414,10 @@
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ObsoleteAll.cs" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ObsoleteOriginal.cs" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ObsoleteCandidate.cs" />
+    <None Include="Test\Data\ArgumentValueAsTaskTests\Parameter.cs" />
+    <None Include="Test\Data\ArgumentValueAsTaskTests\Parameter.cs.gold" />
+    <None Include="Test\Data\ReturnValueAsTaskTests\Return.cs" />
+    <None Include="Test\Data\ReturnValueAsTaskTests\Return.cs.gold" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\LocalFuncGeneric.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\LambdaGenericWithBody.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\LambdaGeneric.cs" />
@@ -491,12 +496,15 @@
     <None Include="Test\Data\NamingHighlightings\XunitFactAttr.cs.gold" />
     <None Include="Test\Data\NamingHighlightings\XunitFactAttr.cs" />
     <None Include="Test\Data\NamingHighlightings\MsTestAttr.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodTests\TransformToAsync.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodTests\TransformToAsync.cs.gold" />
     <None Include="Test\Data\CanBeUseAsyncMethodTests\ChainAwaitSecond.cs" />
     <None Include="Test\Data\CanBeUseAsyncMethodTests\ChainAwait.cs" />
     <None Include="Test\Data\CanBeUseAsyncMethodTests\ChainAwaitSecond.cs.gold" />
     <None Include="Test\Data\CanBeUseAsyncMethodTests\ChainAwait.cs.gold" />
     <None Include="Test\Data\CanBeUseAsyncMethodTests\Simple.cs" />
     <None Include="Test\Data\CanBeUseAsyncMethodTests\Chain.cs" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\Task.cs" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\Sync.cs" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\GenericWithWhereOnStruct.cs" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ParameterDifferentGeneric.cs" />
@@ -514,6 +522,7 @@
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\NotVoid.cs" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\Chein.cs.gold" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ParameterDifferentCount.cs.gold" />
+    <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\Task.cs.gold" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\Void.cs" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\NotVoid.cs.gold" />
     <None Include="Test\Data\CanBeUseAsyncMethodHighlightingTests\ParameterLambda.cs.gold" />
@@ -649,8 +658,6 @@
     <None Include="Test\Data\MethodToAsyncConverterAvailabilityTests\Test01.cs" />
     <None Include="Test\Data\MethodToAsyncConverterTests\ReplaceToGenericTask.cs" />
     <None Include="Test\Data\ReturnNullAsTaskTests\CompletedTaskFromMethod.cs" />
-    <None Include="Test\Data\ReturnValueAsTaskTests\Test01.cs.gold" />
-    <None Include="Test\Data\ReturnValueAsTaskTests\Test01.cs" />
     <None Include="Test\Data\MethodToAsyncConverterAvailabilityTests\Test01.cs.gold" />
     <None Include="Test\Data\MethodToAsyncConverterTests\ReplaceMethodAndMethodInParam.cs.gold" />
     <None Include="Test\Data\MethodToAsyncConverterTests\ReplaceMethodFromAnotherClassThroughProp.cs.gold" />

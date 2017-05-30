@@ -32,8 +32,8 @@ namespace AsyncConverter.Analyzers
 
             var invokedType = (invocationExpression.ConditionalQualifier as IReferenceExpression)?.QualifierExpression?.Type();
 
-            var findingReslt = asyncMethodFinder.FindEquivalentAsyncMethod(invocationMethod, invokedType);
-            if (findingReslt.Method == null || !findingReslt.ParameterCompareResult.CanBeConvertedToAsync())
+            var findingResult = asyncMethodFinder.FindEquivalentAsyncMethod(invocationMethod, invokedType);
+            if (findingResult.Method == null || !findingResult.ParameterCompareResult.CanBeConvertedToAsync())
                 return;
 
             consumer.AddHighlighting(new CanBeUseAsyncMethodHighlighting(invocationExpression));

@@ -2,7 +2,7 @@
 
 namespace AsyncConverter.Tests.QuickFixes
 {
-    public class ReturnValueAsTaskTests :QuickFixBaseTests<ReturnValueAsTask>
+    public class ReturnValueToTaskTests : QuickFixBaseTests<ReturnValueAsTask>
     {
         protected override string RelativeTestDataPath => @"ReturnValueAsTaskTests";
     }
