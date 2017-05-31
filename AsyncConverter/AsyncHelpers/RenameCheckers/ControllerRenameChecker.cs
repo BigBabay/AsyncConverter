@@ -10,12 +10,13 @@ using JetBrains.Util;
 namespace AsyncConverter.AsyncHelpers.RenameCheckers
 {
     [SolutionComponent]
-    internal class MvcControllerRenameChecker : IConcreateRenameChecker
+    internal class ControllerRenameChecker : IConcreateRenameChecker
     {
         private readonly HashSet<ClrTypeName> controllerClasses = new HashSet<ClrTypeName>
                                                            {
                                                                new ClrTypeName("System.Web.Mvc.Controller"),
                                                                new ClrTypeName("System.Web.Http.ApiController"),
+                                                               new ClrTypeName("Microsoft.AspNetCore.Mvc.Controller"),
                                                            };
 
         public bool SkipRename(IMethodDeclaration method)
