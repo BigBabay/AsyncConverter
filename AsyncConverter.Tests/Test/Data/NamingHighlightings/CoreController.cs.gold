@@ -1,0 +1,21 @@
+﻿using System.Threading.Tasks;
+
+namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
+{
+    using Microsoft.AspNetCore.Mvc;
+    public class Class : Controller
+    {
+        public async Task Test()
+        {
+            |await Task.Delay(1000).ConfigureAwait(false)|(0);
+        }
+    }
+}
+
+namespace Microsoft.AspNetCore.Mvc
+{
+    public class Controller
+    { }
+}
+---------------------------------------------------------
+(0): ReSharper Warning: (T) 'Async in method declaration and await may be elided.' (E) 'Await may be elided.'
