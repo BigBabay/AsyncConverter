@@ -14,7 +14,8 @@ namespace AsyncConverter.AsyncHelpers.AwaitElideChecker
             if (statement != null
                 && IsFinalStatement(statement)
                 && statement.GetContainingNode<IUsingStatement>() == null
-                && statement.GetContainingNode<ITryStatement>() == null)
+                && statement.GetContainingNode<ITryStatement>() == null
+                && statement.GetContainingNode<ILoopStatement>() == null)
                 return true;
 
             var arrowExpressionClause = element.Parent as IArrowExpressionClause;
