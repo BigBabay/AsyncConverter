@@ -407,6 +407,7 @@
     <Compile Include="ContextActions\MethodToAsyncConverterAvailabilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEnvironment.cs" />
+    <None Include="Test\Data\NamingQuickFix\Overload.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\IfInFor.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\DoWhile.cs" />
     <None Include="Test\Data\AsyncAwaitMayBeElidedHighlightingTests\IfInFor.cs.gold" />
@@ -428,6 +429,7 @@
     <None Include="Test\Data\ArgumentValueAsTaskTests\Parameter.cs" />
     <None Include="Test\Data\ArgumentValueAsTaskTests\Parameter.cs.gold" />
     <None Include="Test\Data\NamingHighlightings\CoreController.cs.gold" />
+    <None Include="Test\Data\NamingQuickFix\Overload.cs.gold" />
     <None Include="Test\Data\ReturnValueAsTaskTests\Return.cs" />
     <None Include="Test\Data\ReturnValueAsTaskTests\Return.cs.gold" />
     <None Include="Test\Data\AsyncAwaitMayBeElided\LocalFuncGeneric.cs" />
