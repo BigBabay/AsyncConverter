@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using AsyncConverter.Helpers;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
+using JetBrains.ReSharper.Psi.Tree;
 
-namespace AsyncConverter.AsyncHelpers.AwaitElider
+namespace AsyncConverter.AsyncHelpers.AwaitEliders
 {
     [SolutionComponent]
     internal class AwaitElider : IAwaitElider
@@ -25,6 +27,14 @@ namespace AsyncConverter.AsyncHelpers.AwaitElider
             var expressionWithoutConfigureAwait = invocationExpression.RemoveConfigureAwait();
 
             awaitEliders.FirstOrDefault(x => x.CanElide(declarationOrClosure))?.Elide(declarationOrClosure, expressionWithoutConfigureAwait);
+        }
+
+        public void Elide(IParametersOwnerDeclaration parametersOwnerDeclaration)
+        {
+            foreach (var awaitExpression in parametersOwnerDeclaration.DescendantsInScope<IAwaitExpression>())
+            {
+                Elide(awaitExpression);
+            }
         }
     }
 }

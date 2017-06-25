@@ -18,7 +18,8 @@ namespace SKBKontur.Billy.Core.BusinessObjects.Entities
     {
         public Data[] {caret}SelectByIds(Guid[] ids)
         {
-            return SelectByKeys(data => data.Id, ids);
+            var selectByKeys = SelectByKeys(data => data.Id, ids);
+            return selectByKeys;
         }
     }
 

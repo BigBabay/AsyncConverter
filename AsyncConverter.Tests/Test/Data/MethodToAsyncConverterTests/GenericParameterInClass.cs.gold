@@ -18,7 +18,8 @@ namespace SKBKontur.Billy.Core.BusinessObjects.Entities
     {
         public async Task<Data[]> {caret}SelectByIdsAsync(Guid[] ids)
         {
-            return await SelectByKeysAsync(data => data.Id, ids).ConfigureAwait(false);
+            var selectByKeys = await SelectByKeysAsync(data => data.Id, ids).ConfigureAwait(false);
+            return selectByKeys;
         }
     }
 

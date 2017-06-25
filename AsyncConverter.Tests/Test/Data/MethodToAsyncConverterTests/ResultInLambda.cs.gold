@@ -7,7 +7,7 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
     {
         public async Task {caret}TestAsync()
         {
-            var a = await ExecuteAsync(async () => await MethodAsync().ConfigureAwait(false)).ConfigureAwait(false);
+            var a = await ExecuteAsync(() => MethodAsync()).ConfigureAwait(false);
         }
 
         private int Execute(Func<int> func)

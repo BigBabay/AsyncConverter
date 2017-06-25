@@ -9,8 +9,13 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
           return MethodAsync();
         }
 
-        public async Task MethodAsync()
+        public void Method()
         {
+        }
+
+        public Task MethodAsync()
+        {
+            return Task.CompletedTask;
         }
     }
 }

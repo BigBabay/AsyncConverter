@@ -1,11 +1,8 @@
-﻿using System.Linq;
-using AsyncConverter.AsyncHelpers.AwaitElideChecker;
-using AsyncConverter.Helpers;
+﻿using AsyncConverter.Helpers;
 using AsyncConverter.Highlightings;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Daemon.Stages.Dispatcher;
 using JetBrains.ReSharper.Feature.Services.Daemon;
-using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 
@@ -16,32 +13,15 @@ namespace AsyncConverter.Analyzers
     {
         protected override void Run(IParametersOwnerDeclaration element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
-            var awaitElideChecker = element.GetSolution().GetComponent<IAwaitElideChecker>();
+            var awaitElideChecker = element.GetSolution().GetComponent<IAwaitEliderChecker>();
 
-            var returnStatements = element.DescendantsInScope<IReturnStatement>().ToArray();
-            var returnType = element.DeclaredParametersOwner?.ReturnType;
-            if (returnType == null)
-                return;
-            if (returnType.IsTask() && returnStatements.Any())
-                return;
-
-            var awaitExpressions = element.DescendantsInScope<IAwaitExpression>().ToArray();
-            //TODO: think about this, different settings
-            if(awaitExpressions.Length != 1)
-                return;
-
-            var awaitExpression = awaitExpressions.First();
-
-            if (returnStatements.Length > 1)
-                return;
-
-            if (returnStatements.Any() && returnStatements.First() != awaitExpression.GetContainingStatement())
-                return;
-
-            if (!awaitElideChecker.MayBeElided(awaitExpression))
-                return;
-
-            consumer.AddHighlighting(new AsyncAwaitMayBeElidedHighlighting(awaitExpression));
+            if (awaitElideChecker.CanElide(element))
+            {
+                foreach (var awaitExpression in element.DescendantsInScope<IAwaitExpression>())
+                {
+                    consumer.AddHighlighting(new AsyncAwaitMayBeElidedHighlighting(awaitExpression));
+                }
+            }
         }
     }
 }

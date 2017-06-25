@@ -7,7 +7,8 @@ namespace A
     {
         public string {caret}Test()
         {
-            return Method("input");
+            var a = Method("input");
+            return a;
         }
 
         private string Method<T>(T input)
