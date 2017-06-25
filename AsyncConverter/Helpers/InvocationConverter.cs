@@ -1,5 +1,6 @@
 using System;
 using AsyncConverter.AsyncHelpers.AwaitEliders;
+using AsyncConverter.AsyncHelpers.MethodFinders;
 using AsyncConverter.AsyncHelpers.ParameterComparers;
 using JetBrains.Annotations;
 using JetBrains.ProjectModel;

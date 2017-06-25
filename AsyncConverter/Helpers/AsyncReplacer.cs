@@ -1,13 +1,10 @@
 using System.Linq;
-using AsyncConverter.AsyncHelpers.MethodFinders;
-using AsyncConverter.AsyncHelpers.ParameterComparers;
 using AsyncConverter.AsyncHelpers.AwaitEliders;
 using JetBrains.Annotations;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Search;
-using JetBrains.ReSharper.Psi.Tree;
 
 namespace AsyncConverter.Helpers
 {
