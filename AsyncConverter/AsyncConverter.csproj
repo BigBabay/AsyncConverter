@@ -432,6 +432,7 @@
     <Compile Include="QuickFixes\ReturnNullToTask.cs" />
     <Compile Include="QuickFixes\ReturnValueAsTask.cs" />
     <Compile Include="QuickFixes\ArgumentValueAsTask.cs" />
+    <Compile Include="Settings\AsyncConverterOptionsPage.cs" />
     <Compile Include="Settings\AsyncConverterSettings.cs" />
     <Compile Include="ZoneMarker.cs" />
   </ItemGroup>
