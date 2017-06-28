@@ -393,6 +393,7 @@
     <Compile Include="Highlightings\CanBeUseAsyncMethodHighlightingTests.cs" />
     <Compile Include="Highlightings\HighlightingsTestsBase.cs" />
     <Compile Include="Highlightings\ConfigureAwaitHighlightingTests.cs" />
+    <Compile Include="Highlightings\NamingHighlightingsWithExcludeTestMethodsTests.cs" />
     <Compile Include="Highlightings\NullReturnHighlightingsTests.cs" />
     <Compile Include="QuickFixes\AsyncAwaitMayBeElidedQuickFixTests.cs" />
     <Compile Include="QuickFixes\AsyncMethodNamingQuickFixTests.cs" />
