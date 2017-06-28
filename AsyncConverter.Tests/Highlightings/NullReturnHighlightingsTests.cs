@@ -1,4 +1,4 @@
-namespace AsyncConverter.Tests.Analyzers
+namespace AsyncConverter.Tests.Highlightings
 {
     public class NullReturnHighlightingsTests : HighlightingsTestsBase
     {

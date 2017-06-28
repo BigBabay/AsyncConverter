@@ -389,11 +389,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Analyzers\AsyncAwaitMayBeElidedHighlightingTests.cs" />
-    <Compile Include="Analyzers\CanBeUseAsyncMethodHighlightingTests.cs" />
-    <Compile Include="Analyzers\HighlightingsTestsBase.cs" />
-    <Compile Include="Analyzers\ConfigureAwaitHighlightingTests.cs" />
-    <Compile Include="Analyzers\NullReturnHighlightingsTests.cs" />
+    <Compile Include="Highlightings\AsyncAwaitMayBeElidedHighlightingTests.cs" />
+    <Compile Include="Highlightings\CanBeUseAsyncMethodHighlightingTests.cs" />
+    <Compile Include="Highlightings\HighlightingsTestsBase.cs" />
+    <Compile Include="Highlightings\ConfigureAwaitHighlightingTests.cs" />
+    <Compile Include="Highlightings\NullReturnHighlightingsTests.cs" />
     <Compile Include="QuickFixes\AsyncAwaitMayBeElidedQuickFixTests.cs" />
     <Compile Include="QuickFixes\AsyncMethodNamingQuickFixTests.cs" />
     <Compile Include="QuickFixes\CanBeUseAsyncMethodQuickFixTests.cs" />
@@ -603,7 +603,7 @@
     <None Include="Test\Data\MethodToAsyncConverterTests\ReplaceTree.cs" />
     <None Include="Test\Data\MethodToAsyncConverterTests\ReplaceTreeWithMultipleRoot.cs.gold" />
     <None Include="Test\Data\MethodToAsyncConverterTests\ReplaceTree.cs.gold" />
-    <Compile Include="Analyzers\NamingHighlightingsTests.cs" />
+    <Compile Include="Highlightings\NamingHighlightingsTests.cs" />
     <None Include="Test\Data\ReturnNullAsTaskTests\ObjectFromMethod.cs.gold" />
     <None Include="Test\Data\ReturnNullToTaskAvailabilityTests\ReturnNull.cs" />
     <None Include="Test\Data\ReturnNullToTaskAvailabilityTests\NullFromLambda.cs.gold" />

@@ -4,7 +4,7 @@ using JetBrains.ReSharper.FeaturesTestFramework.Daemon;
 using JetBrains.ReSharper.TestFramework;
 using NUnit.Framework;
 
-namespace AsyncConverter.Tests.Analyzers
+namespace AsyncConverter.Tests.Highlightings
 {
     [TestFixture]
     [TestNetFramework46]
@@ -19,7 +19,7 @@ namespace AsyncConverter.Tests.Analyzers
         protected TestCaseData[] FileNames()
         {
             return Directory
-                .GetFiles(@"..\..\Test\Data\" + RelativeTestDataPath, "*.cs")
+                .GetFiles(@"..\..\Test\Data\Highlightings\" + RelativeTestDataPath, "*.cs")
                 .Select(x => new TestCaseData(Path.GetFileName(x)))
                 .ToArray();
         }
