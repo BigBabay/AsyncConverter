@@ -434,6 +434,7 @@
     <Compile Include="QuickFixes\ArgumentValueAsTask.cs" />
     <Compile Include="Settings\AsyncConverterOptionsPage.cs" />
     <Compile Include="Settings\AsyncConverterSettings.cs" />
+    <Compile Include="Settings\AsyncSuffixSettingsAccessor.cs" />
     <Compile Include="ZoneMarker.cs" />
   </ItemGroup>
   <ItemGroup>
