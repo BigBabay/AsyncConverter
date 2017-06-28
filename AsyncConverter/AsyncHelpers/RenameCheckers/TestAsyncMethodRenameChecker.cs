@@ -1,9 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
+using AsyncConverter.Settings;
+using JetBrains.Application.Settings;
 using JetBrains.Metadata.Reader.Impl;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
+using JetBrains.ReSharper.Psi.Tree;
 
 namespace AsyncConverter.AsyncHelpers.RenameCheckers
 {
@@ -22,6 +25,10 @@ namespace AsyncConverter.AsyncHelpers.RenameCheckers
         public bool SkipRename(IMethodDeclaration method)
         {
             if (method.AttributeSectionList == null)
+                return false;
+
+            var excludeTestMethods = method.GetSettingsStore().GetValue(AsyncSuffixSettingsAccessor.ExcludeTestMethodsFromAnalysis);
+            if (!excludeTestMethods)
                 return false;
 
             return method
