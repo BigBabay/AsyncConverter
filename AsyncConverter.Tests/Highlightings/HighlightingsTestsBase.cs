@@ -16,10 +16,14 @@ namespace AsyncConverter.Tests.Highlightings
             DoTestSolution(fileName);
         }
 
+        protected abstract string Folder { get; }
+
+        protected override string RelativeTestDataPath => "Highlightings\\" + Folder;
+
         protected TestCaseData[] FileNames()
         {
             return Directory
-                .GetFiles(@"..\..\Test\Data\Highlightings\" + RelativeTestDataPath, "*.cs")
+                .GetFiles(@"..\..\Test\Data\" + RelativeTestDataPath, "*.cs")
                 .Select(x => new TestCaseData(Path.GetFileName(x)))
                 .ToArray();
         }

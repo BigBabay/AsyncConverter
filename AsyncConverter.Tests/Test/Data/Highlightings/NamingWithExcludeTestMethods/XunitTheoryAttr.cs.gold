@@ -1,0 +1,23 @@
+﻿using System;
+using System.Threading.Tasks;
+
+namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
+{
+    using Xunit;
+    public class Class
+    {
+        [Theory]
+        public async Task Test()
+        {
+            |await Task.Delay(1000).ConfigureAwait(false)|(0);
+        }
+    }
+}
+
+namespace Xunit
+{
+    public class TheoryAttribute : Attribute
+    { }
+}
+---------------------------------------------------------
+(0): ReSharper Warning: (T) 'Async in method declaration and await may be elided.' (E) 'Await may be elided.'

@@ -3,10 +3,10 @@ using JetBrains.ReSharper.TestFramework;
 
 namespace AsyncConverter.Tests.Highlightings
 {
-    [TestSetting(typeof(AsyncConverterSettings), "ExcludeTestMethodsFromAnalysis", true)]
-    public class NamingHighlightingsWithExcludeTestMethodsTests : HighlightingsTestsBase
+    [TestSetting(typeof(AsyncConverterSettings), "ExcludeTestMethodsFromAnalysis", false)]
+    public class NamingWithExcludeTestMethodsTests : HighlightingsTestsBase
     {
-        protected override string RelativeTestDataPath => "NamingWithExcludeTestMethods";
+        protected override string Folder => "NamingWithExcludeTestMethods";
 
     }
 }
