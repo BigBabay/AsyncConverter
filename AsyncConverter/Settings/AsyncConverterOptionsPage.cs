@@ -17,17 +17,4 @@ namespace AsyncConverter.Settings
         {
         }
     }
-
-    [OptionsPage(PID, "AsyncConverterNaming", typeof(ServicesThemedIcons.AnalyzeThis), ParentId = AsyncConverterOptionsPage.PID)]
-    public sealed class AsyncConverterNamingOptionsPage : CustomSimpleOptionsPage
-    {
-        public const string PID = "AsyncConverterNaming";
-
-        public AsyncConverterNamingOptionsPage([NotNull] Lifetime lifetime, [NotNull] OptionsSettingsSmartContext store)
-            : base(lifetime, store)
-        {
-            AddHeader("Tests");
-            AddBoolOption((AsyncConverterSettings options) => options.ExcludeTestMethodsFromAnalysis, "Exclude test methods from analysis");
-        }
-    }
 }
