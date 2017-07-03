@@ -27,7 +27,7 @@ namespace AsyncConverter.AsyncHelpers.RenameCheckers
             if (method.AttributeSectionList == null)
                 return false;
 
-            var excludeTestMethods = method.GetSettingsStore().GetValue(AsyncSuffixSettingsAccessor.ExcludeTestMethodsFromAnalysis);
+            var excludeTestMethods = method.GetSettingsStore().GetValue(AsyncConverterSettingsAccessor.ExcludeTestMethodsFromAnalysis);
             if (!excludeTestMethods)
                 return false;
 

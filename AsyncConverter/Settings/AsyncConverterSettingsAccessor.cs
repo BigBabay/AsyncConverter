@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 
 namespace AsyncConverter.Settings
 {
-    internal static class AsyncSuffixSettingsAccessor
+    internal static class AsyncConverterSettingsAccessor
     {
         [NotNull]
         public static readonly Expression<Func<AsyncConverterNamingSettings, bool>>

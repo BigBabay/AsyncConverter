@@ -436,7 +436,7 @@
     <Compile Include="Settings\AsyncConverterNamingSettings.cs" />
     <Compile Include="Settings\AsyncConverterOptionsPage.cs" />
     <Compile Include="Settings\AsyncConverterSettings.cs" />
-    <Compile Include="Settings\AsyncSuffixSettingsAccessor.cs" />
+    <Compile Include="Settings\AsyncConverterSettingsAccessor.cs" />
     <Compile Include="ZoneMarker.cs" />
   </ItemGroup>
   <ItemGroup>
