@@ -432,8 +432,8 @@
     <Compile Include="QuickFixes\ReturnNullToTask.cs" />
     <Compile Include="QuickFixes\ReturnValueAsTask.cs" />
     <Compile Include="QuickFixes\ArgumentValueAsTask.cs" />
-    <Compile Include="Settings\AsyncConverterNamingOptionsPage.cs" />
-    <Compile Include="Settings\AsyncConverterNamingSettings.cs" />
+    <Compile Include="Settings\AsyncConverterAsyncSuffixOptionsPage.cs" />
+    <Compile Include="Settings\AsyncConverterAsyncSuffixSettings.cs" />
     <Compile Include="Settings\AsyncConverterOptionsPage.cs" />
     <Compile Include="Settings\AsyncConverterSettings.cs" />
     <Compile Include="Settings\AsyncConverterSettingsAccessor.cs" />
