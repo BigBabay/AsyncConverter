@@ -7,7 +7,7 @@ namespace AsyncConverter.Settings
     internal static class AsyncSuffixSettingsAccessor
     {
         [NotNull]
-        public static readonly Expression<Func<AsyncConverterSettings, bool>>
+        public static readonly Expression<Func<AsyncConverterNamingSettings, bool>>
             ExcludeTestMethodsFromAnalysis = x => x.ExcludeTestMethodsFromAnalysis;
     }
 }

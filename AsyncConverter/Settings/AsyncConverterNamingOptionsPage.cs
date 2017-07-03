@@ -18,4 +18,17 @@ namespace AsyncConverter.Settings
             AddBoolOption((AsyncConverterSettings options) => options.ExcludeTestMethodsFromAnalysis, "Exclude test methods from analysis");
         }
     }
+
+    [OptionsPage(PID, "AsyncConverterConfigureAwait", typeof(ServicesThemedIcons.AnalyzeThis), ParentId = AsyncConverterOptionsPage.PID)]
+    public sealed class AsyncConverterConfigureAwaitOptionsPage : CustomSimpleOptionsPage
+    {
+        public const string PID = "AsyncConverterConfigureAwait";
+
+        public AsyncConverterConfigureAwaitOptionsPage([NotNull] Lifetime lifetime, [NotNull] OptionsSettingsSmartContext store)
+            : base(lifetime, store)
+        {
+            AddHeader("Tests");
+            AddBoolOption((AsyncConverterSettings options) => options.ExcludeTestMethodsFromAnalysis, "Exclude test methods from analysis");
+        }
+    }
 }
