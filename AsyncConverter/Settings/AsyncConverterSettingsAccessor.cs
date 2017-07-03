@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using JetBrains.Annotations;
+using JetBrains.Application.Settings.Store;
 
 namespace AsyncConverter.Settings
 {
@@ -9,5 +10,10 @@ namespace AsyncConverter.Settings
         [NotNull]
         public static readonly Expression<Func<AsyncConverterNamingSettings, bool>>
             ExcludeTestMethodsFromAnalysis = x => x.ExcludeTestMethodsFromAnalysis;
+
+        [NotNull]
+        public static readonly Expression<Func<AsyncConverterConfigureAwaitSettings, IIndexedEntry<string, string>>>
+            ConfigureAwaitIgnoreAttributeTypes =
+                x => x.ConfigureAwaitIgnoreAttributeTypes;
     }
 }
