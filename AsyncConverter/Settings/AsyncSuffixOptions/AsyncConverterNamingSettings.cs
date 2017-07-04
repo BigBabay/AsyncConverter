@@ -1,6 +1,6 @@
 using JetBrains.Application.Settings;
 
-namespace AsyncConverter.Settings
+namespace AsyncConverter.Settings.AsyncSuffixOptions
 {
     [SettingsKey(typeof(AsyncConverterSettings), "Settings for 'Async' suffix")]
     public class AsyncConverterNamingSettings

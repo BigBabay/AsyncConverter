@@ -1,4 +1,5 @@
 using AsyncConverter.Settings;
+using AsyncConverter.Settings.AsyncSuffixOptions;
 using JetBrains.ReSharper.TestFramework;
 
 namespace AsyncConverter.Tests.Highlightings

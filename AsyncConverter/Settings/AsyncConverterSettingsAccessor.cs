@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
+using AsyncConverter.Settings.AsyncSuffixOptions;
+using AsyncConverter.Settings.ConfigureAwaitOptions;
 using JetBrains.Annotations;
 using JetBrains.Application.Settings.Store;
 

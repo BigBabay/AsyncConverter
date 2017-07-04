@@ -1,7 +1,7 @@
 using JetBrains.Application.Settings;
 using JetBrains.Application.Settings.Store;
 
-namespace AsyncConverter.Settings
+namespace AsyncConverter.Settings.ConfigureAwaitOptions
 {
     [SettingsKey(typeof(AsyncConverterSettings), "Settings for ConfigureAwait")]
     public class AsyncConverterConfigureAwaitSettings

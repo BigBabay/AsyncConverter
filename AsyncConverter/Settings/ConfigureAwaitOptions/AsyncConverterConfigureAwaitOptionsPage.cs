@@ -1,10 +1,11 @@
-﻿using JetBrains.Annotations;
+﻿using AsyncConverter.Settings.AsyncSuffixOptions;
+using JetBrains.Annotations;
 using JetBrains.DataFlow;
 using JetBrains.ReSharper.Feature.Services.Resources;
 using JetBrains.UI.Options;
 using JetBrains.UI.Options.OptionsDialog2.SimpleOptions;
 
-namespace AsyncConverter.Settings
+namespace AsyncConverter.Settings.ConfigureAwaitOptions
 {
     [OptionsPage(PID, "AsyncConverterConfigureAwait", typeof(ServicesThemedIcons.AnalyzeThis), ParentId = AsyncConverterOptionsPage.PID)]
     public sealed class AsyncConverterConfigureAwaitOptionsPage : CustomSimpleOptionsPage

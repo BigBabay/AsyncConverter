@@ -4,7 +4,7 @@ using JetBrains.ReSharper.Feature.Services.Resources;
 using JetBrains.UI.Options;
 using JetBrains.UI.Options.OptionsDialog2.SimpleOptions;
 
-namespace AsyncConverter.Settings
+namespace AsyncConverter.Settings.AsyncSuffixOptions
 {
     [OptionsPage(PID, "AsyncConverterNaming", typeof(ServicesThemedIcons.AnalyzeThis), ParentId = AsyncConverterOptionsPage.PID)]
     public sealed class AsyncConverterNamingOptionsPage : CustomSimpleOptionsPage
