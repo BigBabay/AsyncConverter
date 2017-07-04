@@ -432,11 +432,11 @@
     <Compile Include="QuickFixes\ReturnNullToTask.cs" />
     <Compile Include="QuickFixes\ReturnValueAsTask.cs" />
     <Compile Include="QuickFixes\ArgumentValueAsTask.cs" />
-    <Compile Include="Settings\ConfigureAwaitOptions\AsyncConverterConfigureAwaitOptionsPage.cs" />
+    <Compile Include="Settings\ConfigureAwaitOptions\AsyncConverterConfigureAwaitPage.cs" />
     <Compile Include="Settings\ConfigureAwaitOptions\AsyncConverterConfigureAwaitSettings.cs" />
-    <Compile Include="Settings\AsyncSuffixOptions\AsyncConverterNamingOptionsPage.cs" />
-    <Compile Include="Settings\AsyncSuffixOptions\AsyncConverterNamingSettings.cs" />
-    <Compile Include="Settings\AsyncConverterOptionsPage.cs" />
+    <Compile Include="Settings\AsyncSuffixOptions\AsyncConverterAsyncSuffixPage.cs" />
+    <Compile Include="Settings\AsyncSuffixOptions\AsyncConverterAsyncSuffixSettings.cs" />
+    <Compile Include="Settings\AsyncConverterPage.cs" />
     <Compile Include="Settings\AsyncConverterSettings.cs" />
     <Compile Include="Settings\AsyncConverterSettingsAccessor.cs" />
     <Compile Include="ZoneMarker.cs" />

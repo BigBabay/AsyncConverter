@@ -5,8 +5,8 @@ using JetBrains.UI.Options.Helpers;
 
 namespace AsyncConverter.Settings
 {
-    [OptionsPage(PID, "AsyncConverter", typeof(ServicesThemedIcons.AnalyzeThis), ParentId = CodeInspectionPage.PID)]
-    public sealed class AsyncConverterOptionsPage : AEmptyOptionsPage
+    [OptionsPage(PID, "Async Converter", typeof(ServicesThemedIcons.FileStorage), ParentId = CodeInspectionPage.PID)]
+    public sealed class AsyncConverterPage : AEmptyOptionsPage
     {
         public const string PID = "AsyncConverter";
     }
