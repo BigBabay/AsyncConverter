@@ -6,7 +6,7 @@ using JetBrains.UI.Options.OptionsDialog2.SimpleOptions;
 
 namespace AsyncConverter.Settings.ConfigureAwaitOptions
 {
-    [OptionsPage(PID, "AsyncConverterConfigureAwait", typeof(ServicesThemedIcons.AnalyzeThis), ParentId = AsyncConverterPage.PID)]
+    [OptionsPage(PID, "ConfigureAwait settings", typeof(ServicesThemedIcons.InspectionToolWindow), ParentId = AsyncConverterPage.PID)]
     public sealed class AsyncConverterConfigureAwaitPage : CustomSimpleOptionsPage
     {
         public const string PID = "AsyncConverterConfigureAwait";
@@ -14,7 +14,6 @@ namespace AsyncConverter.Settings.ConfigureAwaitOptions
         public AsyncConverterConfigureAwaitPage([NotNull] Lifetime lifetime, [NotNull] OptionsSettingsSmartContext store)
             : base(lifetime, store)
         {
-            AddHeader("Configure await settings");
         }
     }
 }
