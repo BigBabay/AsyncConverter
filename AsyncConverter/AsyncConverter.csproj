@@ -412,6 +412,7 @@
     <Compile Include="Helpers\IAwaitEliderChecker.cs" />
     <Compile Include="Helpers\IInvocationConverter.cs" />
     <Compile Include="Helpers\InvocationConverter.cs" />
+    <Compile Include="Helpers\MethodDeclarationExtensions.cs" />
     <Compile Include="Helpers\ParametersOwnerDeclarationExtensions.cs" />
     <Compile Include="Helpers\TypeHelper.cs" />
     <Compile Include="Highlightings\AsyncConverterGroupSettings.cs" />

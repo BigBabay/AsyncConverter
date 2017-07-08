@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using AsyncConverter.Helpers;
 using AsyncConverter.Settings;
 using JetBrains.ReSharper.Psi.Tree;
 using JetBrains.Application.Settings;
@@ -14,27 +15,19 @@ namespace AsyncConverter.AsyncHelpers.Checker
         public bool IsUnder(ICSharpTreeNode node)
         {
             var store = node.GetSettingsStore();
-            var customTypeKey = store.EnumEntryIndices(AsyncConverterSettingsAccessor.ConfigureAwaitIgnoreAttributeTypes).ToArray();
-            //var customAttributes = configureAwaitIgnoreAttributeTypes.Select(x => TypeFactory.CreateTypeByCLRName(x, node.GetPsiModule())).ToArray();
+            var customTypes = store.EnumIndexedValues(AsyncConverterSettingsAccessor.ConfigureAwaitIgnoreAttributeTypes).ToArray();
 
-            if (customTypeKey.IsNullOrEmpty())
+            if (customTypes.IsNullOrEmpty())
                 return false;
 
             var containingFunctionLikeDeclarationOrClosure = node.GetContainingFunctionDeclarationIgnoringClosures() as IMethodDeclaration;
 
-            if (containingFunctionLikeDeclarationOrClosure == null)
-                return false;
-
-            if (containingFunctionLikeDeclarationOrClosure
-                .AttributeSectionList
-                .AttributesEnumerable
-                .Any(attribute => customTypeKey
-                         .Any(customType => attribute.Name.QualifiedName == store.GetIndexedValue(AsyncConverterSettingsAccessor.ConfigureAwaitIgnoreAttributeTypes, customType))))
+            if (containingFunctionLikeDeclarationOrClosure?.ContainsAttribute(customTypes) == true)
             {
-                return false;
+                return true;
             }
 
-            return true;
+            return false;
         }
     }
 }

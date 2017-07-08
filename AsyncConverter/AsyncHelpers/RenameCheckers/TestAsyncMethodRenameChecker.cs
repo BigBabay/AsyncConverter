@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using AsyncConverter.Helpers;
 using AsyncConverter.Settings;
 using JetBrains.Application.Settings;
 using JetBrains.Metadata.Reader.Impl;
@@ -31,13 +32,7 @@ namespace AsyncConverter.AsyncHelpers.RenameCheckers
             if (!excludeTestMethods)
                 return false;
 
-            return method
-                .AttributeSectionList
-                .AttributesEnumerable
-                .Select(attribute => attribute.Name.Reference.Resolve().DeclaredElement)
-                .OfType<IClass>()
-                .Select(attributeClass => attributeClass.GetClrName())
-                .Any(clrTypeName => testAttributesClass.Contains(clrTypeName));
+            return method.ContainsAttribute(testAttributesClass);
         }
     }
 }
