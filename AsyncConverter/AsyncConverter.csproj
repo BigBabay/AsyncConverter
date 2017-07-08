@@ -367,6 +367,7 @@
     <Compile Include="Analyzers\AsyncMethodNamingAnalyzer.cs" />
     <Compile Include="Analyzers\NullReturnFromLambdaAnalyzer.cs" />
     <Compile Include="Analyzers\NullReturnFromMethodAnalyzer.cs" />
+    <Compile Include="AsyncHelpers\Checker\IUnderAttributeChecker.cs" />
     <Compile Include="AsyncHelpers\Checker\LastNodeChecker.cs" />
     <Compile Include="AsyncHelpers\Checker\ILastNodeChecker.cs" />
     <Compile Include="AsyncHelpers\AwaitEliders\AwaitElider.cs" />
@@ -375,6 +376,7 @@
     <Compile Include="AsyncHelpers\AwaitEliders\LambdaAwaitElider.cs" />
     <Compile Include="AsyncHelpers\AwaitEliders\LocalFunctionAwaitElider.cs" />
     <Compile Include="AsyncHelpers\AwaitEliders\MethodAwaitElider.cs" />
+    <Compile Include="AsyncHelpers\Checker\UnderAttribureChecker.cs" />
     <Compile Include="AsyncHelpers\InvocationExpressionExtensions.cs" />
     <Compile Include="AsyncHelpers\MethodFinders\AsyncMethodFinder.cs" />
     <Compile Include="AsyncHelpers\MethodFinders\FindingReslt.cs" />

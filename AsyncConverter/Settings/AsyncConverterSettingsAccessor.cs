@@ -7,7 +7,7 @@ using JetBrains.Application.Settings.Store;
 
 namespace AsyncConverter.Settings
 {
-    internal static class AsyncConverterSettingsAccessor
+    public static class AsyncConverterSettingsAccessor
     {
         [NotNull]
         public static readonly Expression<Func<AsyncConverterAsyncSuffixSettings, bool>>
