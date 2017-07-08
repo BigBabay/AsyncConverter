@@ -1,0 +1,22 @@
+﻿using System;
+using System.Threading.Tasks;
+
+namespace AsyncConverter.Tests.Test.Data.Highlightings.ConfigureAwaitWithAttribute
+{
+    public class Class
+    {
+        [MyCustom]
+        public async Task TestAsync()
+        {
+            |await Task.Delay(1000)|(0);
+        }
+    }
+
+    public class MyCustomAttribute : Attribute
+    {
+
+    }
+}
+
+---------------------------------------------------------
+(0): ReSharper Warning: (T) 'Async in method declaration and await may be elided.' (E) 'Await may be elided.'
