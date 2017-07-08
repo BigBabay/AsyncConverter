@@ -1,11 +1,9 @@
 using System.Collections.Generic;
-using System.Linq;
 using AsyncConverter.Helpers;
 using AsyncConverter.Settings;
 using JetBrains.Application.Settings;
 using JetBrains.Metadata.Reader.Impl;
 using JetBrains.ProjectModel;
-using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 
