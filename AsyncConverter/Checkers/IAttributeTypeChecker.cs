@@ -5,6 +5,5 @@ namespace AsyncConverter.Checkers
     public interface IAttributeTypeChecker
     {
         bool IsUnder(ICSharpTreeNode node);
-
     }
 }
