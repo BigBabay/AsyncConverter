@@ -360,8 +360,10 @@
     <Compile Include="ContextActions\MethodToAsyncConverterAvailabilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEnvironment.cs" />
+    <None Include="Test\Data\Highlightings\ConfigureAwaitWithAttribute\WithAttributeOnAssembly.cs" />
     <None Include="Test\Data\Highlightings\ConfigureAwaitWithAttribute\WithAttributeOnClass.cs" />
     <None Include="Test\Data\Highlightings\ConfigureAwaitWithAttribute\WithAttributeOnMethod.cs" />
+    <None Include="Test\Data\Highlightings\ConfigureAwaitWithAttribute\WithAttributeOnAssembly.cs.gold" />
     <None Include="Test\Data\Highlightings\ConfigureAwaitWithAttribute\WithAttributeOnClass.cs.gold" />
     <None Include="Test\Data\Highlightings\ConfigureAwaitWithAttribute\WithoutAttribute.cs" />
     <None Include="Test\Data\Highlightings\ConfigureAwaitWithAttribute\WithAttributeOnMethod.cs.gold" />
