@@ -8,9 +8,9 @@ using JetBrains.Util;
 
 namespace AsyncConverter.Helpers
 {
-    public static class CSharpTypeDeclarationExtensions
+    public static class CSharpFunctionDeclarationExtensions
     {
-        public static bool ContainsAttribute([NotNull] this ICSharpTypeDeclaration declaration, IEnumerable<ClrTypeName> attributeNames)
+        public static bool ContainsAttribute([NotNull] this ICSharpFunctionDeclaration declaration, IEnumerable<ClrTypeName> attributeNames)
         {
             var clrTypeNames = attributeNames.ToHashSet();
             if (clrTypeNames.IsNullOrEmpty())
@@ -25,7 +25,7 @@ namespace AsyncConverter.Helpers
                 .Any(clrTypeNames.Contains);
         }
 
-        public static bool ContainsAttribute([NotNull] this ICSharpTypeDeclaration declaration, IEnumerable<string> attributeNames)
+        public static bool ContainsAttribute([NotNull] this ICSharpFunctionDeclaration declaration, IEnumerable<string> attributeNames)
         {
             var clrTypeNames = attributeNames.Select(x => new ClrTypeName(x)).ToHashSet();
             if (clrTypeNames.IsNullOrEmpty())

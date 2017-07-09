@@ -406,6 +406,7 @@
     <Compile Include="Helpers\AsyncInvocationReplacer.cs" />
     <Compile Include="Helpers\AsyncReplacer.cs" />
     <Compile Include="Helpers\AwaitEliderChecker.cs" />
+    <Compile Include="Helpers\CSharpFunctionDeclarationExtensions.cs" />
     <Compile Include="Helpers\FinderHelper.cs" />
     <Compile Include="Helpers\IAsyncInvocationReplacer.cs" />
     <Compile Include="Helpers\IAsyncReplacer.cs" />
