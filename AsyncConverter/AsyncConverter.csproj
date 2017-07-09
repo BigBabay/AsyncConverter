@@ -14,11 +14,9 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
-  <!--
   <PropertyGroup>
-    <HostFullIdentifier>ReSharperPlatformVs14Test</HostFullIdentifier>
+    <HostFullIdentifier>ReSharperPlatformVs15test</HostFullIdentifier>
   </PropertyGroup>
-  -->
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -367,7 +365,7 @@
     <Compile Include="Analyzers\AsyncMethodNamingAnalyzer.cs" />
     <Compile Include="Analyzers\NullReturnFromLambdaAnalyzer.cs" />
     <Compile Include="Analyzers\NullReturnFromMethodAnalyzer.cs" />
-    <Compile Include="AsyncHelpers\Checker\IUnderAttributeChecker.cs" />
+    <Compile Include="AsyncHelpers\Checker\IAttributeFunctionChecker.cs" />
     <Compile Include="AsyncHelpers\Checker\LastNodeChecker.cs" />
     <Compile Include="AsyncHelpers\Checker\ILastNodeChecker.cs" />
     <Compile Include="AsyncHelpers\AwaitEliders\AwaitElider.cs" />
@@ -376,7 +374,7 @@
     <Compile Include="AsyncHelpers\AwaitEliders\LambdaAwaitElider.cs" />
     <Compile Include="AsyncHelpers\AwaitEliders\LocalFunctionAwaitElider.cs" />
     <Compile Include="AsyncHelpers\AwaitEliders\MethodAwaitElider.cs" />
-    <Compile Include="AsyncHelpers\Checker\UnderAttribureChecker.cs" />
+    <Compile Include="AsyncHelpers\Checker\AttributeFunctionChecker.cs" />
     <Compile Include="AsyncHelpers\InvocationExpressionExtensions.cs" />
     <Compile Include="AsyncHelpers\MethodFinders\AsyncMethodFinder.cs" />
     <Compile Include="AsyncHelpers\MethodFinders\FindingReslt.cs" />
@@ -402,6 +400,8 @@
     <Compile Include="AsyncHelpers\ParameterComparers\TypeComparer.cs" />
     <Compile Include="AsyncHelpers\RenameCheckers\ControllerRenameChecker.cs" />
     <Compile Include="AsyncHelpers\RenameCheckers\TestAsyncMethodRenameChecker.cs" />
+    <Compile Include="Checkers\IAttributeTypeChecker.cs" />
+    <Compile Include="Checkers\AttributeTypeChecker.cs" />
     <Compile Include="ContextActions\MethodToAsyncConverter.cs" />
     <Compile Include="Helpers\AsyncInvocationReplacer.cs" />
     <Compile Include="Helpers\AsyncReplacer.cs" />
@@ -412,7 +412,7 @@
     <Compile Include="Helpers\IAwaitEliderChecker.cs" />
     <Compile Include="Helpers\IInvocationConverter.cs" />
     <Compile Include="Helpers\InvocationConverter.cs" />
-    <Compile Include="Helpers\MethodDeclarationExtensions.cs" />
+    <Compile Include="Helpers\CSharpTypeDeclarationExtensions.cs" />
     <Compile Include="Helpers\ParametersOwnerDeclarationExtensions.cs" />
     <Compile Include="Helpers\TypeHelper.cs" />
     <Compile Include="Highlightings\AsyncConverterGroupSettings.cs" />

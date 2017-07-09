@@ -1,8 +1,8 @@
 ﻿using JetBrains.ReSharper.Psi.CSharp.Tree;
 
-namespace AsyncConverter.AsyncHelpers.Checker
+namespace AsyncConverter.Checkers
 {
-    public interface IUnderAttributeChecker
+    public interface IAttributeTypeChecker
     {
         bool IsUnder(ICSharpTreeNode node);
 

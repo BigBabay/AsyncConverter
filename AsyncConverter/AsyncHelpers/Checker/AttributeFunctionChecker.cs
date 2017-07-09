@@ -10,7 +10,7 @@ using JetBrains.Util;
 namespace AsyncConverter.AsyncHelpers.Checker
 {
     [SolutionComponent]
-    public class UnderAttributeChecker : IUnderAttributeChecker
+    public class AttributeFunctionChecker : IAttributeFunctionChecker
     {
         public bool IsUnder(ICSharpTreeNode node)
         {
@@ -20,7 +20,7 @@ namespace AsyncConverter.AsyncHelpers.Checker
             if (customTypes.IsNullOrEmpty())
                 return false;
 
-            var containingFunctionLikeDeclarationOrClosure = node.GetContainingFunctionDeclarationIgnoringClosures() as IMethodDeclaration;
+            var containingFunctionLikeDeclarationOrClosure = node.GetContainingFunctionDeclarationIgnoringClosures();
 
             if (containingFunctionLikeDeclarationOrClosure?.ContainsAttribute(customTypes) == true)
             {
