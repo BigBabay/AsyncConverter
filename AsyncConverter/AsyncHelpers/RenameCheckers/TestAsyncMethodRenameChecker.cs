@@ -1,9 +1,11 @@
 using System.Collections.Generic;
-using System.Linq;
+using AsyncConverter.Helpers;
+using AsyncConverter.Settings;
+using JetBrains.Application.Settings;
 using JetBrains.Metadata.Reader.Impl;
 using JetBrains.ProjectModel;
-using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
+using JetBrains.ReSharper.Psi.Tree;
 
 namespace AsyncConverter.AsyncHelpers.RenameCheckers
 {
@@ -24,13 +26,11 @@ namespace AsyncConverter.AsyncHelpers.RenameCheckers
             if (method.AttributeSectionList == null)
                 return false;
 
-            return method
-                .AttributeSectionList
-                .AttributesEnumerable
-                .Select(attribute => attribute.Name.Reference.Resolve().DeclaredElement)
-                .OfType<IClass>()
-                .Select(attributeClass => attributeClass.GetClrName())
-                .Any(clrTypeName => testAttributesClass.Contains(clrTypeName));
+            var excludeTestMethods = method.GetSettingsStore().GetValue(AsyncConverterSettingsAccessor.ExcludeTestMethodsFromAnalysis);
+            if (!excludeTestMethods)
+                return false;
+
+            return method.ContainsAttribute(testAttributesClass);
         }
     }
 }
