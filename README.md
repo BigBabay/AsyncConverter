@@ -26,7 +26,7 @@ If expected returning type is `Task` or `Task<T>` but null is returned instead, 
 ## Async suffix in a method name
 AsyncConverter will suggest you to add the 'Async' suffix to an asynchronous method name in all cases except:
 1. Classes inherited from `Controller` or `ApiController`. 
-2. Methods of test classes. NUnit, XUnit and MsUnit are supported.
+2. Methods of test classes. NUnit, XUnit and MsUnit are supported. This may be turn off in Resharper->Options->Code Inspection->Async Converter->Async Suffix
 
 ![Suggesting method name with Async suffix](ReadMe/Naming.gif)
 
