@@ -2,15 +2,15 @@
 using JetBrains.Annotations;
 using JetBrains.Application.Interop.NativeHook;
 using JetBrains.Application.Settings;
+using JetBrains.Application.UI.Components;
+using JetBrains.Application.UI.Controls.StringCollectionEdit.Impl;
+using JetBrains.Application.UI.Controls.StringCollectionEdit.Impl.Items;
+using JetBrains.Application.UI.Options;
+using JetBrains.Application.UI.Options.OptionsDialog;
+using JetBrains.Application.UI.Validation;
 using JetBrains.DataFlow;
 using JetBrains.ReSharper.Feature.Services.Resources;
-using JetBrains.UI.Application;
-using JetBrains.UI.Options;
-using JetBrains.UI.Options.OptionsDialog2.SimpleOptions;
-using JetBrains.UI.Validation;
-using JetBrains.UI.Wpf.Controls.StringCollectionEdit.Impl;
 using JetBrains.UI.Wpf.Controls.StringCollectionEdit.Impl.Buttons;
-using JetBrains.UI.Wpf.Controls.StringCollectionEdit.Impl.Items;
 
 namespace AsyncConverter.Settings.ConfigureAwaitOptions
 {

@@ -1,8 +1,11 @@
 ﻿using System.Linq;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
+using JetBrains.Metadata.Reader.API;
 using JetBrains.ReSharper.Psi;
+using JetBrains.ReSharper.Psi.Impl;
 using JetBrains.ReSharper.Psi.Resolve;
-using JetBrains.ReSharper.Psi.Util;
+using JetBrains.Util;
 using IType = JetBrains.ReSharper.Psi.IType;
 using ITypeParameter = JetBrains.ReSharper.Psi.ITypeParameter;
 
@@ -55,7 +58,19 @@ namespace AsyncConverter.Helpers
         [ContractAnnotation("null => false")]
         public static bool IsGenericIQueryable([CanBeNull]this IType type)
         {
-            return TypesUtil.IsPredefinedTypeFromAssembly(type, PredefinedType.GENERIC_IQUERYABLE_FQN, assembly => assembly.IsMscorlib);
+            var declaredType = type as IDeclaredType;
+            return declaredType != null && IsPredefinedTypeElement(declaredType.GetTypeElement(), PredefinedType.GENERIC_IQUERYABLE_FQN);
+        }
+
+        [Pure]
+        [ContractAnnotation("typeElement:null => false")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static bool IsPredefinedTypeElement([CanBeNull] ITypeElement typeElement, [NotNull] IClrTypeName clrName)
+        {
+            if (typeElement == null)
+                return false;
+            ITypeElement typeElement1 = typeElement.Module.GetPredefinedType().TryGetType(clrName).NotNull("NOT PREDEFINED").GetTypeElement();
+            return DeclaredElementEqualityComparer.TypeElementComparer.Equals(typeElement, typeElement1);
         }
 
         [Pure]

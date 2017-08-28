@@ -1,7 +1,7 @@
-﻿using JetBrains.ReSharper.Feature.Services.Daemon.OptionPages;
+﻿using JetBrains.Application.UI.Options;
+using JetBrains.Application.UI.Options.OptionsDialog;
+using JetBrains.ReSharper.Feature.Services.Daemon.OptionPages;
 using JetBrains.ReSharper.Feature.Services.Resources;
-using JetBrains.UI.Options;
-using JetBrains.UI.Options.Helpers;
 
 namespace AsyncConverter.Settings
 {
