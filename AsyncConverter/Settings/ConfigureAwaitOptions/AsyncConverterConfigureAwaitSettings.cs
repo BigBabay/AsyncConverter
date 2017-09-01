@@ -1,5 +1,4 @@
 using JetBrains.Application.Settings;
-using JetBrains.Application.Settings.Store;
 
 namespace AsyncConverter.Settings.ConfigureAwaitOptions
 {

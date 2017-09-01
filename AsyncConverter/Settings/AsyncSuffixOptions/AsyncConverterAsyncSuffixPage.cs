@@ -1,8 +1,8 @@
 ﻿using JetBrains.Annotations;
+using JetBrains.Application.UI.Options;
+using JetBrains.Application.UI.Options.OptionsDialog;
 using JetBrains.DataFlow;
 using JetBrains.ReSharper.Feature.Services.Resources;
-using JetBrains.UI.Options;
-using JetBrains.UI.Options.OptionsDialog2.SimpleOptions;
 
 namespace AsyncConverter.Settings.AsyncSuffixOptions
 {
