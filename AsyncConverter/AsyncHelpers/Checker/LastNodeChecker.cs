@@ -16,7 +16,8 @@ namespace AsyncConverter.AsyncHelpers.Checker
                 && IsFinalStatement(statement)
                 && statement.GetContainingNode<IUsingStatement>() == null
                 && statement.GetContainingNode<ITryStatement>() == null
-                && statement.GetContainingNode<ILoopStatement>() == null)
+                && statement.GetContainingNode<ILoopStatement>() == null
+                && statement.GetContainingNode<IIfStatement>() == null)
                 return true;
 
             var arrowExpressionClause = element.Parent as IArrowExpressionClause;
