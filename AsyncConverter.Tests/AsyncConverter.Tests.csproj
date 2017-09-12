@@ -360,6 +360,8 @@
     <Compile Include="ContextActions\MethodToAsyncConverterAvailabilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEnvironment.cs" />
+    <None Include="Test\Data\Highlightings\AsyncAwaitMayBeElided\InIf.cs" />
+    <None Include="Test\Data\Highlightings\AsyncAwaitMayBeElided\InIf.cs.gold" />
     <None Include="Test\Data\Highlightings\ConfigureAwaitWithAttribute\WithAttributeOnClass.cs" />
     <None Include="Test\Data\Highlightings\ConfigureAwaitWithAttribute\WithAttributeOnMethod.cs" />
     <None Include="Test\Data\Highlightings\ConfigureAwaitWithAttribute\WithAttributeOnClass.cs.gold" />
@@ -483,8 +485,6 @@
     <None Include="Test\Data\Highlightings\Naming\XunitFactAttr.cs.gold" />
     <None Include="Test\Data\Highlightings\Naming\XunitFactAttr.cs" />
     <None Include="Test\Data\Highlightings\Naming\MsTestAttr.cs" />
-    <None Include="Test\Data\CanBeUseAsyncMethodTests\TransformToAsync.cs" />
-    <None Include="Test\Data\CanBeUseAsyncMethodTests\TransformToAsync.cs.gold" />
     <None Include="Test\Data\CanBeUseAsyncMethodTests\ChainAwaitSecond.cs" />
     <None Include="Test\Data\CanBeUseAsyncMethodTests\ChainAwait.cs" />
     <None Include="Test\Data\CanBeUseAsyncMethodTests\ChainAwaitSecond.cs.gold" />
