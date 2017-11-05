@@ -24,7 +24,7 @@ namespace AsyncConverter.Checkers
             if (customTypes.IsNullOrEmpty())
                 return false;
 
-            var containingFunctionLikeDeclarationOrClosure = node.;
+            node.GetProject()
 
             if (containingFunctionLikeDeclarationOrClosure?.ContainsAttribute(customTypes) == true)
             {

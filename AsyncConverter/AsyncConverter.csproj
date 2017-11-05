@@ -377,6 +377,7 @@
     <Compile Include="AsyncHelpers\ParameterComparers\TypeComparer.cs" />
     <Compile Include="AsyncHelpers\RenameCheckers\ControllerRenameChecker.cs" />
     <Compile Include="AsyncHelpers\RenameCheckers\TestAsyncMethodRenameChecker.cs" />
+    <Compile Include="Checkers\IAttributeAssemblyChecker.cs" />
     <Compile Include="Checkers\IAttributeTypeChecker.cs" />
     <Compile Include="Checkers\AttributeTypeChecker.cs" />
     <Compile Include="ContextActions\MethodToAsyncConverter.cs" />
