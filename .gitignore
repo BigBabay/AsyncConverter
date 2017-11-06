@@ -96,6 +96,7 @@ $tf/
 
 # ReSharper is a .NET coding add-in
 _ReSharper*/
+.idea/
 *.[Rr]e[Ss]harper
 *.DotSettings.user
 
