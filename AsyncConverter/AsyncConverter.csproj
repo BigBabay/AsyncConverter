@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
+	<IsPackable>true</IsPackable>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="AsyncConverter.Rider.nuspec" />
