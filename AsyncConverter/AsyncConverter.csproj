@@ -2,6 +2,15 @@
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
 	<IsPackable>true</IsPackable>
+	<PackageId>AsyncConverter.AsyncConverter</PackageId>
+	<Version>1.1.8.3</Version>
+	<Authors>i.mamay</Authors>
+	<Company />
+	<Product />
+	<Copyright>i.mamay</Copyright>
+	<Description>Plugin for resharper 2017.2, for converting code to async.</Description>
+	<PackageTags>async</PackageTags>
+	<PackageProjectUrl>https://github.com/BigBabay/AsyncConverter</PackageProjectUrl>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="AsyncConverter.Rider.nuspec" />
