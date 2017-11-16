@@ -21,7 +21,7 @@
     <None Remove="packages.AsyncConverter.Rider.config" />
   </ItemGroup>
   <ItemGroup>
-	<PackageReference Include="JetBrains.Rider.SDK" Version="2017.2.20171114" />
+	<PackageReference Include="JetBrains.Rider.SDK" Version="2017.2.20171114" PrivateAssets="All" />
 	<PackageReference Include="Wave" Version="[10.0]" />
   </ItemGroup>
 </Project>
