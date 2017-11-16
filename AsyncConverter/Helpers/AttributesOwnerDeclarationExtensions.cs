@@ -12,7 +12,7 @@ namespace AsyncConverter.Helpers
     {
         public static bool ContainsAttribute([NotNull] this IAttributesOwnerDeclaration declaration, IEnumerable<ClrTypeName> attributeNames)
         {
-            var clrTypeNames = attributeNames.ToHashSet();
+            var clrTypeNames = new HashSet<ClrTypeName>(attributeNames);
             if (clrTypeNames.IsNullOrEmpty())
             {
                 return false;
@@ -27,7 +27,7 @@ namespace AsyncConverter.Helpers
 
         public static bool ContainsAttribute([NotNull] this IAttributesOwnerDeclaration declaration, IEnumerable<string> attributeNames)
         {
-            var clrTypeNames = attributeNames.Select(x => new ClrTypeName(x)).ToHashSet();
+            var clrTypeNames = new HashSet<ClrTypeName>(attributeNames.Select(x => new ClrTypeName(x)));
             if (clrTypeNames.IsNullOrEmpty())
             {
                 return false;
