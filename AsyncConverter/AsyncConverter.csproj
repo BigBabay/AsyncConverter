@@ -19,5 +19,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="JetBrains.ReSharper.SDK" Version="2017.2.2" PrivateAssets="All" />
+	<PackageReference Include="Wave" Version="[9.0]" />
   </ItemGroup>
 </Project>
