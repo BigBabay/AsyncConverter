@@ -18,6 +18,6 @@
     <None Remove="packages.AsyncConverter.Rider.config" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="JetBrains.ReSharper.SDK" Version="2017.2.2" />
+    <PackageReference Include="JetBrains.ReSharper.SDK" Version="2017.2.2" PrivateAssets="All" />
   </ItemGroup>
 </Project>
