@@ -17,6 +17,7 @@ namespace AsyncConverter.AsyncHelpers.RenameCheckers
                                                                new ClrTypeName("System.Web.Mvc.Controller"),
                                                                new ClrTypeName("System.Web.Http.ApiController"),
                                                                new ClrTypeName("Microsoft.AspNetCore.Mvc.Controller"),
+                                                               new ClrTypeName("Microsoft.AspNetCore.Mvc.ControllerBase"),
                                                            };
 
         public bool SkipRename(IMethodDeclaration method)
