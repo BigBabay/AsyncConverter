@@ -360,6 +360,7 @@
     <Compile Include="ContextActions\MethodToAsyncConverterAvailabilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEnvironment.cs" />
+    <None Include="Test\Data\Highlightings\Naming\CoreControllerBase.cs" />
     <None Include="Test\Data\Highlightings\AsyncAwaitMayBeElided\InIf.cs" />
     <None Include="Test\Data\Highlightings\AsyncAwaitMayBeElided\InIf.cs.gold" />
     <None Include="Test\Data\Highlightings\ConfigureAwaitWithAttribute\WithAttributeOnClass.cs" />
@@ -398,6 +399,7 @@
     <None Include="Test\Data\Highlightings\CanBeUseAsyncMethod\ObsoleteCandidate.cs" />
     <None Include="Test\Data\ArgumentValueAsTaskTests\Parameter.cs" />
     <None Include="Test\Data\ArgumentValueAsTaskTests\Parameter.cs.gold" />
+    <None Include="Test\Data\Highlightings\Naming\CoreControllerBase.cs.gold" />
     <None Include="Test\Data\Highlightings\Naming\CoreController.cs.gold" />
     <None Include="Test\Data\ReturnValueAsTaskTests\Return.cs" />
     <None Include="Test\Data\ReturnValueAsTaskTests\Return.cs.gold" />
