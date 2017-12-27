@@ -1,0 +1,14 @@
+version: 1.1.5.{build}
+configuration: Release
+image: Visual Studio 2017
+nuget:
+  project_feed: true
+before_build:
+- cmd: nuget restore
+build:
+  publish_nuget: true
+  verbosity: minimal
+test:
+  assemblies:
+    only:
+    - AsyncConverter.Tests.dll
