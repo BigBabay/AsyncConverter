@@ -6,9 +6,6 @@
     <ProjectReference Include="..\AsyncConverter\AsyncConverter.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="JetBrains.ReSharper.SDK.Tests" Version="2017.2.2" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Remove="Packages\**" />
     <Compile Remove="Test\Data\**" />
   </ItemGroup>
@@ -20,5 +17,8 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="JetBrains.ReSharper.SDK.Tests" Version="2017.3.1" />
   </ItemGroup>
 </Project>
