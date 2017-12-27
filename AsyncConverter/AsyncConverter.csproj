@@ -1,16 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
-	<IsPackable>true</IsPackable>
-	<PackageId>AsyncConverter.AsyncConverter</PackageId>
-	<Version>1.1.8.3</Version>
-	<Authors>i.mamay</Authors>
-	<Company />
-	<Product />
-	<Copyright>i.mamay</Copyright>
-	<Description>Plugin for resharper 2017.2, for converting code to async.</Description>
-	<PackageTags>async</PackageTags>
-	<PackageProjectUrl>https://github.com/BigBabay/AsyncConverter</PackageProjectUrl>
+    <IsPackable>true</IsPackable>
+    <PackageId>AsyncConverter.AsyncConverter</PackageId>
+    <Version>1.1.8.3</Version>
+    <Authors>i.mamay</Authors>
+    <Company />
+    <Product />
+    <Copyright>i.mamay</Copyright>
+    <Description>Plugin for resharper, for converting code to async.</Description>
+    <PackageTags>async</PackageTags>
+    <PackageProjectUrl>https://github.com/BigBabay/AsyncConverter</PackageProjectUrl>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="AsyncConverter.Rider.nuspec" />
@@ -18,7 +18,7 @@
     <None Remove="packages.AsyncConverter.Rider.config" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="JetBrains.ReSharper.SDK" Version="2017.2.2" PrivateAssets="All" />
-    <PackageReference Include="Wave" Version="[9.0]" />
+    <PackageReference Include="JetBrains.ReSharper.SDK" Version="2017.3.1" PrivateAssets="All" />
+	<PackageReference Include="Wave" Version="[11.0]" />
   </ItemGroup>
 </Project>

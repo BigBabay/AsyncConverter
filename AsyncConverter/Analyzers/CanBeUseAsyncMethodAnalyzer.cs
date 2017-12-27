@@ -1,6 +1,5 @@
 ﻿using AsyncConverter.AsyncHelpers.MethodFinders;
 using AsyncConverter.Highlightings;
-using JetBrains.ReSharper.Daemon.Stages.Dispatcher;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;

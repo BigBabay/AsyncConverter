@@ -2,7 +2,6 @@
 using AsyncConverter.Checkers;
 using AsyncConverter.Highlightings;
 using JetBrains.ProjectModel;
-using JetBrains.ReSharper.Daemon.Stages.Dispatcher;
 using JetBrains.ReSharper.Feature.Services.CSharp.PostfixTemplates;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi;

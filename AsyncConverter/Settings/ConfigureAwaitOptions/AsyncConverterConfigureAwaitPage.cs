@@ -1,16 +1,14 @@
 ﻿using System.Linq;
 using JetBrains.Annotations;
-using JetBrains.Application.Interop.NativeHook;
 using JetBrains.Application.Settings;
-using JetBrains.Application.UI.Components;
+using JetBrains.Application.UI.Controls.Dialogs;
 using JetBrains.Application.UI.Controls.StringCollectionEdit.Impl;
+using JetBrains.Application.UI.Controls.StringCollectionEdit.Impl.Buttons;
 using JetBrains.Application.UI.Controls.StringCollectionEdit.Impl.Items;
 using JetBrains.Application.UI.Options;
 using JetBrains.Application.UI.Options.OptionsDialog;
-using JetBrains.Application.UI.Validation;
 using JetBrains.DataFlow;
 using JetBrains.ReSharper.Feature.Services.Resources;
-using JetBrains.UI.Wpf.Controls.StringCollectionEdit.Impl.Buttons;
 
 namespace AsyncConverter.Settings.ConfigureAwaitOptions
 {
@@ -20,13 +18,12 @@ namespace AsyncConverter.Settings.ConfigureAwaitOptions
         public const string PID = "AsyncConverterConfigureAwait";
 
         public AsyncConverterConfigureAwaitPage([NotNull] Lifetime lifetime, [NotNull] OptionsSettingsSmartContext store,
-            IWindowsHookManager windowsHookManager, FormValidators formValidators, IUIApplication iuiApplication)
+                                                IPromptWinForm promptWinForms)
             : base(lifetime, store)
         {
             AddHeader("In class and method will be ignored ConfigureAwait suggestion");
             var editItemViewModelFactory = new DefaultCollectionEditItemViewModelFactory(null);
-            var buttonProviderFactory = new DefaultButtonProviderFactory(lifetime, windowsHookManager, formValidators,
-                iuiApplication, editItemViewModelFactory);
+            var buttonProviderFactory = new DefaultButtonProviderFactory(lifetime, promptWinForms, editItemViewModelFactory);
             var attributeTypes = new StringCollectionEditViewModel(lifetime, "Attributes:",
                 buttonProviderFactory, editItemViewModelFactory);
             foreach (var type in store.EnumIndexedValues(AsyncConverterSettingsAccessor.ConfigureAwaitIgnoreAttributeTypes))
