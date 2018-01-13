@@ -119,9 +119,6 @@ namespace AsyncConverter.Helpers
                                 return false;
                             }
                         }
-
-                        if (awaitEliderChecker.CanElide(lambdaExpression))
-                            awaitElider.Elide(lambdaExpression);
                     }
                 }
             }
