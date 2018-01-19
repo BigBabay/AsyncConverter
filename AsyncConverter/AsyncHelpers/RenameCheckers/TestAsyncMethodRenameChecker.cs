@@ -15,10 +15,11 @@ namespace AsyncConverter.AsyncHelpers.RenameCheckers
         private readonly HashSet<ClrTypeName> testAttributesClass = new HashSet<ClrTypeName>
                                                            {
                                                                new ClrTypeName("Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute"),
+                                                               new ClrTypeName("Microsoft.VisualStudio.TestTools.UnitTesting.DataTestMethodAttribute"),
                                                                new ClrTypeName("Xunit.FactAttribute"),
                                                                new ClrTypeName("Xunit.TheoryAttribute"),
                                                                new ClrTypeName("NUnit.Framework.TestAttribute"),
-                                                               new ClrTypeName("NUnit.Framework.TestCaseAttribute"),
+                                                               new ClrTypeName("NUnit.Framework.TestCaseAttribute")
                                                            };
 
         public bool SkipRename(IMethodDeclaration method)
