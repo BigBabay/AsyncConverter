@@ -8,11 +8,11 @@ using JetBrains.ReSharper.Psi.Tree;
 namespace AsyncConverter.Helpers
 {
     [SolutionComponent]
-    public class AwaitEliderChecker : IAwaitEliderChecker
+    public class MainAwaitEliderChecker : IConcreateAwaitEliderChecker
     {
         private readonly ILastNodeChecker lastNodeChecker;
 
-        public AwaitEliderChecker(ILastNodeChecker lastNodeChecker)
+        public MainAwaitEliderChecker(ILastNodeChecker lastNodeChecker)
         {
             this.lastNodeChecker = lastNodeChecker;
         }
