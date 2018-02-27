@@ -9,7 +9,7 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
         [Test]
         public async Task |Test|(0)()
         {
-            |await Task.Delay(1000).ConfigureAwait(false)|(1);
+            await Task.Delay(1000).ConfigureAwait(false);
         }
     }
 }
@@ -21,4 +21,3 @@ namespace NUnit.Framework
 }
 ---------------------------------------------------------
 (0): ReSharper Warning: (T) '' (E) 'Async method must ends on "Async"'
-(1): ReSharper Warning: (T) 'Async in method declaration and await may be elided.' (E) 'Await may be elided.'
