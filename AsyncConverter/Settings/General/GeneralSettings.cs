@@ -8,7 +8,7 @@ namespace AsyncConverter.Settings.General
         [SettingsEntry(true, "Do not suggest elide await in test method.")]
         public bool ExcludeTestMethodsFromEliding{ get; set; }
 
-        [SettingsEntry(true, "Do not suggest adding 'Async' suffix to test method.")]
+        [SettingsEntry(true, "Do not suggest add 'Async' suffix to test method.")]
         public bool ExcludeTestMethodsFromRanaming { get; set; }
     }
 }

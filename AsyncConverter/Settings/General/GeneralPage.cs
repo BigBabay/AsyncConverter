@@ -15,10 +15,10 @@ namespace AsyncConverter.Settings.General
             : base(lifetime, store)
         {
             AddHeader("Naming options");
-            AddBoolOption((GeneralSettings options) => options.ExcludeTestMethodsFromRanaming, "Do not suggest elide await in test method.");
+            AddBoolOption((GeneralSettings options) => options.ExcludeTestMethodsFromRanaming, "Do not suggest add 'Async' suffix to test method.");
 
             AddHeader("Eliding options");
-            AddBoolOption((GeneralSettings options) => options.ExcludeTestMethodsFromEliding, "Do not suggest adding 'Async' suffix to test method.");
+            AddBoolOption((GeneralSettings options) => options.ExcludeTestMethodsFromEliding, "Do not suggest elide await in test method.");
         }
     }
 }
