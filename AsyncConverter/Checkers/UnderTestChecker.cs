@@ -1,11 +1,8 @@
 ﻿using System.Collections.Generic;
 using AsyncConverter.Helpers;
-using AsyncConverter.Settings;
-using JetBrains.Application.Settings;
 using JetBrains.Metadata.Reader.Impl;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
-using JetBrains.ReSharper.Psi.Tree;
 
 namespace AsyncConverter.Checkers
 {
@@ -22,16 +19,6 @@ namespace AsyncConverter.Checkers
                                                                         new ClrTypeName("NUnit.Framework.TestCaseAttribute")
                                                                     };
 
-        public bool IsUnder(IMethodDeclaration method)
-        {
-            if (method.AttributeSectionList == null)
-                return false;
-
-            var excludeTestMethods = method.GetSettingsStore().GetValue(AsyncConverterSettingsAccessor.ExcludeTestMethodsFromAnalysis);
-            if (!excludeTestMethods)
-                return false;
-
-            return method.ContainsAttribute(testAttributesClass);
-        }
+        public bool IsUnder(IMethodDeclaration method) => method.AttributeSectionList != null && method.ContainsAttribute(testAttributesClass);
     }
 }
