@@ -6,10 +6,9 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
     using Xunit;
     public class Class
     {
-        [Theory]
+        [Fact]
         public async Task Test()
         {
-            await Task.Delay(1000).ConfigureAwait(false);
             await Task.Delay(1000).ConfigureAwait(false);
         }
     }
@@ -17,6 +16,6 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 
 namespace Xunit
 {
-    public class TheoryAttribute : Attribute
+    public class FactAttribute : Attribute
     { }
 }

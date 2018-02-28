@@ -3,20 +3,19 @@ using System.Threading.Tasks;
 
 namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 {
-    using Xunit;
+    using NUnit.Framework;
     public class Class
     {
-        [Theory]
+        [TestCase]
         public async Task Test()
         {
-            await Task.Delay(1000).ConfigureAwait(false);
             await Task.Delay(1000).ConfigureAwait(false);
         }
     }
 }
 
-namespace Xunit
+namespace NUnit.Framework
 {
-    public class TheoryAttribute : Attribute
+    public class TestCaseAttribute : Attribute
     { }
 }

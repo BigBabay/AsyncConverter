@@ -2,7 +2,7 @@ using JetBrains.ReSharper.Psi.Tree;
 
 namespace AsyncConverter.Helpers
 {
-    public interface IAwaitEliderChecker
+    public interface IConcreateAwaitEliderChecker
     {
         bool CanElide(IParametersOwnerDeclaration element);
     }

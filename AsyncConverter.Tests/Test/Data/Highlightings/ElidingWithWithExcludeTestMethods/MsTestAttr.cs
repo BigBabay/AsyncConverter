@@ -3,20 +3,19 @@ using System.Threading.Tasks;
 
 namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 {
-    using Xunit;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     public class Class
     {
-        [Theory]
+        [TestMethod]
         public async Task Test()
         {
-            await Task.Delay(1000).ConfigureAwait(false);
             await Task.Delay(1000).ConfigureAwait(false);
         }
     }
 }
 
-namespace Xunit
+namespace Microsoft.VisualStudio.TestTools.UnitTesting
 {
-    public class TheoryAttribute : Attribute
+    public class TestMethodAttribute : Attribute
     { }
 }

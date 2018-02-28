@@ -21,4 +21,7 @@
   <ItemGroup>
     <PackageReference Include="JetBrains.ReSharper.SDK.Tests" Version="2017.3.1" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Test\Data\**\*.cs.tmp" />
+  </ItemGroup>
 </Project>

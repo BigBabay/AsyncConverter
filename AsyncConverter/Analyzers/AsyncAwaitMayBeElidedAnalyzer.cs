@@ -1,4 +1,5 @@
-﻿using AsyncConverter.Helpers;
+﻿using AsyncConverter.AsyncHelpers.AwaitEliders;
+using AsyncConverter.Helpers;
 using AsyncConverter.Highlightings;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Feature.Services.Daemon;
@@ -12,9 +13,9 @@ namespace AsyncConverter.Analyzers
     {
         protected override void Run(IParametersOwnerDeclaration element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
-            var awaitElideChecker = element.GetSolution().GetComponent<IAwaitEliderChecker>();
+            var awaitEliderChecker = element.GetSolution().GetComponent<IAwaitEliderChecker>();
 
-            if (awaitElideChecker.CanElide(element))
+            if (awaitEliderChecker.CanElide(element))
             {
                 foreach (var awaitExpression in element.DescendantsInScope<IAwaitExpression>())
                 {

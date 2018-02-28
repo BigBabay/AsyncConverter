@@ -6,17 +6,18 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     public class Class
     {
-        [DataTestMethod]
+        [TestMethod]
         public async Task Test()
         {
-            await Task.Delay(1000).ConfigureAwait(false);
-            await Task.Delay(1000).ConfigureAwait(false);
+            |await Task.Delay(1000).ConfigureAwait(false)|(0);
         }
     }
 }
 
 namespace Microsoft.VisualStudio.TestTools.UnitTesting
 {
-    public class DataTestMethodAttribute : Attribute
+    public class TestMethodAttribute : Attribute
     { }
 }
+---------------------------------------------------------
+(0): ReSharper Warning: (T) 'Async in method declaration and await may be elided.' (E) 'Await may be elided.'

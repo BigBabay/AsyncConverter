@@ -1,6 +1,6 @@
 namespace AsyncConverter.Tests.Highlightings
 {
-    public class AsyncAwaitMayBeElidedTests : HighlightingsTestsBase
+    public class ElidingTests : HighlightingsTestsBase
     {
         protected override string Folder => "AsyncAwaitMayBeElided";
     }
