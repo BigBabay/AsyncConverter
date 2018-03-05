@@ -13,6 +13,12 @@
     <PackageTags>async</PackageTags>
     <PackageProjectUrl>https://github.com/BigBabay/AsyncConverter</PackageProjectUrl>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Rider\Debug\net461\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Rider\Release\net461\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Settings\ConfigureAwaitOptions\AsyncConverterConfigureAwaitPage.cs" />
   </ItemGroup>
