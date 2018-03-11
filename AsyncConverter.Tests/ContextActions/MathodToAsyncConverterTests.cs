@@ -22,7 +22,7 @@ namespace AsyncConverter.Tests.ContextActions
         private TestCaseData[] FileNames()
         {
             return Directory
-                .GetFiles(@"..\..\..\..\..\Test\Data\" + RelativeTestDataPath, "*.cs")
+                .GetFiles(@"..\..\..\..\Test\Data\" + RelativeTestDataPath, "*.cs")
                 .Select(x => new TestCaseData(Path.GetFileName(x)))
                 .ToArray();
         }
