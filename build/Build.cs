@@ -1,4 +1,4 @@
-﻿using System.IO;
+﻿using System.IO.Compression;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Core;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
@@ -20,6 +20,8 @@ class Build : NukeBuild
 
     // [Parameter] readonly string MyGetApiKey;
     // Returns command-line arguments and environment variables.
+
+    public override AbsolutePath ArtifactsDirectory => SolutionDirectory / "packages";
 
     Target Clean => _ => _
             .OnlyWhen(() => false) // Disabled for safety.
@@ -51,13 +53,17 @@ class Build : NukeBuild
                           .Executes(() =>
                                     {
                                         DotNetPack(s => DefaultDotNetPack
-                                                       .SetOutputDirectory(Path.Combine(SolutionDirectory, "packages"))
+                                                       .SetOutputDirectory(ArtifactsDirectory)
                                                        .DisableIncludeSymbols()
                                                        .SetProject("AsyncConverter/AsyncConverter.csproj"));
 
+                                        var riderDir = SolutionDirectory / "Rider" / "AsyncConverter.AsyncConverter.Rider";
                                         DotNetPack(s => DefaultDotNetPack
-                                                       .SetOutputDirectory(Path.Combine(SolutionDirectory, "Rider"))
+                                                       .SetOutputDirectory(riderDir)
                                                        .DisableIncludeSymbols()
                                                        .SetProject("AsyncConverter/AsyncConverter.Rider.csproj"));
+
+                                        ZipFile.CreateFromDirectory(riderDir,
+                                            ArtifactsDirectory / $"AsyncConverter.Rider.zip");
                                     });
 }
