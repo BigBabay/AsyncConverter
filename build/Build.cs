@@ -1,4 +1,5 @@
-﻿using Nuke.Core;
+﻿using Nuke.Common.Tools.DotNet;
+using Nuke.Core;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 using static Nuke.Core.IO.FileSystemTasks;
 using static Nuke.Core.IO.PathConstruction;
@@ -31,7 +32,10 @@ class Build : NukeBuild
             .DependsOn(Clean)
             .Executes(() =>
             {
-                DotNetRestore(s => DefaultDotNetRestore);
+                DotNetRestore(s => DefaultDotNetRestore.SetProjectFile("AsyncConverter/AsyncConverter.csproj"));
+                DotNetRestore(s => DefaultDotNetRestore.SetProjectFile("AsyncConverter/AsyncConverter.Rider.csproj"));
+                DotNetRestore(s => DefaultDotNetRestore.SetProjectFile("AsyncConverter.Tests/AsyncConverter.Tests.csproj"));
+                DotNetRestore(s => DefaultDotNetRestore.SetProjectFile("AsyncConverter.Tests/AsyncConverter.Rider.Tests.csproj"));
             });
 
     Target Compile => _ => _
