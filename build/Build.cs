@@ -1,4 +1,5 @@
-﻿using Nuke.Common.Tools.DotNet;
+﻿using System.IO;
+using Nuke.Common.Tools.DotNet;
 using Nuke.Core;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 using static Nuke.Core.IO.FileSystemTasks;
@@ -44,4 +45,19 @@ class Build : NukeBuild
             {
                 DotNetBuild(s => DefaultDotNetBuild);
             });
+
+    Target Pack => _ => _
+                          .DependsOn(Compile)
+                          .Executes(() =>
+                                    {
+                                        DotNetPack(s => DefaultDotNetPack
+                                                       .SetOutputDirectory(Path.Combine(SolutionDirectory, "packages"))
+                                                       .DisableIncludeSymbols()
+                                                       .SetProject("AsyncConverter/AsyncConverter.csproj"));
+
+                                        DotNetPack(s => DefaultDotNetPack
+                                                       .SetOutputDirectory(Path.Combine(SolutionDirectory, "Rider"))
+                                                       .DisableIncludeSymbols()
+                                                       .SetProject("AsyncConverter/AsyncConverter.Rider.csproj"));
+                                    });
 }
