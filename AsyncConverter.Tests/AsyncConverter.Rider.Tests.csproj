@@ -1,13 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
+    <RootNamespace>AsyncConverter.Tests</RootNamespace>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>bin\Resharper\Debug</OutputPath>
+    <OutputPath>bin\Rider\Debug</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <OutputPath>bin\Resharper\Release</OutputPath>
+    <OutputPath>bin\Rider\Release</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Packages\**" />
@@ -23,12 +24,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="JetBrains.ReSharper.SDK.Tests" Version="2017.3.1" />
+    <ProjectReference Include="..\AsyncConverter\AsyncConverter.Rider.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Test\Data\**\*.cs.tmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AsyncConverter\AsyncConverter.csproj" />
+    <PackageReference Include="JetBrains.Rider.SDK.Tests" Version="2017.3.0" />
   </ItemGroup>
 </Project>

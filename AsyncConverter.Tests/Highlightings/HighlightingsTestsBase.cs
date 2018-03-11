@@ -25,7 +25,7 @@ namespace AsyncConverter.Tests.Highlightings
         protected TestCaseData[] FileNames()
         {
             return Directory
-                .GetFiles(@"..\..\..\Test\Data\" + RelativeTestDataPath, "*.cs")
+                .GetFiles(@"..\..\..\..\Test\Data\" + RelativeTestDataPath, "*.cs")
                 .Select(x => new TestCaseData(Path.GetFileName(x)))
                 .ToArray();
         }
