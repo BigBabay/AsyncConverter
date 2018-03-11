@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
     <IsPackable>true</IsPackable>
-    <PackageId>AsyncConverter.AsyncConverter</PackageId>
-    <Version>1.1.8.4</Version>
+    <PackageId>AsyncConverter.Rider</PackageId>
+    <Version>1.1.8.7</Version>
     <Authors>i.mamay</Authors>
     <Company />
     <Product />
