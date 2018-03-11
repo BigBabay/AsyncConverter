@@ -9,9 +9,6 @@
     <OutputPath>bin\Resharper\Release</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AsyncConverter\AsyncConverter.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Remove="Packages\**" />
     <Compile Remove="Test\Data\**" />
   </ItemGroup>
@@ -29,5 +26,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Test\Data\**\*.cs.tmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AsyncConverter\AsyncConverter.csproj" />
   </ItemGroup>
 </Project>
