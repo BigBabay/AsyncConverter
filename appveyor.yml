@@ -3,12 +3,8 @@ configuration: Release
 image: Visual Studio 2017
 nuget:
   project_feed: true
-before_build:
-- cmd: nuget restore AsyncConverter.sln
-build:
-  publish_nuget: true
-  project: AsyncConverter.sln
-  verbosity: minimal
+build_script:
+- ps: ./build.cmd Compile
 test:
   assemblies:
     only:
