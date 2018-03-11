@@ -4,8 +4,11 @@ image: Visual Studio 2017
 nuget:
   project_feed: true
 build_script:
-- ps: ./build.cmd Compile
+- ps: ./build.cmd Pack
+artifacts:
+  - path: ./package/*.nupkg
 test:
   assemblies:
     only:
     - AsyncConverter.Tests.dll
+    - AsyncConverter.Rider.Tests.dll
