@@ -4,10 +4,10 @@
     <RootNamespace>AsyncConverter.Tests</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>bin\Rider\Debug\net461\</OutputPath>
+    <OutputPath>bin\Rider\Debug</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <OutputPath>bin\Rider\Release\net461</OutputPath>
+    <OutputPath>bin\Rider\Release</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Packages\**" />

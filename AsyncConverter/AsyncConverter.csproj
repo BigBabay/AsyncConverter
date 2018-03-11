@@ -14,10 +14,10 @@
     <PackageProjectUrl>https://github.com/BigBabay/AsyncConverter</PackageProjectUrl>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>bin\Resharper\Debug\net461\</OutputPath>
+    <OutputPath>bin\Resharper\Debug</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <OutputPath>bin\Resharper\Release\net461\</OutputPath>
+    <OutputPath>bin\Resharper\Release</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="AsyncConverter.Rider.nuspec" />
