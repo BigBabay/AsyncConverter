@@ -1,4 +1,5 @@
-﻿using System.IO.Compression;
+﻿using System.IO;
+using System.IO.Compression;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Core;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
@@ -52,18 +53,21 @@ class Build : NukeBuild
                           .DependsOn(Compile)
                           .Executes(() =>
                                     {
+                                    //TODO: DeleteDirectory not work, and move to Clean
+                                        if (Directory.Exists(ArtifactsDirectory))
+                                            Directory.Delete(ArtifactsDirectory, true);
+
                                         DotNetPack(s => DefaultDotNetPack
                                                        .SetOutputDirectory(ArtifactsDirectory)
                                                        .DisableIncludeSymbols()
                                                        .SetProject("AsyncConverter/AsyncConverter.csproj"));
 
-                                        var riderDir = SolutionDirectory / "Rider" / "AsyncConverter.AsyncConverter.Rider";
                                         DotNetPack(s => DefaultDotNetPack
-                                                       .SetOutputDirectory(riderDir)
+                                                       .SetOutputDirectory(SolutionDirectory / "Rider" / "AsyncConverter.Rider")
                                                        .DisableIncludeSymbols()
                                                        .SetProject("AsyncConverter/AsyncConverter.Rider.csproj"));
 
-                                        ZipFile.CreateFromDirectory(riderDir,
+                                        ZipFile.CreateFromDirectory(SolutionDirectory / "Rider",
                                             ArtifactsDirectory / $"AsyncConverter.Rider.zip");
                                     });
 }
