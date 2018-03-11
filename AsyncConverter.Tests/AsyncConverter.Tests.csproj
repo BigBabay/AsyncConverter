@@ -2,6 +2,12 @@
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Resharper\Debug\net461\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Resharper\Release\net461\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\AsyncConverter\AsyncConverter.csproj" />
   </ItemGroup>
