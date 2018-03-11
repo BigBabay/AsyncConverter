@@ -24,5 +24,8 @@
     <Content Include="..\appveyor.yml">
       <Link>appveyor.yml</Link>
     </Content>
+    <Content Include="..\Rider\AsyncConverter.AsyncConverter.Rider\META-INF\plugin.xml">
+      <Link>plugin.xml</Link>
+    </Content>
   </ItemGroup>
 </Project>
