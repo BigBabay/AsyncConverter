@@ -17,11 +17,11 @@ namespace AsyncConverter.AsyncHelpers.RenameCheckers
             this.underTestChecker = underTestChecker;
         }
 
-        public bool SkipRename(IMethodDeclaration method)
+        public bool SkipRename(IMethodDeclaration methodDeclaration)
         {
-            var excludeTestMethods = method.GetSettingsStore().GetValue(AsyncConverterSettingsAccessor.ExcludeTestMethodsFromRenaming);
+            var excludeTestMethods = methodDeclaration.GetSettingsStore().GetValue(AsyncConverterSettingsAccessor.ExcludeTestMethodsFromRenaming);
             return excludeTestMethods
-                   && underTestChecker.IsUnder(method);
+                   && underTestChecker.IsUnder(methodDeclaration);
         }
     }
 }
