@@ -5,6 +5,7 @@ using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Search;
+using JetBrains.ReSharper.Psi.Tree;
 
 namespace AsyncConverter.Helpers
 {
@@ -59,6 +60,14 @@ namespace AsyncConverter.Helpers
                     .All(invocationExpression => !invocationConverter.TryReplaceInvocationToAsync(invocationExpression));
                 if(allInvocationReplaced)
                     break;
+            }
+
+            foreach (var parametersOwnerDeclaration in method
+                .Descendants<IParametersOwnerDeclaration>()
+                .ToEnumerable()
+                .Where(awaitEliderChecker.CanElide))
+            {
+                awaitElider.Elide(parametersOwnerDeclaration);
             }
 
             ReplaceMethodSignatureToAsync(methodDeclaredElement, method);

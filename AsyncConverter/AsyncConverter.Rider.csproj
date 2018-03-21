@@ -31,4 +31,22 @@
     <PackageReference Include="JetBrains.Rider.SDK" Version="2017.3.0" PrivateAssets="All" />
     <PackageReference Include="Wave" Version="[11.0]" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="tmp\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="tmp\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="tmp\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="packages\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="packages\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="packages\**" />
+  </ItemGroup>
 </Project>

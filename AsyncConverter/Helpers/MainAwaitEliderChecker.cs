@@ -1,4 +1,5 @@
 using System.Linq;
+using AsyncConverter.AsyncHelpers;
 using AsyncConverter.AsyncHelpers.Checker;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Psi;
@@ -40,6 +41,13 @@ namespace AsyncConverter.Helpers
                 return false;
 
             if (!lastNodeChecker.IsLastNode(awaitExpression))
+                return false;
+
+            var awaitingType = (awaitExpression.Task as IInvocationExpression)?.RemoveConfigureAwait()?.Type();
+            if (awaitingType == null)
+                return false;
+
+            if (!awaitingType.Equals(returnType) && !(returnType.IsTask() && awaitingType.IsGenericTask()) && !returnType.IsVoid())
                 return false;
 
             return true;
