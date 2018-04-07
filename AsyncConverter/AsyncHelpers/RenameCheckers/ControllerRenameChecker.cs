@@ -20,9 +20,9 @@ namespace AsyncConverter.AsyncHelpers.RenameCheckers
                                                                new ClrTypeName("Microsoft.AspNetCore.Mvc.ControllerBase"),
                                                            };
 
-        public bool SkipRename(IMethodDeclaration method)
+        public bool SkipRename(IMethodDeclaration methodDeclaration)
         {
-            var @class = method.DeclaredElement?.GetContainingType() as IClass;
+            var @class = methodDeclaration.DeclaredElement?.GetContainingType() as IClass;
             if (@class == null)
                 return false;
             var superTypes = @class.GetSuperTypesWithoutCircularDependent();

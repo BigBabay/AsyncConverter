@@ -5,6 +5,6 @@ namespace AsyncConverter.AsyncHelpers.RenameCheckers
 {
     public interface IConcreateRenameChecker
     {
-        bool SkipRename([NotNull]IMethodDeclaration method);
+        bool SkipRename([NotNull]IMethodDeclaration methodDeclaration);
     }
 }

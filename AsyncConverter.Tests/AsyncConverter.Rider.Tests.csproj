@@ -21,6 +21,9 @@
     <Content Include="Test\Data\**\*.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Test\Data\**\*.cs.tmp" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
