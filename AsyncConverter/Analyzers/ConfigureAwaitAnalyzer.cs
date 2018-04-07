@@ -15,6 +15,8 @@ namespace AsyncConverter.Analyzers
     {
         protected override void Run(IAwaitExpression element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
+            var needConfAwaitCheckers = element.GetSolution().GetComponent<IConfigureAwaitChecker>();
+
             var attributeFunctionChecker = element.GetSolution().GetComponent<IAttributeFunctionChecker>();
             var attributeTypeChecker = element.GetSolution().GetComponent<IAttributeTypeChecker>();
 
@@ -31,5 +33,14 @@ namespace AsyncConverter.Analyzers
 
             consumer.AddHighlighting(new ConfigureAwaitHighlighting(element));
         }
+    }
+
+    public interface IConfigureAwaitChecker
+    {
+        bool NeedAdding();
+    }
+
+    class ConfigureAwaitChecker : IConfigureAwaitChecker
+    {
     }
 }
