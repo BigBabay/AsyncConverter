@@ -12,6 +12,7 @@
     <Description>Plugin for resharper, for converting code to async.</Description>
     <PackageTags>async</PackageTags>
     <PackageProjectUrl>https://github.com/BigBabay/AsyncConverter</PackageProjectUrl>
+    <RootNamespace>AsyncConverter</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\Rider\Debug</OutputPath>
