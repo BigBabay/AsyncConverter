@@ -1,10 +1,7 @@
-﻿using AsyncConverter.AsyncHelpers.Checker;
-using AsyncConverter.Checkers;
+﻿using AsyncConverter.AsyncHelpers.ConfigureAwaitCheckers;
 using AsyncConverter.Highlightings;
 using JetBrains.ProjectModel;
-using JetBrains.ReSharper.Feature.Services.CSharp.PostfixTemplates;
 using JetBrains.ReSharper.Feature.Services.Daemon;
-using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 
@@ -17,30 +14,10 @@ namespace AsyncConverter.Analyzers
         {
             var needConfAwaitCheckers = element.GetSolution().GetComponent<IConfigureAwaitChecker>();
 
-            var attributeFunctionChecker = element.GetSolution().GetComponent<IAttributeFunctionChecker>();
-            var attributeTypeChecker = element.GetSolution().GetComponent<IAttributeTypeChecker>();
-
-            var declaredType = element.Task?.GetExpressionType() as IDeclaredType;
-
-            if (declaredType.IsConfigurableAwaitable() || declaredType.IsGenericConfigurableAwaitable())
-                return;
-
-            if (attributeFunctionChecker.IsUnder(element))
-                return;
-
-            if (attributeTypeChecker.IsUnder(element))
+            if(!needConfAwaitCheckers.NeedAdding(element))
                 return;
 
             consumer.AddHighlighting(new ConfigureAwaitHighlighting(element));
         }
-    }
-
-    public interface IConfigureAwaitChecker
-    {
-        bool NeedAdding();
-    }
-
-    class ConfigureAwaitChecker : IConfigureAwaitChecker
-    {
     }
 }
