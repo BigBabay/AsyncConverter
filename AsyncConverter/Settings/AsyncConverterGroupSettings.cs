@@ -1,9 +1,9 @@
-﻿using AsyncConverter.Highlightings;
+﻿using AsyncConverter.Settings;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 
 [assembly: RegisterConfigurableHighlightingsGroup(AsyncConverterGroupSettings.Id, AsyncConverterGroupSettings.Name)]
 
-namespace AsyncConverter.Highlightings
+namespace AsyncConverter.Settings
 {
     public static class AsyncConverterGroupSettings
     {
