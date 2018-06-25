@@ -1,0 +1,23 @@
+﻿using System;
+using System.Threading.Tasks;
+
+namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
+{
+    using NUnit.Framework;
+    public class Class
+    {
+        [TestCase]
+        public async Task Test()
+        {
+            |await Task.Delay(1000)|(0);
+        }
+    }
+}
+
+namespace NUnit.Framework
+{
+    public class TestCaseAttribute : Attribute
+    { }
+}
+---------------------------------------------------------
+(0): ReSharper Warning: (T) 'If await not configured it may cause deadlock, if this code will be call synchronously' (E) 'Await not configured'
