@@ -4,6 +4,6 @@ namespace AsyncConverter.AsyncHelpers.ConfigureAwaitCheckers.CustomCheckers
 {
     public interface IConfigureAwaitCustomChecker
     {
-        bool NeedAdding(IAwaitExpression element);
+        bool CanBeAdded(IAwaitExpression element);
     }
 }

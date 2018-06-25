@@ -14,7 +14,7 @@ namespace AsyncConverter.AsyncHelpers.ConfigureAwaitCheckers.CustomCheckers
             this.attributeFunctionChecker = attributeFunctionChecker;
         }
 
-        public bool NeedAdding(IAwaitExpression element)
+        public bool CanBeAdded(IAwaitExpression element)
         {
             return !attributeFunctionChecker.IsUnder(element);
         }
