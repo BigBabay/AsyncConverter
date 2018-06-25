@@ -8,7 +8,7 @@ namespace AsyncConverter.AsyncHelpers.ConfigureAwaitCheckers.CustomCheckers
     [SolutionComponent]
     internal class BaseChecker : IConfigureAwaitCustomChecker
     {
-        public bool NeedAdding(IAwaitExpression element)
+        public bool CanBeAdded(IAwaitExpression element)
         {
             var declaredType = element.Task?.GetExpressionType() as IDeclaredType;
 

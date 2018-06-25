@@ -1,18 +1,19 @@
 ﻿using AsyncConverter.Checkers;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
-using JetBrains.ReSharper.Psi.Tree;
 
 namespace AsyncConverter.AsyncHelpers.ConfigureAwaitCheckers.CustomCheckers
 {
     [SolutionComponent]
     class AttributeTypeChecker : IConfigureAwaitCustomChecker
     {
-        public bool NeedAdding(IAwaitExpression element)
-        {
-            var attributeTypeChecker = element.GetSolution().GetComponent<IAttributeTypeChecker>();
+        private readonly IAttributeTypeChecker attributeTypeChecker;
 
-            return !attributeTypeChecker.IsUnder(element);
+        public AttributeTypeChecker(IAttributeTypeChecker attributeTypeChecker)
+        {
+            this.attributeTypeChecker = attributeTypeChecker;
         }
+
+        public bool CanBeAdded(IAwaitExpression element) => !attributeTypeChecker.IsUnder(element);
     }
 }

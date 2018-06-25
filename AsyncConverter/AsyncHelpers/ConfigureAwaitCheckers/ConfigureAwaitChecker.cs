@@ -18,7 +18,7 @@ namespace AsyncConverter.AsyncHelpers.ConfigureAwaitCheckers
 
         public bool NeedAdding(IAwaitExpression element)
         {
-            return awaitCustomCheckers.All(x => x.NeedAdding(element));
+            return awaitCustomCheckers.All(x => x.CanBeAdded(element));
         }
     }
 }
