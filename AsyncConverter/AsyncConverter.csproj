@@ -3,7 +3,7 @@
     <TargetFramework>net461</TargetFramework>
     <IsPackable>true</IsPackable>
     <PackageId>AsyncConverter.AsyncConverter</PackageId>
-    <Version>1.1.8.10</Version>
+    <Version>1.1.8.11</Version>
     <Authors>i.mamay</Authors>
     <Company />
     <Product />
