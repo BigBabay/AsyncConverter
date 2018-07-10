@@ -16,7 +16,8 @@ namespace AsyncConverter.Checkers
                                                                         new ClrTypeName("Xunit.FactAttribute"),
                                                                         new ClrTypeName("Xunit.TheoryAttribute"),
                                                                         new ClrTypeName("NUnit.Framework.TestAttribute"),
-                                                                        new ClrTypeName("NUnit.Framework.TestCaseAttribute")
+                                                                        new ClrTypeName("NUnit.Framework.TestCaseAttribute"),
+                                                                        new ClrTypeName("NUnit.Framework.TestCaseSourceAttribute"),
                                                                     };
 
         public bool IsUnder(IMethodDeclaration method) => method.AttributeSectionList != null && method.ContainsAttribute(testAttributesClass);
