@@ -18,6 +18,10 @@ namespace AsyncConverter.Settings
             ExcludeTestMethodsFromEliding = x => x.ExcludeTestMethodsFromEliding;
 
         [NotNull]
+        public static readonly Expression<Func<GeneralSettings, bool>>
+            ExcludeTestMethodsFromConfigureAwait = x => x.ExcludeTestMethodsFromConfigureAwait;
+
+        [NotNull]
         public static readonly Expression<Func<AsyncConverterConfigureAwaitSettings, IIndexedEntry<string, string>>>
             ConfigureAwaitIgnoreAttributeTypes =
                 x => x.ConfigureAwaitIgnoreAttributeTypes;

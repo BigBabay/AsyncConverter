@@ -1,4 +1,4 @@
-using AsyncConverter.Settings.ConfigureAwaitOptions;
+﻿using AsyncConverter.Settings.ConfigureAwaitOptions;
 using JetBrains.Application.Settings;
 
 namespace AsyncConverter.Tests.Highlightings
@@ -9,6 +9,6 @@ namespace AsyncConverter.Tests.Highlightings
         {
             settingsStore.SetIndexedValue((AsyncConverterConfigureAwaitSettings s) => s.ConfigureAwaitIgnoreAttributeTypes, "MyCustomAttribute", "AsyncConverter.Tests.Test.Data.Highlightings.ConfigureAwaitWithAttribute.MyCustomAttribute");
         }
-        protected override string Folder => "ConfigureAwaitWithAttribute";
+        protected override string Folder => "ConfigureAwait/WithAttribute";
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AsyncConverter.Highlightings;
+using AsyncConverter.Settings;
 using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
