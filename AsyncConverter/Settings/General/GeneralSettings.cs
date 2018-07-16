@@ -11,8 +11,5 @@ namespace AsyncConverter.Settings.General
         [SettingsEntry(true, "Do not suggest add 'Async' suffix to test method.")]
         public bool ExcludeTestMethodsFromRanaming { get; set; }
 
-        [SettingsEntry(true, "Do not suggest add 'ConfigureAwait' into test method.")]
-        public bool ExcludeTestMethodsFromConfigureAwait { get; set; }
-
     }
 }
