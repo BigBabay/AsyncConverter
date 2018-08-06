@@ -1,8 +1,11 @@
+using System;
 using System.Linq;
 using AsyncConverter.AsyncHelpers.AwaitEliders;
 using JetBrains.Annotations;
 using JetBrains.ProjectModel;
+using JetBrains.ReSharper.Feature.Services.CSharp.Util;
 using JetBrains.ReSharper.Psi;
+using JetBrains.ReSharper.Psi.CodeAnnotations;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Search;
 using JetBrains.ReSharper.Psi.Tree;
@@ -91,6 +94,7 @@ namespace AsyncConverter.Helpers
                 if (task == null)
                     return;
                 newReturnValue = TypeFactory.CreateType(task, returnType);
+                ChangeJetbrainsAnnotations(methodDeclaration);
             }
 
             var name = GenerateAsyncMethodName(methodDeclaration.DeclaredName);
@@ -99,6 +103,35 @@ namespace AsyncConverter.Helpers
 
             if(awaitEliderChecker.CanElide(methodDeclaration))
                 awaitElider.Elide(methodDeclaration);
+        }
+
+        private static void ChangeJetbrainsAnnotations([NotNull] IMethodDeclaration methodDeclaration)
+        {
+            var itemCanBeNull = CodeAnnotationsUtil.GetNullabilityCache(methodDeclaration.UserData, methodDeclaration).ItemCanBeNullAnnotation;
+            ChangeAnnotationAttribute(
+                methodDeclaration,
+                "CanBeNull",
+                itemCanBeNull);
+
+            var itemNotNull = CodeAnnotationsUtil.GetNullabilityCache(methodDeclaration.UserData, methodDeclaration).ItemNotNullAnnotation;
+            ChangeAnnotationAttribute(
+                methodDeclaration,
+                "NotNull",
+                itemNotNull);
+        }
+
+        private static void ChangeAnnotationAttribute(IMethodDeclaration methodDeclaration, string toReplace, ITypeElement replacement)
+        {
+            var toReplaceAttribute = methodDeclaration.Attributes
+                .FirstOrDefault(a => string.Compare(a.Name.QualifiedName, toReplace, StringComparison.InvariantCultureIgnoreCase) == 0);
+            if (toReplaceAttribute != null && replacement != null)
+            {
+                var annotation = CSharpAnnotationsUtil.Annotate(methodDeclaration, replacement);
+                if (annotation.Status == CSharpAnnotationsUtil.Status.AnnotationInserted)
+                {
+                    methodDeclaration.RemoveAttribute(toReplaceAttribute);
+                }
+            }
         }
 
         private static void SetSignature([NotNull] IMethodDeclaration methodDeclaration, [NotNull] IType newReturnValue, [NotNull] string newName)

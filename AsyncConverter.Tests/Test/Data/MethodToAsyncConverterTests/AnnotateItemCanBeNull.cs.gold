@@ -1,0 +1,14 @@
+using System.Threading.Tasks;
+using JetBrains.Annotations;
+
+namespace AsyncConverter.Tests.Test.Data.MethodToAsyncConverterTests
+{
+    public class Class
+    {
+        [ItemCanBeNull]
+        public async Task<string> {caret}TestAsync()
+        {
+            return 5;
+        }
+    }
+}
