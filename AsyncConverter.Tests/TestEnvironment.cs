@@ -7,7 +7,7 @@ using NUnit.Framework;
 [assembly: RequiresSTA]
 
 [ZoneDefinition]
-public class TestEnvironmentZone : ITestsZone, IRequire<PsiFeatureTestZone> { }
+public class TestEnvironmentZone : ITestsEnvZone, IRequire<PsiFeatureTestZone> { }
 
 [SetUpFixture]
 public class ReSharperTestEnvironmentAssembly : ExtensionTestEnvironmentAssembly<TestEnvironmentZone> { }
