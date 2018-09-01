@@ -1,13 +1,13 @@
 ﻿using JetBrains.Annotations;
 using JetBrains.Application.UI.Options;
-using JetBrains.Application.UI.Options.OptionsDialog;
 using JetBrains.DataFlow;
+using JetBrains.IDE.UI.Options;
 using JetBrains.ReSharper.Feature.Services.Resources;
 
 namespace AsyncConverter.Settings.General
 {
     [OptionsPage(PID, "General", typeof(ServicesThemedIcons.AnalyzeThis), ParentId = AsyncConverterPage.PID)]
-    public sealed class GeneralPage : CustomSimpleOptionsPage
+    public sealed class GeneralPage : BeSimpleOptionsPage
     {
         public const string PID = "General";
 
