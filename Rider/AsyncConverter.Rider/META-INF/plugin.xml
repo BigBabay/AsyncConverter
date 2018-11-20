@@ -2,9 +2,9 @@
   <id>AsyncConverter.AsyncConverter</id>
   <name>AsyncConverter</name>
   <description>Plugin for converting code to async.</description>
-  <version>1.1.8.12</version>
+  <version>1.1.8.12-eap06</version>
   <vendor url="https://github.com/BigBabay/AsyncConverter">i.mamay</vendor>
-  <idea-version since-build="183.4139" until-build="183.*"/>
+  <idea-version since-build="183.4560.28" until-build="183.4560.28"/>
   <extensions defaultExtensionNs="com.intellij" />
   <depends>com.intellij.modules.rider</depends>
 </idea-plugin>

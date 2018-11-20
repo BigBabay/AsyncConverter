@@ -3,7 +3,7 @@
     <TargetFramework>net461</TargetFramework>
     <IsPackable>true</IsPackable>
     <PackageId>AsyncConverter.Rider</PackageId>
-    <Version>1.1.8.12-eap05</Version>
+    <Version>1.1.8.12-eap06</Version>
     <Authors>i.mamay</Authors>
     <Company />
     <Product />
@@ -29,8 +29,8 @@
     <None Remove="packages.AsyncConverter.Rider.config" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="JetBrains.Rider.SDK" Version="2018.3.0-eap05" PrivateAssets="All" />
-    <PackageReference Include="Wave" Version="[183.0.0-eap05]" />
+    <PackageReference Include="JetBrains.Rider.SDK" Version="2018.3.0-eap06" PrivateAssets="All" />
+    <PackageReference Include="Wave" Version="[183.0.0-eap06]" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="tmp\**" />
