@@ -3,7 +3,7 @@
     <TargetFramework>net461</TargetFramework>
     <IsPackable>true</IsPackable>
     <PackageId>AsyncConverter.Rider</PackageId>
-    <Version>1.1.8.11</Version>
+    <Version>1.1.8.12</Version>
     <Authors>i.mamay</Authors>
     <Company />
     <Product />
@@ -12,6 +12,7 @@
     <Description>Plugin for resharper, for converting code to async.</Description>
     <PackageTags>async</PackageTags>
     <PackageProjectUrl>https://github.com/BigBabay/AsyncConverter</PackageProjectUrl>
+    <RootNamespace>AsyncConverter</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\Rider\Debug</OutputPath>

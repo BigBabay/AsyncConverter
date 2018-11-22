@@ -21,7 +21,10 @@ namespace AsyncConverter.Settings.ConfigureAwaitOptions
                                                 IPromptWinForm promptWinForms)
             : base(lifetime, store)
         {
-            AddHeader("In class and method will be ignored ConfigureAwait suggestion");
+            AddBoolOption((AsyncConverterConfigureAwaitSettings options) => options.ExcludeTestMethodsFromConfigureAwait,
+                "Do not suggest add 'ConfigureAwait' in test method.");
+
+            AddHeader("In class and method under attributes will be ignored ConfigureAwait suggestion");
             var editItemViewModelFactory = new DefaultCollectionEditItemViewModelFactory(null);
             var buttonProviderFactory = new DefaultButtonProviderFactory(lifetime, promptWinForms, editItemViewModelFactory);
             var attributeTypes = new StringCollectionEditViewModel(lifetime, "Attributes:",

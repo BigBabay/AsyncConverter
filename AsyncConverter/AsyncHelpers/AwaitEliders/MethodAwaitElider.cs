@@ -9,7 +9,7 @@ namespace AsyncConverter.AsyncHelpers.AwaitEliders
     {
         public bool CanElide(ICSharpDeclaration declarationOrClosure) => declarationOrClosure is IMethodDeclaration;
 
-        public void Elide(ICSharpDeclaration declarationOrClosure, ICSharpExpression awaitExpression)
+        public void  Elide(ICSharpDeclaration declarationOrClosure, ICSharpExpression awaitExpression)
         {
             var factory = CSharpElementFactory.GetInstance(awaitExpression);
 

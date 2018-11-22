@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using AsyncConverter.Helpers;
 using AsyncConverter.Settings;
-using JetBrains.ReSharper.Psi.Tree;
 using JetBrains.Application.Settings;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
+using JetBrains.ReSharper.Psi.Tree;
 using JetBrains.Util;
 
 namespace AsyncConverter.AsyncHelpers.Checker
