@@ -1,0 +1,23 @@
+﻿using System;
+using System.Threading.Tasks;
+
+namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
+{
+    using NUnit.Framework;
+    public class Class
+    {
+        [Test]
+        public async Task Test()
+        {
+            |await Task.CompletedTask|(0);
+        }
+    }
+}
+
+namespace NUnit.Framework
+{
+    public class TestAttribute : Attribute
+    { }
+}
+---------------------------------------------------------
+(0): ReSharper Warning: (T) 'Async in method declaration and await may be elided.' (E) 'Await may be elided.'
