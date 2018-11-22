@@ -1,4 +1,4 @@
-﻿<idea-plugin>
+<idea-plugin>
   <id>AsyncConverter.AsyncConverter</id>
   <name>AsyncConverter</name>
   <description>Plugin for converting code to async.</description>
