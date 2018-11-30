@@ -1,10 +1,10 @@
 ﻿using JetBrains.Annotations;
-using JetBrains.ReSharper.Psi.Tree;
+using JetBrains.ReSharper.Psi.CSharp.Tree;
 
 namespace AsyncConverter.AsyncHelpers.Checker
 {
     public interface ILastNodeChecker
     {
-        bool IsLastNode([NotNull] ITreeNode element);
+        bool IsLastNode([NotNull] ICSharpExpression element);
     }
 }
