@@ -16,9 +16,11 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\Rider\Debug</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NETFRAMEWORK;NET461;RIDER</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Rider\Release</OutputPath>
+    <DefineConstants>TRACE;RELEASE;NETFRAMEWORK;NET461;RIDER</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Settings\ConfigureAwaitOptions\AsyncConverterConfigureAwaitPage.cs" />
@@ -29,8 +31,8 @@
     <None Remove="packages.AsyncConverter.Rider.config" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="JetBrains.Rider.SDK" Version="2018.2.0" PrivateAssets="All" />
-    <PackageReference Include="Wave" Version="[182]" />
+    <PackageReference Include="JetBrains.Rider.SDK" Version="2018.3.0" PrivateAssets="All" />
+    <PackageReference Include="Wave" Version="[183]" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="tmp\**" />
