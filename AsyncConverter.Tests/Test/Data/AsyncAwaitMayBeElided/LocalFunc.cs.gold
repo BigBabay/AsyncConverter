@@ -8,10 +8,10 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
         {
             await Foo().ConfigureAwait(false);
 
-          Task Foo()
-          {
-            {caret}return Task.Delay(1000);
-          }
+            Task Foo()
+            {
+              {caret}return Task.Delay(1000);
+            }
         }
     }
 }
