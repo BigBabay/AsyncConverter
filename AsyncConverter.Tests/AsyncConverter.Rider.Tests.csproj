@@ -30,6 +30,6 @@
     <ProjectReference Include="..\AsyncConverter\AsyncConverter.Rider.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="JetBrains.Rider.SDK.Tests" Version="2018.2.3" />
+    <PackageReference Include="JetBrains.Rider.SDK.Tests" Version="2018.3.0" />
   </ItemGroup>
 </Project>

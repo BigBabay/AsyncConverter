@@ -1,5 +1,6 @@
 ﻿using JetBrains.Annotations;
 using JetBrains.Application.UI.Options;
+using JetBrains.Application.UI.Options.OptionsDialog;
 using JetBrains.DataFlow;
 using JetBrains.IDE.UI.Options;
 using JetBrains.ReSharper.Feature.Services.Resources;
@@ -11,8 +12,8 @@ namespace AsyncConverter.Settings.General
     {
         public const string PID = "General";
 
-        public GeneralPage([NotNull] Lifetime lifetime, [NotNull] OptionsSettingsSmartContext store)
-            : base(lifetime, store)
+        public GeneralPage([NotNull] Lifetime lifetime, [NotNull] OptionsPageContext optionsPageContext, [NotNull] OptionsSettingsSmartContext store)
+            : base(lifetime, optionsPageContext, store)
         {
             AddHeader("Naming options");
             AddBoolOption((GeneralSettings options) => options.ExcludeTestMethodsFromRanaming, "Do not suggest add 'Async' suffix to test method.");
