@@ -4,7 +4,7 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 {
     public class Class
     {
-        private async Task MethodAsync()
+        public async Task MethodAsync()
         {
             if (await IsAsync().ConfigureAwait(false))
             {

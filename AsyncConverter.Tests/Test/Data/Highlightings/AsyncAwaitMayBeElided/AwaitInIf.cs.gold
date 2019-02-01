@@ -4,7 +4,7 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 {
     public class Class
     {
-        private async Task |MethodAsync|(0)()
+        public async Task MethodAsync()
         {
             if (await IsAsync().ConfigureAwait(false))
             {
@@ -20,4 +20,3 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 }
 
 ---------------------------------------------------------
-(0): ReSharper Dead Code: Method 'MethodAsync' is never used
