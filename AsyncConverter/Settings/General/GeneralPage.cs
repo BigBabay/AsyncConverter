@@ -1,8 +1,8 @@
 ﻿using JetBrains.Annotations;
 using JetBrains.Application.UI.Options;
 using JetBrains.Application.UI.Options.OptionsDialog;
-using JetBrains.DataFlow;
 using JetBrains.IDE.UI.Options;
+using JetBrains.Lifetimes;
 using JetBrains.ReSharper.Feature.Services.Resources;
 
 namespace AsyncConverter.Settings.General

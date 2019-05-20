@@ -26,7 +26,7 @@
     <None Remove="Test\Data\**\*.cs.tmp" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="JetBrains.ReSharper.SDK.Tests" Version="2018.3.0" />
+    <PackageReference Include="JetBrains.ReSharper.SDK.Tests" Version="2019.1.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AsyncConverter\AsyncConverter.csproj" />

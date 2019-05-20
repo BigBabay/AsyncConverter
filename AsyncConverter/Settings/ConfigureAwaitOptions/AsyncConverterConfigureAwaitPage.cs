@@ -7,7 +7,7 @@ using JetBrains.Application.UI.Controls.StringCollectionEdit.Impl.Buttons;
 using JetBrains.Application.UI.Controls.StringCollectionEdit.Impl.Items;
 using JetBrains.Application.UI.Options;
 using JetBrains.Application.UI.Options.OptionsDialog;
-using JetBrains.DataFlow;
+using JetBrains.Lifetimes;
 using JetBrains.ReSharper.Feature.Services.Resources;
 
 namespace AsyncConverter.Settings.ConfigureAwaitOptions
@@ -17,7 +17,7 @@ namespace AsyncConverter.Settings.ConfigureAwaitOptions
     {
         public const string PID = "AsyncConverterConfigureAwait";
 
-        public AsyncConverterConfigureAwaitPage([NotNull] Lifetime lifetime, [NotNull] OptionsSettingsSmartContext store,
+        public AsyncConverterConfigureAwaitPage(Lifetime lifetime, [NotNull] OptionsSettingsSmartContext store,
                                                 IPromptWinForm promptWinForms)
             : base(lifetime, store)
         {
