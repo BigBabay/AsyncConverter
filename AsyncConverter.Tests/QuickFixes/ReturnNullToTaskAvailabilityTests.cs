@@ -6,8 +6,7 @@ using NUnit.Framework;
 
 namespace AsyncConverter.Tests.QuickFixes
 {
-    [TestFixture]
-    [TestNetFramework4]
+    [TestNetFramework46]
     public class ReturnNullToTaskAvailabilityTests : QuickFixAvailabilityTestBase
     {
         protected override string RelativeTestDataPath => @"ReturnNullToTaskAvailabilityTests";

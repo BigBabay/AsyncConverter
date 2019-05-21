@@ -2,11 +2,12 @@
 using System.Linq;
 using AsyncConverter.ContextActions;
 using JetBrains.ReSharper.FeaturesTestFramework.Intentions;
+using JetBrains.ReSharper.TestFramework;
 using NUnit.Framework;
 
 namespace AsyncConverter.Tests.ContextActions
 {
-    [TestFixture]
+    [TestNetFramework46]
     public class MethodToAsyncConverterTests : CSharpContextActionExecuteTestBase<MethodToAsyncConverter>
     {
         protected override string ExtraPath => "MethodToAsyncConverterTests";
