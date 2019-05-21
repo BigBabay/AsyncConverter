@@ -6,7 +6,7 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
     {
         public Task<int> MethodAsync(Task<int> taskInt)
         {
-            return {caret}Task.FromResult(5);
+            return Task.FromResult({caret}5);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
     {
         public Task Test()
         {
-            return {caret}Task.CompletedTask;
+            return Task.Comp{caret}letedTask;
         }
     }
 }
