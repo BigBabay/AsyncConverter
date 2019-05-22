@@ -8,7 +8,6 @@ using NUnit.Framework;
 
 namespace AsyncConverter.Tests.Highlightings
 {
-    [TestFixture]
     [TestNetFramework46]
     public abstract class HighlightingsTestsBase : CSharpHighlightingTestBase
     {

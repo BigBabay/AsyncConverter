@@ -10,7 +10,7 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
             await Task.Factory.StartNew(() =>
             {
               Console.WriteLine("foo");
-              {caret}return Task.Delay(1000);
+              re{caret}turn Task.Delay(1000);
             }
         }
     }

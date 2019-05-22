@@ -31,8 +31,8 @@
     <None Remove="packages.AsyncConverter.Rider.config" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="JetBrains.Rider.SDK" Version="2018.3.0" PrivateAssets="All" />
-    <PackageReference Include="Wave" Version="[183]" />
+    <PackageReference Include="JetBrains.Rider.SDK" Version="2019.1.1" PrivateAssets="All" />
+    <PackageReference Include="Wave" Version="[191]" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="tmp\**" />

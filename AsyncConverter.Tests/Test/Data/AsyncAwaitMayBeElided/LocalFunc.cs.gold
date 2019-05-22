@@ -10,7 +10,7 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 
             Task Foo()
             {
-              {caret}return Task.Delay(1000);
+              re{caret}turn Task.Delay(1000);
             }
         }
     }

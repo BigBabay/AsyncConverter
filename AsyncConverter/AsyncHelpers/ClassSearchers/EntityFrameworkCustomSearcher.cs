@@ -24,7 +24,7 @@ namespace AsyncConverter.AsyncHelpers.ClassSearchers
             }
 
             var queryableName = new ClrTypeName("System.Data.Entity.QueryableExtensions");
-            var queryableType = TypeFactory.CreateTypeByCLRName(queryableName, invokedType.Module);
+            var queryableType = TypeFactory.CreateTypeByCLRName(queryableName, NullableAnnotation.Unknown, invokedType.Module);
             var queryableTypeElement = queryableType.GetTypeElement();
 
             return queryableTypeElement;

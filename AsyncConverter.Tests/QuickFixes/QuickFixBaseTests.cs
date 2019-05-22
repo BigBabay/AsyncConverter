@@ -7,7 +7,6 @@ using NUnit.Framework;
 
 namespace AsyncConverter.Tests.QuickFixes
 {
-    [TestFixture]
     [TestNetFramework46]
     public abstract class QuickFixBaseTests<TQuickFix> : CSharpQuickFixTestBase<TQuickFix> where TQuickFix : IQuickFix
     {

@@ -6,7 +6,7 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
     {
         public Task TestAsync()
         {
-          ret{caret}urn Task.Delay(1000);
+          return{caret} Task.Delay(1000);
         }
     }
 }

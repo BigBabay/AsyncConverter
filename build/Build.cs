@@ -1,7 +1,8 @@
-﻿using System.IO;
+using System.IO;
 using System.IO.Compression;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Core;
+using Nuke.Core.Utilities.Collections;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 using static Nuke.Core.IO.FileSystemTasks;
 using static Nuke.Core.IO.PathConstruction;
@@ -25,11 +26,11 @@ class Build : NukeBuild
     public override AbsolutePath ArtifactsDirectory => SolutionDirectory / "packages";
 
     Target Clean => _ => _
-            .OnlyWhen(() => false) // Disabled for safety.
             .Executes(() =>
             {
-                DeleteDirectories(GlobDirectories(SourceDirectory, "**/bin", "**/obj"));
-                EnsureCleanDirectory(OutputDirectory);
+                EnsureCleanDirectory(ArtifactsDirectory);
+                var directories = GlobDirectories(SolutionDirectory / "AsyncConverter", "**/bin", "**/obj");
+                directories.ForEach(EnsureCleanDirectory);
             });
 
     Target Restore => _ => _
