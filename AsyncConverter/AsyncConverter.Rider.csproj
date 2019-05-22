@@ -13,6 +13,7 @@
     <PackageTags>async</PackageTags>
     <PackageProjectUrl>https://github.com/BigBabay/AsyncConverter</PackageProjectUrl>
     <RootNamespace>AsyncConverter</RootNamespace>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\Rider\Debug</OutputPath>
