@@ -27,6 +27,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="JetBrains.ReSharper.SDK.Tests" Version="2019.1.1" />
+    <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="16.1.0" />
+    <PackageReference Include="Microsoft.TestPlatform.TranslationLayer" Version="16.1.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AsyncConverter\AsyncConverter.csproj" />
