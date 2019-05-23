@@ -4,6 +4,6 @@ namespace AsyncConverter.Tests.QuickFixes
 {
     public class ConfigureAwaitQuickFixTests : QuickFixBaseTests<ConfigureAwaitQuickFix>
     {
-        protected override string RelativeTestDataPath => @"ConfigureAwaitQuickFixTests";
+        protected override string Folder => @"ConfigureAwait";
     }
 }

@@ -4,6 +4,6 @@ namespace AsyncConverter.Tests.QuickFixes
 {
     public class ReturnNullAsTaskTests : QuickFixBaseTests<ReturnNullAsTask>
     {
-        protected override string RelativeTestDataPath => @"ReturnNullAsTaskTests";
+        protected override string Folder => @"NullReturn";
     }
 }
