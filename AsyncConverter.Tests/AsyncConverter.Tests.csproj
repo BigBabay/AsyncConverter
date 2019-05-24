@@ -33,4 +33,10 @@
   <ItemGroup>
     <ProjectReference Include="..\AsyncConverter\AsyncConverter.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Packages\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Test\Data\Highlightings\Eliding" />
+  </ItemGroup>
 </Project>
