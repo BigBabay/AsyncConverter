@@ -4,6 +4,6 @@ namespace AsyncConverter.Tests.QuickFixes
 {
     public class ArgumentValueAsTaskTests : QuickFixBaseTests<ArgumentValueAsTask>
     {
-        protected override string RelativeTestDataPath => @"ArgumentValueAsTaskTests";
+        protected override string Folder => @"ArgumentValueAsTask";
     }
 }

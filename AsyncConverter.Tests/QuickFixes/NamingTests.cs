@@ -4,6 +4,6 @@ namespace AsyncConverter.Tests.QuickFixes
 {
     public class NamingQuickFixTests : QuickFixBaseTests<AsyncMethodNamingQuickFix>
     {
-        protected override string RelativeTestDataPath => @"NamingQuickFix";
+        protected override string Folder => @"Naming";
     }
 }

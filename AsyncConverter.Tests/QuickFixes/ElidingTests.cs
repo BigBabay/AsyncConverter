@@ -4,6 +4,6 @@ namespace AsyncConverter.Tests.QuickFixes
 {
     public class AsyncAwaitMayBeElidedQuickFixTests : QuickFixBaseTests<AsyncAwaitMayBeElidedQuickFix>
     {
-        protected override string RelativeTestDataPath => @"AsyncAwaitMayBeElided";
+        protected override string Folder => @"Eliding";
     }
 }

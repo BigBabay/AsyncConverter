@@ -16,6 +16,10 @@ namespace AsyncConverter.Tests.QuickFixes
             DoTestFiles(fileName);
         }
 
+        protected abstract string Folder { get; }
+
+        protected sealed override string RelativeTestDataPath => "QuickFixes\\" + Folder;
+
         // ReSharper disable once MemberCanBePrivate.Global
         protected TestCaseData[] FileNames()
         {

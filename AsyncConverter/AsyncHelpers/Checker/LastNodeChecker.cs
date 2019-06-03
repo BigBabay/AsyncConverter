@@ -2,22 +2,22 @@
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.CSharp.Util;
-using JetBrains.ReSharper.Psi.Tree;
 
 namespace AsyncConverter.AsyncHelpers.Checker
 {
     [SolutionComponent]
     internal class LastNodeChecker : ILastNodeChecker
     {
-        public bool IsLastNode(ITreeNode element)
+        public bool IsLastNode(ICSharpExpression element)
         {
-            var statement = element.Parent as ICSharpStatement;
-            if (statement != null
-                && IsFinalStatement(statement)
-                && statement.GetContainingNode<IUsingStatement>() == null
-                && statement.GetContainingNode<ITryStatement>() == null
-                && statement.GetContainingNode<ILoopStatement>() == null
-                && statement.GetContainingNode<IIfStatement>() == null)
+            var parentStatement = element.Parent as ICSharpStatement;
+            if ((parentStatement is IReturnStatement || parentStatement is IExpressionStatement)
+                && IsFinalStatement(parentStatement)
+                && parentStatement.GetContainingNode<IUsingStatement>() == null
+                && parentStatement.GetContainingNode<ITryStatement>() == null
+                && parentStatement.GetContainingNode<ILoopStatement>() == null
+                && parentStatement.GetContainingNode<IIfStatement>() == null
+                )
                 return true;
 
             var arrowExpressionClause = element.Parent as IArrowExpressionClause;

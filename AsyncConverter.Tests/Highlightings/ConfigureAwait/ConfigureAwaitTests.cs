@@ -1,4 +1,4 @@
-﻿namespace AsyncConverter.Tests.Highlightings
+﻿namespace AsyncConverter.Tests.Highlightings.ConfigureAwait
 {
     public class ConfigureAwaitTests : HighlightingsTestsBase
     {

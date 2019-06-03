@@ -19,7 +19,7 @@ namespace AsyncConverter.Tests.Highlightings
 
         protected abstract string Folder { get; }
 
-        protected override string RelativeTestDataPath => "Highlightings\\" + Folder;
+        protected sealed override string RelativeTestDataPath => "Highlightings\\" + Folder;
 
         protected TestCaseData[] FileNames()
         {

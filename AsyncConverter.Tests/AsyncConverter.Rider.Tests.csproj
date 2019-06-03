@@ -34,4 +34,10 @@
     <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="16.1.0" />
     <PackageReference Include="Microsoft.TestPlatform.TranslationLayer" Version="16.1.0" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Packages\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Test\Data\QuickFixes" />
+  </ItemGroup>
 </Project>

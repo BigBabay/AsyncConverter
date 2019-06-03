@@ -1,7 +1,7 @@
 ﻿using AsyncConverter.Settings.ConfigureAwaitOptions;
 using JetBrains.Application.Settings;
 
-namespace AsyncConverter.Tests.Highlightings
+namespace AsyncConverter.Tests.Highlightings.ConfigureAwait
 {
     public class ConfigureAwaitWithAttributeTests : HighlightingsTestsBase
     {
