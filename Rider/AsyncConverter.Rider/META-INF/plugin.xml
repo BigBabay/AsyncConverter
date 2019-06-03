@@ -2,7 +2,7 @@
   <id>AsyncConverter.AsyncConverter</id>
   <name>AsyncConverter</name>
   <description>Plugin for converting code to async.</description>
-  <version>1.1.8.14</version>
+  <version>1.1.8.15</version>
   <vendor url="https://github.com/BigBabay/AsyncConverter">i.mamay</vendor>
   <idea-version since-build="191" until-build="191.*"/>
   <extensions defaultExtensionNs="com.intellij" />
