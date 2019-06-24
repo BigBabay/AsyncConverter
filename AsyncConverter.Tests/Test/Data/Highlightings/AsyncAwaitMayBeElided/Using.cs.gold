@@ -7,7 +7,7 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
     {
         public async Task TestAsync()
         {
-            |using|(0) (new MemoryStream())
+            using (new MemoryStream())
             {
                 await Task.Delay(1000).ConfigureAwait(false);
             }
@@ -16,4 +16,3 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 }
 
 ---------------------------------------------------------
-(0): ReSharper Suggestion: Convert to using declaration

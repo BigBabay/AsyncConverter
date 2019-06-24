@@ -31,15 +31,23 @@ namespace AsyncConverter.Helpers
             if (!type.IsGenericTask())
                 return false;
 
+            var meaningType = type.GetFirstGenericType();
+            return meaningType != null && meaningType.IsEquals(otherType);
+        }
+
+        [Pure]
+        [CanBeNull]
+        [ContractAnnotation("null => null")]
+        public static IType GetFirstGenericType(this IType type)
+        {
             var taskDeclaredType = type as IDeclaredType;
             if (taskDeclaredType == null)
-                return false;
+                return null;
 
             var substitution = taskDeclaredType.GetSubstitution();
             if (substitution.IsEmpty())
-                return false;
-            var meaningType = substitution.Apply(substitution.Domain[0]);
-            return meaningType.IsEquals(otherType);
+                return null;
+            return substitution.Apply(substitution.Domain[0]);
         }
 
         [Pure]
