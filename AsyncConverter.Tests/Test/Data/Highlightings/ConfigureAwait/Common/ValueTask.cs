@@ -6,7 +6,12 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
     {
         public async Task TestAsync()
         {
-            await Task.Delay(1000).ConfigureAwait(false);
+            await Aaa().ConfigureAwait(false);
+        }
+        
+        public static ValueTask<int> Aaa()
+        {
+            return new ValueTask<int>(5);
         }
     }
 }
