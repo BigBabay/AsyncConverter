@@ -15,3 +15,5 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
         }
     }
 }
+
+---------------------------------------------------------
