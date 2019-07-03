@@ -19,14 +19,14 @@ namespace AsyncConverter.AsyncHelpers.MethodFinders
             this.methodFindingChecker = methodFindingChecker;
         }
 
-        public FindingReslt FindEquivalentAsyncMethod(IMethod originalMethod, IType invokedType)
+        public FindingResult FindEquivalentAsyncMethod(IMethod originalMethod, IType invokedType)
         {
             if (!originalMethod.IsValid())
-                return FindingReslt.CreateFail();
+                return FindingResult.CreateFail();
 
             var @class = classForSearchResolver.GetClassForSearch(originalMethod, invokedType);
             if (@class == null)
-                return FindingReslt.CreateFail();
+                return FindingResult.CreateFail();
 
             foreach (var candidateMethod in @class.Methods)
             {
@@ -39,13 +39,13 @@ namespace AsyncConverter.AsyncHelpers.MethodFinders
                 if (!parameterCompareResult.CanBeConvertedToAsync())
                     continue;
 
-                return new FindingReslt
+                return new FindingResult
                        {
                            Method = candidateMethod,
                            ParameterCompareResult = parameterCompareResult,
                        };
             }
-            return FindingReslt.CreateFail();
+            return FindingResult.CreateFail();
         }
     }
 }

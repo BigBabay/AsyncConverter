@@ -3,12 +3,12 @@ using JetBrains.ReSharper.Psi;
 
 namespace AsyncConverter.AsyncHelpers.MethodFinders
 {
-    public class FindingReslt
+    public class FindingResult
     {
         public IMethod Method { get; set; }
         public ParameterCompareResult ParameterCompareResult { get; set; }
 
-        public static FindingReslt CreateFail() => new FindingReslt();
+        public static FindingResult CreateFail() => new FindingResult();
 
         public bool CanBeConvertedToAsync() => Method != null && ParameterCompareResult.CanBeConvertedToAsync();
     }
