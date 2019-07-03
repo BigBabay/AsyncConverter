@@ -16,12 +16,12 @@ namespace AsyncConverter.Analyzers
             this.asyncMethodFinder = asyncMethodFinder;
         }
 
-        protected override void Run(IInvocationExpression invocationExpression, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
+        protected override void Run(IInvocationExpression element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
-            if (!invocationExpression.IsUnderAsyncDeclaration())
+            if (!element.IsUnderAsyncDeclaration())
                 return;
 
-            var referenceCurrentResolveResult = invocationExpression.Reference?.Resolve();
+            var referenceCurrentResolveResult = element.Reference?.Resolve();
             if (referenceCurrentResolveResult?.IsValid() != true)
                 return;
 
@@ -29,13 +29,13 @@ namespace AsyncConverter.Analyzers
             if (invocationMethod == null)
                 return;
 
-            var invokedType = (invocationExpression.ConditionalQualifier as IReferenceExpression)?.QualifierExpression?.Type();
+            var invokedType = (element.ConditionalQualifier as IReferenceExpression)?.QualifierExpression?.Type();
 
             var findingResult = asyncMethodFinder.FindEquivalentAsyncMethod(invocationMethod, invokedType);
             if (findingResult.Method == null || !findingResult.ParameterCompareResult.CanBeConvertedToAsync())
                 return;
 
-            consumer.AddHighlighting(new CanBeUseAsyncMethodHighlighting(invocationExpression));
+            consumer.AddHighlighting(new CanBeUseAsyncMethodHighlighting(element));
         }
     }
 }
