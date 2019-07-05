@@ -27,4 +27,3 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 }
 
 ---------------------------------------------------------
-(0): ReSharper Warning: (T) '' (E) 'May be converted to nonblocking await call.'
