@@ -1,5 +1,4 @@
 using System;
-using AsyncConverter.AsyncHelpers.AwaitEliders;
 using AsyncConverter.AsyncHelpers.MethodFinders;
 using AsyncConverter.AsyncHelpers.ParameterComparers;
 using JetBrains.Annotations;
@@ -14,20 +13,14 @@ namespace AsyncConverter.Helpers
     public class InvocationConverter : IInvocationConverter
     {
         private readonly IAsyncInvocationReplacer asyncInvocationReplacer;
-        private readonly IAwaitEliderChecker awaitEliderChecker;
-        private readonly IAwaitElider awaitElider;
         private readonly IAsyncMethodFinder asyncMethodFinder;
 
         public InvocationConverter(
             IAsyncMethodFinder asyncMethodFinder,
-            IAsyncInvocationReplacer asyncInvocationReplacer,
-            IAwaitEliderChecker awaitEliderChecker,
-            IAwaitElider awaitElider)
+            IAsyncInvocationReplacer asyncInvocationReplacer)
         {
             this.asyncMethodFinder = asyncMethodFinder;
             this.asyncInvocationReplacer = asyncInvocationReplacer;
-            this.awaitEliderChecker = awaitEliderChecker;
-            this.awaitElider = awaitElider;
         }
 
         public bool TryReplaceInvocationToAsync(IInvocationExpression invocationExpression)
