@@ -8,7 +8,7 @@ namespace AsyncConverter.Helpers
 {
     public static class ParametersOwnerDeclarationExtensions
     {
-        //TODO:alredy exists?
+        //TODO:already exists?
         [Pure]
         [NotNull, ItemNotNull]
         public static IEnumerable<TNode> DescendantsInScope<TNode>([CanBeNull] this IParametersOwnerDeclaration root) where TNode : class, ICSharpTreeNode
