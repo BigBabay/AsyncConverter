@@ -1,29 +1,37 @@
 using AsyncConverter.Highlightings;
 using AsyncConverter.Settings;
+using JetBrains.Annotations;
 using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 
-[assembly: RegisterConfigurableSeverity(AsyncWaitHighlighting .SeverityId, null, AsyncConverterGroupSettings.Id, "Use async wait instead sync wait.", "Use async wait instead sync wait.", Severity.ERROR)]
+[assembly: RegisterConfigurableSeverity(AsyncWaitHighlighting.SeverityId, null, AsyncConverterGroupSettings.Id, "Use async wait instead sync wait.", "Use async wait instead sync wait.", Severity.ERROR)]
 
 namespace AsyncConverter.Highlightings
 {
     [ConfigurableSeverityHighlighting(SeverityId, CSharpLanguage.Name)]
     public class AsyncWaitHighlighting : IHighlighting
     {
-        public IReferenceExpression InvocationExpression { get; }
+        public IInvocationExpression InvocationExpression { get; }
+        public IReferenceExpression ReferenceExpression { get; }
+
         public const string SeverityId = "AsyncConverter.AsyncWait";
 
-        public AsyncWaitHighlighting(IReferenceExpression invocationExpression)
+        public AsyncWaitHighlighting([NotNull] IReferenceExpression referenceExpression)
+        {
+            ReferenceExpression = referenceExpression;
+        }
+
+        public AsyncWaitHighlighting([NotNull] IInvocationExpression invocationExpression)
         {
             InvocationExpression = invocationExpression;
         }
 
-        public bool IsValid() => InvocationExpression.IsValid();
+        public bool IsValid() => ReferenceExpression.IsValid();
 
-        public DocumentRange CalculateRange() => InvocationExpression.GetDocumentRange();
+        public DocumentRange CalculateRange() => ReferenceExpression?.GetDocumentRange() ?? InvocationExpression.GetDocumentRange();
 
         public string ToolTip => "Use async wait instead sync wait.";
         public string ErrorStripeToolTip => "Use async wait.";
