@@ -4,12 +4,13 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 {
     public class Class
     {
-        public async Task TestAsync()
+        public async Task<int> TestAsync()
         {
             await Task.Delay(1000).ConfigureAwait(false);
-            var result = Task.FromResult(5).Result;
+            return |Task.FromResult(1000).Result|(0);
         }
     }
 }
 
 ---------------------------------------------------------
+(0): ReSharper Underlined Error Highlighting: (T) 'Use async wait instead sync wait.' (E) 'Use async wait.'

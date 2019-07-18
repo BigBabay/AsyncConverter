@@ -5,9 +5,9 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 {
     public class Class
     {
-        public async Task {caret}TestAsync()
+        public Task {caret}TestAsync()
         {
-            Method(() => InnerMethod());
+          return MethodAsync(async () => InnerMethod());
         }
 
         public void Method(Action func)

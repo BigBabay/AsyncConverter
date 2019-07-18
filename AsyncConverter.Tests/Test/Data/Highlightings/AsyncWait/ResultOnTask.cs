@@ -8,8 +8,7 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
         {
             await Task.Delay(1000).ConfigureAwait(false);
             var task = Task.FromResult(1000);
-            var result = task.Result;
-            return result;
+            return task.Result;
         }
     }
 }

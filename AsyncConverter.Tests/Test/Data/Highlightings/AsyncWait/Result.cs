@@ -4,10 +4,10 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 {
     public class Class
     {
-        public async Task TestAsync()
+        public async Task<int> TestAsync()
         {
             await Task.Delay(1000).ConfigureAwait(false);
-            var result = Task.FromResult(1000).Result;
+            return Task.FromResult(1000).Result;
         }
     }
 }
