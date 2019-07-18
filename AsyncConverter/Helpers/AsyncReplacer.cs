@@ -1,5 +1,6 @@
 using System.Linq;
 using AsyncConverter.AsyncHelpers.AwaitEliders;
+using AsyncConverter.Checkers.AsyncWait;
 using JetBrains.Annotations;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Psi;
@@ -16,13 +17,19 @@ namespace AsyncConverter.Helpers
         private readonly IInvocationConverter invocationConverter;
         private readonly IAwaitElider awaitElider;
         private readonly IAwaitEliderChecker awaitEliderChecker;
+        private readonly ISyncWaitChecker syncWaitChecker;
+        private readonly ISyncWaitConverter syncWaitConverter;
 
-        public AsyncReplacer(IAsyncInvocationReplacer asyncInvocationReplacer, IInvocationConverter invocationConverter, IAwaitElider awaitElider, IAwaitEliderChecker awaitEliderChecker)
+        public AsyncReplacer(IAsyncInvocationReplacer asyncInvocationReplacer, IInvocationConverter invocationConverter,
+                             IAwaitElider awaitElider, IAwaitEliderChecker awaitEliderChecker,
+                             ISyncWaitChecker syncWaitChecker, ISyncWaitConverter syncWaitConverter)
         {
             this.asyncInvocationReplacer = asyncInvocationReplacer;
             this.invocationConverter = invocationConverter;
+            this.syncWaitChecker = syncWaitChecker;
             this.awaitElider = awaitElider;
             this.awaitEliderChecker = awaitEliderChecker;
+            this.syncWaitConverter = syncWaitConverter;
         }
 
         public void ReplaceToAsync(IMethod method)
@@ -53,13 +60,28 @@ namespace AsyncConverter.Helpers
             }
 
             //TODO: ugly hack. think
-            while (true)
+            IInvocationExpression invocationExpression;
+            while ((invocationExpression
+                       = method.DescendantsInScope<IInvocationExpression>().FirstOrDefault(syncWaitChecker.CanReplaceWaitToAsync)) != null)
+                syncWaitConverter.ReplaceWaitToAsync(invocationExpression);
+
+            IReferenceExpression referenceExpression;
+            while ((referenceExpression
+                       = method.DescendantsInScope<IReferenceExpression>().FirstOrDefault(syncWaitChecker.CanReplaceResultToAsync)) != null)
+                syncWaitConverter.ReplaceResultToAsync(referenceExpression);
+
+            var replace = true;
+            while (replace)
             {
-                var allInvocationReplaced = method
-                    .DescendantsInScope<IInvocationExpression>()
-                    .All(invocationExpression => !invocationConverter.TryReplaceInvocationToAsync(invocationExpression));
-                if(allInvocationReplaced)
-                    break;
+                replace = false;
+                foreach (var invocationExpression2 in method.DescendantsInScope<IInvocationExpression>())
+                {
+                    if (invocationConverter.TryReplaceInvocationToAsync(invocationExpression2))
+                    {
+                        replace = true;
+                        break;
+                    }
+                }
             }
 
             foreach (var parametersOwnerDeclaration in method
