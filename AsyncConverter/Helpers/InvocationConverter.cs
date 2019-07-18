@@ -1,10 +1,11 @@
 using System;
+using System.Linq;
 using AsyncConverter.AsyncHelpers.MethodFinders;
 using AsyncConverter.AsyncHelpers.ParameterComparers;
+using AsyncConverter.Checkers.AsyncWait;
 using JetBrains.Annotations;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Psi;
-using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 
 namespace AsyncConverter.Helpers
@@ -12,28 +13,24 @@ namespace AsyncConverter.Helpers
     [SolutionComponent]
     public class InvocationConverter : IInvocationConverter
     {
-        private readonly IAsyncInvocationReplacer asyncInvocationReplacer;
         private readonly IAsyncMethodFinder asyncMethodFinder;
+        private readonly IAsyncInvocationReplacer asyncInvocationReplacer;
+        private readonly ISyncWaitChecker syncWaitChecker;
+        private readonly ISyncWaitConverter syncWaitConverter;
 
         public InvocationConverter(
             IAsyncMethodFinder asyncMethodFinder,
-            IAsyncInvocationReplacer asyncInvocationReplacer)
+            IAsyncInvocationReplacer asyncInvocationReplacer,
+            ISyncWaitChecker syncWaitChecker,
+            ISyncWaitConverter syncWaitConverter)
         {
             this.asyncMethodFinder = asyncMethodFinder;
             this.asyncInvocationReplacer = asyncInvocationReplacer;
+            this.syncWaitChecker = syncWaitChecker;
+            this.syncWaitConverter = syncWaitConverter;
         }
 
         public bool TryReplaceInvocationToAsync(IInvocationExpression invocationExpression)
-        {
-            if (invocationExpression.Type().IsGenericTask() || invocationExpression.Type().IsTask())
-            {
-                return TryConvertSyncToAwaitWaiting(invocationExpression);
-            }
-
-            return TryConvertSyncCallToAsyncCall(invocationExpression);
-        }
-
-        private bool TryConvertSyncCallToAsyncCall([NotNull] IInvocationExpression invocationExpression)
         {
             var referenceCurrentResolveResult = invocationExpression.Reference?.Resolve();
             if (referenceCurrentResolveResult?.IsValid() != true)
@@ -57,34 +54,6 @@ namespace AsyncConverter.Helpers
             return false;
         }
 
-        private bool TryConvertSyncToAwaitWaiting([NotNull] IInvocationExpression invocationExpression)
-        {
-            var reference = invocationExpression.Parent as IReferenceExpression;
-
-            var factory = CSharpElementFactory.GetInstance(invocationExpression);
-
-            //TODO: AwaitResult our custom method extension, it must be moved to settings
-            if (reference?.NameIdentifier?.Name == "AwaitResult" || reference?.NameIdentifier?.Name == "Wait")
-            {
-                var call = factory.CreateExpression("await $0($1).ConfigureAwait(false)", invocationExpression.ConditionalQualifier,
-                    invocationExpression.ArgumentList);
-                var parentInvocation = reference.Parent as IInvocationExpression;
-                if (parentInvocation == null)
-                    return false;
-                parentInvocation.ReplaceBy(call);
-                return true;
-            }
-
-            if (reference?.NameIdentifier?.Name == "Result")
-            {
-                var call = factory.CreateExpression("await $0($1).ConfigureAwait(false)", invocationExpression.ConditionalQualifier,
-                    invocationExpression.ArgumentList);
-                reference.ReplaceBy(call);
-                return true;
-            }
-            return false;
-        }
-
         private bool TryConvertParameterFuncToAsync([NotNull] IInvocationExpression invocationExpression, [NotNull] ParameterCompareResult parameterCompareResult)
         {
             var arguments = invocationExpression.Arguments;
@@ -103,13 +72,23 @@ namespace AsyncConverter.Helpers
                             return false;
                         }
                         lambdaExpression.SetAsync(true);
+
+                        IInvocationExpression innerInvocationExpression;
+                        while ((innerInvocationExpression
+                                   = lambdaExpression.DescendantsInScope<IInvocationExpression>().FirstOrDefault(syncWaitChecker.CanReplaceWaitToAsync)) != null)
+                            syncWaitConverter.ReplaceWaitToAsync(innerInvocationExpression);
+
+                        IReferenceExpression referenceExpression;
+                        while ((referenceExpression
+                                   = lambdaExpression.DescendantsInScope<IReferenceExpression>().FirstOrDefault(syncWaitChecker.CanReplaceResultToAsync)) != null)
+                            syncWaitConverter.ReplaceResultToAsync(referenceExpression);
+
                         var innerInvocationExpressions = lambdaExpression.DescendantsInScope<IInvocationExpression>();
-                        foreach (var innerInvocationExpression in innerInvocationExpressions)
+                        foreach (var innerInvocationExpression2 in innerInvocationExpressions)
                         {
-                            if (!TryReplaceInvocationToAsync(innerInvocationExpression))
+                            if (!TryReplaceInvocationToAsync(innerInvocationExpression2))
                             {
-                                invocationExpression.PsiModule.GetPsiServices().Transactions.RollbackTransaction();
-                                return false;
+                                //invocationExpression.PsiModule.GetPsiServices().Transactions.RollbackTransaction();
                             }
                         }
                     }

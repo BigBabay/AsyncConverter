@@ -16,7 +16,7 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 
         public void Test2(Func<Task> func)
         {
-            func().Wait();
+            func();
         }
     }
 }
