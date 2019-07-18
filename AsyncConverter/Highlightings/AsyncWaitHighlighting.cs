@@ -29,7 +29,7 @@ namespace AsyncConverter.Highlightings
             InvocationExpression = invocationExpression;
         }
 
-        public bool IsValid() => ReferenceExpression.IsValid();
+        public bool IsValid() => ReferenceExpression?.IsValid() ?? InvocationExpression.IsValid();
 
         public DocumentRange CalculateRange() => ReferenceExpression?.GetDocumentRange() ?? InvocationExpression.GetDocumentRange();
 
