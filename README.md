@@ -13,15 +13,17 @@ AsyncConverter can:
 5. Analyze a method body and replace the every `.Result` call with the `await` call.
 6. Analyze usage of a processed method. If the method is called from `async` context the AsyncConverter will replace it's call with the `await` expression, otherwise it will just call `.Result` or `.Wait()`
 
-![Replacing Value](ReadMe/MathodToAsyncConverter.gif)
+![Converter Mathod To Async](ReadMe/MathodToAsyncConverter.gif)
 
 # Highlightings
 
-## Value Replacement
+## Convert `Wait()` and `Result` to `await`
 
-In case that an expected returning type is `Task<int>` but an actual returning type is `int`, AsyncConverter will notice you that you can wrap a returning value with `Task.FromResult()`.
+Under `async` method replace `Wait()` and `Result` to `await`.
 
-![Replacing Value](ReadMe/ReplacingValue.gif)
+![Replace wait to await](ReadMe/ReplaceWait.gif)
+
+![Replace result to await](ReadMe/ReplaceResult.gif)
 
 ## Return `null` as `Task`
 
