@@ -28,7 +28,7 @@
     <None Remove="packages.AsyncConverter.Rider.config" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="JetBrains.ReSharper.SDK" Version="2019.1.2" PrivateAssets="All" />
-    <PackageReference Include="Wave" Version="[191]" />
+    <PackageReference Include="JetBrains.ReSharper.SDK" Version="2019.2.0" PrivateAssets="All" />
+    <PackageReference Include="Wave" Version="[192]" />
   </ItemGroup>
 </Project>
