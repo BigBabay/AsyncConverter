@@ -8,9 +8,9 @@ namespace AsyncConverter.Tests.ContextActions
     [TestNetFramework45]
     public class MethodToAsyncConverterAvailabilityTests : CSharpContextActionAvailabilityTestBase<MethodToAsyncConverter>
     {
-        protected override string ExtraPath => "MethodToAsyncConverterAvailabilityTests";
+        protected override string ExtraPath => "";
 
-        protected override string RelativeTestDataPath => "MethodToAsyncConverterAvailabilityTests";
+        protected override string RelativeTestDataPath => @"ContextActions\MethodToAsyncConverterAvailabilityTests";
 
         [Test]
         public void Test()
