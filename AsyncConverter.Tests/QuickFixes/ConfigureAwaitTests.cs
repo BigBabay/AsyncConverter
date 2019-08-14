@@ -1,9 +1,18 @@
 ﻿using AsyncConverter.QuickFixes;
+using AsyncConverter.Tests.Helpers;
+using JetBrains.ReSharper.FeaturesTestFramework.Intentions;
+using JetBrains.ReSharper.TestFramework;
+using NUnit.Framework;
 
 namespace AsyncConverter.Tests.QuickFixes
 {
-    public class ConfigureAwaitQuickFixTests : QuickFixBaseTests<ConfigureAwaitQuickFix>
+    [TestNetFramework46]
+    public class ConfigureAwaitTests : CSharpQuickFixTestBase<ConfigureAwaitQuickFix>
     {
-        protected override string Folder => @"ConfigureAwait";
+        [TestCaseSource(typeof(TestHelper), nameof(TestHelper.FileNames), new object[]{@"QuickFixes\" + nameof(ConfigureAwaitTests)})]
+        public void Test(string fileName)
+        {
+            DoTestFiles(fileName);
+        }
     }
 }

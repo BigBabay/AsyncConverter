@@ -7,9 +7,9 @@ using NUnit.Framework;
 namespace AsyncConverter.Tests.QuickFixes
 {
     [TestNetFramework46]
-    public class NamingTests : CSharpQuickFixTestBase<AsyncMethodNamingQuickFix>
+    public class CanBeUseAsyncMethodTests : CSharpQuickFixTestBase<CanBeUseAsyncMethodQuickFix>
     {
-        [TestCaseSource(typeof(TestHelper), nameof(TestHelper.FileNames), new object[]{@"QuickFixes\" + nameof(NamingTests)})]
+        [TestCaseSource(typeof(TestHelper), nameof(TestHelper.FileNames), new object[]{@"QuickFixes\" + nameof(CanBeUseAsyncMethodTests)})]
         public void Test(string fileName)
         {
             DoTestFiles(fileName);

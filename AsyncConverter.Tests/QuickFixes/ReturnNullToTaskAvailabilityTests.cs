@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Linq;
+﻿using AsyncConverter.Tests.Helpers;
 using JetBrains.ReSharper.FeaturesTestFramework.Intentions;
 using JetBrains.ReSharper.TestFramework;
 using NUnit.Framework;
@@ -9,20 +8,10 @@ namespace AsyncConverter.Tests.QuickFixes
     [TestNetFramework46]
     public class ReturnNullToTaskAvailabilityTests : QuickFixAvailabilityTestBase
     {
-        protected override string RelativeTestDataPath => @"ReturnNullToTaskAvailabilityTests";
-
-        [TestCaseSource(nameof(FileNames))]
+        [TestCaseSource(typeof(TestHelper), nameof(TestHelper.FileNames), new object[]{@"QuickFixes\" + nameof(ReturnNullToTaskAvailabilityTests)})]
         public void Test(string fileName)
         {
             DoTestFiles(fileName);
-        }
-
-        private TestCaseData[] FileNames()
-        {
-            return Directory
-                .GetFiles(@"..\..\..\..\Test\Data\" + RelativeTestDataPath, "*.cs")
-                .Select(x => new TestCaseData(Path.GetFileName(x)))
-                .ToArray();
         }
     }
 }

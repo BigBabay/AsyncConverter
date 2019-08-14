@@ -1,6 +1,5 @@
-﻿using System.IO;
-using System.Linq;
-using AsyncConverter.ContextActions;
+﻿using AsyncConverter.ContextActions;
+using AsyncConverter.Tests.Helpers;
 using JetBrains.ReSharper.FeaturesTestFramework.Intentions;
 using JetBrains.ReSharper.TestFramework;
 using NUnit.Framework;
@@ -10,22 +9,14 @@ namespace AsyncConverter.Tests.ContextActions
     [TestNetFramework46]
     public class MethodToAsyncConverterTests : CSharpContextActionExecuteTestBase<MethodToAsyncConverter>
     {
-        protected override string ExtraPath => "MethodToAsyncConverterTests";
+        protected override string ExtraPath => "";
 
-        protected override string RelativeTestDataPath => "MethodToAsyncConverterTests";
+        protected override string RelativeTestDataPath => "ContextActions\\" + nameof(MethodToAsyncConverterTests);
 
-        [TestCaseSource(nameof(FileNames))]
+        [TestCaseSource(typeof(TestHelper), nameof(TestHelper.FileNames), new object[]{@"ContextActions\" + nameof(MethodToAsyncConverterTests)})]
         public void Test(string fileName)
         {
             DoTestFiles(fileName);
-        }
-
-        private TestCaseData[] FileNames()
-        {
-            return Directory
-                .GetFiles(@"..\..\..\..\Test\Data\" + RelativeTestDataPath, "*.cs")
-                .Select(x => new TestCaseData(Path.GetFileName(x)))
-                .ToArray();
         }
     }
 }
