@@ -11,8 +11,14 @@ namespace AsyncConverter.Checkers.AsyncWait
         public bool CanReplaceWaitToAsync(IInvocationExpression invocationExpression)
         {
             var shortName = invocationExpression.Reference?.Resolve().Result.DeclaredElement?.ShortName;
-            return shortName == "Wait"
-                || shortName == "AwaitResult";
+            var targetType = ResolveTargetType(invocationExpression);
+            return (shortName == "Wait" || shortName == "AwaitResult") && targetType != null && (targetType.IsTask() || targetType.IsGenericTask());
+        }
+
+        private IType ResolveTargetType(IInvocationExpression invocationExpression)
+        {
+            return (invocationExpression.InvokedExpression.FirstChild as IReferenceExpression)?.Type()
+                   ?? (invocationExpression.InvokedExpression.FirstChild as IInvocationExpression)?.Type();
         }
 
         public bool CanReplaceResultToAsync(IReferenceExpression referenceExpression)
