@@ -1,17 +1,17 @@
 # AsyncConverter
 
-This is an implementation of a ReSharper Plugin that converts your synchronous code to it's asynchronous version and helps you to write your own asynchronous applications.
+This is an implementation of a ReSharper Plugin that converts your synchronous code to its asynchronous version and helps you to write your own asynchronous applications.
 
-# Convert Any Method to It's Async Implementation
+# Convert Any Method to Its Async Implementation
 
 AsyncConverter can:
 
 1. Replace a returning type with generic or non-generic `Task<T>` or `Task`
 2. Rename a hierarchy of overridden methods from _&lt;MethodName&gt;_ to _&lt;MethodName&gt;Async_
 3. Add the `System.Threading.Tasks` to a usings declaration
-4. Analyze a method body and replace the every synchronous call with it's `async` implementation if exists.
+4. Analyze a method body and replace the every synchronous call with its `async` implementation if exists.
 5. Analyze a method body and replace the every `.Result` call with the `await` call.
-6. Analyze usage of a processed method. If the method is called from `async` context the AsyncConverter will replace it's call with the `await` expression, otherwise it will just call `.Result` or `.Wait()`
+6. Analyze usage of a processed method. If the method is called from `async` context the AsyncConverter will replace its call with the `await` expression, otherwise it will just call `.Result` or `.Wait()`
 
 ![Converter Mathod To Async](ReadMe/MathodToAsyncConverter.gif)
 
@@ -46,7 +46,7 @@ AsyncConverter will suggest you to add the `Async` suffix to an asynchronous met
 
 ## Suggesting to use the async method if exists
 
-If a synchronous method is called in the async context and it's asynchronous implementation is exists (e.g method has same signature `Async` suffix and `Task` or `Task<T>` as the returning type) AsyncConverter will suggest you to use this asynchronous implementation.
+If a synchronous method is called in the async context and its asynchronous implementation exists (e.g method has same signature `Async` suffix and `Task` or `Task<T>` as the returning type) AsyncConverter will suggest you to use this asynchronous implementation.
 
 Do not suggest to use obsolete async methods.
 
