@@ -1,6 +1,6 @@
-using JetBrains.Annotations;
+using System.Collections.Generic;
+using System.Linq;
 using JetBrains.ProjectModel;
-using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 
 namespace AsyncConverter.Checkers.AsyncWait
@@ -8,28 +8,17 @@ namespace AsyncConverter.Checkers.AsyncWait
     [SolutionComponent]
     class SyncWaitChecker : ISyncWaitChecker
     {
-        public bool CanReplaceWaitToAsync(IInvocationExpression invocationExpression)
+        private readonly ISyncWaitConcreteChecker[] checkers;
+
+        public SyncWaitChecker(IEnumerable<ISyncWaitConcreteChecker> checkers)
         {
-            var shortName = invocationExpression.Reference?.Resolve().Result.DeclaredElement?.ShortName;
-            var targetType = ResolveTargetType(invocationExpression);
-            return (shortName == "Wait" || shortName == "AwaitResult") && targetType != null && (targetType.IsTask() || targetType.IsGenericTask());
+            this.checkers = checkers.ToArray();
         }
 
-        private IType ResolveTargetType(IInvocationExpression invocationExpression)
-        {
-            return (invocationExpression.InvokedExpression.FirstChild as IReferenceExpression)?.Type()
-                   ?? (invocationExpression.InvokedExpression.FirstChild as IInvocationExpression)?.Type();
-        }
+        public bool CanReplaceWaitToAsync(IInvocationExpression invocationExpression)
+            => checkers.All(checker => checker.CanReplaceWaitToAsync(invocationExpression));
 
         public bool CanReplaceResultToAsync(IReferenceExpression referenceExpression)
-        {
-            var type = referenceExpression.QualifierExpression?.Type();
-            return (type.IsGenericTask() || type.IsTask()) && IsResult(referenceExpression);
-        }
-
-        private bool IsResult([NotNull] IReferenceExpression referenceExpression)
-        {
-            return referenceExpression?.NameIdentifier?.Name == "Result";
-        }
+            => checkers.All(checker => checker.CanReplaceResultToAsync(referenceExpression));
     }
 }
