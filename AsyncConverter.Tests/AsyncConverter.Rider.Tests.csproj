@@ -30,9 +30,15 @@
     <ProjectReference Include="..\AsyncConverter\AsyncConverter.Rider.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="JetBrains.Rider.SDK.Tests" Version="2019.3.0" />
+    <PackageReference Include="JetBrains.Annotations" Version="2020.1.0" />
+    <PackageReference Include="JetBrains.Lifetimes" Version="2020.1.3" />
+    <PackageReference Include="JetBrains.Rider.SDK.Tests" Version="2020.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="16.3.0" />
     <PackageReference Include="Microsoft.TestPlatform.TranslationLayer" Version="16.3.0" />
+    <PackageReference Include="NUnit" Version="3.10.1" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="Packages\**" />
