@@ -1,10 +1,8 @@
-﻿using AsyncConverter.Settings;
-using JetBrains.ReSharper.Feature.Services.Daemon;
-
-[assembly: RegisterConfigurableHighlightingsGroup(AsyncConverterGroupSettings.Id, AsyncConverterGroupSettings.Name)]
+﻿using JetBrains.ReSharper.Feature.Services.Daemon;
 
 namespace AsyncConverter.Settings
 {
+    [RegisterConfigurableHighlightingsGroup(Id, Name)]
     public static class AsyncConverterGroupSettings
     {
         public const string Id = "AsyncConverter";

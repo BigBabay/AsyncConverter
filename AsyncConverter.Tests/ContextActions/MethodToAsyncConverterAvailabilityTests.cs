@@ -15,7 +15,7 @@ namespace AsyncConverter.Tests.ContextActions
         [Test]
         public void Test()
         {
-            DoTestFiles("Test01.cs");
+            DoTestSolution("Test01.cs");
         }
     }
 }

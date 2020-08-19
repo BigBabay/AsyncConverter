@@ -12,7 +12,7 @@ namespace AsyncConverter.Tests.QuickFixes
         [TestCaseSource(typeof(TestHelper), nameof(TestHelper.FileNames), new object[]{@"QuickFixes\" + nameof(AsyncWaitTests)})]
         public void Test(string fileName)
         {
-            DoTestFiles(fileName);
+            DoTestSolution(fileName);
         }
     }
 }
