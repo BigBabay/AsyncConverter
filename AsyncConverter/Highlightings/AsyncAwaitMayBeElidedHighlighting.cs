@@ -1,16 +1,14 @@
-﻿using AsyncConverter.Highlightings;
-using AsyncConverter.Settings;
+﻿using AsyncConverter.Settings;
 using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 
-[assembly: RegisterConfigurableSeverity(AsyncAwaitMayBeElidedHighlighting.SeverityId, null, AsyncConverterGroupSettings.Id, "Elide async/await", "Elide async/await if task may be returned", Severity.WARNING)]
-
 namespace AsyncConverter.Highlightings
 {
     [ConfigurableSeverityHighlighting(SeverityId, CSharpLanguage.Name)]
+    [RegisterConfigurableSeverity(AsyncAwaitMayBeElidedHighlighting.SeverityId, null, AsyncConverterGroupSettings.Id, "Elide async/await", "Elide async/await if task may be returned", Severity.WARNING)]
     public class AsyncAwaitMayBeElidedHighlighting : IHighlighting
     {
         public IAwaitExpression AwaitExpression { get; }

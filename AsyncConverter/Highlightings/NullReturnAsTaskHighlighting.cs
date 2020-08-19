@@ -1,5 +1,4 @@
-﻿using AsyncConverter.Highlightings;
-using AsyncConverter.Settings;
+﻿using AsyncConverter.Settings;
 using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi;
@@ -7,11 +6,11 @@ using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 
-[assembly: RegisterConfigurableSeverity(NullReturnAsTaskHighlighting.SeverityId, null, AsyncConverterGroupSettings.Id, "Null return from async method", "May cause null reference exception if return of method will be awaiting.", Severity.WARNING)]
 
 namespace AsyncConverter.Highlightings
 {
     [ConfigurableSeverityHighlighting(SeverityId, CSharpLanguage.Name)]
+    [RegisterConfigurableSeverity(NullReturnAsTaskHighlighting.SeverityId, null, AsyncConverterGroupSettings.Id, "Null return from async method", "May cause null reference exception if return of method will be awaiting.", Severity.WARNING)]
     public class NullReturnAsTaskHighlighting : IHighlighting
     {
         public const string SeverityId = "AsyncConverter.NullReturnAsTask";

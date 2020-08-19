@@ -1,4 +1,3 @@
-using AsyncConverter.Highlightings;
 using AsyncConverter.Settings;
 using JetBrains.Annotations;
 using JetBrains.DocumentModel;
@@ -7,11 +6,11 @@ using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 
-[assembly: RegisterConfigurableSeverity(AsyncWaitHighlighting.SeverityId, null, AsyncConverterGroupSettings.Id, "Use async wait instead sync wait.", "Use async wait instead sync wait.", Severity.ERROR)]
 
 namespace AsyncConverter.Highlightings
 {
     [ConfigurableSeverityHighlighting(SeverityId, CSharpLanguage.Name)]
+    [ RegisterConfigurableSeverity(AsyncWaitHighlighting.SeverityId, null, AsyncConverterGroupSettings.Id, "Use async wait instead sync wait.", "Use async wait instead sync wait.", Severity.ERROR)]
     public class AsyncWaitHighlighting : IHighlighting
     {
         public IInvocationExpression InvocationExpression { get; }
