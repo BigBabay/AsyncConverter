@@ -1,15 +1,13 @@
-﻿using AsyncConverter.Highlightings;
-using AsyncConverter.Settings;
+﻿using AsyncConverter.Settings;
 using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 
-[assembly: RegisterConfigurableSeverity(ConfigureAwaitHighlighting.SeverityId, null, AsyncConverterGroupSettings.Id, "Await not configured", "If await not configured it may cause deadlock", Severity.WARNING)]
-
 namespace AsyncConverter.Highlightings
 {
+    [RegisterConfigurableSeverity(SeverityId, null, AsyncConverterGroupSettings.Id, "Await not configured", "If await not configured it may cause deadlock", Severity.WARNING)]
     [ConfigurableSeverityHighlighting(SeverityId, CSharpLanguage.Name)]
     public class ConfigureAwaitHighlighting : IHighlighting
     {

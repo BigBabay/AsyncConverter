@@ -12,7 +12,7 @@ namespace AsyncConverter.Settings.General
     {
         public const string PID = "General";
 
-        public GeneralPage([NotNull] Lifetime lifetime, [NotNull] OptionsPageContext optionsPageContext, [NotNull] OptionsSettingsSmartContext store)
+        public GeneralPage(Lifetime lifetime, [NotNull] OptionsPageContext optionsPageContext, [NotNull] OptionsSettingsSmartContext store)
             : base(lifetime, optionsPageContext, store)
         {
             AddHeader("Naming options");

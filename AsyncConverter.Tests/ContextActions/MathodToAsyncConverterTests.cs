@@ -16,7 +16,7 @@ namespace AsyncConverter.Tests.ContextActions
         [TestCaseSource(typeof(TestHelper), nameof(TestHelper.FileNames), new object[]{@"ContextActions\" + nameof(MethodToAsyncConverterTests)})]
         public void Test(string fileName)
         {
-            DoTestFiles(fileName);
+            DoTestSolution(fileName);
         }
     }
 }
