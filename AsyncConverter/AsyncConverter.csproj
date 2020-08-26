@@ -3,7 +3,7 @@
     <TargetFramework>net461</TargetFramework>
     <IsPackable>true</IsPackable>
     <PackageId>AsyncConverter.AsyncConverter</PackageId>
-    <Version>1.1.8.26</Version>
+    <Version>1.1.8.27</Version>
     <Authors>i.mamay</Authors>
     <Company />
     <Product />
@@ -28,7 +28,7 @@
     <None Remove="packages.AsyncConverter.Rider.config" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="JetBrains.ReSharper.SDK" Version="2020.1.0" PrivateAssets="All" />
-    <PackageReference Include="Wave" Version="[201]" />
+    <PackageReference Include="JetBrains.ReSharper.SDK" Version="2020.2.1" PrivateAssets="All" />
+    <PackageReference Include="Wave" Version="[202]" />
   </ItemGroup>
 </Project>

@@ -1,15 +1,13 @@
-﻿using AsyncConverter.Highlightings;
-using AsyncConverter.Settings;
+﻿using AsyncConverter.Settings;
 using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 
-[assembly: RegisterConfigurableSeverity(AsyncMethodNamingHighlighting.SeverityId, null, AsyncConverterGroupSettings.Id, "Async method must ends on \"Async\"", "Async method must ends on \"Async\"", Severity.WARNING)]
-
 namespace AsyncConverter.Highlightings
 {
+    [RegisterConfigurableSeverity(SeverityId, null, AsyncConverterGroupSettings.Id, "Async method must ends on \"Async\"", "Async method must ends on \"Async\"", Severity.WARNING)]
     [ConfigurableSeverityHighlighting(SeverityId, CSharpLanguage.Name)]
     public class AsyncMethodNamingHighlighting : IHighlighting
     {

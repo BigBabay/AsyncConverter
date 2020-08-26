@@ -26,7 +26,7 @@
     <None Remove="Test\Data\**\*.cs.tmp" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="JetBrains.ReSharper.SDK.Tests" Version="2020.1.0" />
+    <PackageReference Include="JetBrains.ReSharper.SDK.Tests" Version="2020.2.1" />
     <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="16.3.0" />
     <PackageReference Include="Microsoft.TestPlatform.TranslationLayer" Version="16.3.0" />
   </ItemGroup>
