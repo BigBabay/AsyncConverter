@@ -1,4 +1,4 @@
-﻿using System.IO;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
@@ -7,13 +7,10 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
     {
         public async Task TestAsync()
         {
-            |using|(0) (new MemoryStream())
-            {
-                await Task.Delay(1000).ConfigureAwait(false);
-            }
+            using var usingVar = new SemaphoreSlim(1);
+            await usingVar.WaitAsync().ConfigureAwait(false);
         }
     }
 }
 
 ---------------------------------------------------------
-(0): ReSharper Suggestion: Use 'await using'

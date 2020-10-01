@@ -1,19 +1,18 @@
-﻿using System.IO;
+﻿using System;
 using System.Threading.Tasks;
 
 namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 {
-    public class Class
+    public abstract class Class
     {
         public async Task TestAsync()
         {
-            |using|(0) (new MemoryStream())
-            {
-                await Task.Delay(1000).ConfigureAwait(false);
-            }
+            await using var usingVar = GetAsyncDisposable();
+            await Task.Delay(0).ConfigureAwait(false);
         }
+
+        public abstract IAsyncDisposable GetAsyncDisposable();
     }
 }
 
 ---------------------------------------------------------
-(0): ReSharper Suggestion: Use 'await using'

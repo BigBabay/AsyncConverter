@@ -9,9 +9,9 @@ namespace AsyncConverter.AsyncHelpers.AwaitEliders
     [SolutionComponent]
     public class AwaitEliderChecker : IAwaitEliderChecker
     {
-        private readonly IConcreateAwaitEliderChecker[] checkers;
+        private readonly IConcreteAwaitEliderChecker[] checkers;
 
-        public AwaitEliderChecker(IEnumerable<IConcreateAwaitEliderChecker> checkers)
+        public AwaitEliderChecker(IEnumerable<IConcreteAwaitEliderChecker> checkers)
         {
             this.checkers = checkers.ToArray();
         }

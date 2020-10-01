@@ -9,7 +9,7 @@ using JetBrains.ReSharper.Psi.Tree;
 namespace AsyncConverter.AsyncHelpers.AwaitEliders
 {
     [SolutionComponent]
-    public class EliderInTestChecker : IConcreateAwaitEliderChecker
+    public class EliderInTestChecker : IConcreteAwaitEliderChecker
     {
         private readonly IUnderTestChecker underTestChecker;
 
