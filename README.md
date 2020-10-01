@@ -2,7 +2,7 @@
 
 This is an implementation of a ReSharper Plugin that converts your synchronous code to its asynchronous version and helps you to write your own asynchronous applications.
 
-# Convert Any Method to Its Async Implementation
+## Convert Any Method to Its Async Implementation
 
 AsyncConverter can:
 
@@ -19,9 +19,9 @@ AsyncConverter can:
     ![Converter method to async](ReadMe/MethodToAsyncConverter.gif)
 </details>
 
-# Highlightings
+## Highlightings
 
-## Convert `Wait()` and `Result` to `await`
+### Convert `Wait()` and `Result` to `await`
 
 Under `async` method replace `Wait()` and `Result` to `await`.
 
@@ -37,7 +37,7 @@ Under `async` method replace `Wait()` and `Result` to `await`.
     ![Replace result to await](ReadMe/ReplaceResult.gif)
 </details>
 
-## Return `null` as `Task`
+### Return `null` as `Task`
 
 If expected returning type is `Task` or `Task<T>` but null is returned instead, AsyncConverter warn you that execution point can await expected 'Task' and get `NullReferenceException`.
 
@@ -47,7 +47,7 @@ If expected returning type is `Task` or `Task<T>` but null is returned instead, 
     ![Return null as task](ReadMe/ReturnNullAsTask.gif)
 </details>
 
-## Async suffix in a method name
+### Async suffix in a method name
 
 AsyncConverter will suggest you to add the `Async` suffix to an asynchronous method name in all cases except:
 
@@ -60,7 +60,7 @@ AsyncConverter will suggest you to add the `Async` suffix to an asynchronous met
     ![Suggesting method name with Async suffix](ReadMe/Naming.gif)
 </details>
 
-## Suggesting to configure an every await expression with ConfigureAwait
+### Suggesting to configure an every await expression with ConfigureAwait
 
 <details>
     <summary>Suggesting ConfigureAwait demo</summary>
@@ -68,7 +68,7 @@ AsyncConverter will suggest you to add the `Async` suffix to an asynchronous met
     ![Suggesting ConfigureAwait](ReadMe/ConfigureAwait.gif)
 </details>
 
-## Suggesting to use the async method if exists
+### Suggesting to use the async method if exists
 
 If a synchronous method is called in the async context and its asynchronous implementation exists (e.g method has same signature `Async` suffix and `Task` or `Task<T>` as the returning type) AsyncConverter will suggest you to use this asynchronous implementation.
 
@@ -80,7 +80,7 @@ Do not suggest to use obsolete async methods.
     ![Suggesting method name with Async suffix](ReadMe/CanBeUseAsyncMethod.gif)
 </details>
 
-## Async/await ignoring
+### Async/await ignoring
 
 An `await` expression can be ignored if this `await` expression is the single in a method and awaited value is returned from a method.
 
