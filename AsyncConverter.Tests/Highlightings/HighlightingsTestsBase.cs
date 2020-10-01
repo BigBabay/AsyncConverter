@@ -5,7 +5,7 @@ using JetBrains.ReSharper.TestFramework;
 
 namespace AsyncConverter.Tests.Highlightings
 {
-    [TestNetFramework46]
+    [TestNetCore31]
     public abstract class HighlightingsTestsBase : CSharpHighlightingTestBase
     {
         protected override void DoTestSolution([NotNull] params string[] fileSet)
