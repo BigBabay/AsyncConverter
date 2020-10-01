@@ -13,7 +13,11 @@ AsyncConverter can:
 5. Analyze a method body and replace the every `.Result` call with the `await` call.
 6. Analyze usage of a processed method. If the method is called from `async` context the AsyncConverter will replace its call with the `await` expression, otherwise it will just call `.Result` or `.Wait()`
 
-![Converter Mathod To Async](ReadMe/MathodToAsyncConverter.gif)
+<details>
+    <summary>Converter method to async demo</summary>
+
+    ![Converter method to async](ReadMe/MethodToAsyncConverter.gif)
+</details>
 
 # Highlightings
 
@@ -21,15 +25,27 @@ AsyncConverter can:
 
 Under `async` method replace `Wait()` and `Result` to `await`.
 
-![Replace wait to await](ReadMe/ReplaceWait.gif)
+<details>
+    <summary>Replace wait to await demo</summary>
 
-![Replace result to await](ReadMe/ReplaceResult.gif)
+    ![Replace wait to await](ReadMe/ReplaceWait.gif)
+</details>
+
+<details>
+    <summary>Replace result to await demo</summary>
+
+    ![Replace result to await](ReadMe/ReplaceResult.gif)
+</details>
 
 ## Return `null` as `Task`
 
 If expected returning type is `Task` or `Task<T>` but null is returned instead, AsyncConverter warn you that execution point can await expected 'Task' and get `NullReferenceException`.
 
-![Return Null As Task](ReadMe/ReturnNullAsTask.gif)
+<details>
+    <summary>Return null as task demo</summary>
+
+    ![Return null as task](ReadMe/ReturnNullAsTask.gif)
+</details>
 
 ## Async suffix in a method name
 
@@ -38,11 +54,19 @@ AsyncConverter will suggest you to add the `Async` suffix to an asynchronous met
 1. Classes inherited from `Controller` or `ApiController`
 2. Methods of test classes. NUnit, XUnit and MsUnit are supported. This may be turn off in _Resharper &rarr; Options &rarr; Code Inspection &rarr; Async Converter &rarr; Async Suffix_
 
-![Suggesting method name with Async suffix](ReadMe/Naming.gif)
+<details>
+    <summary>Suggesting method name with Async suffix demo</summary>
+
+    ![Suggesting method name with Async suffix](ReadMe/Naming.gif)
+</details>
 
 ## Suggesting to configure an every await expression with ConfigureAwait
 
-![Suggesting ConfigureAwait](ReadMe/ConfigureAwait.gif)
+<details>
+    <summary>Suggesting ConfigureAwait demo</summary>
+
+    ![Suggesting ConfigureAwait](ReadMe/ConfigureAwait.gif)
+</details>
 
 ## Suggesting to use the async method if exists
 
@@ -50,10 +74,18 @@ If a synchronous method is called in the async context and its asynchronous impl
 
 Do not suggest to use obsolete async methods.
 
-![Suggesting method name with Async suffix](ReadMe/CanBeUseAsyncMethod.gif)
+<details>
+    <summary>Suggesting method name with Async suffix demo</summary>
+
+    ![Suggesting method name with Async suffix](ReadMe/CanBeUseAsyncMethod.gif)
+</details>
 
 ## Async/await ignoring
 
 An `await` expression can be ignored if this `await` expression is the single in a method and awaited value is returned from a method.
 
-![Suggesting method name with Async suffix](ReadMe/AsyncAwaitMayBeElided.gif)
+<details>
+    <summary>Async/await ignoring demo</summary>
+
+    ![Async/await ignoring](ReadMe/AsyncAwaitMayBeElided.gif)
+</details>
