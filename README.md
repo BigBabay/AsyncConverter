@@ -16,7 +16,7 @@ AsyncConverter can:
 <details>
     <summary>Converter method to async demo</summary>
 
-    ![Converter method to async](ReadMe/MethodToAsyncConverter.gif)
+![Converter method to async](ReadMe/MethodToAsyncConverter.gif)
 </details>
 
 ## Highlightings
@@ -28,13 +28,13 @@ Under `async` method replace `Wait()` and `Result` to `await`.
 <details>
     <summary>Replace wait to await demo</summary>
 
-    ![Replace wait to await](ReadMe/ReplaceWait.gif)
+![Replace wait to await](ReadMe/ReplaceWait.gif)
 </details>
 
 <details>
     <summary>Replace result to await demo</summary>
 
-    ![Replace result to await](ReadMe/ReplaceResult.gif)
+![Replace result to await](ReadMe/ReplaceResult.gif)
 </details>
 
 ### Return `null` as `Task`
@@ -57,7 +57,7 @@ AsyncConverter will suggest you to add the `Async` suffix to an asynchronous met
 <details>
     <summary>Suggesting method name with Async suffix demo</summary>
 
-    ![Suggesting method name with Async suffix](ReadMe/Naming.gif)
+![Suggesting method name with Async suffix](ReadMe/Naming.gif)
 </details>
 
 ### Suggesting to configure an every await expression with ConfigureAwait
@@ -65,7 +65,7 @@ AsyncConverter will suggest you to add the `Async` suffix to an asynchronous met
 <details>
     <summary>Suggesting ConfigureAwait demo</summary>
 
-    ![Suggesting ConfigureAwait](ReadMe/ConfigureAwait.gif)
+![Suggesting ConfigureAwait](ReadMe/ConfigureAwait.gif)
 </details>
 
 ### Suggesting to use the async method if exists
@@ -77,7 +77,7 @@ Do not suggest to use obsolete async methods.
 <details>
     <summary>Suggesting method name with Async suffix demo</summary>
 
-    ![Suggesting method name with Async suffix](ReadMe/CanBeUseAsyncMethod.gif)
+![Suggesting method name with Async suffix](ReadMe/CanBeUseAsyncMethod.gif)
 </details>
 
 ### Async/await ignoring
@@ -87,5 +87,5 @@ An `await` expression can be ignored if this `await` expression is the single in
 <details>
     <summary>Async/await ignoring demo</summary>
 
-    ![Async/await ignoring](ReadMe/AsyncAwaitMayBeElided.gif)
+![Async/await ignoring](ReadMe/AsyncAwaitMayBeElided.gif)
 </details>
