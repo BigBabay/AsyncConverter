@@ -44,7 +44,7 @@ If expected returning type is `Task` or `Task<T>` but null is returned instead, 
 <details>
     <summary>Return null as task demo</summary>
 
-    ![Return null as task](ReadMe/ReturnNullAsTask.gif)
+![Return null as task](ReadMe/ReturnNullAsTask.gif)
 </details>
 
 ### Async suffix in a method name
