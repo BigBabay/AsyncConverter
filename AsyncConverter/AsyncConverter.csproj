@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net461</TargetFramework>
+    <TargetFramework>net472</TargetFramework>
     <IsPackable>true</IsPackable>
     <PackageId>AsyncConverter.AsyncConverter</PackageId>
-    <Version>1.1.8.31</Version>
+    <Version>1.1.8.32</Version>
     <Authors>i.mamay</Authors>
     <Company />
     <Product />
@@ -16,11 +16,11 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\Resharper\Debug</OutputPath>
-    <DefineConstants>TRACE;DEBUG;NETFRAMEWORK;NET461;RESHARPER</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETFRAMEWORK;NET472;RESHARPER</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Resharper\Release</OutputPath>
-    <DefineConstants>TRACE;RELEASE;NETFRAMEWORK;NET461;RESHARPER</DefineConstants>
+    <DefineConstants>TRACE;RELEASE;NETFRAMEWORK;NET472;RESHARPER</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="AsyncConverter.Rider.nuspec" />
@@ -28,7 +28,7 @@
     <None Remove="packages.AsyncConverter.Rider.config" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="JetBrains.ReSharper.SDK" Version="2021.1.0" PrivateAssets="All" />
-    <PackageReference Include="Wave" Version="[211]" />
+    <PackageReference Include="JetBrains.ReSharper.SDK" Version="2021.2.0" PrivateAssets="All" />
+    <PackageReference Include="Wave" Version="[212]" />
   </ItemGroup>
 </Project>

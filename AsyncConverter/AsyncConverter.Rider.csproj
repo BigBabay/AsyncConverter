@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net461</TargetFramework>
+    <TargetFramework>net472</TargetFramework>
     <IsPackable>true</IsPackable>
     <PackageId>AsyncConverter.Rider</PackageId>
-    <Version>1.2.8.31</Version>
+    <Version>1.2.8.32</Version>
     <Authors>i.mamay</Authors>
     <Company />
     <Product />
@@ -17,11 +17,11 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\Rider\Debug</OutputPath>
-    <DefineConstants>TRACE;DEBUG;NETFRAMEWORK;NET461;RIDER</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETFRAMEWORK;NET472;RIDER</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Rider\Release</OutputPath>
-    <DefineConstants>TRACE;RELEASE;NETFRAMEWORK;NET461;RIDER</DefineConstants>
+    <DefineConstants>TRACE;RELEASE;NETFRAMEWORK;NET472;RIDER</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Settings\ConfigureAwaitOptions\AsyncConverterConfigureAwaitPage.cs" />
@@ -32,8 +32,8 @@
     <None Remove="packages.AsyncConverter.Rider.config" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="JetBrains.Rider.SDK" Version="2021.1.0" PrivateAssets="All" />
-    <PackageReference Include="Wave" Version="[211]" />
+    <PackageReference Include="JetBrains.Rider.SDK" Version="2021.2.0" PrivateAssets="All" />
+    <PackageReference Include="Wave" Version="[212]" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="tmp\**" />
