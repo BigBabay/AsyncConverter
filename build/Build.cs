@@ -1,74 +1,70 @@
-using System.IO;
+using System.Collections.Generic;
 using System.IO.Compression;
+using Nuke.Common;
+using Nuke.Common.IO;
+using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
-using Nuke.Core;
-using Nuke.Core.Utilities.Collections;
+using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
-using static Nuke.Core.IO.FileSystemTasks;
-using static Nuke.Core.IO.PathConstruction;
 
 class Build : NukeBuild
 {
-    // Console application entry. Also defines the default target.
+    /// Support plugins are available for:
+    ///   - JetBrains ReSharper        https://nuke.build/resharper
+    ///   - JetBrains Rider            https://nuke.build/rider
+    ///   - Microsoft VisualStudio     https://nuke.build/visualstudio
+    ///   - Microsoft VSCode           https://nuke.build/vscode
+
     public static int Main () => Execute<Build>(x => x.Compile);
 
-    // Auto-injection fields:
+    [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
+    readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
 
-    // [GitVersion] readonly GitVersion GitVersion;
-    // Semantic versioning. Must have 'GitVersion.CommandLine' referenced.
-
-    // [GitRepository] readonly GitRepository GitRepository;
-    // Parses origin, branch name and head from git config.
-
-    // [Parameter] readonly string MyGetApiKey;
-    // Returns command-line arguments and environment variables.
-
-    public override AbsolutePath ArtifactsDirectory => SolutionDirectory / "packages";
+    public AbsolutePath ArtifactsDirectory => RootDirectory / "packages";
 
     Target Clean => _ => _
-            .Executes(() =>
-            {
-                EnsureCleanDirectory(ArtifactsDirectory);
-                var directories = GlobDirectories(SolutionDirectory / "AsyncConverter", "**/bin", "**/obj");
-                directories.ForEach(EnsureCleanDirectory);
-            });
+        .Before(Restore)
+        .Executes(() =>
+                  {
+                      DotNetClean();
+                      EnsureCleanDirectory(ArtifactsDirectory);
+                  });
 
     Target Restore => _ => _
-            .DependsOn(Clean)
-            .Executes(() =>
-            {
-                DotNetRestore(s => DefaultDotNetRestore.SetProjectFile("AsyncConverter/AsyncConverter.csproj"));
-                DotNetRestore(s => DefaultDotNetRestore.SetProjectFile("AsyncConverter/AsyncConverter.Rider.csproj"));
-                DotNetRestore(s => DefaultDotNetRestore.SetProjectFile("AsyncConverter.Tests/AsyncConverter.Tests.csproj"));
-                DotNetRestore(s => DefaultDotNetRestore.SetProjectFile("AsyncConverter.Tests/AsyncConverter.Rider.Tests.csproj"));
-            });
+        .DependsOn(Clean)
+        .Executes(() =>
+                  {
+                      DotNetRestore();
+                  });
 
     Target Compile => _ => _
-            .DependsOn(Restore)
-            .Executes(() =>
-            {
-                DotNetBuild(s => DefaultDotNetBuild);
-            });
-
+        .DependsOn(Restore)
+        .Executes(() =>
+                  {
+                      DotNetBuild();
+                  });
     Target Pack => _ => _
-                          .DependsOn(Compile)
-                          .Executes(() =>
-                                    {
-                                    //TODO: DeleteDirectory not work, and move to Clean
-                                        if (Directory.Exists(ArtifactsDirectory))
-                                            Directory.Delete(ArtifactsDirectory, true);
+       .DependsOn(Compile)
+       .Executes(() =>
+                 {
+                     PackForReSharper();
+                     PackForRider();
+                 });
 
-                                        DotNetPack(s => DefaultDotNetPack
-                                                       .SetOutputDirectory(ArtifactsDirectory)
-                                                       .DisableIncludeSymbols()
-                                                       .SetProject("AsyncConverter/AsyncConverter.csproj"));
+    void PackForRider()
+    {
+        DotNetPack(s =>
+                   {
+                       var settings = DotNetPackSettingsExtensions.SetOutputDirectory(s, RootDirectory / "Rider" / "AsyncConverter.Rider").DisableIncludeSymbols();
+                       return DotNetPackSettingsExtensions.SetProject(settings, "AsyncConverter/AsyncConverter.Rider.csproj");
+                   });
+        ZipFile.CreateFromDirectory(RootDirectory / "Rider", ArtifactsDirectory / $"AsyncConverter.Rider.zip");
+    }
 
-                                        DotNetPack(s => DefaultDotNetPack
-                                                       .SetOutputDirectory(SolutionDirectory / "Rider" / "AsyncConverter.Rider")
-                                                       .DisableIncludeSymbols()
-                                                       .SetProject("AsyncConverter/AsyncConverter.Rider.csproj"));
-
-                                        ZipFile.CreateFromDirectory(SolutionDirectory / "Rider",
-                                            ArtifactsDirectory / $"AsyncConverter.Rider.zip");
-                                    });
+    void PackForReSharper() =>
+        DotNetPack(s =>
+                   {
+                       var settings = DotNetPackSettingsExtensions.SetOutputDirectory(s, ArtifactsDirectory).DisableIncludeSymbols();
+                       return DotNetPackSettingsExtensions.SetProject(settings, "AsyncConverter/AsyncConverter.csproj");
+                   });
 }
