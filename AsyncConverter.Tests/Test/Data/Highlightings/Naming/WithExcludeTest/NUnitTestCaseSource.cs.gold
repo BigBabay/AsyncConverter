@@ -15,7 +15,7 @@ namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
 
         protected TestCaseData[] FileNames()
         {
-            return new TestCaseData[0];
+            return |new TestCaseData[0]|(1);
         }
     }
 }
@@ -24,7 +24,7 @@ namespace NUnit.Framework
 {
     public class TestCaseSourceAttribute : Attribute
     {
-        public TestCaseSourceAttribute(string |sourceName|(1))
+        public TestCaseSourceAttribute(string |sourceName|(2))
         {
 
         }
@@ -36,4 +36,5 @@ namespace NUnit.Framework
 }
 ---------------------------------------------------------
 (0): ReSharper Warning: (T) '' (E) 'Async method must ends on "Async"'
-(1): ReSharper Dead Code: Parameter 'sourceName' is never used
+(1): ReSharper Suggestion: Use 'Array<TestCaseData>.Empty()'
+(2): ReSharper Dead Code: Parameter 'sourceName' is never used
