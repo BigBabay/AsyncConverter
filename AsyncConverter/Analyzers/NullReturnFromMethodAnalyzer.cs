@@ -20,11 +20,11 @@ namespace AsyncConverter.Analyzers
             var method = containingFunctionLikeDeclarationOrClosure as IMethodDeclaration;
             if (lambda != null)
             {
-                if (!lambda.ReturnType.IsTask() && !lambda.ReturnType.IsGenericTask())
+                if (!lambda.InferredReturnType.IsTask() && !lambda.InferredReturnType.IsGenericTask())
                     return;
                 if (lambda.IsAsync)
                     return;
-                consumer.AddHighlighting(new NullReturnAsTaskHighlighting(literalExpression, lambda.ReturnType));
+                consumer.AddHighlighting(new NullReturnAsTaskHighlighting(literalExpression, lambda.InferredReturnType));
             }
             else if(method != null)
             {
