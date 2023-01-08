@@ -1,0 +1,16 @@
+﻿using System.Threading.Tasks;
+
+namespace AsyncConverter.Tests.Test.Data.FixReturnValueToTaskTests
+{
+    public interface IClass
+    {
+      async Task {caret}TestAsync()
+        {
+            await RunAsync().ConfigureAwait(false);
+            await RunAsync().ConfigureAwait(false);
+        }
+
+        void Run();
+        Task RunAsync();
+    }
+}
