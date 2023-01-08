@@ -126,8 +126,7 @@ namespace AsyncConverter.Helpers
         private static void SetSignature([NotNull] IMethodDeclaration methodDeclaration, [NotNull] IType newReturnValue, [NotNull] string newName)
         {
             methodDeclaration.SetType(newReturnValue);
-            if(!methodDeclaration.IsAbstract)
-                methodDeclaration.SetAsync(true);
+            methodDeclaration.SetAsync(methodDeclaration.Body != null);
             methodDeclaration.SetName(newName);
         }
     }
