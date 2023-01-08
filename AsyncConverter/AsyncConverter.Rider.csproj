@@ -9,7 +9,7 @@
     <Product />
     <Title>AsyncConverter</Title>
     <Copyright>i.mamay</Copyright>
-    <Description>Plugin for resharper, for converting code to async.</Description>
+    <Description>Plugin for Rider, for converting code to async.</Description>
     <PackageTags>async</PackageTags>
     <PackageProjectUrl>https://github.com/BigBabay/AsyncConverter</PackageProjectUrl>
     <RootNamespace>AsyncConverter</RootNamespace>
