@@ -16,9 +16,9 @@ namespace AsyncConverter.Analyzers
                 return;
             if(element.IsAsync)
                 return;
-            if (!element.ReturnType.IsTask() && !element.ReturnType.IsGenericTask())
-                return;
-            consumer.AddHighlighting(new NullReturnAsTaskHighlighting(literalExpression, element.ReturnType));
+            if (!element.InferredReturnType.IsTask() && !element.InferredReturnType.IsGenericTask())
+                 return;
+            consumer.AddHighlighting(new NullReturnAsTaskHighlighting(literalExpression, element.InferredReturnType));
         }
     }
 }

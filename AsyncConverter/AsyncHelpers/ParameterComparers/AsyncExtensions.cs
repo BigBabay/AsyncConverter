@@ -17,7 +17,7 @@ namespace AsyncConverter.AsyncHelpers.ParameterComparers
                     return methodDeclaration.Type.IsTask() || methodDeclaration.Type.IsGenericTask();
                 var functionExpression = containingNode as IAnonymousFunctionExpression;
                 if (functionExpression != null)
-                    return functionExpression.ReturnType.IsTask() || functionExpression.ReturnType.IsGenericTask();
+                     return functionExpression.InferredReturnType.IsTask() || functionExpression.InferredReturnType.IsGenericTask();
                 var functionDeclaration = containingNode as ILocalFunctionDeclaration;
                 if (functionDeclaration != null)
                     return functionDeclaration.Type.IsTask() || functionDeclaration.Type.IsGenericTask();
