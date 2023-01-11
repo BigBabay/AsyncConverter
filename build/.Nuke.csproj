@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="..\Rider\AsyncConverter.Rider\META-INF\plugin.xml">
+    <Content Include="..\Rider\meta\META-INF\plugin.xml">
       <Link>plugin.xml</Link>
     </Content>
   </ItemGroup>
