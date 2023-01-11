@@ -1,7 +1,7 @@
 <idea-plugin>
   <id>AsyncConverter.AsyncConverter</id>
   <name>AsyncConverter</name>
-  <description>Plugin for converting code to async.</description>
+  <description>Plugin for Rider, for converting code to async.</description>
   <version>1.2.8.33</version>
   <vendor url="https://github.com/BigBabay/AsyncConverter">i.mamay</vendor>
   <idea-version since-build="213" until-build="213.*"/>
