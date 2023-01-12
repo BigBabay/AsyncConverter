@@ -1,6 +1,6 @@
 version: 1.1.8.{build}
 configuration: Release
-image: Visual Studio 2019
+image: Visual Studio 2022
 nuget:
   project_feed: true
 build_script:
