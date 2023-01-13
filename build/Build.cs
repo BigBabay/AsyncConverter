@@ -1,10 +1,8 @@
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
+using System.Text.RegularExpressions;
 using Nuke.Common;
 using Nuke.Common.IO;
-using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
@@ -22,7 +20,9 @@ class Build : NukeBuild
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
     readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
 
-    const string riderVersion = "1.2.8.33";
+    const string version = "34";
+    string ResharperVersion => $"1.1.8.{version}";
+    string RiderVersion => $"1.2.8.{version}";
 
     AbsolutePath ArtifactsDirectory => RootDirectory / "packages";
     AbsolutePath RiderZip => RootDirectory / "Rider" / "zip";
@@ -65,8 +65,11 @@ class Build : NukeBuild
 
     void PackForRider()
     {
+        var str = File.ReadAllText(RiderMetaDir / "META-INF" / "plugin.xml");
+        str = Regex.Replace(str, "<version>\\d+\\.\\d+\\.\\d+\\.\\d+</version>", $"<version>{RiderVersion}</version>");
+        File.WriteAllText(RiderMetaDir / "META-INF" / "plugin.xml", str);
         ZipFile.CreateFromDirectory(RiderMetaDir,
-            RiderJarDir / $"AsyncConverter.Rider-{riderVersion}.jar");
+            RiderJarDir / $"AsyncConverter.Rider-{RiderVersion}.jar");
         File.Copy(RiderBinDir / "AsyncConverter.Rider.dll",
             RiderDotnetDir / "AsyncConverter.Rider.dll", true);
         ZipFile.CreateFromDirectory(RiderZip, ArtifactsDirectory / $"AsyncConverter.Rider.zip");
@@ -75,8 +78,9 @@ class Build : NukeBuild
     void PackForReSharper() =>
         DotNetPack(s =>
                    {
-                       var settings = DotNetPackSettingsExtensions.SetOutputDirectory(s, ArtifactsDirectory).DisableIncludeSymbols();
-                       return DotNetPackSettingsExtensions.SetProject(settings, "AsyncConverter/AsyncConverter.csproj");
+                       s = DotNetPackSettingsExtensions.SetOutputDirectory(s, ArtifactsDirectory).DisableIncludeSymbols();
+                       s = DotNetPackSettingsExtensions.SetVersion(s, ResharperVersion);
+                       return DotNetPackSettingsExtensions.SetProject(s, "AsyncConverter/AsyncConverter.csproj");
                    });
 
     void DeleteFilesInDir(AbsolutePath dir)
