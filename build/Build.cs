@@ -20,7 +20,8 @@ class Build : NukeBuild
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
     readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
 
-    const string version = "34";
+    const string waveVersion = "225";
+    const string version = "37";
     string ResharperVersion => $"1.1.8.{version}";
     string RiderVersion => $"1.2.8.{version}";
 
@@ -67,6 +68,8 @@ class Build : NukeBuild
     {
         var str = File.ReadAllText(RiderMetaDir / "META-INF" / "plugin.xml");
         str = Regex.Replace(str, "<version>\\d+\\.\\d+\\.\\d+\\.\\d+</version>", $"<version>{RiderVersion}</version>");
+        str = Regex.Replace(str, "<idea-version since-build=\"\\d+\" until-build=\"\\d+\\.\\*\"/>",
+                $"<idea-version since-build=\"{waveVersion}\" until-build=\"{waveVersion}.*\"/>");
         File.WriteAllText(RiderMetaDir / "META-INF" / "plugin.xml", str);
         ZipFile.CreateFromDirectory(RiderMetaDir,
             RiderJarDir / $"AsyncConverter.Rider-{RiderVersion}.jar");
