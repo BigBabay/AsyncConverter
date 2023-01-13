@@ -244,3 +244,6 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+
+Rider/zip/AsyncConverter.Rider/dotnet/AsyncConverter.Rider.dll
+Rider/zip/AsyncConverter.Rider/lib/AsyncConverter.Rider-1.2.8.33.jar
