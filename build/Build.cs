@@ -1,5 +1,8 @@
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using Nuke.Common;
 using Nuke.Common.IO;
@@ -20,10 +23,12 @@ class Build : NukeBuild
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
     readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
 
-    const string waveVersion = "225";
-    const string version = "37";
-    string ResharperVersion => $"1.1.8.{version}";
-    string RiderVersion => $"1.2.8.{version}";
+    readonly string WaveVersion = "221";
+    readonly string SdkVersion = "2022.1.2";
+    readonly string PluginVersion = "34";
+
+    string ResharperVersion => $"1.1.8.{PluginVersion}";
+    string RiderVersion => $"1.2.8.{PluginVersion}";
 
     AbsolutePath ArtifactsDirectory => RootDirectory / "packages";
     AbsolutePath RiderZip => RootDirectory / "Rider" / "zip";
@@ -45,6 +50,7 @@ class Build : NukeBuild
 
     Target Restore => _ => _
                           .DependsOn(Clean)
+                          .DependsOn(UpdateVersion)
                           .Executes(() =>
                                     {
                                         DotNetRestore();
@@ -63,16 +69,68 @@ class Build : NukeBuild
                      PackForReSharper();
                      PackForRider();
                  });
+    Target UpdateVersion => _ => _
+                       .Executes(() =>
+                                 {
+                                     PatchResharper();
+                                     PatchRider();
+                                 });
+
+    void PatchRider()
+    {
+        PatchFile(RiderMetaDir / "META-INF" / "plugin.xml",
+            new List<(string, string)>
+            {
+                ("<version>\\d+\\.\\d+\\.\\d+\\.\\d+</version>", $"<version>{RiderVersion}</version>"),
+                ("<idea-version since-build=\"\\d+\" until-build=\"\\d+\\.\\*\"/>",
+                    $"<idea-version since-build=\"{WaveVersion}\" until-build=\"{WaveVersion}.*\"/>")
+            });
+        PatchFile(RootDirectory / "AsyncConverter" / "AsyncConverter.Rider.csproj",
+            new List<(string, string)>
+            {
+                ("<Version>\\d+\\.\\d+\\.\\d+\\.\\d+</Version>", $"<Version>{RiderVersion}</Version>"),
+                ("<PackageReference Include=\"Wave\" Version=\"\\[\\d+\\]\" />", $"<PackageReference Include=\"Wave\" Version=\"[{WaveVersion}]\" />"),
+                ("<PackageReference Include=\"JetBrains.Rider.SDK\" Version=\"\\d+\\.\\d+\\.\\d+\" PrivateAssets=\"All\" />",
+                    $"<PackageReference Include=\"JetBrains.Rider.SDK\" Version=\"{SdkVersion}\" PrivateAssets=\"All\" />")
+            });
+        PatchFile(RootDirectory / "AsyncConverter.Tests" / "AsyncConverter.Rider.Tests.csproj",
+            new List<(string pattern, string replacement)>
+            {
+                ("<PackageReference Include=\"JetBrains.Rider.SDK.Tests\" Version=\"\\d+\\.\\d+\\.\\d+\" />",
+                    $"<PackageReference Include=\"JetBrains.Rider.SDK.Tests\" Version=\"{SdkVersion}\" />"),
+            });
+    }
+
+    void PatchResharper()
+    {
+        PatchFile(RootDirectory / "AsyncConverter" / "AsyncConverter.csproj",
+            new List<(string, string)>
+            {
+                ("<Version>\\d+\\.\\d+\\.\\d+\\.\\d+</Version>", $"<Version>{ResharperVersion}</Version>"),
+                ("<PackageReference Include=\"Wave\" Version=\"\\[\\d+\\]\" />", $"<PackageReference Include=\"Wave\" Version=\"[{WaveVersion}]\" />"),
+                ("<PackageReference Include=\"JetBrains.ReSharper.SDK\" Version=\"\\d+\\.\\d+\\.\\d+\" PrivateAssets=\"All\" />",
+                    $"<PackageReference Include=\"JetBrains.ReSharper.SDK\" Version=\"{SdkVersion}\" PrivateAssets=\"All\" />")
+            });
+        PatchFile(RootDirectory / "AsyncConverter.Tests" / "AsyncConverter.Tests.csproj",
+            new List<(string pattern, string replacement)>
+            {
+                ("<PackageReference Include=\"JetBrains.ReSharper.SDK.Tests\" Version=\"\\d+\\.\\d+\\.\\d+\" />",
+                    $"<PackageReference Include=\"JetBrains.ReSharper.SDK.Tests\" Version=\"{SdkVersion}\" />"),
+            });
+    }
+
+    void PatchFile(AbsolutePath filePath, List<(string pattern, string replacement)> replaces)
+    {
+        var content = File.ReadAllText(filePath);
+        content = replaces
+            .Aggregate(content, (current, replace) => Regex.Replace(current, replace.pattern, replace.replacement));
+        File.WriteAllText(filePath, content, Encoding.UTF8);
+    }
 
     void PackForRider()
     {
-        var str = File.ReadAllText(RiderMetaDir / "META-INF" / "plugin.xml");
-        str = Regex.Replace(str, "<version>\\d+\\.\\d+\\.\\d+\\.\\d+</version>", $"<version>{RiderVersion}</version>");
-        str = Regex.Replace(str, "<idea-version since-build=\"\\d+\" until-build=\"\\d+\\.\\*\"/>",
-                $"<idea-version since-build=\"{waveVersion}\" until-build=\"{waveVersion}.*\"/>");
-        File.WriteAllText(RiderMetaDir / "META-INF" / "plugin.xml", str);
         ZipFile.CreateFromDirectory(RiderMetaDir,
-            RiderJarDir / $"AsyncConverter.Rider-{RiderVersion}.jar");
+            RiderJarDir / $"AsyncConverter.Rider.jar");
         File.Copy(RiderBinDir / "AsyncConverter.Rider.dll",
             RiderDotnetDir / "AsyncConverter.Rider.dll", true);
         ZipFile.CreateFromDirectory(RiderZip, ArtifactsDirectory / $"AsyncConverter.Rider.zip");
@@ -82,7 +140,6 @@ class Build : NukeBuild
         DotNetPack(s =>
                    {
                        s = DotNetPackSettingsExtensions.SetOutputDirectory(s, ArtifactsDirectory).DisableIncludeSymbols();
-                       s = DotNetPackSettingsExtensions.SetVersion(s, ResharperVersion);
                        return DotNetPackSettingsExtensions.SetProject(s, "AsyncConverter/AsyncConverter.csproj");
                    });
 

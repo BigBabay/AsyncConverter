@@ -75,7 +75,8 @@
               "Clean",
               "Compile",
               "Pack",
-              "Restore"
+              "Restore",
+              "UpdateVersion"
             ]
           }
         },
@@ -88,7 +89,8 @@
               "Clean",
               "Compile",
               "Pack",
-              "Restore"
+              "Restore",
+              "UpdateVersion"
             ]
           }
         },
