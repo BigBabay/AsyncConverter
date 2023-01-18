@@ -246,5 +246,4 @@ ModelManifest.xml
 .fake/
 
 Rider/zip/AsyncConverter.Rider/dotnet/AsyncConverter.Rider.dll
-Rider/zip/AsyncConverter.Rider/lib/AsyncConverter.Rider-*.jar
-Rider/meta/META-INF/plugin.xml
+Rider/zip/AsyncConverter.Rider/lib/AsyncConverter.Rider.jar
