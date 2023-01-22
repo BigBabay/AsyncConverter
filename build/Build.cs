@@ -23,9 +23,9 @@ class Build : NukeBuild
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
     readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
 
-    readonly string WaveVersion = "221";
-    readonly string SdkVersion = "2022.1.2";
-    readonly string PluginVersion = "34";
+    readonly string WaveVersion = "222";
+    readonly string SdkVersion = "2022.2.4";
+    readonly string PluginVersion = "35";
 
     string ResharperVersion => $"1.1.8.{PluginVersion}";
     string RiderVersion => $"1.2.8.{PluginVersion}";
@@ -84,7 +84,7 @@ class Build : NukeBuild
                 ("<version>\\d+\\.\\d+\\.\\d+\\.\\d+</version>", $"<version>{RiderVersion}</version>"),
                 ("<idea-version since-build=\"\\d+\" until-build=\"\\d+\\.\\*\"/>",
                     $"<idea-version since-build=\"{WaveVersion}\" until-build=\"{WaveVersion}.*\"/>")
-            });
+            }, Encoding.ASCII);
         PatchFile(RootDirectory / "AsyncConverter" / "AsyncConverter.Rider.csproj",
             new List<(string, string)>
             {
@@ -119,12 +119,12 @@ class Build : NukeBuild
             });
     }
 
-    void PatchFile(AbsolutePath filePath, List<(string pattern, string replacement)> replaces)
+    void PatchFile(AbsolutePath filePath, List<(string pattern, string replacement)> replaces, Encoding encoding = null)
     {
         var content = File.ReadAllText(filePath);
         content = replaces
             .Aggregate(content, (current, replace) => Regex.Replace(current, replace.pattern, replace.replacement));
-        File.WriteAllText(filePath, content, Encoding.UTF8);
+        File.WriteAllText(filePath, content, encoding ?? Encoding.UTF8);
     }
 
     void PackForRider()

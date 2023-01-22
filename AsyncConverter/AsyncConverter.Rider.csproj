@@ -3,7 +3,7 @@
     <TargetFramework>net472</TargetFramework>
     <IsPackable>true</IsPackable>
     <PackageId>AsyncConverter.Rider</PackageId>
-    <Version>1.2.8.34</Version>
+    <Version>1.2.8.35</Version>
     <Authors>i.mamay</Authors>
     <Company />
     <Product />
@@ -32,8 +32,8 @@
     <None Remove="packages.AsyncConverter.Rider.config" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="JetBrains.Rider.SDK" Version="2022.1.2" PrivateAssets="All" />
-    <PackageReference Include="Wave" Version="[221]" />
+    <PackageReference Include="JetBrains.Rider.SDK" Version="2022.2.4" PrivateAssets="All" />
+    <PackageReference Include="Wave" Version="[222]" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="tmp\**" />
