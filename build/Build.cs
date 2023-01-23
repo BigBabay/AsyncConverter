@@ -23,9 +23,9 @@ class Build : NukeBuild
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
     readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
 
-    readonly string WaveVersion = "222";
-    readonly string SdkVersion = "2022.2.4";
-    readonly string PluginVersion = "35";
+    readonly string WaveVersion = "223";
+    readonly string SdkVersion = "2022.3.1";
+    readonly string PluginVersion = "36";
 
     string ResharperVersion => $"1.1.8.{PluginVersion}";
     string RiderVersion => $"1.2.8.{PluginVersion}";
