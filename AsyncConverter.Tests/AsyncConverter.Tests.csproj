@@ -26,7 +26,7 @@
     <None Remove="Test\Data\**\*.cs.tmp" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="JetBrains.ReSharper.SDK.Tests" Version="2022.3.1" />
+    <PackageReference Include="JetBrains.ReSharper.SDK.Tests" Version="2023.1.0" />
     <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="17.0.0" />
     <PackageReference Include="Microsoft.TestPlatform.TranslationLayer" Version="17.0.0" />
   </ItemGroup>
@@ -35,8 +35,5 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="Packages\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Test\Data\Highlightings\Eliding" />
   </ItemGroup>
 </Project>

@@ -112,7 +112,7 @@ namespace AsyncConverter.Helpers
                 var task = TypeFactory.CreateTypeByCLRName("System.Threading.Tasks.Task`1", psiModule).GetTypeElement();
                 if (task == null)
                     return;
-                newReturnValue = TypeFactory.CreateType(task, returnType);
+                newReturnValue = TypeFactory.CreateType(task, new[] {returnType});
             }
 
             var name = GenerateAsyncMethodName(methodDeclaration.DeclaredName);
